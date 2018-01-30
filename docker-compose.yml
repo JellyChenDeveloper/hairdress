@@ -1,0 +1,12 @@
+version: "3"
+services:
+  janeslamp:
+    image: janes/alpine-lamp:latest
+    restart: always
+    # environment:
+    #   - WEB_DOCUMENT_INDEX="index.php"
+    ports:
+      - 80:80
+      - 3306:3306
+    volumes:
+      - ./:/www
