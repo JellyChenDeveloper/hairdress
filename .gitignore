@@ -1,3 +1,10 @@
-ThinkPHP/
-Runtime/
-.idea/
+.buildpath
+.DS_Store
+.project
+.settings
+.idea
+composer.lock
+/api
+/public/api
+/public/assets/dist
+/node_modules

@@ -10,3 +10,6 @@ services:
       - 3306:3306
     volumes:
       - ./:/www
+      - ./docker/httpd.conf:/etc/apache2/httpd.conf
+      - ./docker/php.ini:/etc/php5/php.ini
+      - ./docker/mysql:/var/lib/mysql

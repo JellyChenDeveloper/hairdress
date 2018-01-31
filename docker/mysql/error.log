@@ -1,0 +1,38 @@
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: Using mutexes to ref count buffer pool pages
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: The InnoDB memory heap is disabled
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: GCC builtin __atomic_thread_fence() is used for memory barrier
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: Compressed tables use zlib 1.2.8
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: Using Linux native AIO
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: Using SSE crc32 instructions
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: Initializing buffer pool, size = 128.0M
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: Completed initialization of buffer pool
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: The first specified data file ./ibdata1 did not exist: a new database to be created!
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: Setting file ./ibdata1 size to 12 MB
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: Database physically writes the file full: wait...
+2018-01-31 22:54:48 139674116365096 [Note] InnoDB: Setting log file ./ib_logfile101 size to 48 MB
+2018-01-31 22:54:49 139674116365096 [Note] InnoDB: Setting log file ./ib_logfile1 size to 48 MB
+2018-01-31 22:54:49 139674116365096 [Note] InnoDB: Renaming log file ./ib_logfile101 to ./ib_logfile0
+2018-01-31 22:54:49 139674116365096 [Warning] InnoDB: New log files created, LSN=45883
+2018-01-31 22:54:49 139674116365096 [Note] InnoDB: Doublewrite buffer not found: creating new
+2018-01-31 22:54:49 139674116365096 [Note] InnoDB: Doublewrite buffer created
+2018-01-31 22:54:49 139674116365096 [Note] InnoDB: 128 rollback segment(s) are active.
+2018-01-31 22:54:49 139674116365096 [Warning] InnoDB: Creating foreign key constraint system tables.
+2018-01-31 22:54:49 139674116365096 [Note] InnoDB: Foreign key constraint system tables created
+2018-01-31 22:54:49 139674116365096 [Note] InnoDB: Creating tablespace and datafile system tables.
+2018-01-31 22:54:49 139674116365096 [Note] InnoDB: Tablespace and datafile system tables created.
+2018-01-31 22:54:49 139674116365096 [Note] InnoDB: Creating zip_dict and zip_dict_cols system tables.
+2018-01-31 22:54:49 139674116365096 [Note] InnoDB: zip_dict and zip_dict_cols system tables created.
+2018-01-31 22:54:49 139674116365096 [Note] InnoDB: Waiting for purge to start
+2018-01-31 22:54:49 139674116365096 [Note] InnoDB:  Percona XtraDB (http://www.percona.com) 5.6.32-79.0 started; log sequence number 0
+2018-01-31 22:54:49 139673890044592 [Note] InnoDB: Dumping buffer pool(s) not yet started
+2018-01-31 22:54:49 139674116365096 [Note] Plugin 'FEEDBACK' is disabled.
+2018-01-31 22:54:49 139673752840880 [Warning] Failed to load slave replication state from table mysql.gtid_slave_pos: 1146: Table 'mysql.gtid_slave_pos' doesn't exist
+2018-01-31 22:54:49 139674116365096 [ERROR] Can't open and lock privilege tables: Table 'mysql.servers' doesn't exist
+2018-01-31 22:54:49 139674116365096 [Note] Server socket created on IP: '0.0.0.0'.
+2018-01-31 22:54:49 139674116365096 [Warning] Can't open and lock time zone table: Table 'mysql.time_zone_leap_second' doesn't exist trying to live without them
+2018-01-31 22:54:49 139673752226480 [Warning] Failed to load slave replication state from table mysql.gtid_slave_pos: 1146: Table 'mysql.gtid_slave_pos' doesn't exist
+2018-01-31 22:54:50 139674116365096 [Note] mysqld: ready for connections.
+Version: '10.1.19-MariaDB'  socket: '/run/mysqld/mysqld.sock'  port: 3306  MariaDB Server
+2018-01-31 22:55:17 7f08545e1ab0 InnoDB: Error: Table "mysql"."innodb_table_stats" not found.
+2018-01-31 22:56:02 139673751919280 [Warning] IP address '172.19.0.1' could not be resolved: Name does not resolve
