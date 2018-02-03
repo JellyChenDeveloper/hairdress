@@ -1,13 +1,11 @@
 version: "3"
 services:
-  mysql:
+  mysqldb:
     image: mysql
     restart: always
     ports:
       - 3306:3306
     environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 123456
       MYSQL_ROOT_PASSWORD: 123456
     networks:
       - code-network
@@ -22,10 +20,8 @@ services:
       WEB_DOCUMENT_INDEX: "index.php index.html"
     ports:
       - 80:80
-    depends_on:
-      - mysql
     links:
-      - mysql
+      - mysqldb
     volumes:
       - ./:/app
       - ./docker/php.ini:/opt/docker/etc/php/php.ini
