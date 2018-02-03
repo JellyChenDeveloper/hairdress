@@ -1,15 +1,36 @@
 version: "3"
 services:
-  janeslamp:
-    image: janes/alpine-lamp:latest
+  mysql:
+    image: mysql
     restart: always
-    # environment:
-    #   - WEB_DOCUMENT_INDEX="index.php"
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: 123456
+    networks:
+      - code-network
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+
+  php:
+    image: webdevops/php-apache-dev:5.6
+    restart: always
+    environment:
+      WEB_DOCUMENT_ROOT: "/app/public"
+      WEB_DOCUMENT_INDEX: "index.php index.html"
     ports:
       - 80:80
-      - 3306:3306
+    depends_on:
+      - mysql
+    links:
+      - mysql
     volumes:
-      - ./:/www
-      - ./docker/httpd.conf:/etc/apache2/httpd.conf
-      - ./docker/php.ini:/etc/php5/php.ini
-      - ./docker/mysql:/var/lib/mysql
+      - ./:/app
+      - ./docker/php.ini:/opt/docker/etc/php/php.ini
+    networks:
+      - code-network
+networks:
+  code-network:
+    driver: bridge
