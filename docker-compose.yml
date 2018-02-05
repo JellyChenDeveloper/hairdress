@@ -25,6 +25,7 @@ services:
     volumes:
       - ./:/app
       - ./docker/php.ini:/opt/docker/etc/php/php.ini
+#      - ./docker1:/opt/docker
     networks:
       - code-network
 networks:

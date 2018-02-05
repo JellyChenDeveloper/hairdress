@@ -220,56 +220,6 @@ class UserController extends AdminBaseController
     }
 
     /**
-     * 管理员个人信息修改
-     * @adminMenu(
-     *     'name'   => '个人信息',
-     *     'parent' => 'index',
-     *     'display'=> false,
-     *     'hasView'=> true,
-     *     'order'  => 10000,
-     *     'icon'   => '',
-     *     'remark' => '管理员个人信息修改',
-     *     'param'  => ''
-     * )
-     */
-    public function userInfo()
-    {
-        $id   = cmf_get_current_admin_id();
-        $user = Db::name('user')->where(["id" => $id])->find();
-        $this->assign($user);
-        return $this->fetch();
-    }
-
-    /**
-     * 管理员个人信息修改提交
-     * @adminMenu(
-     *     'name'   => '管理员个人信息修改提交',
-     *     'parent' => 'index',
-     *     'display'=> false,
-     *     'hasView'=> false,
-     *     'order'  => 10000,
-     *     'icon'   => '',
-     *     'remark' => '管理员个人信息修改提交',
-     *     'param'  => ''
-     * )
-     */
-    public function userInfoPost()
-    {
-        if ($this->request->isPost()) {
-
-            $data             = $this->request->post();
-            $data['birthday'] = strtotime($data['birthday']);
-            $data['id']       = cmf_get_current_admin_id();
-            $create_result    = Db::name('user')->update($data);;
-            if ($create_result !== false) {
-                $this->success("保存成功！");
-            } else {
-                $this->error("保存失败！");
-            }
-        }
-    }
-
-    /**
      * 管理员删除
      * @adminMenu(
      *     'name'   => '管理员删除',

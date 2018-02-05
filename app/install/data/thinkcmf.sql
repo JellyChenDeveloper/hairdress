@@ -321,8 +321,6 @@ INSERT INTO `cmf_auth_rule` (`id`, `status`, `app`, `type`, `name`, `param`, `ti
 (67, 1, 'admin', 'admin_url', 'admin/Route/listOrder', '', '路由规则排序', ''),
 (68, 1, 'admin', 'admin_url', 'admin/Route/select', '', '选择URL', ''),
 (69, 1, 'admin', 'admin_url', 'admin/Setting/default', '', '设置', ''),
-(70, 1, 'admin', 'admin_url', 'admin/Setting/site', '', '网站信息', ''),
-(71, 1, 'admin', 'admin_url', 'admin/Setting/sitePost', '', '网站信息设置提交', ''),
 (72, 1, 'admin', 'admin_url', 'admin/Setting/password', '', '密码修改', ''),
 (73, 1, 'admin', 'admin_url', 'admin/Setting/passwordPost', '', '密码修改提交', ''),
 (74, 1, 'admin', 'admin_url', 'admin/Setting/upload', '', '上传设置', ''),

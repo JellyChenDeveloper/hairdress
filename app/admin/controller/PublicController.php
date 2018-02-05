@@ -58,15 +58,15 @@ class PublicController extends AdminBaseController
         if (empty($loginAllowed)) {
             $this->error('非法登录!', cmf_get_root() . '/');
         }
-
-        $captcha = $this->request->param('captcha');
-        if (empty($captcha)) {
-            $this->error(lang('CAPTCHA_REQUIRED'));
-        }
-        //验证码
-        if (!cmf_captcha_check($captcha)) {
-            $this->error(lang('CAPTCHA_NOT_RIGHT'));
-        }
+//
+//        $captcha = $this->request->param('captcha');
+//        if (empty($captcha)) {
+//            $this->error(lang('CAPTCHA_REQUIRED'));
+//        }
+//        //验证码
+//        if (!cmf_captcha_check($captcha)) {
+//            $this->error(lang('CAPTCHA_NOT_RIGHT'));
+//        }
 
         $name = $this->request->param("username");
         if (empty($name)) {
