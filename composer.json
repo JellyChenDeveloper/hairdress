@@ -28,7 +28,8 @@
         "dompdf/dompdf": "^0.8.0",
         "phpoffice/phpexcel": "^1.8",
         "ezyang/htmlpurifier": "^4.9",
-        "topthink/think-queue": "^1.1.4"
+        "topthink/think-queue": "^1.1.4",
+        "overtrue/wechat":"~4.0"
     },
     "extra": {
     },
