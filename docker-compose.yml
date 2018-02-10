@@ -10,7 +10,9 @@ services:
     networks:
       - code-network
     volumes:
-      - ./docker/mysql:/var/lib/mysql
+#      - ./docker/mysql:/var/lib/mysql
+      - ./docker/sql:/opt/sql
+#    command: mysql -uroot -proot < /opt/sql/thinkcmf5_2018-02-10.sql
 
   php:
     image: webdevops/php-apache-dev:7.0
