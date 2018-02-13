@@ -11,11 +11,14 @@
 
 namespace app\hair\controller;
 
-use cmf\controller\HomeBaseController;
-
-class IndexController extends HomeBaseController {
+class IndexController extends HairBaseController {
 
     public function index() {
         return $this->fetch();
+    }
+
+    public function test() {
+        echo 'asd';
+        exit();
     }
 }

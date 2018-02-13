@@ -15,7 +15,7 @@ use cmf\controller\HomeBaseController;
 
 class UserInfoController extends HomeBaseController {
 
-    public function index(){
+    public function index() {
         $this->fetch();
     }
 }
