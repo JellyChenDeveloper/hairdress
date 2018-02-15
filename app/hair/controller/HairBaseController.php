@@ -18,7 +18,20 @@ class HairBaseController extends HomeBaseController {
 
     public function _initialize() {
         parent::_initialize();
-        $this->userLogin();
+//        $this->userLogin();
+    }
+
+    public function _initializeView() {
+        parent::_initializeView();
+
+        $viewReplaceStr                  = config('view_replace_str');
+        $pub_path                        = $viewReplaceStr['__TMPL__'] . '/hair/public/assets';
+        $viewReplaceStr['__WE_JS__']     = $pub_path . "/js";
+        $viewReplaceStr['__WE_CSS__']    = $pub_path . "/css";
+        $viewReplaceStr['__WE_LIB__']    = $pub_path . "/lib";
+        $viewReplaceStr['__WE_IMAGES__'] = $pub_path . "/images";
+
+        config('view_replace_str', $viewReplaceStr);
     }
 
     /**

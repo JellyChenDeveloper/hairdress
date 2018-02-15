@@ -11,9 +11,7 @@
 
 namespace app\hair\controller;
 
-use cmf\controller\HomeBaseController;
-
-class ProjectController extends HomeBaseController{
+class ProjectController extends HairBaseController{
 
     public function index() {
         return $this->fetch();
