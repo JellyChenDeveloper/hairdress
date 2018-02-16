@@ -1144,9 +1144,8 @@ CREATE TABLE `wechat_user` (
   `user_status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户状态;0:禁用,1:正常,2:未验证',
   `more` text COMMENT '扩展属性',
   PRIMARY KEY (`id`),
-  KEY `user_login` (`wx_openid`),
-  KEY `user_nickname` (`wx_nickname`),
-  KEY `mobile` (`wx_nickname`)
+  KEY `wx_openid` (`wx_openid`),
+  KEY `wx_nickname` (`wx_nickname`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 

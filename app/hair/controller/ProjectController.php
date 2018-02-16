@@ -11,9 +11,17 @@
 
 namespace app\hair\controller;
 
-class ProjectController extends HairBaseController{
+class ProjectController extends HairBaseController {
 
     public function index() {
         return $this->fetch();
+    }
+
+    public function addProj() {
+        return $this->fetch();
+    }
+
+    public function doAddProj(){
+
     }
 }

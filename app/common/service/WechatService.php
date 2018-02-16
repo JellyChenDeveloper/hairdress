@@ -9,7 +9,7 @@
  * @version        1.0
  */
 
-namespace app\wechat\service;
+namespace app\common\service;
 
 use EasyWeChat\Factory;
 use think\Config;
@@ -18,7 +18,7 @@ use think\Session;
 
 class WechatService {
 
-    /** @var \app\wechat\service\WechatService null */
+    /** @var \app\common\service\WechatService null */
     static private $_instance = null;
 
     private $authconfig = array();
