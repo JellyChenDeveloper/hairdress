@@ -17,11 +17,23 @@ class ProjectController extends HairBaseController {
         return $this->fetch();
     }
 
-    public function addProj() {
+    public function doAddProj() {
+        $project_name = $this->request->post('project_name');
+
+        $this->success(lang('ADD_PROJECT_OK'), url('hair/project/detail'), ['id' => 1, 'project_name' => $project_name]);
+    }
+
+    public function detail() {
+        $project_name = $this->request->get('project_name');
+
+        $this->assign('project_name', $project_name);
+
         return $this->fetch();
     }
 
-    public function doAddProj(){
+    public function doAddPage() {
+        $page_name = $this->request->post('page_name');
 
+        $this->success(lang('ADD_PAGE_OK'), url('hair/project/detail'), ['id' => 1, 'page_name' => $page_name]);
     }
 }

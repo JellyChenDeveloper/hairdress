@@ -12,15 +12,17 @@ CREATE TABLE `wechat_user` (
   `city` varchar(255) NOT NULL DEFAULT '' COMMENT '市',
   `user_type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户类型;1:普通会员;2:代理',
   `last_login_time` int(11) NOT NULL DEFAULT '0' COMMENT '最后登录时间',
-  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '注册时间',
   `last_login_ip` varchar(15) NOT NULL DEFAULT '' COMMENT '最后登录ip',
   `activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '激活码',
   `mobile` varchar(255) NOT NULL DEFAULT '' COMMENT '用户手机号',
   `has_payed` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '用户状态;0:未支付,1:已支付',
   `user_status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户状态;0:禁用,1:正常,2:未验证',
   `more` text COMMENT '扩展属性',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `wx_openid` (`wx_openid`),
-  KEY `wx_nickname` (`wx_nickname`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
+  KEY `wx_nickname` (`wx_nickname`),
+  KEY `mobile` (`mobile`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;

@@ -1,32 +1,26 @@
 <include file="hair@public/head"/>
 <include file="hair@public/tab_head"/>
 <header class='demos-header'>
-    <h1 class="demos-title">我的项目</h1>
+    <h1 class="demos-title">{:lang('MY_PROJECT')}</h1>
 </header>
 <div class="bd">
     <div class='demos-content-padded'>
         <div class="button_sp_area" style="text-align: right;">
-            <a href="{:url('hair/project/addProj')}" class="weui-btn weui-btn_mini weui-btn_primary">新建项目</a>
+            <a href="javascript:" id='add_project' class="weui-btn weui-btn_mini weui-btn_primary">{:lang('NEW_PROJECT')}</a>
         </div>
     </div>
-    <!--<div class="page__bd">-->
-    <!--<div class="weui-cells__title">-->
-    <!--项目列表-->
-    <!--</div>-->
-    <!--</div>-->
     <div class="weui-cells">
         <div class="weui-cell weui-cell_swiped">
             <div class="weui-cell__bd" style="transform: translateX(-136px)">
                 <div class="weui-cell">
-                    <div class="weui-cell__bd">
+                    <a class="weui-cell__bd" href="{:url('hair/index/index')}">
                         <p>项目1</p>
-                    </div>
-                    <div class="weui-cell__ft">向左滑动试试</div>
+                    </a>
+                    <div class="weui-cell__ft">向左滑动删除</div>
                 </div>
             </div>
             <div class="weui-cell__ft">
-                <a class="weui-swiped-btn weui-swiped-btn_default delete-swipeout" href="{:url('hair/index/index')}">查看</a>
-                <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">删除</a>
+                <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">{:lang('DELETE')}</a>
             </div>
         </div>
         <div class="weui-cell weui-cell_swiped">
@@ -35,12 +29,11 @@
                     <div class="weui-cell__bd">
                         <p>项目2</p>
                     </div>
-                    <div class="weui-cell__ft">向左滑动试试</div>
+                    <div class="weui-cell__ft">向左滑动删除</div>
                 </div>
             </div>
             <div class="weui-cell__ft">
-                <a class="weui-swiped-btn weui-swiped-btn_default delete-swipeout" href="{:url('hair/index/index')}">查看</a>
-                <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">删除</a>
+                <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">{:lang('DELETE')}</a>
             </div>
         </div>
         <div class="weui-cell weui-cell_swiped">
@@ -49,15 +42,47 @@
                     <div class="weui-cell__bd">
                         <p>项目3</p>
                     </div>
-                    <div class="weui-cell__ft">向左滑动试试</div>
+                    <div class="weui-cell__ft">向左滑动删除</div>
                 </div>
             </div>
             <div class="weui-cell__ft">
-                <a class="weui-swiped-btn weui-swiped-btn_default delete-swipeout" href="{:url('hair/index/index')}">查看</a>
-                <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">删除</a>
+                <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">{:lang('DELETE')}</a>
             </div>
         </div>
     </div>
 </div>
 <include file="hair@public/tab_foot"/>
 <include file="hair@public/foot"/>
+<script>
+    $(function () {
+        $(document).on("click", "#add_project", function () {
+            $.prompt({
+                text     : "{:lang('INPUT_NAME_TIPS')}",
+                title    : "{:lang('INPUT_PROJECT_NAME')}",
+                onOK     : function (project_name) {
+                    if (!project_name) {
+                        $.toptip("{:lang('INPUT_PROJECT_NAME')}");
+                        return false;
+                    }
+
+                    $.post("{:url('hair/project/doAddProj')}", {project_name : project_name}, function (ret) {
+                        if (ret.code) {
+                            $.toast(ret.msg, 'success', function () {
+                                window.location.href = ret.url + "?project_name=" + ret.data.project_name;
+                            });
+                        } else {
+                            $.toast(ret.msg, "forbidden");
+                        }
+                    }, 'json').error(function (err) {
+                        console.log(err);
+                    });
+                },
+                onCancel : function () {
+                    $.toast("{:lang('CANCEL')}", "cancel");
+                    console.log("{:lang('CANCEL')}");
+                },
+                input    : "{:lang('MY_PROJECT')}"
+            });
+        });
+    });
+</script>
