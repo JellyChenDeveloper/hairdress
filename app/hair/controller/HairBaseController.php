@@ -75,8 +75,6 @@ class HairBaseController extends HomeBaseController {
                     $wx_user->country     = $original['country'];
                     $wx_user->province    = $original['province'];
                     $wx_user->city        = $original['city'];
-//                    $wx_user->create_time = time();
-//                    $wx_user->update_time = time();
 
                     $wx_user->save();
                 } else {
