@@ -12,9 +12,6 @@
 namespace app\common\service;
 
 use EasyWeChat\Factory;
-use think\Config;
-use think\Session;
-
 
 class WechatService {
 
@@ -41,7 +38,7 @@ class WechatService {
     public function auth() {
         $this->authconfig['oauth'] = array(
             'scopes'   => ['snsapi_userinfo',],
-            'callback' => url('wechat/index/index'),
+            'callback' => url('hair/index/wxAuth'),
         );
 
         $app      = Factory::officialAccount($this->authconfig);
@@ -55,7 +52,7 @@ class WechatService {
      * 检测微信是否已授权
      */
     public function checkWxAuth() {
-        return Session::has(Config::get('we_chat.WX_LOGIN_SESSION_KEY'));
+        return session('?' . config('we_chat.WX_LOGIN_SESSION_KEY'));
     }
 
     /**
@@ -65,7 +62,7 @@ class WechatService {
      *
      * @return $this|\Overtrue\Socialite\User
      */
-    public function getUserInfo() {
+    public function getWxUserInfo() {
         $app  = Factory::officialAccount($this->authconfig);
         $user = $app->oauth->user();
         file_put_contents(__DIR__ . "/qwdoi.txt", var_export($user->toArray(), true) . "\r\n", FILE_APPEND);

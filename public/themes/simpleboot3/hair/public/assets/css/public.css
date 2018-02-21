@@ -47,3 +47,7 @@ footer a {
 a.weui-cell__bd {
     color: inherit;
 }
+
+.weui-tabbar__label {
+    font-size: 20px;
+}

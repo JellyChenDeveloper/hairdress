@@ -21,4 +21,13 @@ class IndexController extends HairBaseController {
         echo 'asd';
         exit();
     }
+
+    public function wxAuth() {
+
+        cmf_set_user_wx_login();
+
+        $this->userLogin();
+
+        $this->redirect(url('hair/index/index'));
+    }
 }
