@@ -10,45 +10,22 @@
         </div>
     </div>
     <div class="weui-cells">
-        <div class="weui-cell weui-cell_swiped">
-            <div class="weui-cell__bd" style="transform: translateX(-136px)">
-                <div class="weui-cell">
-                    <a class="weui-cell__bd" href="{:url('hair/index/index')}">
-                        <p>项目1</p>
-                    </a>
-                    <div class="weui-cell__ft">向左滑动删除</div>
-                </div>
-            </div>
-            <div class="weui-cell__ft">
-                <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">{:lang('DELETE')}</a>
-            </div>
-        </div>
-        <div class="weui-cell weui-cell_swiped">
-            <div class="weui-cell__bd" style="transform: translateX(-136px)">
-                <div class="weui-cell">
-                    <div class="weui-cell__bd">
-                        <p>项目2</p>
+        <foreach name="project_list" item="project">
+            <div class="weui-cell weui-cell_swiped">
+                <!--<div class="weui-cell__bd" style="transform: translateX(-136px)">-->
+                <div class="weui-cell__bd">
+                    <div class="weui-cell">
+                        <a class="weui-cell__bd" href="{:url('hair/project/detail','id='.$project.id)}">
+                            <p>{$project.name}</p>
+                        </a>
+                        <div class="weui-cell__ft">向左滑动删除</div>
                     </div>
-                    <div class="weui-cell__ft">向左滑动删除</div>
+                </div>
+                <div class="weui-cell__ft">
+                    <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">{:lang('DELETE')}</a>
                 </div>
             </div>
-            <div class="weui-cell__ft">
-                <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">{:lang('DELETE')}</a>
-            </div>
-        </div>
-        <div class="weui-cell weui-cell_swiped">
-            <div class="weui-cell__bd" style="transform: translateX(-136px)">
-                <div class="weui-cell">
-                    <div class="weui-cell__bd">
-                        <p>项目3</p>
-                    </div>
-                    <div class="weui-cell__ft">向左滑动删除</div>
-                </div>
-            </div>
-            <div class="weui-cell__ft">
-                <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">{:lang('DELETE')}</a>
-            </div>
-        </div>
+        </foreach>
     </div>
 </div>
 <include file="hair@public/tab_foot"/>

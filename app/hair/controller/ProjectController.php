@@ -14,6 +14,10 @@ namespace app\hair\controller;
 class ProjectController extends HairBaseController {
 
     public function index() {
+        $project_list = model('common/projects')->where('status', 1)->page('1,2')->select()->toArray();
+
+        $this->assign('project_list', $project_list);
+
         return $this->fetch();
     }
 
@@ -35,8 +39,8 @@ class ProjectController extends HairBaseController {
         $this->success(lang('ADD_PROJECT_OK'), url('hair/project/detail'), ['id' => $project->id, 'project_name' => $project_name]);
     }
 
-    public function detail() {
-        $project_id = $this->request->get('id');
+    public function detail($id) {
+        $project_id = $id;
 
         $project = model('Projects')->get(['id' => $project_id, 'status' => 1])->toArray();
 
