@@ -28,6 +28,10 @@ class IndexController extends HairBaseController {
 
         $this->userLogin();
 
-        $this->redirect(url('hair/index/index'));
+        $callback_url = session('wx_auth_callback_url');
+
+        session('wx_auth_callback_url', null);
+
+        $this->redirect($callback_url);
     }
 }

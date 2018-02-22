@@ -47,6 +47,7 @@ class HairBaseController extends HomeBaseController {
      */
     public function userWxLogin() {
         if (!$this->wecharService->checkWxAuth()) {
+            session('wx_auth_callback_url', $this->request->url());
             $this->wecharService->auth();
 
             return false;

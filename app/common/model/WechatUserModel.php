@@ -12,7 +12,5 @@
 namespace app\common\model;
 
 class WechatUserModel extends BaseModel {
-    protected $table = 'wechat_user';
-
-    
+    protected $table = 'hair_wechat_user';
 }

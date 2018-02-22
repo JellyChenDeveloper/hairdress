@@ -1119,44 +1119,78 @@ LOCK TABLES `cmf_verification_code` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `projects`
+-- Table structure for table `hair_pages`
 --
 
-DROP TABLE IF EXISTS `projects`;
+DROP TABLE IF EXISTS `hair_pages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `projects` (
+CREATE TABLE `hair_pages` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
-  `project_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '项目名称',
-  `project_avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '项目图表，暂未使用',
-  `project_status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '项目状态;0:已删除,1:正常',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '页面名称',
+  `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '页面url',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '页面状态;0:已删除,1:正常',
+  `order` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片排序，0-999，从小到大',
   `more` text COMMENT '扩展属性',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  KEY `project_name` (`project_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='项目列表';
+  KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='项目详情表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `projects`
+-- Dumping data for table `hair_pages`
 --
 
-LOCK TABLES `projects` WRITE;
-/*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-/*!40000 ALTER TABLE `projects` ENABLE KEYS */;
+LOCK TABLES `hair_pages` WRITE;
+/*!40000 ALTER TABLE `hair_pages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hair_pages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `wechat_user`
+-- Table structure for table `hair_projects`
 --
 
-DROP TABLE IF EXISTS `wechat_user`;
+DROP TABLE IF EXISTS `hair_projects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wechat_user` (
+CREATE TABLE `hair_projects` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '项目名称',
+  `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '项目图表，暂未使用',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '项目状态;0:已删除,1:正常',
+  `order` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '项目排序，0-999，从小到大',
+  `more` text COMMENT '扩展属性',
+  `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='项目列表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hair_projects`
+--
+
+LOCK TABLES `hair_projects` WRITE;
+/*!40000 ALTER TABLE `hair_projects` DISABLE KEYS */;
+INSERT INTO `hair_projects` VALUES (1,1,'项目1','',1,0,NULL,1519309082,1519309082),(2,1,'项目2','',1,0,NULL,1519309155,1519309155),(3,1,'项目3','',1,0,NULL,1519309163,1519309163);
+/*!40000 ALTER TABLE `hair_projects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hair_wechat_user`
+--
+
+DROP TABLE IF EXISTS `hair_wechat_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hair_wechat_user` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `wx_openid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '用户名',
   `wx_nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '用户昵称',
@@ -1168,7 +1202,8 @@ CREATE TABLE `wechat_user` (
   `user_type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户类型;1:普通会员;2:代理',
   `last_login_time` int(11) NOT NULL DEFAULT '0' COMMENT '最后登录时间',
   `last_login_ip` varchar(15) NOT NULL DEFAULT '' COMMENT '最后登录ip',
-  `activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '激活码',
+  `private_activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '代理激活码,user_type=2时有效',
+  `activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '激活码,user_type=1时有效',
   `mobile` varchar(255) NOT NULL DEFAULT '' COMMENT '用户手机号',
   `has_payed` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '用户状态;0:未支付,1:已支付',
   `user_status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户状态;0:禁用,1:正常,2:未验证',
@@ -1179,16 +1214,17 @@ CREATE TABLE `wechat_user` (
   KEY `wx_openid` (`wx_openid`),
   KEY `wx_nickname` (`wx_nickname`),
   KEY `mobile` (`mobile`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wechat_user`
+-- Dumping data for table `hair_wechat_user`
 --
 
-LOCK TABLES `wechat_user` WRITE;
-/*!40000 ALTER TABLE `wechat_user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `wechat_user` ENABLE KEYS */;
+LOCK TABLES `hair_wechat_user` WRITE;
+/*!40000 ALTER TABLE `hair_wechat_user` DISABLE KEYS */;
+INSERT INTO `hair_wechat_user` VALUES (1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','Jelly_国栋',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJTK7xAv9WibAnJfqxhCXU4lNV19EeOIF2hCsIbia4c8ACSGnhEYNXFpeb2Njo4RPicNooEVic7MQDrXQ/132','中国','北京','',1,0,'','','','',0,1,NULL,1519308682,1519308682);
+/*!40000 ALTER TABLE `hair_wechat_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -1200,4 +1236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-20 16:56:01
+-- Dump completed on 2018-02-22 14:30:30

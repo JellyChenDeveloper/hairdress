@@ -21,6 +21,7 @@ return [
     'PROJECT_NAME'       => '项目名称',
     'NEW_PROJECT'        => '新建项目',
     'INPUT_PROJECT_NAME' => '请输入项目名称',
+    'PROJECT_NAME_EXIST' => '该项目名已存在',
     'ADD_PROJECT_OK'     => '新建项目成功',
 
     'MY_PAGE'         => '我的页面',

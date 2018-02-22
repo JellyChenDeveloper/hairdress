@@ -9,11 +9,11 @@
  * @version        1.0
  */
 
-if (defined(ENV_LOC)) {
+if (defined('ENV_LOC')) {
     $app_id = 'wx0a27e7e0e626f8ea';
     $secret = '222a7a2e27a670e6ab6cada48cdd7b14';
     define('TEST_OPENID', 'odJLRt4ITX2siPTPbiN3LNUJAxUI');
-} elseif (defined(ENV_DEV)) {
+} elseif (defined('ENV_DEV')) {
     $app_id = 'wxa804ed68b68f6499';
     $secret = 'a9ae0f963cf6489c110b62cf8b80ee77';
 } else {

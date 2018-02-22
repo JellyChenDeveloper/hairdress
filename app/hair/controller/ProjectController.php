@@ -11,8 +11,6 @@
 
 namespace app\hair\controller;
 
-use app\common\model\ProjectsModel;
-
 class ProjectController extends HairBaseController {
 
     public function index() {
@@ -23,10 +21,13 @@ class ProjectController extends HairBaseController {
         $project_name = $this->request->post('project_name');
         $id           = cmf_get_current_user_id();
 
-        $data    = [
-            'user_id'      => $id,
-            'project_name' => $project_name,
+        $data = [
+            'user_id' => $id,
+            'name'    => $project_name,
         ];
+        if (model('common/projects')->get($data + ['status' => 1])) {
+            $this->error(lang('PROJECT_NAME_EXIST'));
+        }
         $project = model('Projects');
         $project->save($data);
 
@@ -37,7 +38,7 @@ class ProjectController extends HairBaseController {
     public function detail() {
         $project_id = $this->request->get('id');
 
-        $project = model('Projects')->get(['id' => $project_id, 'project_status' => 1])->toArray();
+        $project = model('Projects')->get(['id' => $project_id, 'status' => 1])->toArray();
 
         $this->assign('project', $project);
 

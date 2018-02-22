@@ -13,6 +13,6 @@ namespace app\common\model;
 
 
 class ProjectsModel extends BaseModel {
-    protected $table = 'projects';
+    protected $table = 'hair_projects';
 
 }

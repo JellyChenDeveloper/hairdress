@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS `wechat_user`;
+DROP TABLE IF EXISTS `hair_wechat_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `wechat_user` (
+CREATE TABLE `hair_wechat_user` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `wx_openid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '用户名',
   `wx_nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '用户昵称',
@@ -13,7 +13,8 @@ CREATE TABLE `wechat_user` (
   `user_type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户类型;1:普通会员;2:代理',
   `last_login_time` int(11) NOT NULL DEFAULT '0' COMMENT '最后登录时间',
   `last_login_ip` varchar(15) NOT NULL DEFAULT '' COMMENT '最后登录ip',
-  `activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '激活码',
+  `private_activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '代理激活码,user_type=2时有效',
+  `activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '激活码,user_type=1时有效',
   `mobile` varchar(255) NOT NULL DEFAULT '' COMMENT '用户手机号',
   `has_payed` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '用户状态;0:未支付,1:已支付',
   `user_status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户状态;0:禁用,1:正常,2:未验证',
