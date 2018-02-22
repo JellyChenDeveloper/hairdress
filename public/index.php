@@ -9,6 +9,15 @@
 
 // [ 入口文件 ]
 
+
+if ($_SERVER['HTTP_HOST'] == '127.0.0.1') {
+    define("ENV_LOC", true);
+} elseif ($_SERVER['HTTP_HOST'] == 'wechat.jellychen.cn') {
+    define("ENV_DEV", true);
+} else {
+    define("ENV_PRO", true);
+}
+
 // 调试模式开关
 define("APP_DEBUG", true);
 

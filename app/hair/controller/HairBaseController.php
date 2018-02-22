@@ -13,7 +13,6 @@ namespace app\hair\controller;
 
 use cmf\controller\HomeBaseController;
 use app\common\service\WechatService;
-use app\common\model\WechatUserModel;
 
 class HairBaseController extends HomeBaseController {
 
@@ -62,11 +61,21 @@ class HairBaseController extends HomeBaseController {
      */
     public function userLogin() {
         if (!cmf_get_current_user_id()) {
+
+            if (ENV_LOC) {
+                $test_user = model('common/wechat_user')->get(['wx_openid' => TEST_OPENID]);
+                if (!is_null($test_user)) {
+                    cmf_update_current_user($test_user->toArray());
+
+                    return cmf_get_current_user();
+                }
+            }
+
             if (cmf_is_user_wx_login()) {
                 $user    = $this->wecharService->getWxUserInfo();
-                $wx_user = WechatUserModel::get(['wx_openid' => $user->getId()]);
+                $wx_user = model('common/wechat_user')->get(['wx_openid' => $user->getId()]);
                 if (is_null($wx_user)) {
-                    $wx_user              = new WechatUserModel();
+                    $wx_user              = model('common/wechat_user');
                     $original             = $user->getOriginal();
                     $wx_user->wx_openid   = $user->getId();
                     $wx_user->wx_nickname = $user->getNickname();
