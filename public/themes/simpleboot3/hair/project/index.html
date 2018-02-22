@@ -68,7 +68,7 @@
                     $.post("{:url('hair/project/doAddProj')}", {project_name : project_name}, function (ret) {
                         if (ret.code) {
                             $.toast(ret.msg, 'success', function () {
-                                window.location.href = ret.url + "?project_name=" + ret.data.project_name;
+                                window.location.href = ret.url + "?id=" + ret.data.id;
                             });
                         } else {
                             $.toast(ret.msg, "forbidden");

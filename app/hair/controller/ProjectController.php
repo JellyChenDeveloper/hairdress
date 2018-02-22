@@ -11,6 +11,8 @@
 
 namespace app\hair\controller;
 
+use app\common\model\ProjectsModel;
+
 class ProjectController extends HairBaseController {
 
     public function index() {
@@ -19,14 +21,25 @@ class ProjectController extends HairBaseController {
 
     public function doAddProj() {
         $project_name = $this->request->post('project_name');
+        $id           = cmf_get_current_user_id();
 
-        $this->success(lang('ADD_PROJECT_OK'), url('hair/project/detail'), ['id' => 1, 'project_name' => $project_name]);
+        $data    = [
+            'user_id'      => $id,
+            'project_name' => $project_name,
+        ];
+        $project = model('Projects');
+        $project->save($data);
+
+
+        $this->success(lang('ADD_PROJECT_OK'), url('hair/project/detail'), ['id' => $project->id, 'project_name' => $project_name]);
     }
 
     public function detail() {
-        $project_name = $this->request->get('project_name');
+        $project_id = $this->request->get('id');
 
-        $this->assign('project_name', $project_name);
+        $project = model('Projects')->get(['id' => $project_id, 'project_status' => 1])->toArray();
+
+        $this->assign('project', $project);
 
         return $this->fetch();
     }
