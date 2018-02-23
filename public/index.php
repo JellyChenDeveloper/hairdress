@@ -12,7 +12,7 @@
 
 if ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') {
     define("ENV_LOC", true);
-} elseif ($_SERVER['HTTP_HOST'] == 'wechat.jellychen.cn') {
+} elseif ($_SERVER['HTTP_HOST'] == 'wechat.jellychen.cn' || $_SERVER['HTTP_HOST'] == 'wechat.yikaoshuju.com') {
     define("ENV_DEV", true);
 } else {
     define("ENV_PRO", true);
