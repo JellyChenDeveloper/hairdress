@@ -63,7 +63,7 @@ class HairBaseController extends HomeBaseController {
     public function userLogin() {
         if (!cmf_get_current_user_id()) {
 
-            if (ENV_LOC) {
+            if (defined(ENV_LOC)) {
                 $test_user = model('common/wechat_user')->get(['wx_openid' => TEST_OPENID]);
                 if (!is_null($test_user)) {
                     cmf_update_current_user($test_user->toArray());

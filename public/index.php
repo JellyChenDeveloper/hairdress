@@ -10,7 +10,7 @@
 // [ 入口文件 ]
 
 
-if ($_SERVER['HTTP_HOST'] == '127.0.0.1') {
+if ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost') {
     define("ENV_LOC", true);
 } elseif ($_SERVER['HTTP_HOST'] == 'wechat.jellychen.cn') {
     define("ENV_DEV", true);
