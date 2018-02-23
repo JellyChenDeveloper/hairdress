@@ -9,3 +9,4 @@ composer.lock
 /public/assets/dist
 /node_modules
 docker1/
+docker/mysql/*

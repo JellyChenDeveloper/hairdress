@@ -11,12 +11,11 @@ docker exec -it hairdress_mysqldb_1 /bin/bash
 
 在容器中，运行命令
 ```bash
-mysql -uroot -proot < /opt/sql/create_thinkcmf5.sql
-mysql -uroot -proot thinkcmf5 < /opt/sql/thinkcmf5.sql
+mysql -uroot -proot < /opt/sql/hairdress.sql
 ```
 
 #### 关闭容器时导出数据库
 在容器中，运行
 ```bash
-mysqldump thinkcmf5 -uroot -proot >/opt/sql/thinkcmf5.sql
+mysqldump -uroot -proot -B hairdress >/opt/sql/hairdress.sql
 ```

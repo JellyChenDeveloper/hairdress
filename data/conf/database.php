@@ -9,7 +9,7 @@ return [
     // 服务器地址
     'hostname' => 'mysqldb',
     // 数据库名
-    'database' => 'thinkcmf5',
+    'database' => 'hairdress',
     // 用户名
     'username' => 'root',
     // 密码

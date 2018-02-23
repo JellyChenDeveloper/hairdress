@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.21, for Linux (x86_64)
 --
--- Host: localhost    Database: thinkcmf5
+-- Host: localhost    Database: hairdress
 -- ------------------------------------------------------
 -- Server version	5.7.21
 
@@ -14,6 +14,14 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `hairdress`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `hairdress` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `hairdress`;
 
 --
 -- Table structure for table `cmf_admin_menu`
@@ -1128,6 +1136,7 @@ DROP TABLE IF EXISTS `hair_pages`;
 CREATE TABLE `hair_pages` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `project_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '项目id',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '页面名称',
   `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '页面url',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '页面状态;0:已删除,1:正常',
@@ -1236,4 +1245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-22 14:30:30
+-- Dump completed on 2018-02-23  9:26:12

@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS `hair_pages`;
 CREATE TABLE `hair_pages` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `project_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '项目id',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '页面名称',
   `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '页面url',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '页面状态;0:已删除,1:正常',
