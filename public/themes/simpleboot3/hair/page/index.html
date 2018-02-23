@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>test</title>
+    <link rel="stylesheet" href="__PAGE_TOOLS__/css/main.css">
+    <script src="__PAGE_TOOLS__/js/flexible.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <div class="tab">
+        <ul>
+            <li class="fl">返回</li>
+            <li class="fl tri-head" >头像</li>
+            <li class="fl tri-tool" >工具</li>
+            <li class="fl tri-word">文字</li>
+            <li class="fl">分享</li>
+        </ul>
+    </div>
+    <div class="main-wrap">
+        <div class="canvas-wrap">
+            <canvas id="canvas"></canvas>
+        </div>
+        <div class="m-tool m-all-tool">
+            <div class="m-inner">
+                <ul>
+                    <!-- <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="images/bg.png" alt="">
+                            <p class="h-text">发片</p>
+                        </div>
+                    </li> -->
+                    <li class="h-icon fl" renderType='Line' >
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <p class="h-text">直线</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='renderArrow'>
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <p class="h-text">箭头</p>
+                        </div>
+                    </li>
+                    <!-- <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="images/bg.png" alt="">
+                            <p class="h-text">弧线</p>
+                        </div>
+                    </li> -->
+                    <!-- <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="images/bg.png" alt="">
+                            <p class="h-text">虚弧线</p>
+                        </div>
+                    </li> -->
+                    <li class="h-icon fl" renderType='renderTriangle' >
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <p class="h-text">三角形</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='renderCircle'>
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <p class="h-text">圆形</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='renderEllipse'>
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <p class="h-text">椭圆</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='isDrawingMode'>
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <p class="h-text">画笔</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="m-head m-all-tool">
+            <div class="m-inner">
+                <ul>
+                    <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="mask" id="select-cx">
+        <div class="m-box">
+            <ul >
+                <!-- <li  >
+                    <p class="text-c">发片</p>
+                    <p>
+                        请选择颜色: <input type="color" name='fill'>
+                    </p>
+                </li> -->
+                <li >
+                    <p class="text-c">直线</p>
+                    <p>颜色：<input class="s-select" type="color" key='stroke fill' ></p>
+                    <p>线宽：<select class="s-select" key='strokeWidth' id="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    </p>
+                </li>
+                <li>
+                    <p class="text-c">箭头</p>
+                    <p>颜色：<input class="s-select" type="color" key='stroke fill' ></p>
+                </li>
+                <!-- <li>弧线</li> -->
+                <!-- <li>虚弧线</li> -->
+                <li>
+                    <p class="text-c">三角形</p>
+                    <p>颜色：<input class="s-select" type="color" key='fill' ></p>
+                </li>
+                <li>
+                    <p class="text-c">圆形</p>
+                    <p>颜色：<input class="s-select" type="color" key='fill' ></p>
+                </li>
+                <li>
+                    <p class="text-c">椭圆</p>
+                    <p>颜色：<input class="s-select" type="color" key='fill' ></p>
+                </li>
+                <li>
+                    <p class="text-c">画笔</p>
+                    <p>颜色：<input class="s-select" type="color" key='color' ></p>
+                    <p>线宽：<select class="s-select " key='width' id="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    </p>
+                </li>
+            </ul>
+            <div class="btn-wrap">
+                <div class="btn-no">取消</div>
+                <div class="btn-ok">确定</div>
+            </div>
+        </div>
+    </div>
+    <div class="mask" id="text">
+        <div class="m-box">
+            <div class="text-wrap">
+                <p>文案：<input type="text" id="i-text"></p>
+                <p>颜色：<input class="text-option" type="color" key='stroke fill' name='color'></p>
+                <p>粗细：<select class="text-option" key='fontWeight'  id="text-width">
+                    <option value="normal">正常</option>
+                    <option value="bold">加粗</option>
+                </select>
+                </p>
+                <p>字体：<select class="text-option" key='fontSize' name="" id="font-size">
+                    <option value="12">12</option>
+                    <option value="14">14</option>
+                    <option value="16">16</option>
+                    <option value="18">18</option>
+                    <option value="20">20</option>
+                </select>
+                </p>
+            </div>
+            <div class="btn-wrap">
+                <div class="btn-no">取消</div>
+                <div class="btn-ok">确定</div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-btn">
+        <!-- <div class="btn-pre btn fl">上一步</div> -->
+        <div class="btn-delete btn fl">删除</div>
+        <div class="btn-save fr btn">保存</div>
+        <div class="btn-hb btn fr">移除画笔</div>
+    </div>
+</div>
+<div id="canvas" style="height:200px;"></div>
+<!-- <canvas id="canvas"></canvas> -->
+<script src="__PAGE_TOOLS__/js/jquery.min.js"></script>
+<!-- <script src="js/fabric.min.js"></script> -->
+<!-- <script src="js/fabric2.js"></script> -->
+<script src="__PAGE_TOOLS__/js/fabric_gestures.js"></script>
+<!-- <script src="js/canvas.js"></script> -->
+<script>
+    $(function(){
+        window.obj={
+            init:function(){
+                var _this = this;
+                this.offsetX = $('.main-wrap').offset().left;
+                this.offsetY = $('.main-wrap').offset().top;
+                this.renderOBJ = null;
+                this.renderOption=null;
+                this.canvas = $('#canvas');
+                this.setHeight();
+                this.ctx =new fabric.Canvas('canvas');
+                this.ctx.isDrawingMode =false;
+                this.baseSize = this.w/5;
+
+                this.bindEvent();
+                this.renderBG();
+                // setTimeout(function(){
+                //     _this.ctx.isDrawingMode =false;
+                // },3000);
+            },
+            bindEvent:function(){
+                var _this =this;
+                //工具头像切换
+                $('.tri-head').on('click',function(){
+                    $('.m-head').slideToggle();
+                    $('.m-tool').hide();
+                });
+                $('.tri-tool').on('click',function(){
+                    $('.m-tool').slideToggle();
+                    $('.m-head').hide();
+                });
+                //头像点击
+                $('.m-head .h-one').on('click',function(){
+                    var src = $(this).find('img').attr('src');
+                    var img = $(this).find('img')[0];
+                    // var img = new Image();
+                    // img.src=src;
+                    // img.width=_this.w/2;
+                    // img.height=_this.h/2;
+                    var top = (_this.h-img.height)*0.6;
+                    var left = (_this.w-img.width)/2;
+                    var img = new fabric.Image(img,{
+                        left:left,
+                        top:top,
+                    });
+                    // img.on('dbclick',function(){
+                    //    alert(1111);
+                    // });
+                    _this.ctx.add(img);
+                    $('.m-head').slideUp();
+                });
+                //工具点击
+                $('.m-tool li.h-icon').on('click',function(){
+                    var index = $(this).index();
+                    _this.renderOBJ =$(this).attr('renderType');
+                    $('#select-cx').show().find('li').eq(index).addClass('on').siblings().removeClass('on');
+                });
+                $('#select-cx .btn-wrap .btn-ok').on("click",function(){
+                    var obj={};
+                    var hasOption = false;
+                    var option = $('#select-cx ul li.on').find('.s-select');
+                    option = _this.createOption(option);
+                    console.log(JSON.stringify(option));
+                    console.log(_this.renderOBJ);
+                    _this.renderFN[_this.renderOBJ].call(_this,option);
+                    $('#select-cx').hide();
+                    $('.m-tool').hide();
+                });
+                $('.btn-wrap .btn-no').on("click",function(){
+                    $('#select-cx input').val('');
+                    $(this).parents('.mask').hide();
+                    _this.renderOBJ=null;
+                    _this.renderOption=null;
+                });
+                //文案点击
+                //
+                $('.tri-word').on('click',function(){
+                    $('.m-all-tool').hide();
+                    $('#text').show();
+                });
+                $('#text .btn-ok').on('click',function(){
+                    var text = $('#i-text').val();
+                    if(text ==''){
+                        alert('文案不能为空~');
+                        return false;
+                    }
+                    var input_option = $('#text').find('.text-option');
+                    var option = _this.createOption(input_option);
+                    console.log(JSON.stringify(option));
+                    option.left = _this.w/2;
+                    option.top = _this.h/2;
+                    option.textAlign = 'center';
+                    // option.originY='top';
+                    _this.renderOBJ = 'Text';
+                    var text_obj = new fabric[_this.renderOBJ](text,option);
+                    _this.ctx.add(text_obj);
+                    $(this).parents('.mask').hide();
+                    $('#i-text').val('');
+                    $('.m-all-tool').hide();
+                    _this.renderOBJ=null;
+                    _this.renderOption=null;
+
+                });
+
+                //
+                //
+                //
+                $('.btn-hb').on('click',function(){
+
+                    $(this).hide();
+                    _this.ctx.isDrawingMode=false;
+                });
+                //canvas点击
+
+                this.ctx.on('mouse:down',function(options,self){
+
+                });
+            },
+            createOBJ:function(){
+                var obj = new fabric[this.renderOBJ,this.renderOption];
+                this.ctx.add(obj);
+            }
+            ,
+            renderBG:function(){
+                var num =10;
+                var w = this.w;
+                var space = w/num;
+                var h = this.h;
+                var l_num = Math.ceil(h/space);
+                var option = {
+                    fill: '#ccc',
+                    stroke: '#ccc',
+                    opacity:0.2,
+                    strokeWidth: 1,
+                    hasControls: false,
+                    hasRotatingPoint: false,
+                    hasBorders:false,
+                    transparentCorners:true,
+                    perPixelTargetFind:true,
+                    selectable:false,
+                    lockMovementX: true,
+                    lockMovementY: true,
+                };
+                for(var i = 1;i<l_num;i++){
+                    var line = new fabric.Line([w,i*space,0,i*space],option);
+                    this.ctx.add(line);
+                }
+                for(var i = 1;i<num;i++){
+                    var line = new fabric.Line([i*space,0,i*space,h],option);
+                    this.ctx.add(line);
+                }
+            }
+            ,
+            setHeight:function(){
+                var h = $('.canvas-wrap').height();
+                var w = $('.canvas-wrap').width();
+                this.w=w;
+                this.h=h;
+                this.canvas[0].width = w;
+                this.canvas[0].height = h;
+            },
+            createOption:function(el){
+                var option={};
+                $(el).each(function(i,e){
+                    var keys = $(e).attr('key').split(' ');
+                    var val = $(this).val();
+                    $.each(keys,function(i,e){
+                        option[e]=val;
+                    });
+                });
+                return option;
+            },
+            renderFN:{
+                Line:function(option){
+                    var line = new fabric.Line([this.w/3,this.h/2,this.w*(2/3),this.h/2],option);
+                    console.log(this.renderOBJ);
+                    console.log(JSON.stringify([this.w/3,this.h/2,this.w*(2/3),this.h/2]));
+                    this.ctx.add(line);
+                },
+                isDrawingMode:function(option){
+                    this.ctx.freeDrawingBrush.color =option.color;
+                    this.ctx.freeDrawingBrush.width  =option.width;
+                    this.ctx.isDrawingMode =true;
+                    $('.btn-hb').show();
+                },
+                renderTriangle:function(option){
+                    var w = this.w/4;
+                    var top = (this.h-w)/2;
+                    var left =(this.w-w)/2;
+                    option.width = w;
+                    option.height = w;
+                    option.top =top;
+                    option.left = left;
+                    var tri = new fabric.Triangle(option);
+                    this.ctx.add(tri);
+                },
+                renderCircle:function(option){
+                    var w = this.w/5;
+                    var top = (this.h-w*2)/2;
+                    var left =(this.w-w*2)/2;
+                    option.radius = w;
+                    option.top =top;
+                    option.left = left;
+                    var tri = new fabric.Circle(option);
+                    this.ctx.add(tri);
+                },
+                renderEllipse:function(option){
+                    var w = this.w/3;
+                    var h = w*0.5;
+                    var top = (this.h-h*2)/2;
+                    var left =(this.w-w*2)/2;
+                    option.rx =w;
+                    option.ry =h;
+                    option.top =top;
+                    option.left = left;
+                    console.log(JSON.stringify(option));
+                    var ell = new fabric.Ellipse(option);
+                    this.ctx.add(ell);
+                },
+                renderArrow:function(option){
+                    option.strokeWidth=1;
+                    var w = this.w*0.3;
+                    var l_left = (this.w-w)/2;
+                    var l_top = (this.h-option.strokeWidth)*0.5;
+                    console.log(JSON.stringify([l_left,l_top,l_left+w,l_top]));
+                    var line = new fabric.Line([l_left,l_top,l_left+w,l_top],option);
+                    var a_w=w*0.05;
+                    var a_h=a_w*2;
+                    var arr = new fabric.Triangle({
+                        width:a_w,
+                        height:a_h,
+                        left:l_left+w+3,
+                        top:(this.h-a_h/2-option.strokeWidth/2-0.5)/2,
+                        fill:option.fill,
+                        angle:90
+                    });
+                    var group = new fabric.Group([line,arr],{
+                        left:l_left,
+                        top:l_top
+                    });
+
+                    this.ctx.add(group);
+                }
+            }
+        };
+        obj.init();
+    });
+</script>
+</body>
+</html>

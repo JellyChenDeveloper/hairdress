@@ -38,6 +38,7 @@ class HairBaseController extends HomeBaseController {
         $viewReplaceStr['__WE_CSS__']    = $pub_path . "/css";
         $viewReplaceStr['__WE_LIB__']    = $pub_path . "/lib";
         $viewReplaceStr['__WE_IMAGES__'] = $pub_path . "/images";
+        $viewReplaceStr['__PAGE_TOOLS__'] = $pub_path . "/page_tools";
 
         config('view_replace_str', $viewReplaceStr);
     }
