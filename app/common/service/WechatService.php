@@ -41,8 +41,8 @@ class WechatService {
             'callback' => url('hair/index/wxAuth'),
         );
 
-        $app      = Factory::officialAccount($this->authconfig);
-        $oauth    = $app->oauth;
+        $app   = Factory::officialAccount($this->authconfig);
+        $oauth = $app->oauth;
         $oauth->redirect()->send();
     }
 

@@ -15,15 +15,14 @@ use think\Request;
 use think\View;
 use think\Config;
 
-class BaseController extends Controller
-{
+class BaseController extends Controller {
     /**
      * 构造函数
+     *
      * @param Request $request Request对象
      * @access public
      */
-    public function __construct(Request $request = null)
-    {
+    public function __construct(Request $request = null) {
         if (!cmf_is_installed() && $request->module() != 'install') {
             header('Location: ' . cmf_get_root() . '/?s=install');
             exit;
@@ -54,15 +53,13 @@ class BaseController extends Controller
 
 
     // 初始化视图配置
-    protected function _initializeView()
-    {
+    protected function _initializeView() {
     }
 
     /**
      *  排序 排序字段为list_orders数组 POST 排序字段为：list_order
      */
-    protected function listOrders($model)
-    {
+    protected function listOrders($model) {
         if (!is_object($model)) {
             return false;
         }

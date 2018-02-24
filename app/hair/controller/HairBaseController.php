@@ -32,12 +32,12 @@ class HairBaseController extends HomeBaseController {
     public function _initializeView() {
         parent::_initializeView();
 
-        $viewReplaceStr                  = config('view_replace_str');
-        $pub_path                        = $viewReplaceStr['__TMPL__'] . '/hair/public/assets';
-        $viewReplaceStr['__WE_JS__']     = $pub_path . "/js";
-        $viewReplaceStr['__WE_CSS__']    = $pub_path . "/css";
-        $viewReplaceStr['__WE_LIB__']    = $pub_path . "/lib";
-        $viewReplaceStr['__WE_IMAGES__'] = $pub_path . "/images";
+        $viewReplaceStr                   = config('view_replace_str');
+        $pub_path                         = $viewReplaceStr['__TMPL__'] . '/hair/public/assets';
+        $viewReplaceStr['__WE_JS__']      = $pub_path . "/js";
+        $viewReplaceStr['__WE_CSS__']     = $pub_path . "/css";
+        $viewReplaceStr['__WE_LIB__']     = $pub_path . "/lib";
+        $viewReplaceStr['__WE_IMAGES__']  = $pub_path . "/images";
         $viewReplaceStr['__PAGE_TOOLS__'] = $pub_path . "/page_tools";
 
         config('view_replace_str', $viewReplaceStr);
@@ -47,8 +47,7 @@ class HairBaseController extends HomeBaseController {
      * 判断该用户是否存在，如果存在则取出相关信息，否则注册一个用户
      * 检测当前用户是否存在数据库中，如未存在则注册，如存在则获取信息保存在session中
      */
-    public function userLogin()
-    {
+    public function userLogin() {
         if (defined('ENV_LOC')) {
             $test_user = model('common/wechat_user')->get(['wx_openid' => TEST_OPENID]);
             if (!is_null($test_user)) {
@@ -64,23 +63,23 @@ class HairBaseController extends HomeBaseController {
             return false;
         } else {
             if (!cmf_get_current_user_id()) {
-                $user = $this->wecharService->getWxUserInfo();
+                $user    = $this->wecharService->getWxUserInfo();
                 $wx_user = model('common/wechat_user')->get(['wx_openid' => $user->getId()]);
                 if (is_null($wx_user)) {
-                    $wx_user = model('common/wechat_user');
-                    $original = $user->getOriginal();
-                    $wx_user->wx_openid = $user->getId();
+                    $wx_user              = model('common/wechat_user');
+                    $original             = $user->getOriginal();
+                    $wx_user->wx_openid   = $user->getId();
                     $wx_user->wx_nickname = $user->getNickname();
-                    $wx_user->wx_avatar = $user->getAvatar();
-                    $wx_user->sex = $original['sex'];
-                    $wx_user->country = $original['country'];
-                    $wx_user->province = $original['province'];
-                    $wx_user->city = $original['city'];
+                    $wx_user->wx_avatar   = $user->getAvatar();
+                    $wx_user->sex         = $original['sex'];
+                    $wx_user->country     = $original['country'];
+                    $wx_user->province    = $original['province'];
+                    $wx_user->city        = $original['city'];
 
                     $wx_user->save();
                 } else {
                     $wx_user->last_login_time = time();
-                    $wx_user->last_login_ip = get_client_ip(0, true);
+                    $wx_user->last_login_ip   = get_client_ip(0, true);
                 }
                 cmf_update_current_user($wx_user->toArray());
             }
