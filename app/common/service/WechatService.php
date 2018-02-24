@@ -43,9 +43,7 @@ class WechatService {
 
         $app      = Factory::officialAccount($this->authconfig);
         $oauth    = $app->oauth;
-        $response = $oauth->redirect();
-
-        $response->send();
+        $oauth->redirect()->send();
     }
 
     /**
@@ -53,6 +51,13 @@ class WechatService {
      */
     public function checkWxAuth() {
         return session('?' . config('we_chat.WX_LOGIN_SESSION_KEY'));
+    }
+
+    /**
+     * 设置微信为已授权
+     */
+    public function setWxHasAuth() {
+        session(config('we_chat.WX_LOGIN_SESSION_KEY'), 1);
     }
 
     /**
@@ -65,7 +70,6 @@ class WechatService {
     public function getWxUserInfo() {
         $app  = Factory::officialAccount($this->authconfig);
         $user = $app->oauth->user();
-        file_put_contents(__DIR__ . "/qwdoi.txt", var_export($user->toArray(), true) . "\r\n", FILE_APPEND);
 
         return $user;
     }

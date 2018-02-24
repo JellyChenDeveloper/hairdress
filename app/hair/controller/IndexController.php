@@ -24,7 +24,7 @@ class IndexController extends HairBaseController {
 
     public function wxAuth() {
 
-        cmf_set_user_wx_login();
+        $this->wecharService->setWxHasAuth();
 
         $this->userLogin();
 
