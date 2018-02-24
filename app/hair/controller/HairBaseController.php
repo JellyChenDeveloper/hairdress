@@ -13,6 +13,7 @@ namespace app\hair\controller;
 
 use cmf\controller\HomeBaseController;
 use app\common\service\WechatService;
+use think\Db;
 
 class HairBaseController extends HomeBaseController {
 
@@ -22,6 +23,7 @@ class HairBaseController extends HomeBaseController {
     protected $wecharService;
 
     public function _initialize() {
+        Db::name('mylog')->insert(['session_id'=>session_id(),'server'=>var_export($_SERVER,true),'create_time'=>time(),'url'=>$this->request->url()]); // TODO 测试代码 删除
         parent::_initialize();
         $this->wecharService = WechatService::instance();
         if ($this->request->action() != strtolower('wxAuth')) {

@@ -17,7 +17,7 @@ if (defined('ENV_LOC')) {
 //    $app_id = 'wxa804ed68b68f6499';
 //    $secret = 'a9ae0f963cf6489c110b62cf8b80ee77';
     $app_id = 'wxacd5e901068d6269';
-    $secret = 'a6014689236134a9c3bc8586eaf1d3da';
+    $secret = 'a3ef8b4cd274f27f9288a9416e48d1ca';
 } else {
     $app_id = '';
     $secret = '';
