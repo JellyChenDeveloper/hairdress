@@ -1144,6 +1144,7 @@ CREATE TABLE `hair_pages` (
   `more` text COMMENT '扩展属性',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
+  `delete_time` int(11) NOT NULL DEFAULT '0' COMMENT '删除时间',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `name` (`name`)
@@ -1176,6 +1177,7 @@ CREATE TABLE `hair_projects` (
   `more` text COMMENT '扩展属性',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
+  `delete_time` int(11) NOT NULL DEFAULT '0' COMMENT '删除时间',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `name` (`name`)
@@ -1188,7 +1190,7 @@ CREATE TABLE `hair_projects` (
 
 LOCK TABLES `hair_projects` WRITE;
 /*!40000 ALTER TABLE `hair_projects` DISABLE KEYS */;
-INSERT INTO `hair_projects` VALUES (1,1,'项目1','',1,0,NULL,1519309082,1519309082),(2,1,'项目2','',1,0,NULL,1519309155,1519309155),(3,1,'项目3','',1,0,NULL,1519309163,1519309163);
+INSERT INTO `hair_projects` VALUES (1,1,'项目1','',1,0,NULL,1519309082,1519309082,0),(2,1,'项目2','',1,0,NULL,1519309155,1519309155,0),(3,1,'项目3','',1,0,NULL,1519309163,1519309163,0);
 /*!40000 ALTER TABLE `hair_projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1220,6 +1222,7 @@ CREATE TABLE `hair_wechat_user` (
   `more` text COMMENT '扩展属性',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  `delete_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '删除时间',
   PRIMARY KEY (`id`),
   KEY `wx_openid` (`wx_openid`),
   KEY `wx_nickname` (`wx_nickname`),
@@ -1233,7 +1236,7 @@ CREATE TABLE `hair_wechat_user` (
 
 LOCK TABLES `hair_wechat_user` WRITE;
 /*!40000 ALTER TABLE `hair_wechat_user` DISABLE KEYS */;
-INSERT INTO `hair_wechat_user` VALUES (1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','Jelly_国栋',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/6SoGhxRa80KlwicJGGR6KZDnllWwIbsrbkdVTRZxYXwQ4MGPqYBN5eicNdyO5KjjZlscOpFf4CwmI69vsRjqhnBQ/132','中国','北京','',1,'','',0,'',0,1,0,'',NULL,1519544796,1519544796);
+INSERT INTO `hair_wechat_user` VALUES (1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','Jelly_国栋',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/6SoGhxRa80KlwicJGGR6KZDnllWwIbsrbkdVTRZxYXwQ4MGPqYBN5eicNdyO5KjjZlscOpFf4CwmI69vsRjqhnBQ/132','中国','北京','',1,'','',0,'',0,1,0,'',NULL,1519544796,1519544796,0);
 /*!40000 ALTER TABLE `hair_wechat_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1246,4 +1249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-25 10:21:24
+-- Dump completed on 2018-02-25 15:21:46
