@@ -60,6 +60,7 @@ class HairBaseController extends HomeBaseController {
         if (!$this->wecharService->checkWxAuth()) {
             session('wx_auth_callback_url', $this->request->url());
             $this->wecharService->auth();
+
             return false;
         } else {
             if (!cmf_get_current_user_id()) {
@@ -83,6 +84,7 @@ class HairBaseController extends HomeBaseController {
                 }
                 cmf_update_current_user($wx_user->toArray());
             }
+
             return cmf_get_current_user();
         }
     }

@@ -9,9 +9,8 @@
 namespace app\hair\controller;
 
 
-class PageController extends HairBaseController
-{
-    public function index(){
+class PageController extends HairBaseController {
+    public function index() {
         $this->fetch();
     }
 }
