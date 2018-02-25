@@ -12,8 +12,12 @@
 namespace app\common\model;
 
 use think\Model;
+use traits\model\SoftDelete;
 
 class BaseModel extends Model {
+
+    use SoftDelete;
+    protected $deleteTime = 'delete_time';
 
     // 开启自动写入时间戳字段
     protected $autoWriteTimestamp = 'true';

@@ -15,4 +15,7 @@ namespace app\common\model;
 class ProjectsModel extends BaseModel {
     protected $table = 'hair_projects';
 
+    protected function modelDelete() {
+        $this->save(['status' => 0]);
+    }
 }

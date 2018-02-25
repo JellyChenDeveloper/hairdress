@@ -22,6 +22,7 @@ return [
     'NEW_PROJECT'        => '新建项目',
     'INPUT_PROJECT_NAME' => '请输入项目名称',
     'PROJECT_NAME_EXIST' => '该项目名已存在',
+    'PROJECT_NOT_EXIST'  => '项目名不存在',
     'ADD_PROJECT_OK'     => '新建项目成功',
 
     'MY_PAGE'         => '我的页面',
@@ -31,4 +32,8 @@ return [
     'PAGE_NAME_EXIST' => '页面名称已存在',
     'ADD_PAGE_OK'     => '新建页面成功',
     'SAVE_IMG_OK'     => '图片保存成功',
+
+    'DELETE_PROJ_CONFIRM' => '您确定要删除项目<<%s>>吗?',
+    'DELETE_PAGE_CONFIRM' => '您确定要删除页面<<%s>>吗?',
+    'DELETE_CONFIRM'      => '确定删除?',
 ];
