@@ -14,7 +14,7 @@ namespace app\hair\controller;
 class ProjectController extends HairBaseController {
 
     public function index() {
-        $project_list = model('Projects')->where(['status' => 1, 'user_id' => $this->user_id])->page('1,500')->select();
+        $project_list = model('Projects')->where(['user_id' => $this->user_id])->page('1,500')->select();
 
         $this->assign('project_list', $project_list);
 
@@ -28,7 +28,7 @@ class ProjectController extends HairBaseController {
             'user_id' => $this->user_id,
             'name'    => $project_name,
         ];
-        if (model('Projects')->get($data + ['status' => 1])) {
+        if (model('Projects')->get($data)) {
             $this->error(lang('PROJECT_NAME_EXIST'));
         }
         $project = model('Projects');
@@ -41,8 +41,8 @@ class ProjectController extends HairBaseController {
     public function detail($id) {
         $project_id = $id;
 
-        $project   = model('Projects')->get(['id' => $project_id, 'status' => 1]);
-        $page_list = model('Pages')->where(['user_id' => $this->user_id, 'project_id' => $project_id, 'status' => 1])->page('1,500')->select();
+        $project   = model('Projects')->get(['id' => $project_id]);
+        $page_list = model('Pages')->where(['user_id' => $this->user_id, 'project_id' => $project_id])->page('1,500')->select();
 
         $this->assign('project', $project);
         $this->assign('page_list', $page_list);
@@ -59,7 +59,7 @@ class ProjectController extends HairBaseController {
             'project_id' => $project_id,
             'name'       => $page_name,
         ];
-        if (model('Pages')->get($data + ['status' => 1])) {
+        if (model('Pages')->get($data)) {
             $this->error(lang('PAGE_NAME_EXIST'));
         }
         $page = model('Pages');

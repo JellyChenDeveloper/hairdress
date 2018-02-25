@@ -1211,10 +1211,10 @@ CREATE TABLE `hair_wechat_user` (
   `user_type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户类型;1:普通会员;2:代理',
   `mobile` varchar(255) NOT NULL DEFAULT '' COMMENT '用户手机号',
   `activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '激活码,user_type=1时有效',
-  `has_payed` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '用户状态;0:未支付,1:已支付',
+  `has_payed` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '支付状态;0:未支付,1:已支付',
   `agent_activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '代理激活码,user_type=2时有效',
   `agent_work_count` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '代理推广人数,user_type=2时有效',
-  `user_status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户状态;0:禁用,1:正常,2:未验证',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户状态;0:已删除,1:正常',
   `last_login_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '最后登录时间',
   `last_login_ip` varchar(15) NOT NULL DEFAULT '' COMMENT '最后登录ip',
   `more` text COMMENT '扩展属性',
@@ -1246,4 +1246,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-25  8:05:03
+-- Dump completed on 2018-02-25 10:21:24

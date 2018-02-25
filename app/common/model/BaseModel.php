@@ -18,5 +18,10 @@ class BaseModel extends Model {
     // 开启自动写入时间戳字段
     protected $autoWriteTimestamp = 'true';
 
+    // 定义全局的查询范围
+    protected function base($query) {
+        $query->where('status', 1);
+    }
+
 
 }
