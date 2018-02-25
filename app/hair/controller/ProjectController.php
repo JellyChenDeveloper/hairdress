@@ -14,7 +14,7 @@ namespace app\hair\controller;
 class ProjectController extends HairBaseController {
 
     public function index() {
-        $project_list = model('common/projects')->where('status', 1)->page('1,2')->select()->toArray();
+        $project_list = model('Projects')->where(['status' => 1, 'user_id' => $this->user_id])->page('1,500')->select()->toArray();
 
         $this->assign('project_list', $project_list);
 
@@ -23,35 +23,48 @@ class ProjectController extends HairBaseController {
 
     public function doAddProj() {
         $project_name = $this->request->post('project_name');
-        $id           = cmf_get_current_user_id();
 
         $data = [
-            'user_id' => $id,
+            'user_id' => $this->user_id,
             'name'    => $project_name,
         ];
-        if (model('common/projects')->get($data + ['status' => 1])) {
+        if (model('Projects')->get($data + ['status' => 1])) {
             $this->error(lang('PROJECT_NAME_EXIST'));
         }
         $project = model('Projects');
         $project->save($data);
 
 
-        $this->success(lang('ADD_PROJECT_OK'), url('hair/project/detail'), ['id' => $project->id, 'project_name' => $project_name]);
+        $this->success(lang('ADD_PROJECT_OK'), url('hair/project/detail', ['id' => $project->id]));
     }
 
     public function detail($id) {
         $project_id = $id;
 
-        $project = model('Projects')->get(['id' => $project_id, 'status' => 1])->toArray();
+        $project   = model('Projects')->get(['id' => $project_id, 'status' => 1])->toArray();
+        $page_list = model('Pages')->where(['user_id' => $this->user_id, 'project_id' => $project_id, 'status' => 1])->page('1,500')->select()->toArray();
 
         $this->assign('project', $project);
+        $this->assign('page_list', $page_list);
 
         return $this->fetch();
     }
 
     public function doAddPage() {
-        $page_name = $this->request->post('page_name');
+        $page_name  = $this->request->post('page_name');
+        $project_id = $this->request->post('project_id');
 
-        $this->success(lang('ADD_PAGE_OK'), url('hair/project/detail'), ['id' => 1, 'page_name' => $page_name]);
+        $data = [
+            'user_id'    => $this->user_id,
+            'project_id' => $project_id,
+            'name'       => $page_name,
+        ];
+        if (model('Pages')->get($data + ['status' => 1])) {
+            $this->error(lang('PAGE_NAME_EXIST'));
+        }
+        $page = model('Pages');
+        $page->save($data);
+
+        $this->success(lang('ADD_PAGE_OK'), url('hair/page/index', ['id' => $page->id]));
     }
 }

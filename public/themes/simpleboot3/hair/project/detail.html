@@ -1,35 +1,40 @@
 <include file="hair@public/head"/>
-<include file="hair@public/tab_head"/>
+
 <header class='demos-header'>
     <h1 class="demos-title">{$project.name}</h1>
 </header>
 <div class="bd">
     <div class='demos-content-padded'>
         <div class="button_sp_area" style="text-align: right;">
-            <a href="javascript:" id='add_page' class="weui-btn weui-btn_mini weui-btn_primary">{:lang('NEW_PAGE')}</a>
+            <a href="javascript:" id='add_page' class="weui-btn weui-btn_mini weui-btn_primary" data-proj_id="{$project.id}">{:lang('NEW_PAGE')}</a>
         </div>
     </div>
     <div class="weui-cells">
-        <div class="weui-cell weui-cell_swiped">
-            <div class="weui-cell__bd" style="transform: translateX(-136px)">
-                <div class="weui-cell">
-                    <a class="weui-cell__bd" href="#" style="width: 30px;">
-                        <p>页面1</p>
-                    </a>
-                    <div class="weui-cell__ft">向左滑动删除</div>
+        <foreach name="page_list" item="page">
+            <div class="weui-cell weui-cell_swiped">
+                <!--<div class="weui-cell__bd" style="transform: translateX(-136px)">-->
+                <div class="weui-cell__bd">
+                    <div class="weui-cell">
+                        <a class="weui-cell__bd" href="{:url('hair/page/index',['id'=>$page.id])}">
+                            <p>{$page.name}</p>
+                        </a>
+                        <div class="weui-cell__ft">向左滑动删除</div>
+                    </div>
+                </div>
+                <div class="weui-cell__ft">
+                    <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">{:lang('DELETE')}</a>
                 </div>
             </div>
-            <div class="weui-cell__ft">
-                <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">{:lang('DELETE')}</a>
-            </div>
-        </div>
+        </foreach>
     </div>
 </div>
-<include file="hair@public/tab_foot"/>
+
 <include file="hair@public/foot"/>
+
 <script>
     $(function () {
         $(document).on("click", "#add_page", function () {
+            var _this = $(this);
             $.prompt({
                 text     : "{:lang('INPUT_NAME_TIPS')}",
                 title    : "{:lang('INPUT_PAGE_NAME')}",
@@ -39,11 +44,10 @@
                         return false;
                     }
 
-                    $.post("{:url('hair/project/doAddPage')}", {page_name : page_name}, function (ret) {
+                    $.post("{:url('hair/project/doAddPage')}", {page_name : page_name, project_id : _this.data('proj_id')}, function (ret) {
                         if (ret.code) {
                             $.toast(ret.msg, 'success', function () {
-                                $.alert('页面名称:' + ret.data.page_name, '创建页面成功');
-                                // window.location.href = ret.url + "?page_name=" + ret.data.page_name;
+                                window.location.href = ret.url;
                             });
                         } else {
                             $.toast(ret.msg, "forbidden");

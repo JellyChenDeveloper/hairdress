@@ -21,12 +21,15 @@ class HairBaseController extends HomeBaseController {
      */
     protected $wecharService;
 
+    protected $user_id;
+
     public function _initialize() {
         parent::_initialize();
         $this->wecharService = WechatService::instance();
         if ($this->request->path() != strtolower('hair/index/wxauth')) {
             $this->userLogin();
         }
+        $this->user_id = cmf_get_current_user_id();
     }
 
     public function _initializeView() {
@@ -49,7 +52,7 @@ class HairBaseController extends HomeBaseController {
      */
     public function userLogin() {
         if (defined('ENV_LOC')) {
-            $test_user = model('common/wechat_user')->get(['wx_openid' => TEST_OPENID]);
+            $test_user = model('WechatUser')->get(['wx_openid' => TEST_OPENID]);
             if (!is_null($test_user)) {
                 cmf_update_current_user($test_user->toArray());
 
@@ -65,9 +68,9 @@ class HairBaseController extends HomeBaseController {
         } else {
             if (!cmf_get_current_user_id()) {
                 $user    = $this->wecharService->getWxUserInfo();
-                $wx_user = model('common/wechat_user')->get(['wx_openid' => $user->getId()]);
+                $wx_user = model('WechatUser')->get(['wx_openid' => $user->getId()]);
                 if (is_null($wx_user)) {
-                    $wx_user              = model('common/wechat_user');
+                    $wx_user              = model('WechatUser');
                     $original             = $user->getOriginal();
                     $wx_user->wx_openid   = $user->getId();
                     $wx_user->wx_nickname = $user->getNickname();

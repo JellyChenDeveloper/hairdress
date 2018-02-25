@@ -28,5 +28,7 @@ return [
     'PAGE_NAME'       => '页面名称',
     'NEW_PAGE'        => '新建页面',
     'INPUT_PAGE_NAME' => '请输入页面名称',
+    'PAGE_NAME_EXIST' => '页面名称已存在',
     'ADD_PAGE_OK'     => '新建页面成功',
+    'SAVE_IMG_OK'     => '图片保存成功',
 ];

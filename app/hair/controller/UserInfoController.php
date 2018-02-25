@@ -14,7 +14,7 @@ namespace app\hair\controller;
 class UserInfoController extends HairBaseController {
 
     public function index() {
-        $user = model('common/wechat_user')->get(['id' => cmf_get_current_user_id()])->toArray();
+        $user = model('WechatUser')->get(['id' => $this->user_id])->toArray();
 
         $user['has_payed_str'] = $user['has_payed'] ? '已支付' : '未支付';
         $user['location']      = implode(' ', array_filter([$user['country'], $user['province'], $user['city']]));
