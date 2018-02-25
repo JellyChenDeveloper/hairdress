@@ -11,7 +11,7 @@ namespace app\hair\controller;
 
 class PageController extends HairBaseController {
     public function index($id) {
-        $page = model('Pages')->get(['id' => $id, 'user_id' => $this->user_id, 'status' => 1])->toArray();
+        $page = model('Pages')->get(['id' => $id, 'user_id' => $this->user_id, 'status' => 1]);
 
         $this->assign('page', $page);
 

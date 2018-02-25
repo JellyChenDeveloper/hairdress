@@ -14,7 +14,7 @@ namespace app\hair\controller;
 class ProjectController extends HairBaseController {
 
     public function index() {
-        $project_list = model('Projects')->where(['status' => 1, 'user_id' => $this->user_id])->page('1,500')->select()->toArray();
+        $project_list = model('Projects')->where(['status' => 1, 'user_id' => $this->user_id])->page('1,500')->select();
 
         $this->assign('project_list', $project_list);
 
@@ -41,8 +41,8 @@ class ProjectController extends HairBaseController {
     public function detail($id) {
         $project_id = $id;
 
-        $project   = model('Projects')->get(['id' => $project_id, 'status' => 1])->toArray();
-        $page_list = model('Pages')->where(['user_id' => $this->user_id, 'project_id' => $project_id, 'status' => 1])->page('1,500')->select()->toArray();
+        $project   = model('Projects')->get(['id' => $project_id, 'status' => 1]);
+        $page_list = model('Pages')->where(['user_id' => $this->user_id, 'project_id' => $project_id, 'status' => 1])->page('1,500')->select();
 
         $this->assign('project', $project);
         $this->assign('page_list', $page_list);
