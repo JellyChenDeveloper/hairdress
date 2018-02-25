@@ -1,10 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>个人中心</title>
-</head>
-<body>
-头像qwdqwdqwd,qiwjdoiqjdoi
-</body>
-</html>
+<include file="hair@public/head"/>
+
+<div class="page__bd">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd">
+            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="{$user.wx_avatar}" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">{$user.wx_nickname}</h4>
+                    <p class="weui-media-box__desc">{$user.has_payed_str}</p>
+                </div>
+            </a>
+
+            <div class="weui-panel__hd"></div>
+
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_small-appmsg">
+                    <div class="weui-cells">
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>手机号</p>
+                            </div>
+                            <div class="weui-cell__ft">{$user.mobile|default='未设置'}</div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>激活码</p>
+                            </div>
+                            <div class="weui-cell__ft">{$user.activation_key|default='未设置'}</div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>地区</p>
+                            </div>
+                            <div class="weui-cell__ft">{$user.location}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <eq name="user.user_type" value="2">
+                <div class="weui-panel__hd"></div>
+                <div class="weui-panel__bd">
+                    <div class="weui-media-box weui-media-box_small-appmsg">
+                        <div class="weui-cells">
+
+                            <!--<a class="weui-cell weui-cell_access" href="{:url('hair/userInfo/agentInfo')}">
+                                <div class="weui-cell__bd">
+                                    <p>推广码</p>
+                                </div>
+                                <div class="weui-cell__ft">{$user.agent_activation_key|default='未分配'}</div>
+                            </a>-->
+
+                            <div class="weui-cell">
+                                <div class="weui-cell__bd">
+                                    <p>推广码</p>
+                                </div>
+                                <div class="weui-cell__ft">{$user.agent_activation_key|default='未分配'}</div>
+                            </div>
+
+                            <div class="weui-cell">
+                                <div class="weui-cell__bd">
+                                    <p>推广人数</p>
+                                </div>
+                                <div class="weui-cell__ft">{$user.agent_work_count|default='0'}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </eq>
+
+        </div>
+    </div>
+</div>
+
+<article class="weui-article">
+    <br>
+    <a href="{:url('hair/system/clearCache')}" class="weui-btn weui-btn_warn">清除缓存</a>
+</article>
+
+<include file="hair@public/foot"/>

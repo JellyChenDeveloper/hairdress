@@ -11,11 +11,23 @@
 
 namespace app\hair\controller;
 
-use cmf\controller\HomeBaseController;
-
-class UserInfoController extends HomeBaseController {
+class UserInfoController extends HairBaseController {
 
     public function index() {
-        $this->fetch();
+        $user = model('common/wechat_user')->get(['id' => cmf_get_current_user_id()])->toArray();
+
+        $user['has_payed_str'] = $user['has_payed'] ? '已支付' : '未支付';
+        $user['location']      = implode(' ', array_filter([$user['country'], $user['province'], $user['city']]));
+        $this->assign('user', $user);
+
+        return $this->fetch();
+    }
+
+    public function agentInfo() {
+        return $this->fetch();
+    }
+
+    public function paybackRecord() {
+        return $this->fetch();
     }
 }
