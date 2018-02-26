@@ -41,7 +41,7 @@ class PayController extends HairBaseController {
         $response = $this->wecharService->pay()->handlePaidNotify(function ($message, $fail) {
             // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
             $order_hand = $this->wecharService->pay()->order;
-            $order      = $order_hand - queryByOutTradeNumber($message['out_trade_no']);
+            $order      = $order_hand->queryByOutTradeNumber($message['out_trade_no']);
 
             if (!$order || $order->paid_at) { // 如果订单不存在 或者 订单已经支付过了
                 return true; // 告诉微信，我已经处理完了，订单没找到，别再通知我了
@@ -70,6 +70,6 @@ class PayController extends HairBaseController {
 
         $response->send();
 
-        return $response;
+//        return $response;
     }
 }
