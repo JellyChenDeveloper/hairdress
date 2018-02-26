@@ -1,0 +1,55 @@
+<include file="hair@public/head"/>
+
+<header class='demos-header'>
+    <h1 class="demos-title">付费开通</h1>
+</header>
+<div class="weui-form-preview">
+    <div class="weui-form-preview__bd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">名称</label>
+            <span class="weui-form-preview__value">美发工具</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">价格</label>
+            <em class="weui-form-preview__value">200.00元</em>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">说明</label>
+            <span class="weui-form-preview__value">该工具为付费产品，必须支付后方能使用，一次付费终生使用。</span>
+        </div>
+    </div>
+    <div class="weui-form-preview__ft">
+        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:" id="tool_pay">支付</a>
+    </div>
+</div>
+<include file="hair@public/foot"/>
+<script>
+    $(function () {
+        $(document).on("click", '.tool_pay', function () {
+            var _this     = $(this);
+            var page_item = _this.parents('.weui-cell_swiped');
+            var page_name = page_item.find('a.weui-cell__bd p').text();
+
+            if (typeof WeixinJSBridge == "undefined") {
+                if (document.addEventListener) {
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                } else if (document.attachEvent) {
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            } else {
+                WeixinJSBridge.invoke(
+                    'getBrandWCPayRequest', {$pay_json},
+                    function (res) {
+                        if (res.err_msg == "get_brand_wcpay_request:ok") {
+                            // 使用以上方式判断前端返回,微信团队郑重提示：
+                            // res.err_msg将在用户支付成功后返回
+                            // ok，但并不保证它绝对可靠。
+                        }
+                    }
+                );
+            }
+            return false;
+        });
+    });
+</script>

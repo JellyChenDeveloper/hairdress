@@ -18,7 +18,7 @@ class WechatService {
     /** @var \app\common\service\WechatService null */
     static private $_instance = null;
 
-    private $authconfig = array();
+    private $config = array();
 
     static public function instance() {
         if (!self::$_instance instanceof WechatService) {
@@ -29,19 +29,14 @@ class WechatService {
     }
 
     private function __construct() {
-        $this->authconfig = config('we_chat.wx_sdk_config');
+        $this->config = config('we_chat.wx_sdk_config');
     }
 
     /**
      * 进行微信网页授权
      */
     public function auth() {
-        $this->authconfig['oauth'] = array(
-            'scopes'   => ['snsapi_userinfo',],
-            'callback' => url('hair/index/wxAuth'),
-        );
-
-        $app   = Factory::officialAccount($this->authconfig);
+        $app   = Factory::officialAccount($this->config);
         $oauth = $app->oauth;
         $oauth->redirect()->send();
     }
@@ -68,9 +63,20 @@ class WechatService {
      * @return $this|\Overtrue\Socialite\User
      */
     public function getWxUserInfo() {
-        $app  = Factory::officialAccount($this->authconfig);
+        $app  = Factory::officialAccount($this->config);
         $user = $app->oauth->user();
 
         return $user;
+    }
+
+    /**
+     * 获取支付接口句柄
+     *
+     * @return \EasyWeChat\Payment\Application
+     */
+    public function pay() {
+        $app = Factory::payment($this->config);
+
+        return $app;
     }
 }

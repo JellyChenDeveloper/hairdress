@@ -11,11 +11,15 @@ namespace app\hair\controller;
 
 class PageController extends HairBaseController {
     public function index($id) {
-        $page = model('Pages')->get(['id' => $id, 'user_id' => $this->user_id]);
+        $user = model('WechatUser')->get($this->user_id);
+        if ($user->has_payed == 0) {
+            $this->redirect(url('hair/pay/toolPay'));
+        } else {
+            $page = model('Pages')->get(['id' => $id, 'user_id' => $this->user_id]);
+            $this->assign('page', $page);
 
-        $this->assign('page', $page);
-
-        return $this->fetch();
+            return $this->fetch();
+        }
     }
 
     public function doAddPage() {
