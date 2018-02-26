@@ -24,7 +24,7 @@ class BaseModel extends Model {
 
     // 定义全局的查询范围
     protected function base($query) {
-        $query->where('status', 1);
+        $query->where(['status' => 1, 'delete_time' => 0]);
     }
 
 

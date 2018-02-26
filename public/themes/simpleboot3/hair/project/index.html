@@ -56,7 +56,7 @@
                     $.toast("{:lang('CANCEL')}", "cancel");
                     console.log("{:lang('CANCEL')}");
                 },
-                input    : "{:lang('MY_PROJECT')}"
+                input    : "{:lang('PROJECT')}"
             });
         });
         $(document).on("click", '.delete_project', function () {
@@ -76,8 +76,6 @@
                 }, 'json').error(function (err) {
                     console.log(err);
                 });
-            }, function () {
-                //取消操作
             });
         })
     });

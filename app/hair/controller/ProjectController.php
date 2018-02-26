@@ -46,14 +46,16 @@ class ProjectController extends HairBaseController {
             'id'      => $project_id,
         ];
         $project = model('Projects')->get($data);
-        $project1 = model('common/projects');
         if (!$project) {
             $this->error(lang('PROJECT_NOT_EXIST'));
         }
 
-        $project1 = $project->modelDelete();
-
-        $this->success("文件已经删除!");
+        $result = $project->delete();
+        if($result == 1){
+            $this->success(lang('DELETE_SUCCESS'));
+        }else{
+            $this->error(lang('DELETE_FAILED'));
+        }
     }
 
     public function detail($id) {
