@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="weui-cell__ft">
-                    <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">{:lang('DELETE')}</a>
+                    <a class="weui-swiped-btn weui-swiped-btn_warn delete_project" href="javascript:" data-id="{$page.id}">{:lang('DELETE')}</a>
                 </div>
             </div>
         </foreach>
@@ -44,7 +44,7 @@
                         return false;
                     }
 
-                    $.post("{:url('hair/project/doAddPage')}", {page_name : page_name, project_id : _this.data('proj_id')}, function (ret) {
+                    $.post("{:url('hair/page/doAddPage')}", {page_name : page_name, project_id : _this.data('proj_id')}, function (ret) {
                         if (ret.code) {
                             $.toast(ret.msg, 'success', function () {
                                 window.location.href = ret.url;
@@ -60,8 +60,27 @@
                     $.toast("{:lang('CANCEL')}", "cancel");
                     console.log("{:lang('CANCEL')}");
                 },
-                input    : "{:lang('MY_PAGE')}"
+                input    : "{:lang('PAGE')}"
             });
         });
+        $(document).on("click", '.delete_project', function () {
+            var _this     = $(this);
+            var page_item = _this.parents('.weui-cell_swiped');
+            var page_name = page_item.find('a.weui-cell__bd p').text();
+
+            $.confirm("{:lang('DELETE_PAGE_CONFIRM',['" + page_name + "'])}", "{:lang('DELETE_CONFIRM')}", function () {
+                $.post("{:url('hair/page/doDeletePage')}", {page_id : _this.data('id'), project_id : $('#add_page').data('proj_id')}, function (ret) {
+                    if (ret.code) {
+                        $.toast(ret.msg, 'success', function () {
+                            page_item.remove();
+                        });
+                    } else {
+                        $.toast(ret.msg, "forbidden");
+                    }
+                }, 'json').error(function (err) {
+                    console.log(err);
+                });
+            });
+        })
     });
 </script>

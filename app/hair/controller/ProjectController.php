@@ -69,22 +69,4 @@ class ProjectController extends HairBaseController {
 
         return $this->fetch();
     }
-
-    public function doAddPage() {
-        $page_name  = $this->request->post('page_name');
-        $project_id = $this->request->post('project_id');
-
-        $data = [
-            'user_id'    => $this->user_id,
-            'project_id' => $project_id,
-            'name'       => $page_name,
-        ];
-        if (model('Pages')->get($data)) {
-            $this->error(lang('PAGE_NAME_EXIST'));
-        }
-        $page = model('Pages');
-        $page->save($data);
-
-        $this->success(lang('ADD_PAGE_OK'), url('hair/page/index', ['id' => $page->id]));
-    }
 }

@@ -1148,7 +1148,7 @@ CREATE TABLE `hair_pages` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='项目详情表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='项目详情表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1157,6 +1157,7 @@ CREATE TABLE `hair_pages` (
 
 LOCK TABLES `hair_pages` WRITE;
 /*!40000 ALTER TABLE `hair_pages` DISABLE KEYS */;
+INSERT INTO `hair_pages` VALUES (1,1,1,'页面1','',1,0,NULL,1519638590,1519638590,0),(2,1,1,'页面2','',1,0,NULL,1519638598,1519638598,0),(3,1,1,'页面3','',1,0,NULL,1519638605,1519638605,0);
 /*!40000 ALTER TABLE `hair_pages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1249,4 +1250,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-25 15:21:46
+-- Dump completed on 2018-02-26  9:50:25
