@@ -17,9 +17,37 @@ class IndexController extends HairBaseController {
         return $this->fetch();
     }
 
-    public function test() {
-        echo 'asd';
-        exit();
+    public function register() {
+        $this->assign('user', $this->user);
+
+        return $this->fetch();
+    }
+
+    public function doRegister() {
+        $from_url       = session('register.from_url');
+        $mobile         = $this->request->post('mobile');
+        $activation_key = $this->request->post('activation_key');
+        $user_id        = $this->request->post('user_id');
+        if ($user_id != $this->user_id) {
+            $this->error(lang('页面错误，请关闭页面后重试!'));
+        }
+
+        $data = [
+            'id'             => $user_id,
+            'mobile'         => $mobile,
+            'activation_key' => $activation_key,
+        ];
+        $user = model('WechatUser')->get($user_id);
+        if (!$user) {
+            $this->error('用户不存在');
+        }
+
+        $result = $user->data($data)->save();
+        if ($result == 1) {
+            $this->success(lang('注册成功'), null, ['from_url' => $from_url]);
+        } else {
+            $this->error(lang('该用户已注册'));
+        }
     }
 
     public function wxAuth() {

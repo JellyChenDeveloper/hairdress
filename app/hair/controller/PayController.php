@@ -14,8 +14,8 @@ namespace app\hair\controller;
 class PayController extends HairBaseController {
 
     public function toolPay() {
-
-        $out_trade_no = config('we_chat.wx_sdk_config')['payment']['merchant_id'] . date("YmdHis");        // todo 更新用户的订单号
+        // todo 更新用户的订单号
+        $out_trade_no = config('we_chat.wx_sdk_config')['payment']['merchant_id'] . date("YmdHis");
 
         $order_info = [
             'body'         => '腾讯充值中心-QQ会员充值',
@@ -33,10 +33,17 @@ class PayController extends HairBaseController {
 
             $this->assign('pay_json', $pay_json);
         }
+//        $this->assign('pay_json', session('wx_pay.from_url'));
 
         return $this->fetch();
     }
 
+    /**
+     * 支付回调函数
+     *
+     * TODO 还未做，带参数配置好后再写该部分代码
+     *
+     */
     public function notify() {
         $response = $this->wecharService->pay()->handlePaidNotify(function ($message, $fail) {
             // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单

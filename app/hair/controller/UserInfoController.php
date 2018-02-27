@@ -16,7 +16,6 @@ class UserInfoController extends HairBaseController {
     public function index() {
         $user = model('WechatUser')->get(['id' => $this->user_id]);
 
-//        $user['has_payed_str'] = $user['has_payed'] ? '已支付' : '未支付';
         $this->assign('user', $user);
 
         return $this->fetch();

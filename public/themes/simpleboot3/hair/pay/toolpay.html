@@ -25,7 +25,14 @@
 <include file="hair@public/foot"/>
 <script>
     $(function () {
-        $(document).on("click", '.tool_pay', function () {
+        $(document).on("click", '#tool_pay', function () {
+            /*
+                        // todo  测试代码
+                        $.toast('支付成功', 'success', function () {
+                            window.location.href = "{$pay_json}";
+                        });
+                        return;*/
+
             var _this     = $(this);
             var page_item = _this.parents('.weui-cell_swiped');
             var page_name = page_item.find('a.weui-cell__bd p').text();
