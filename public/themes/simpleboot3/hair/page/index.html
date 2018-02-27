@@ -1,81 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>{$page.name}</title>
-    <link rel="stylesheet" href="__PAGE_TOOLS__/css/main.css">
-    <script src="__PAGE_TOOLS__/js/flexible.js"></script>
-</head>
-<body>
+<include file="hair@public/head"/>
+<link rel="stylesheet" href="__PAGE_TOOLS__/css/minicolor.css">
+<link rel="stylesheet" href="__PAGE_TOOLS__/css/main.css">
+<script src="__PAGE_TOOLS__/js/flexible.js"></script>
+
+<form id="page_info">
+    <input type="hidden" name="id" value="{$page.id}"/>
+    <input type="hidden" name="user_id" value="{$page.user_id}"/>
+    <input type="hidden" name="project_id" value="{$page.project_id}"/>
+    <input type="hidden" name="name" value="{$page.name}"/>
+    <input type="hidden" name="image" value=""/>
+</form>
 <div class="wrap">
     <div class="tab">
         <ul>
-            <li class="fl">返回</li>
+            <li class="fl"><a href="{:url('hair/project/detail',['id'=>$page.project_id])}">返回</a></li>
             <li class="fl tri-head">头像</li>
-            <li class="fl tri-tool">工具</li>
+            <li class="fl tri-fun">工具</li>
+            <li class="fl tri-tool">功能</li>
             <li class="fl tri-word">文字</li>
             <li class="fl">分享</li>
         </ul>
     </div>
     <div class="main-wrap">
         <div class="canvas-wrap">
-            <canvas id="canvas"></canvas>
+            <div class="c-inner">
+
+                <canvas id="canvas-grids"></canvas>
+            </div>
+            <div class="c-inner">
+
+                <canvas id="canvas-bg"></canvas>
+            </div>
+            <div class="c-inner">
+
+                <canvas id="canvas"></canvas>
+            </div>
         </div>
         <div class="m-tool m-all-tool">
             <div class="m-inner">
                 <ul>
                     <!-- <li class="h-icon fl">
                         <div class="h-one">
-                            <img src="images/bg.png" alt="">
+                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
                             <p class="h-text">发片</p>
                         </div>
                     </li> -->
                     <li class="h-icon fl" renderType='Line'>
                         <div class="h-one">
-                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            </div>
                             <p class="h-text">直线</p>
                         </div>
                     </li>
                     <li class="h-icon fl" renderType='renderArrow'>
                         <div class="h-one">
-                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            </div>
                             <p class="h-text">箭头</p>
                         </div>
                     </li>
                     <!-- <li class="h-icon fl">
                         <div class="h-one">
-                            <img src="images/bg.png" alt="">
+                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
                             <p class="h-text">弧线</p>
                         </div>
                     </li> -->
                     <!-- <li class="h-icon fl">
                         <div class="h-one">
-                            <img src="images/bg.png" alt="">
+                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
                             <p class="h-text">虚弧线</p>
                         </div>
                     </li> -->
                     <li class="h-icon fl" renderType='renderTriangle'>
                         <div class="h-one">
-                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            </div>
                             <p class="h-text">三角形</p>
                         </div>
                     </li>
                     <li class="h-icon fl" renderType='renderCircle'>
                         <div class="h-one">
-                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            </div>
                             <p class="h-text">圆形</p>
                         </div>
                     </li>
                     <li class="h-icon fl" renderType='renderEllipse'>
                         <div class="h-one">
-                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            </div>
                             <p class="h-text">椭圆</p>
                         </div>
                     </li>
                     <li class="h-icon fl" renderType='isDrawingMode'>
                         <div class="h-one">
-                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            </div>
                             <p class="h-text">画笔</p>
                         </div>
                     </li>
@@ -87,17 +113,68 @@
                 <ul>
                     <li class="h-icon fl">
                         <div class="h-one">
-                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <img src="__PAGE_TOOLS__/images/bg_0.png" alt="">
                         </div>
                     </li>
                     <li class="h-icon fl">
                         <div class="h-one">
-                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <img src="__PAGE_TOOLS__/images/bg_1.png" alt="">
                         </div>
                     </li>
                     <li class="h-icon fl">
                         <div class="h-one">
-                            <img src="__PAGE_TOOLS__/images/bg.png" alt="">
+                            <img src="__PAGE_TOOLS__/images/bg_2.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg_3.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg_4.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg_5.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg_6.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg_7.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/bg_8.png" alt="">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="m-fun m-all-tool">
+            <div class="m-inner">
+                <ul>
+                    <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/tool1.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/tool2.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one">
+                            <img src="__PAGE_TOOLS__/images/tool4.png" alt="">
                         </div>
                     </li>
                 </ul>
@@ -115,7 +192,7 @@
                 </li> -->
                 <li>
                     <p class="text-c">直线</p>
-                    <p>颜色：<input class="s-select" type="color" key='stroke fill'></p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='stroke fill'></p>
                     <p>线宽：<select class="s-select" key='strokeWidth' id="">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -132,25 +209,25 @@
                 </li>
                 <li>
                     <p class="text-c">箭头</p>
-                    <p>颜色：<input class="s-select" type="color" key='stroke fill'></p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='stroke fill'></p>
                 </li>
                 <!-- <li>弧线</li> -->
                 <!-- <li>虚弧线</li> -->
                 <li>
                     <p class="text-c">三角形</p>
-                    <p>颜色：<input class="s-select" type="color" key='fill'></p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='fill'></p>
                 </li>
                 <li>
                     <p class="text-c">圆形</p>
-                    <p>颜色：<input class="s-select" type="color" key='fill'></p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='fill'></p>
                 </li>
                 <li>
                     <p class="text-c">椭圆</p>
-                    <p>颜色：<input class="s-select" type="color" key='fill'></p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='fill'></p>
                 </li>
                 <li>
                     <p class="text-c">画笔</p>
-                    <p>颜色：<input class="s-select" type="color" key='color'></p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='color'></p>
                     <p>线宽：<select class="s-select " key='width' id="">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -176,7 +253,7 @@
         <div class="m-box">
             <div class="text-wrap">
                 <p>文案：<input type="text" id="i-text"></p>
-                <p>颜色：<input class="text-option" type="color" key='stroke fill' name='color'></p>
+                <p>颜色：<input class="text-option color" type="hidden" key='stroke fill' name='color'></p>
                 <p>粗细：<select class="text-option" key='fontWeight' id="text-width">
                     <option value="normal">正常</option>
                     <option value="bold">加粗</option>
@@ -200,15 +277,21 @@
     <div class="footer-btn">
         <!-- <div class="btn-pre btn fl">上一步</div> -->
         <div class="btn-delete btn fl">删除</div>
-        <div class="btn-save fr btn">保存</div>
+        <div class="btn-save fr btn">生成图片</div>
         <div class="btn-hb btn fr">移除画笔</div>
     </div>
 </div>
+<div class="mask" id="createImg">
+    <div class="m-box text-c">图片生成中...</div>
+</div>
 <div id="canvas" style="height:200px;"></div>
 <!-- <canvas id="canvas"></canvas> -->
-<script src="__PAGE_TOOLS__/js/jquery.min.js"></script>
+<include file="hair@public/foot"/>
+
+<!--<script src="__PAGE_TOOLS__/js/jquery.min.js"></script>-->
 <!-- <script src="js/fabric.min.js"></script> -->
 <!-- <script src="js/fabric2.js"></script> -->
+<script src="__PAGE_TOOLS__/js/jquery.minicolor.js"></script>
 <script src="__PAGE_TOOLS__/js/fabric_gestures.js"></script>
 <!-- <script src="js/canvas.js"></script> -->
 <script>
@@ -221,11 +304,13 @@
                 this.renderOBJ    = null;
                 this.renderOption = null;
                 this.canvas       = $('#canvas');
+                this.canvas_bg    = $('#canvas-bg');
                 this.setHeight();
+                this.grids             = new fabric.Canvas('canvas-grids');
                 this.ctx               = new fabric.Canvas('canvas');
                 this.ctx.isDrawingMode = false;
                 this.baseSize          = this.w / 5;
-
+                this.initColor();
                 this.bindEvent();
                 this.renderBG();
                 // setTimeout(function(){
@@ -238,13 +323,21 @@
                 $('.tri-head').on('click', function () {
                     $('.m-head').slideToggle();
                     $('.m-tool').hide();
+                    $('.m-fun').hide();
+
                 });
                 $('.tri-tool').on('click', function () {
                     $('.m-tool').slideToggle();
                     $('.m-head').hide();
+                    $('.m-fun').hide();
+                });
+                $('.tri-fun').on('click', function () {
+                    $('.m-fun').slideToggle();
+                    $('.m-head').hide();
+                    $('.m-tool').hide();
                 });
                 //头像点击
-                $('.m-head .h-one').on('click', function () {
+                $('.m-head .h-one,.m-fun .h-one').on('click', function () {
                     var src = $(this).find('img').attr('src');
                     var img = $(this).find('img')[0];
                     // var img = new Image();
@@ -261,7 +354,7 @@
                     //    alert(1111);
                     // });
                     _this.ctx.add(img);
-                    $('.m-head').slideUp();
+                    $(this).parents('.m-all-tool').slideUp();
                 });
                 //工具点击
                 $('.m-tool li.h-icon').on('click', function () {
@@ -287,7 +380,6 @@
                     _this.renderOption = null;
                 });
                 //文案点击
-                //
                 $('.tri-word').on('click', function () {
                     $('.m-all-tool').hide();
                     $('#text').show();
@@ -315,7 +407,6 @@
                     _this.renderOption = null;
 
                 });
-
                 //
                 //
                 //
@@ -324,12 +415,60 @@
                     $(this).hide();
                     _this.ctx.isDrawingMode = false;
                 });
+
+                ///生成图片
+                $('.btn-save').on('click', function () {
+                    var png = _this.ctx.toDataURL();
+                    $('#createImg').show();
+                    $("#page_info input[name='image']").val(png);
+                    var form = $('#page_info');
+                    $.post("{:url('hair/page/doSavePage')}", form.serializeArray(), function (ret) {
+                        $('#createImg').hide();
+                        if (ret.code) {
+                            $.toast(ret.msg, 'success', function () {
+                                // window.location.href = ret.data.from_url;
+                                // var imgObj = new Image();
+                                // imgObj.src = ret.data.img_url;
+                                // //待图片加载完后，将其显示在canvas上
+
+                                var img    = new Image();
+                                img.src    = ret.data.img_url;
+                                img.onload = function () {
+                                    this.width  = _this.w / 2;
+                                    this.height = _this.h / 2;
+                                    var top     = (_this.h - this.height) * 0.6;
+                                    var left    = (_this.w - this.width) / 2;
+                                    var img     = new fabric.Image(this, {
+                                        left : left,
+                                        top  : top,
+                                    });
+                                    _this.ctx.add(img);
+                                    _this.renderOBJ    = null;
+                                    _this.renderOption = null;
+                                };
+                            });
+                        } else {
+                            $.toast(ret.msg, "forbidden");
+                        }
+                    }, 'json').error(function (err) {
+                        $('#createImg').hide();
+                        console.log(err);
+                    });
+                });
                 //canvas点击
 
                 this.ctx.on('mouse:down', function (options, self) {
 
                 });
             },
+            initColor    : function () {
+                $('input.color').each(function () {
+                    $(this).minicolors({
+                        defaultValue : '#000'
+                    });
+                });
+            }
+            ,
             createOBJ    : function () {
                 var obj = new fabric[this.renderOBJ, this.renderOption];
                 this.ctx.add(obj);
@@ -366,12 +505,14 @@
             }
             ,
             setHeight    : function () {
-                var h                 = $('.canvas-wrap').height();
-                var w                 = $('.canvas-wrap').width();
-                this.w                = w;
-                this.h                = h;
-                this.canvas[0].width  = w;
-                this.canvas[0].height = h;
+                var h  = $('.canvas-wrap').height();
+                var w  = $('.canvas-wrap').width();
+                this.w = w;
+                this.h = h;
+                $('canvas').each(function () {
+                    $(this)[0].height = h;
+                    $(this)[0].width  = w;
+                });
             },
             createOption : function (el) {
                 var option = {};
@@ -460,5 +601,3 @@
         obj.init();
     });
 </script>
-</body>
-</html>

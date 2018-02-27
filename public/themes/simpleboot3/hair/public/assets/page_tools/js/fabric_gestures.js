@@ -2705,7 +2705,7 @@ fabric.Collection = {
      */
     createImage: function() {
       return fabric.isLikelyNode
-        ? new (require('public/themes/simpleboot3/hair/public/assets/pagetools/js/canvas').Image)()
+        ? new (require('canvas').Image)()
         : fabric.document.createElement('img');
     },
 
@@ -25426,8 +25426,8 @@ fabric.util.object.extend(fabric.IText.prototype, /** @lends fabric.IText.protot
       HTTP = require('http'),
       HTTPS = require('https'),
 
-      Canvas = require('public/themes/simpleboot3/hair/public/assets/pagetools/js/canvas'),
-      Image = require('public/themes/simpleboot3/hair/public/assets/pagetools/js/canvas').Image;
+      Canvas = require('canvas'),
+      Image = require('canvas').Image;
 
   /** @private */
   function request(url, encoding, callback) {

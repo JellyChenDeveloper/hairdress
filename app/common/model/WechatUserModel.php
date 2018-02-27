@@ -14,6 +14,9 @@ namespace app\common\model;
 class WechatUserModel extends BaseModel {
     protected $table = 'hair_wechat_user';
 
+    /** TODO 添加对微信昵称保存和读取时进行base64编解码来保存昵称中的特殊符号，*/
+
+
     public function getHasPayedStrAttr($value, $data) {
         return config('property.pay_status')[$data['has_payed']];
     }

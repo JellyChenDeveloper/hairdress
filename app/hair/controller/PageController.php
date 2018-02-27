@@ -9,17 +9,14 @@
 namespace app\hair\controller;
 
 
+use cmf\lib\Storage;
+
 class PageController extends HairBaseController {
     public function index($id) {
-        $user = model('WechatUser')->get($this->user_id);
-        if ($user->has_payed == 0) {
-            $this->redirect(url('hair/pay/toolPay'));
-        } else {
-            $page = model('Pages')->get(['id' => $id, 'user_id' => $this->user_id]);
-            $this->assign('page', $page);
+        $page = model('Pages')->get(['id' => $id, 'user_id' => $this->user_id]);
+        $this->assign('page', $page);
 
-            return $this->fetch();
-        }
+        return $this->fetch();
     }
 
     public function doAddPage() {
@@ -41,20 +38,29 @@ class PageController extends HairBaseController {
     }
 
     public function doSavePage() {
-        $avatar     = $this->request->post('img_url');
         $id         = $this->request->post('id');
+        $user_id    = $this->request->post('user_id');
         $project_id = $this->request->post('project_id');
+        $image      = $this->request->post('image');
+        $name       = $this->request->post('name');
+        if ($user_id != $this->user_id) {
+            $this->error(lang('页面错误，请关闭页面后重试!'));
+        }
+
+        $path = cmf_save_base64_image($image, $name);
 
         $data = [
             'id'         => $id,
             'user_id'    => $this->user_id,
-            'project_id' => $project_id,
-            'avatar'     => $avatar,
+            'project_id' => $project_id
         ];
-        $page = model('Projects');
-        $page->save($data);
+        $page = model('Pages')->get($data);
+        if (!$page) {
+            $this->error(lang('页面错误，请关闭页面后重试!'));
+        }
+        $page->save(['avatar' => $path]);
 
-        $this->success(lang('SAVE_IMG_OK'), url('hair/project/detail', ['id' => $project_id]));
+        $this->success(lang('SAVE_IMG_OK'), url('hair/project/detail', ['id' => $project_id]), ['img_url' => Storage::instance()->getImageUrl($path)]);
     }
 
     public function doDeletePage() {
