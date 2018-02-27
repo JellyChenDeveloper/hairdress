@@ -58,8 +58,6 @@ class WechatService {
     /**
      * 获取微信用户信息
      *
-     * @todo 删除下方调试缓存文件及代码同目录缓存文件
-     *
      * @return $this|\Overtrue\Socialite\User
      */
     public function getWxUserInfo() {

@@ -1127,6 +1127,44 @@ LOCK TABLES `cmf_verification_code` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `hair_order`
+--
+
+DROP TABLE IF EXISTS `hair_order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hair_order` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `body` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '商品描述',
+  `detail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '商品详情',
+  `out_trade_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '商户订单号',
+  `transaction_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '微信订单号',
+  `total_fee` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标价金额',
+  `spbill_create_ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '终端IP',
+  `prepay_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '预支付交易会话标识',
+  `type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '订单类型:0-工具订单,1-组件订单',
+  `pay_time` int(11) NOT NULL DEFAULT '0' COMMENT '支付时间',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态:0:已删除,1:正常',
+  `more` text COMMENT '扩展属性',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  `delete_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '删除时间',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='订单表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hair_order`
+--
+
+LOCK TABLES `hair_order` WRITE;
+/*!40000 ALTER TABLE `hair_order` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hair_order` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `hair_pages`
 --
 
@@ -1157,7 +1195,7 @@ CREATE TABLE `hair_pages` (
 
 LOCK TABLES `hair_pages` WRITE;
 /*!40000 ALTER TABLE `hair_pages` DISABLE KEYS */;
-INSERT INTO `hair_pages` VALUES (1,1,1,'页面1','',1,0,NULL,1519638590,1519638590,0),(2,1,1,'页面2','',1,0,NULL,1519638598,1519638598,0),(3,1,1,'页面3','',1,0,NULL,1519638605,1519638605,0);
+INSERT INTO `hair_pages` VALUES (1,1,1,'页面1','/default/18-02-27/页面1_1519744688.png',1,0,NULL,1519638590,1519744688,0),(2,1,1,'页面2','',1,0,NULL,1519638598,1519638598,0),(3,1,1,'页面3','',1,0,NULL,1519638605,1519638605,0);
 /*!40000 ALTER TABLE `hair_pages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1237,7 +1275,7 @@ CREATE TABLE `hair_wechat_user` (
 
 LOCK TABLES `hair_wechat_user` WRITE;
 /*!40000 ALTER TABLE `hair_wechat_user` DISABLE KEYS */;
-INSERT INTO `hair_wechat_user` VALUES (1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','Jelly_国栋',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/6SoGhxRa80KlwicJGGR6KZDnllWwIbsrbkdVTRZxYXwQ4MGPqYBN5eicNdyO5KjjZlscOpFf4CwmI69vsRjqhnBQ/132','中国','北京','',1,'','',0,'',0,1,0,'',NULL,1519544796,1519544796,0);
+INSERT INTO `hair_wechat_user` VALUES (1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','Jelly_国栋',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/6SoGhxRa80KlwicJGGR6KZDnllWwIbsrbkdVTRZxYXwQ4MGPqYBN5eicNdyO5KjjZlscOpFf4CwmI69vsRjqhnBQ/132','中国','北京','',1,'13111111111','',0,'',0,1,0,'',NULL,1519544796,1519744650,0);
 /*!40000 ALTER TABLE `hair_wechat_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1250,4 +1288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-26  9:50:25
+-- Dump completed on 2018-02-27 15:35:52
