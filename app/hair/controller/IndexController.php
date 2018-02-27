@@ -43,6 +43,7 @@ class IndexController extends HairBaseController {
         }
 
         $result = $user->data($data)->save();
+        cmf_update_current_user($user->toArray());
         if ($result == 1) {
             $this->success(lang('注册成功'), null, ['from_url' => $from_url]);
         } else {
