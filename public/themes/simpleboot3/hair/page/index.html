@@ -434,14 +434,16 @@
                                 var img    = new Image();
                                 img.src    = ret.data.img_url;
                                 img.onload = function () {
-                                    this.width  = _this.w / 2;
-                                    this.height = _this.h / 2;
-                                    var top     = (_this.h - this.height) * 0.6;
-                                    var left    = (_this.w - this.width) / 2;
+                                    this.width  = _this.w;
+                                    this.height = _this.h;
+                                    var top     = 0;
+                                    var left    = 0;
                                     var img     = new fabric.Image(this, {
                                         left : left,
                                         top  : top,
                                     });
+                                    // todo 目前生成的图片还是已以控件的形式添加在画布上的，能否直接将该图片设置为背景。
+                                    _this.ctx.clear();
                                     _this.ctx.add(img);
                                     _this.renderOBJ    = null;
                                     _this.renderOption = null;
