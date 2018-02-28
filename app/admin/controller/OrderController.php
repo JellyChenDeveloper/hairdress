@@ -1,42 +1,44 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: cgd45
- * Date: 2018/2/28
- * Time: 14:30
+ * FileName:OrderController.php
+ * Created by JellyChen
+ * Date: 2018/2/28 下午11:11
+ *
+ * @author         JellyChen
+ * @copyright      All Rights Reserved.
+ * @version        1.0
  */
 
 namespace app\admin\controller;
 
-
 use cmf\controller\AdminBaseController;
 
 /**
- * Class WxUserInfoController
+ * Class OrderController
  *
  * @package app\admin\controller
  * @adminMenuRoot(
- *     'name'   => '微信用户管理',
+ *     'name'   => '订单管理',
  *     'action' => 'default',
  *     'parent' => 'default',
  *     'display'=> true,
  *     'order'  => 10000,
  *     'icon'   => '',
- *     'remark' => '微信用户管理'
+ *     'remark' => '订单管理'
  * )
  */
-class WxUserInfoController extends AdminBaseController {
+class OrderController extends AdminBaseController {
 
     /**
-     * 管理员列表
+     * 订单列表
      * @adminMenu(
-     *     'name'   => '微信用户',
+     *     'name'   => '订单列表',
      *     'parent' => 'default',
      *     'display'=> true,
      *     'hasView'=> true,
      *     'order'  => 10000,
      *     'icon'   => '',
-     *     'remark' => '微信用户',
+     *     'remark' => '订单列表',
      *     'param'  => ''
      * )
      */
@@ -53,17 +55,18 @@ class WxUserInfoController extends AdminBaseController {
         if ($mobile) {
             $where['mobile'] = ['like', "%$mobile%"];;
         }
-        $users = model('WechatUser')
+        $orders = model('Order')
             ->useGlobalScope(false)
             ->where($where)
             ->order("id DESC")
             ->paginate(10);
-        $users->appends(['wx_nickname' => $wx_nickname, 'mobile' => $mobile]);
+//        $users->appends(['wx_nickname' => $wx_nickname, 'mobile' => $mobile]);
         // 获取分页显示
-        $page = $users->render();
+        $page = $orders->render();
 
         $this->assign("page", $page);
-        $this->assign("users", $users);
+        $this->assign("orders", $orders);
+
         return $this->fetch();
     }
 
