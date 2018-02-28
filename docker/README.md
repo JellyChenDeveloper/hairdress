@@ -11,7 +11,7 @@ docker exec -it hairdress_mysqldb_1 /bin/bash
 
 在容器中，运行命令
 ```bash
-mysql -uroot -proot < /opt/sql/hairdress.sql
+mysql -uroot -proot -B hairdress < /opt/sql/hairdress.sql
 ```
 
 #### 关闭容器时导出数据库

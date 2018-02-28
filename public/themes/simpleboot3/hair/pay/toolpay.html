@@ -26,36 +26,36 @@
 <script>
     $(function () {
         $(document).on("click", '#tool_pay', function () {
-            /*
-                        // todo  测试代码
-                        $.toast('支付成功', 'success', function () {
-                            window.location.href = "{$pay_json}";
-                        });
-                        return;*/
-
-            var _this     = $(this);
-            var page_item = _this.parents('.weui-cell_swiped');
-            var page_name = page_item.find('a.weui-cell__bd p').text();
-
-            if (typeof WeixinJSBridge == "undefined") {
-                if (document.addEventListener) {
-                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
-                } else if (document.attachEvent) {
-                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
-                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
-                }
-            } else {
-                WeixinJSBridge.invoke(
-                    'getBrandWCPayRequest', {$pay_json},
-                    function (res) {
-                        if (res.err_msg == "get_brand_wcpay_request:ok") {
-                            // 使用以上方式判断前端返回,微信团队郑重提示：
-                            // res.err_msg将在用户支付成功后返回
-                            // ok，但并不保证它绝对可靠。
+            $.confirm("", "确定支付", function () {
+                $.post("{:url('hair/pay/getPreOrder')}", {}, function (ret) {
+                    if (ret.code) {
+                        if (typeof WeixinJSBridge == "undefined") {
+                            if (document.addEventListener) {
+                                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                            } else if (document.attachEvent) {
+                                document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                            }
+                        } else {
+                            WeixinJSBridge.invoke(
+                                'getBrandWCPayRequest', ret.data.pay_json,
+                                function (res) {
+                                    if (res.err_msg == "get_brand_wcpay_request:ok") {
+                                        // todo  支付成功操作 跳转到下一页
+                                        alert('支付成功');
+                                        // window.location.href = 'some urls ';
+                                    } else {//支付过程中用户取消或者 失败
+                                        alert('支付失败');
+                                    }
+                                });
                         }
+                    } else {
+                        $.toast(ret.msg, "forbidden");
                     }
-                );
-            }
+                }, 'json').error(function (err) {
+                    console.log(err);
+                });
+            });
             return false;
         });
     });

@@ -14,28 +14,43 @@ namespace app\hair\controller;
 class PayController extends HairBaseController {
 
     public function toolPay() {
-        // todo 更新用户的订单号
-        $out_trade_no = config('we_chat.wx_sdk_config')['payment']['merchant_id'] . date("YmdHis");
+        return $this->fetch();
+    }
 
-        $order_info = [
+    public function getPreOrder() {
+        $out_trade_no = config('we_chat.wx_sdk_config')['payment']['merchant_id'] . date("YmdHis");
+        $order_info   = [
             'body'         => '腾讯充值中心-QQ会员充值',
+            'detail'       => '腾讯充值中心-QQ会员充值',
             'out_trade_no' => $out_trade_no,
-            'total_fee'    => 88,
-            'notify_url'   => 'https://pay.weixin.qq.com/wxpay/pay.action', // 支付结果通知网址，如果不设置则会使用配置里的默认地址
+            'total_fee'    => 200,
+            'notify_url'   => url('hair/pay/notify'), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
             'trade_type'   => 'JSAPI',
-            'openid'       => 'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o',
+            'openid'       => $this->user['wx_openid'],
         ];
-        $result     = $this->wecharService->pay()->order->unify($order_info);
+
+        $result = $this->wecharService->pay()->order->unify($order_info);
         if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS') {
             $prepayId = $result->prepay_id;
             $jssdk    = $this->wecharService->pay()->jssdk;
             $pay_json = $jssdk->bridgeConfig($prepayId);
+            // todo 更新用户的订单号
+            $data = [
+                'user_id'      => $this->user_id,
+                'body'         => $order_info['body'],
+                'detail'       => $order_info['detail'],
+                'out_trade_no' => $order_info['out_trade_no'],
+                'total_fee'    => $order_info['total_fee'],
+                'openid'       => $order_info['openid'],
+                'prepay_id'    => $prepayId,
+                'type'         => 0,
+            ];
+            model('Order')->save($data);
 
-            $this->assign('pay_json', $pay_json);
+            $this->success("下单成功", null, ['pay_json' => $pay_json]);
+        } else {
+            $this->error($result->return_code);
         }
-//        $this->assign('pay_json', session('wx_pay.from_url'));
-
-        return $this->fetch();
     }
 
     /**
