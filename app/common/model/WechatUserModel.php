@@ -24,4 +24,8 @@ class WechatUserModel extends BaseModel {
     public function getLocationAttr($value, $data) {
         return implode(' ', array_filter([$data['country'], $data['province'], $data['city']]));
     }
+
+    public function getUserTypeStrAttr($value, $data) {
+        return config('property.user_type')[$data['user_type']];
+    }
 }
