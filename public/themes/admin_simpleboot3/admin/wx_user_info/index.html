@@ -22,8 +22,6 @@
             <th>是否支付</th>
             <th>推广邀请码</th>
             <th>推广人数</th>
-            <th>用户状态</th>
-            <th>{:lang('LAST_LOGIN_IP')}</th>
             <th>{:lang('LAST_LOGIN_TIME')}</th>
             <th>注册时间</th>
             <th width="130">{:lang('ACTIONS')}</th>
@@ -41,8 +39,6 @@
                 <td>{$vo.has_payed_str}</td>
                 <td>{$vo.agent_activation_key}</td>
                 <td>{$vo.agent_work_count}</td>
-                <td>{$vo.status}</td>
-                <td>{$vo.last_login_ip}</td>
                 <td>
                     <if condition="$vo['last_login_time'] eq 0">
                         {:lang('USER_HAVE_NOT_LOGIN')}
