@@ -105,7 +105,7 @@ class HairBaseController extends HomeBaseController {
                     $wx_user->last_login_time = time();
                     $wx_user->last_login_ip   = get_client_ip(0, true);
                 }
-                cmf_update_current_user($wx_user->toArray());
+                cmf_update_current_user(model('WechatUser')->get(['wx_openid' => $user->getId()])->toArray());
             }
 
             return cmf_get_current_user();
