@@ -55,15 +55,12 @@ return [
          * 微信支付
          */
         'payment'       => [
-            'merchant_id' => 'your-mch-id',
-            'key'         => 'key-for-signature',
-            'cert_path'   => ROOT_PATH . 'public/certs/wechat/apiclient_cert.pem', // XXX: 绝对路径！！！！
-            'key_path'    => ROOT_PATH . 'public/certs/wechat/apiclient_key.pem',      // XXX: 绝对路径！！！！
-            'notify_url'  => '默认的订单回调地址',       // 你也可以在下单时单独设置来想覆盖它
-            // 'device_info'     => '013467007045764',
-            // 'sub_app_id'      => '',
-            // 'sub_merchant_id' => '',
-            // ...
+            'app_id'     => $app_id,
+            'mch_id'     => '1499509362',
+            'key'        => 'klp4h9BxsP5LF8NsXdy2YgKMRNFoWjzk',
+            'cert_path'  => ROOT_PATH . 'data/cert/apiclient_cert.pem', // XXX: 绝对路径！！！！
+            'key_path'   => ROOT_PATH . 'data/cert/apiclient_key.pem', // XXX: 绝对路径！！！！
+            'notify_url' => '/index.php/hair/pay/notify.html',     // 你也可以在下单时单独设置来想覆盖它
         ],
     ],
 ];

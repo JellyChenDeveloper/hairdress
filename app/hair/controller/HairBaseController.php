@@ -45,7 +45,7 @@ class HairBaseController extends HomeBaseController {
                     if (!($this->request->module() == 'hair' && $this->request->controller() == 'Pay')) {
                         session('wx_pay.from_url', $this->request->url(true));
                         // TODO 先屏蔽该部分代码，支付完成后放开
-//                        $this->redirect(url('hair/pay/toolPay'));
+                        $this->redirect(url('hair/pay/toolPay'));
                     }
                 }
             }

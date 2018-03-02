@@ -73,7 +73,7 @@ class WechatService {
      * @return \EasyWeChat\Payment\Application
      */
     public function pay() {
-        $app = Factory::payment($this->config);
+        $app = Factory::payment($this->config['payment']);
 
         return $app;
     }

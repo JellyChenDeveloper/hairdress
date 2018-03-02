@@ -18,12 +18,12 @@ class PayController extends HairBaseController {
     }
 
     public function getPreOrder() {
-        $out_trade_no = config('we_chat.wx_sdk_config')['payment']['merchant_id'] . date("YmdHis");
+        $out_trade_no = config('we_chat.wx_sdk_config')['payment']['mch_id'] . date("YmdHis");
         $order_info   = [
             'body'         => '腾讯充值中心-QQ会员充值',
             'detail'       => '腾讯充值中心-QQ会员充值',
             'out_trade_no' => $out_trade_no,
-            'total_fee'    => 200,
+            'total_fee'    => 1,
             'notify_url'   => url('hair/pay/notify'), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
             'trade_type'   => 'JSAPI',
             'openid'       => $this->user['wx_openid'],
