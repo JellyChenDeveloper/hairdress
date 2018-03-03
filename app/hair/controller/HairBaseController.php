@@ -71,14 +71,14 @@ class HairBaseController extends HomeBaseController {
      * 检测当前用户是否存在数据库中，如未存在则注册，如存在则获取信息保存在session中
      */
     public function userLogin() {
-        if (defined('ENV_LOC')) {
-            $test_user = model('WechatUser')->get(['wx_openid' => TEST_OPENID]);
-            if (!is_null($test_user)) {
-                cmf_update_current_user($test_user->toArray());
-
-                return cmf_get_current_user();
-            }
-        }
+//        if (defined('ENV_LOC')) {
+//            $test_user = model('WechatUser')->get(['wx_openid' => TEST_OPENID]);
+//            if (!is_null($test_user)) {
+//                cmf_update_current_user($test_user->toArray());
+//
+//                return cmf_get_current_user();
+//            }
+//        }
 
         if (!$this->wecharService->checkWxAuth()) {
             session('wx_auth_callback_url', $this->request->url());
@@ -86,9 +86,10 @@ class HairBaseController extends HomeBaseController {
 
             return false;
         } else {
-            if (!cmf_get_current_user_id()) {
+            if (!session('?wx_openid')) {
                 $user    = $this->wecharService->getWxUserInfo();
                 $wx_user = model('WechatUser')->get(['wx_openid' => $user->getId()]);
+                session('wx_openid', $user->getId());
                 if (is_null($wx_user)) {
                     $wx_user              = model('WechatUser');
                     $original             = $user->getOriginal();
@@ -106,6 +107,9 @@ class HairBaseController extends HomeBaseController {
                     $wx_user->last_login_ip   = get_client_ip(0, true);
                 }
                 cmf_update_current_user(model('WechatUser')->get(['wx_openid' => $user->getId()])->toArray());
+            } else {
+                $wx_user = model('WechatUser')->get(['wx_openid' => session('wx_openid')]);
+                cmf_update_current_user($wx_user->toArray());
             }
 
             return cmf_get_current_user();

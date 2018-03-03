@@ -27,35 +27,25 @@
     $(function () {
         $(document).on("click", '#tool_pay', function () {
             $.confirm("", "确定支付", function () {
-                $.post("{:url('hair/pay/getPreOrder')}", {}, function (ret) {
-                    if (ret.code) {
-                        if (typeof WeixinJSBridge == "undefined") {
-                            if (document.addEventListener) {
-                                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
-                            } else if (document.attachEvent) {
-                                document.attachEvent('WeixinJSBridgeReady', jsApiCall);
-                                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
-                            }
-                        } else {
-                            WeixinJSBridge.invoke(
-                                'getBrandWCPayRequest', ret.data.pay_json,
-                                function (res) {
-                                    if (res.err_msg == "get_brand_wcpay_request:ok") {
-                                        // todo  支付成功操作 跳转到下一页
-                                        alert('支付成功');
-                                        // window.location.href = 'some urls ';
-                                    } else {
-                                        //支付过程中用户取消或者 失败
-                                        alert('支付失败');
-                                    }
-                                });
-                        }
-                    } else {
-                        $.toast(ret.msg, "forbidden");
+                if (typeof WeixinJSBridge == "undefined") {
+                    if (document.addEventListener) {
+                        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                    } else if (document.attachEvent) {
+                        document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
                     }
-                }, 'json').error(function (err) {
-                    console.log(err);
-                });
+                } else {
+                    WeixinJSBridge.invoke(
+                        'getBrandWCPayRequest', {$pay_json},
+                        function (res) {
+                            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                                $.toast('支付成功', 'success');
+                                window.location.href = '{$wx_pay_from_url}';
+                            } else {
+                                $.toast('支付失败', "forbidden");
+                            }
+                        });
+                }
             });
             return false;
         });

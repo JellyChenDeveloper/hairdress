@@ -14,6 +14,7 @@ CREATE TABLE `hair_order` (
   `prepay_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '预支付交易会话标识',
   `type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '订单类型:0-工具订单,1-组件订单',
   `pay_time` int(11) NOT NULL DEFAULT '0' COMMENT '支付时间',
+  `pay_status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '支付状态:0:默认,1:支付成功,2:支付失败',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态:0:已删除,1:正常',
   `more` text COMMENT '扩展属性',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',

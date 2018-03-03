@@ -60,7 +60,7 @@ return [
             'key'        => 'klp4h9BxsP5LF8NsXdy2YgKMRNFoWjzk',
             'cert_path'  => ROOT_PATH . 'data/cert/apiclient_cert.pem', // XXX: 绝对路径！！！！
             'key_path'   => ROOT_PATH . 'data/cert/apiclient_key.pem', // XXX: 绝对路径！！！！
-            'notify_url' => '/index.php/hair/pay/notify.html',     // 你也可以在下单时单独设置来想覆盖它
+            'notify_url' => think\Url::build('hair/pay/notify', '', true, true),     // 你也可以在下单时单独设置来想覆盖它
         ],
     ],
 ];

@@ -14,6 +14,10 @@ namespace app\hair\controller;
 
 class SystemController extends HairBaseController {
 
+    public function _initialize() {
+
+    }
+
     public function clearCache() {
 
         session(null);
