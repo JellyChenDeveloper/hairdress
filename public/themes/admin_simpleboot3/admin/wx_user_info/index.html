@@ -16,15 +16,15 @@
             <th width="50">ID</th>
             <th>微信昵称</th>
             <th>微信openid</th>
-            <th>用户类型</th>
             <th>手机号</th>
             <th>邀请码</th>
             <th>是否支付</th>
+            <th>用户类型</th>
             <th>推广邀请码</th>
             <th>推广人数</th>
             <th>{:lang('LAST_LOGIN_TIME')}</th>
             <th>注册时间</th>
-            <th width="130">{:lang('ACTIONS')}</th>
+            <th width="80">{:lang('ACTIONS')}</th>
         </tr>
         </thead>
         <tbody>
@@ -33,15 +33,15 @@
                 <td>{$vo.id}</td>
                 <td>{$vo.wx_nickname}</td>
                 <td>{$vo.wx_openid}</td>
-                <td>{$vo.user_type_str}</td>
                 <td>{$vo.mobile}</td>
                 <td>{$vo.activation_key}</td>
                 <td>{$vo.has_payed_str}</td>
+                <td>{$vo.user_type_str}</td>
                 <td>{$vo.agent_activation_key}</td>
                 <td>{$vo.agent_work_count}</td>
                 <td>
                     <if condition="$vo['last_login_time'] eq 0">
-                        {:lang('USER_HAVE_NOT_LOGIN')}
+                        -
                         <else/>
                         {:date('Y-m-d H:i:s',$vo['last_login_time'])}
                     </if>

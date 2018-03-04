@@ -12,10 +12,10 @@
 namespace app\common\model;
 
 
-class PagesModel extends BaseModel{
+class PagesModel extends BaseModel {
     protected $table = 'hair_pages';
 
     public function getAvatarUrlAttr($value, $data) {
-        return '/upload/' . $data['avatar'];
+        return $data['avatar'] ? '/upload/' . $data['avatar'] : '';
     }
 }

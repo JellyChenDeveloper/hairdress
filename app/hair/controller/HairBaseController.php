@@ -71,14 +71,14 @@ class HairBaseController extends HomeBaseController {
      * 检测当前用户是否存在数据库中，如未存在则注册，如存在则获取信息保存在session中
      */
     public function userLogin() {
-//        if (defined('ENV_LOC')) {
-//            $test_user = model('WechatUser')->get(['wx_openid' => TEST_OPENID]);
-//            if (!is_null($test_user)) {
-//                cmf_update_current_user($test_user->toArray());
-//
-//                return cmf_get_current_user();
-//            }
-//        }
+        if (defined('ENV_LOC')) {
+            $test_user = model('WechatUser')->get(['wx_openid' => TEST_OPENID]);
+            if (!is_null($test_user)) {
+                cmf_update_current_user($test_user->toArray());
+
+                return cmf_get_current_user();
+            }
+        }
 
         if (!$this->wecharService->checkWxAuth()) {
             session('wx_auth_callback_url', $this->request->url());

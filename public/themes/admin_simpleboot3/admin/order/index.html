@@ -15,17 +15,13 @@
         <tr>
             <th width="50">ID</th>
             <th>用户ID</th>
-            <th>微信openid</th>
             <th>商品名称</th>
-            <th>商品详情</th>
             <th>商户订单号</th>
             <th>微信订单号</th>
             <th>标价金额</th>
-            <th>预支付交易会话标识</th>
             <th>订单类型</th>
             <th>支付时间</th>
-            <th>创建时间</th>
-            <th width="130">{:lang('ACTIONS')}</th>
+            <th width="80">{:lang('ACTIONS')}</th>
         </tr>
         </thead>
         <tbody>
@@ -33,16 +29,12 @@
             <tr>
                 <td>{$vo.id}</td>
                 <td>{$vo.user_id}</td>
-                <td>{$vo.openid}</td>
                 <td>{$vo.body}</td>
-                <td>{$vo.detail}</td>
                 <td>{$vo.out_trade_no}</td>
                 <td>{$vo.transaction_id}</td>
                 <td>{$vo.total_fee}</td>
-                <td>{$vo.prepay_id}</td>
                 <td>{$vo.type}</td>
                 <td>{:date('Y-m-d H:i:s',$vo['pay_time'])}</td>
-                <td>{:date('Y-m-d H:i:s',$vo['create_time'])}</td>
                 <td>
                     <a href='{:url("WxUserInfo/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
                     <a class="js-ajax-delete" href="{:url('WxUserInfo/delete',array('id'=>$vo['id']))}">{:lang('DELETE')}</a>

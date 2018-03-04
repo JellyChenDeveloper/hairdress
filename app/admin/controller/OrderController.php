@@ -60,7 +60,7 @@ class OrderController extends AdminBaseController {
             ->where($where)
             ->order("id DESC")
             ->paginate(10);
-//        $users->appends(['wx_nickname' => $wx_nickname, 'mobile' => $mobile]);
+        $orders->appends(['wx_nickname' => $wx_nickname, 'mobile' => $mobile]);
         // 获取分页显示
         $page = $orders->render();
 
