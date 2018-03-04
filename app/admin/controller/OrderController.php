@@ -70,4 +70,27 @@ class OrderController extends AdminBaseController {
         return $this->fetch();
     }
 
+    /**
+     * 订单详情
+     * @adminMenu(
+     *     'name'   => '订单详情',
+     *     'parent' => 'index',
+     *     'display'=> false,
+     *     'hasView'=> true,
+     *     'order'  => 10000,
+     *     'icon'   => '',
+     *     'remark' => '订单详情',
+     *     'param'  => ''
+     * )
+     */
+    public function detail() {
+        $id = $this->request->param("id", 0, 'intval');
+
+        $order = model('Order')->get($id);
+//        $order = $order->toArray();
+        $this->assign('order', $order);
+
+        return $this->fetch();
+    }
+
 }

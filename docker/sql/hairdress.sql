@@ -647,7 +647,7 @@ CREATE TABLE `cmf_role_user` (
   PRIMARY KEY (`id`),
   KEY `role_id` (`role_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色对应表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户角色对应表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -656,6 +656,7 @@ CREATE TABLE `cmf_role_user` (
 
 LOCK TABLES `cmf_role_user` WRITE;
 /*!40000 ALTER TABLE `cmf_role_user` DISABLE KEYS */;
+INSERT INTO `cmf_role_user` VALUES (1,1,2);
 /*!40000 ALTER TABLE `cmf_role_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -884,7 +885,7 @@ CREATE TABLE `cmf_user` (
   PRIMARY KEY (`id`),
   KEY `user_login` (`user_login`),
   KEY `user_nickname` (`user_nickname`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -893,7 +894,7 @@ CREATE TABLE `cmf_user` (
 
 LOCK TABLES `cmf_user` WRITE;
 /*!40000 ALTER TABLE `cmf_user` DISABLE KEYS */;
-INSERT INTO `cmf_user` VALUES (1,1,0,0,1519746094,0,0,0.00,1517667595,1,'admin','###b0e6dcf3e0cc1923339b92d115e6bcc1','admin','1@1.com','','','','172.21.0.1','','',NULL);
+INSERT INTO `cmf_user` VALUES (1,1,0,0,1520075338,0,0,0.00,1517667595,1,'admin','###b0e6dcf3e0cc1923339b92d115e6bcc1','admin','1@1.com','','','','172.21.0.1','','',NULL),(2,1,0,0,1520075935,0,0,0.00,0,0,'admin2','###949505e3c19e695eefbb70fb3197dfc4','','3@3.com','','','','172.21.0.1','','',NULL);
 /*!40000 ALTER TABLE `cmf_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1086,7 +1087,7 @@ CREATE TABLE `cmf_user_token` (
   `token` varchar(64) NOT NULL DEFAULT '' COMMENT 'token',
   `device_type` varchar(10) NOT NULL DEFAULT '' COMMENT '设备类型;mobile,android,iphone,ipad,web,pc,mac,wxapp',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户客户端登录 token 表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='用户客户端登录 token 表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1095,7 +1096,7 @@ CREATE TABLE `cmf_user_token` (
 
 LOCK TABLES `cmf_user_token` WRITE;
 /*!40000 ALTER TABLE `cmf_user_token` DISABLE KEYS */;
-INSERT INTO `cmf_user_token` VALUES (1,1,1533219600,1517667600,'ea6b9f065a3fd8c6a901dd76c823949a7a0b00e5787626e7eaacf237ddec90dd','web');
+INSERT INTO `cmf_user_token` VALUES (1,1,1533219600,1517667600,'ea6b9f065a3fd8c6a901dd76c823949a7a0b00e5787626e7eaacf237ddec90dd','web'),(2,2,1535627935,1520075935,'f1a68072101b50b490206c82164fb3c74bcf13138cd5b3307ff7522f086f359c','web');
 /*!40000 ALTER TABLE `cmf_user_token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1127,6 +1128,42 @@ LOCK TABLES `cmf_verification_code` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `hair_element`
+--
+
+DROP TABLE IF EXISTS `hair_element`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hair_element` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '组件名称',
+  `alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '组件别名',
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '组件',
+  `thumb` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '组件缩略图',
+  `type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '组件类型:0-头像,1-工具,2-功能组件',
+  `is_free` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否免费:0-否,1-是',
+  `price` float NOT NULL DEFAULT '0' COMMENT '价格',
+  `order` int(10) unsigned NOT NULL DEFAULT '10000' COMMENT '排序，0-10000，从小到大',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态:0:已隐藏,1:正常',
+  `more` text COMMENT '扩展属性',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  `delete_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '删除时间',
+  PRIMARY KEY (`id`),
+  KEY `alias` (`alias`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='组件表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hair_element`
+--
+
+LOCK TABLES `hair_element` WRITE;
+/*!40000 ALTER TABLE `hair_element` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hair_element` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `hair_order`
 --
 
@@ -1153,7 +1190,7 @@ CREATE TABLE `hair_order` (
   `delete_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '删除时间',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='订单表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1162,6 +1199,7 @@ CREATE TABLE `hair_order` (
 
 LOCK TABLES `hair_order` WRITE;
 /*!40000 ALTER TABLE `hair_order` DISABLE KEYS */;
+INSERT INTO `hair_order` VALUES (1,1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','腾讯充值中心-QQ会员充值','详情详情','149950936220180303191207','','1','','wx20180303181309a72ba1ae1c0686161491',0,0,1,NULL,1520075527,1520075527,0),(2,1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','腾讯充值中心-QQ会员充值','详情详情','149950936220180303191221','','1','','wx20180303181309a72ba1ae1c0686161491',0,0,1,NULL,1520075541,1520075541,0),(3,1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','腾讯充值中心-QQ会员充值','详情详情','149950936220180303191221','','1','','wx20180303181309a72ba1ae1c0686161491',0,0,1,NULL,1520075541,1520075541,0),(4,1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','腾讯充值中心-QQ会员充值','详情详情','149950936220180303191222','','1','','wx20180303181309a72ba1ae1c0686161491',0,0,1,NULL,1520075542,1520075542,0),(5,1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','腾讯充值中心-QQ会员充值','详情详情','149950936220180303191223','','1','','wx20180303181309a72ba1ae1c0686161491',0,0,1,NULL,1520075543,1520075543,0),(6,1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','腾讯充值中心-QQ会员充值','详情详情','149950936220180303191224','','1','','wx20180303181309a72ba1ae1c0686161491',0,0,1,NULL,1520075544,1520075544,0);
 /*!40000 ALTER TABLE `hair_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1178,8 +1216,9 @@ CREATE TABLE `hair_pages` (
   `project_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '项目id',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '页面名称',
   `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '页面url',
+  `thumb` varchar(255) NOT NULL DEFAULT '' COMMENT '页面缩略图',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '页面状态;0:已删除,1:正常',
-  `order` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '图片排序，0-999，从小到大',
+  `order` int(10) unsigned NOT NULL DEFAULT '10000' COMMENT '图片排序，0-10000，从小到大',
   `more` text COMMENT '扩展属性',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
@@ -1187,7 +1226,7 @@ CREATE TABLE `hair_pages` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='项目详情表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='项目详情表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1210,9 +1249,9 @@ CREATE TABLE `hair_projects` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '项目名称',
-  `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '项目图表，暂未使用',
+  `thumb` varchar(255) NOT NULL DEFAULT '' COMMENT '项目缩略图，暂未使用',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '项目状态;0:已删除,1:正常',
-  `order` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '项目排序，0-999，从小到大',
+  `order` int(10) unsigned NOT NULL DEFAULT '10000' COMMENT '项目排序，0-10000，从小到大',
   `more` text COMMENT '扩展属性',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
@@ -1220,7 +1259,7 @@ CREATE TABLE `hair_projects` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='项目列表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='项目列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1251,7 +1290,7 @@ CREATE TABLE `hair_wechat_user` (
   `user_type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户类型;1:普通会员;2:代理',
   `mobile` varchar(255) NOT NULL DEFAULT '' COMMENT '用户手机号',
   `activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '激活码,user_type=1时有效',
-  `has_payed` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '支付状态;0:未支付,1:已支付',
+  `has_payed` float unsigned NOT NULL DEFAULT '0' COMMENT '支付状态;0:未支付,1:已支付',
   `agent_activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '代理激活码,user_type=2时有效',
   `agent_work_count` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '代理推广人数,user_type=2时有效',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户状态;0:已删除,1:正常',
@@ -1265,7 +1304,7 @@ CREATE TABLE `hair_wechat_user` (
   KEY `wx_openid` (`wx_openid`),
   KEY `wx_nickname` (`wx_nickname`),
   KEY `mobile` (`mobile`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1274,6 +1313,7 @@ CREATE TABLE `hair_wechat_user` (
 
 LOCK TABLES `hair_wechat_user` WRITE;
 /*!40000 ALTER TABLE `hair_wechat_user` DISABLE KEYS */;
+INSERT INTO `hair_wechat_user` VALUES (1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','Jelly_国栋',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/6SoGhxRa80KlwicJGGR6KZDnllWwIbsrbkdVTRZxYXwQ4MGPqYBN5eicNdyO5KjjZlscOpFf4CwmI69vsRjqhnBQ/132','中国','北京','朝阳',1,'13111111111','',1,'',0,1,0,'',NULL,1520075519,1520075526,0);
 /*!40000 ALTER TABLE `hair_wechat_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1286,4 +1326,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-03 10:52:32
+-- Dump completed on 2018-03-04  9:13:20

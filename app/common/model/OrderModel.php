@@ -15,4 +15,11 @@ namespace app\common\model;
 class OrderModel extends BaseModel {
     protected $table = 'hair_order';
 
+    public function getTypeStrAttr($value, $data) {
+        return config('property.order_type')[$data['type']];
+    }
+
+    public function getHasPayedAttr($value, $data) {
+        return !($data['pay_time'] == 0);
+    }
 }

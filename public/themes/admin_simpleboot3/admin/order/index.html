@@ -2,6 +2,9 @@
 </head>
 <body>
 <div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('order/index')}">订单列表</a></li>
+    </ul>
     <form class="well form-inline margin-top-20" method="post" action="{:url('WxUserInfo/index')}">
         微信昵称:
         <input type="text" class="form-control" name="wx_nickname" style="width: 120px;" value="{:input('request.wx_nickname/s','')}" placeholder="请输入{:lang('USERNAME')}">
@@ -36,8 +39,7 @@
                 <td>{$vo.type}</td>
                 <td>{:date('Y-m-d H:i:s',$vo['pay_time'])}</td>
                 <td>
-                    <a href='{:url("WxUserInfo/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
-                    <a class="js-ajax-delete" href="{:url('WxUserInfo/delete',array('id'=>$vo['id']))}">{:lang('DELETE')}</a>
+                    <a href='{:url("order/detail",array("id"=>$vo["id"]))}'>详情</a>
                 </td>
             </tr>
         </foreach>
