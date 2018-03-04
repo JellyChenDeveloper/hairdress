@@ -6,7 +6,7 @@
         <li><a href="{:url('order/index')}">订单列表</a></li>
         <li class="active"><a href="#">订单详情</a></li>
     </ul>
-    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('nav/editPost')}">
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('order/editPost')}">
         <div class="form-group">
             <label class="col-sm-2 control-label">ID:</label>
             <div class="col-md-6 col-sm-10">
@@ -79,9 +79,8 @@
             <div class="col-md-6 col-sm-10">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox"
-                        <if condition="$order.has_payed eq 1">checked</if>
-                        >
+                        <php>$has_payed=$order['has_payed']?"checked":"";</php>
+                        <input type="checkbox" {$has_payed}>
                     </label>
                 </div>
             </div>

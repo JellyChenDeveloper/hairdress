@@ -87,7 +87,6 @@ class OrderController extends AdminBaseController {
         $id = $this->request->param("id", 0, 'intval');
 
         $order = model('Order')->get($id);
-//        $order = $order->toArray();
         $this->assign('order', $order);
 
         return $this->fetch();

@@ -28,7 +28,7 @@ use cmf\controller\AdminBaseController;
 class WxUserInfoController extends AdminBaseController {
 
     /**
-     * 管理员列表
+     * 微信用户
      * @adminMenu(
      *     'name'   => '微信用户',
      *     'parent' => 'default',
@@ -64,7 +64,29 @@ class WxUserInfoController extends AdminBaseController {
 
         $this->assign("page", $page);
         $this->assign("users", $users);
+
         return $this->fetch();
     }
 
+    /**
+     * 编辑用户
+     * @adminMenu(
+     *     'name'   => '编辑用户',
+     *     'parent' => 'index',
+     *     'display'=> false,
+     *     'hasView'=> true,
+     *     'order'  => 10000,
+     *     'icon'   => '',
+     *     'remark' => '编辑用户',
+     *     'param'  => ''
+     * )
+     */
+    public function edit() {
+        $id = $this->request->param("id", 0, 'intval');
+
+        $user = model('WechatUser')->get($id);
+        $this->assign('user', $user);
+
+        return $this->fetch();
+    }
 }
