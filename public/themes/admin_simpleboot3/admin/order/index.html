@@ -5,13 +5,16 @@
     <ul class="nav nav-tabs">
         <li class="active"><a href="{:url('order/index')}">订单列表</a></li>
     </ul>
-    <form class="well form-inline margin-top-20" method="post" action="{:url('WxUserInfo/index')}">
-        微信昵称:
-        <input type="text" class="form-control" name="wx_nickname" style="width: 120px;" value="{:input('request.wx_nickname/s','')}" placeholder="请输入{:lang('USERNAME')}">
-        手机号:
-        <input type="text" class="form-control" name="mobile" style="width: 120px;" value="{:input('request.mobile/s','')}" placeholder="请输入手机号">
+    <form class="well form-inline margin-top-20" method="post" action="{:url('order/index')}">
+        支付状态：
+        <select class="form-control" name="has_payed" style="width: 140px;">
+            <foreach name="Think.config.property.pay_status_select" item="vo">
+                <php>$target_selected=input('request.has_payed',999)==$key?"selected='selected'":"";</php>
+                <option value="{$key}" {$target_selected}>{$vo}</option>
+            </foreach>
+        </select>
         <input type="submit" class="btn btn-primary" value="搜索"/>
-        <a class="btn btn-danger" href="{:url('WxUserInfo/index')}">清空</a>
+        <a class="btn btn-danger" href="{:url('order/index')}">清空</a>
     </form>
     <table class="table table-hover table-bordered">
         <thead>
@@ -36,8 +39,8 @@
                 <td>{$vo.out_trade_no}</td>
                 <td>{$vo.transaction_id}</td>
                 <td>{$vo.total_fee}</td>
-                <td>{$vo.type}</td>
-                <td>{:date('Y-m-d H:i:s',$vo['pay_time'])}</td>
+                <td>{$vo.type_str}</td>
+                <td>{$vo.pay_time_str}</td>
                 <td>
                     <a href='{:url("order/detail",array("id"=>$vo["id"]))}'>详情</a>
                 </td>

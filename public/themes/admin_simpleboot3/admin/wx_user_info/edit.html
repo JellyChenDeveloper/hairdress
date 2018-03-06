@@ -1,80 +1,109 @@
-<include file="public@header" />
+<include file="public@header"/>
 </head>
 <body>
-	<div class="wrap">
-		<ul class="nav nav-tabs">
-            <li><a href="{:url('WxUserInfo/index')}">用户列表</a></li>
-            <li class="active"><a href="#">编辑用户</a></li>
-		</ul>
-		<form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('WxUserInfo/editPost')}">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">ID:</label>
-                <div class="col-md-6 col-sm-10">
-                    <input type="text" class="form-control" value="{$user.id}" disabled="disabled">
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('WxUserInfo/index')}">用户列表</a></li>
+        <li class="active"><a href="#">编辑用户</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('WxUserInfo/editPost')}">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">ID:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" value="{$user.id}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">open_id:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" value="{$user.wx_openid}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">用户昵称:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" value="{$user.wx_nickname}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">性别:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" value="{$user.sex_str}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">用户头像:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" value="{$user.wx_avatar}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">地区:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" value="{$user.location}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">手机号:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" value="{$user.mobile}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">推广码:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" value="{$user.activation_key}" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">是否支付:</label>
+            <div class="col-md-6 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <php>$has_payed=$user['has_payed']?"checked":"";</php>
+                        <input type="checkbox" name="has_payed" {$has_payed} value="1">
+                    </label>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">ID:</label>
-                <div class="col-md-6 col-sm-10">
-                    <input type="text" class="form-control" value="{$user.wx_openid}" disabled="disabled">
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">用户类型:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="user_type" id="input-target">
+                    <foreach name="Think.config.property.user_type" item="vo">
+                        <php>$link_target_selected=$user['user_type']==$key?"selected='selected'":"";</php>
+                        <option value="{$key}" {$link_target_selected}>{$vo}</option>
+                    </foreach>
+                </select>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">ID:</label>
-                <div class="col-md-6 col-sm-10">
-                    <input type="text" class="form-control" value="{$user.wx_nickname}" disabled="disabled">
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">代理推广码:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="agent_activation_key" value="{$user.agent_activation_key}">
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">ID:</label>
-                <div class="col-md-6 col-sm-10">
-                    <input type="text" class="form-control" value="{$user.sex}" disabled="disabled">
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">推广人数:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" value="{$user.agent_work_count}" disabled="disabled">
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">ID:</label>
-                <div class="col-md-6 col-sm-10">
-                    <input type="text" class="form-control" value="{$user.wx_avatar}" disabled="disabled">
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">创建时间:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" name="create_time" value="{$user.create_time_str}" disabled="disabled">
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">ID:</label>
-                <div class="col-md-6 col-sm-10">
-                    <input type="text" class="form-control" value="{$user.mobile}" disabled="disabled">
-                </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="hidden" name="id" value="{$user.id}"/>
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                <a class="btn btn-default" href="javascript:history.back(-1);">{:lang('BACK')}</a>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">ID:</label>
-                <div class="col-md-6 col-sm-10">
-                    <input type="text" class="form-control" value="{$user.activation_key}" disabled="disabled">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">是否支付:</label>
-                <div class="col-md-6 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            <php>$has_payed=$user['has_payed']?"checked":"";</php>
-                            <input type="checkbox" {$has_payed}>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">创建时间:</label>
-                <div class="col-md-6 col-sm-10">
-                    <input type="text" class="form-control" name="create_time" value="{$user.create_time}" disabled="disabled">
-                </div>
-            </div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<input type="hidden" name="id" value="{$user.id}" />
-					<button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
-					<a class="btn btn-default" href="javascript:history.back(-1);">{:lang('BACK')}</a>
-				</div>
-			</div>
-		</form>
-	</div>
-	<script src="__STATIC__/js/admin.js"></script>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
 </body>
 </html>

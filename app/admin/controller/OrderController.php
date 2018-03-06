@@ -45,22 +45,21 @@ class OrderController extends AdminBaseController {
     public function index() {
         $where = [];
         /**搜索条件**/
-        $wx_nickname = $this->request->param('wx_nickname');
-        $mobile      = trim($this->request->param('mobile'));
-
-        if ($wx_nickname) {
-            $where['wx_nickname'] = ['like', "%$wx_nickname%"];
+        $has_payed = $this->request->param('has_payed');
+        if ($has_payed != 999) {
+            if ($has_payed) {
+                $where['pay_time'] = ['gt', 0];
+            } else {
+                $where['pay_time'] = 0;
+            }
         }
 
-        if ($mobile) {
-            $where['mobile'] = ['like', "%$mobile%"];;
-        }
         $orders = model('Order')
             ->useGlobalScope(false)
             ->where($where)
             ->order("id DESC")
             ->paginate(10);
-        $orders->appends(['wx_nickname' => $wx_nickname, 'mobile' => $mobile]);
+        $orders->appends(['has_payed' => $has_payed]);
         // 获取分页显示
         $page = $orders->render();
 

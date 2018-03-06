@@ -28,4 +28,8 @@ class WechatUserModel extends BaseModel {
     public function getUserTypeStrAttr($value, $data) {
         return config('property.user_type')[$data['user_type']];
     }
+
+    public function getSexStrAttr($value, $data) {
+        return config('property.sex')[$data['sex']];
+    }
 }

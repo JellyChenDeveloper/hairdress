@@ -80,7 +80,7 @@
                 <div class="checkbox">
                     <label>
                         <php>$has_payed=$order['has_payed']?"checked":"";</php>
-                        <input type="checkbox" {$has_payed}>
+                        <input type="checkbox" {$has_payed} disabled="disabled">
                     </label>
                 </div>
             </div>
@@ -94,7 +94,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">创建时间:</label>
             <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" name="create_time" value="{$order.create_time}" disabled="disabled">
+                <input type="text" class="form-control" name="create_time" value="{$order.create_time_str}" disabled="disabled">
             </div>
         </div>
     </form>

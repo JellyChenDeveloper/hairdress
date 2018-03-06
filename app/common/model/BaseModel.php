@@ -27,5 +27,24 @@ class BaseModel extends Model {
         $query->where(['status' => 1, 'delete_time' => 0]);
     }
 
+    public function getCreateTimeStrAttr($value, $data) {
+        return $data['create_time'] ? date('Y-m-d H:i:s', $data['create_time']) : '-';
+    }
+
+    public function getUpdateTimeStrAttr($value, $data) {
+        return $data['update_time'] ? date('Y-m-d H:i:s', $data['update_time']) : '-';
+    }
+
+    public function getDeleteTimeStrAttr($value, $data) {
+        return $data['delete_time'] ? date('Y-m-d H:i:s', $data['delete_time']) : '-';
+    }
+
+    public function getLastLoginTimeStrAttr($value, $data) {
+        return $data['last_login_time'] ? date('Y-m-d H:i:s', $data['last_login_time']) : '-';
+    }
+
+    public function getPayTimeStrAttr($value, $data) {
+        return $data['pay_time'] ? date('Y-m-d H:i:s', $data['pay_time']) : '-';
+    }
 
 }
