@@ -199,4 +199,37 @@ class ElementController extends AdminBaseController {
         parent::listOrders(model('Element'));
         $this->success("排序更新成功！", '');
     }
+
+    /**
+     * 删除组件
+     * @adminMenu(
+     *     'name'   => '删除组件',
+     *     'parent' => 'index',
+     *     'display'=> false,
+     *     'hasView'=> false,
+     *     'order'  => 10000,
+     *     'icon'   => '',
+     *     'remark' => '删除组件',
+     *     'param'  => ''
+     * )
+     */
+    public function deletePost() {
+        if (!cmf_get_current_admin_id()) {
+            $this->error('非法操作');
+        }
+
+        $id = $this->request->param('id');
+
+        $element = model('Element')->get($id);
+        if (!$element) {
+            $this->error('参数错误，请刷新重试');
+        }
+
+        $result = $element->delete();
+        if ($result == 1) {
+            $this->success(lang('DELETE_SUCCESS'));
+        } else {
+            $this->error(lang('DELETE_FAILED'));
+        }
+    }
 }

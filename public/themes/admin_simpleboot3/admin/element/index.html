@@ -46,6 +46,7 @@
                     <td>{$vo.price_str}</td>
                     <td>
                         <a href='{:url("Element/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
+                        <a href="{:url('Element/deletePost',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="是否删除该组件">删除</a>
                     </td>
                 </tr>
             </foreach>
