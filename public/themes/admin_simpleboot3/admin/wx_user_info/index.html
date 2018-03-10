@@ -25,7 +25,7 @@
         <tr>
             <th width="50">ID</th>
             <th>微信昵称</th>
-            <th>微信openid</th>
+            <th>头像</th>
             <th>手机号</th>
             <th>邀请码</th>
             <th>是否支付</th>
@@ -42,7 +42,7 @@
             <tr>
                 <td>{$vo.id}</td>
                 <td>{$vo.wx_nickname}</td>
-                <td>{$vo.wx_openid}</td>
+                <td><img width="25" height="25" src="{$vo.wx_avatar}"/></td>
                 <td>{$vo.mobile}</td>
                 <td>{$vo.activation_key}</td>
                 <td>{$vo.has_payed_str}</td>
