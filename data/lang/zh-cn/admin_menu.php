@@ -1,5 +1,6 @@
 <?php
 return array (
+  'ADMIN_ACTIVITYCODE_INDEX' => '激活码管理',
   'ADMIN_ELEMENT_INDEX' => '组件管理',
   'ADMIN_ORDER_INDEX' => '订单管理',
   'ADMIN_USER_INDEX' => '管理员',

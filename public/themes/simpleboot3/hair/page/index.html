@@ -1,4 +1,4 @@
-<!-- <include file="hair@public/head"/> -->
+<include file="hair@public/head"/>
 <script src="__PAGE_TOOLS__/js/flexible.js"></script>
 <link rel="stylesheet" href="__PAGE_TOOLS__/css/minicolor.css">
 <link rel="stylesheet" href="__PAGE_TOOLS__/css/main.css">
@@ -6,6 +6,7 @@
 <style>
     body {
         line-height: 1.5rem;
+        font-size: 12px !important;
     }
 
     #i-text {
@@ -21,7 +22,7 @@
     <input type="hidden" name="user_id" value="{$page.user_id}"/>
     <input type="hidden" name="project_id" value="{$page.project_id}"/>
     <input type="hidden" name="name" value="{$page.name}"/>
-    <input type="hidden" name="image" value=""/>
+    <input type="hidden" name="image" value="{$page.avatar_url}"/>
 </form>
 <div class="wrap">
     <div class="tab">
@@ -37,7 +38,7 @@
     <div class="main-wrap">
         <div class="canvas-wrap">
             <!-- 背景图片 -->
-            <img src="__PAGE_TOOLS__/images/bg.png" alt="" id="bg-img" style="position: absolute;width:100%;height: 100%;opacity: 0;z-index: -2;">
+            <img src="{$page.avatar_url|default=''}" alt="" id="bg-img" style="position: absolute;width:100%;height: 100%;opacity: 0;z-index: -2;">
             <div class="c-inner" style="overflow: hidden;">
                 <canvas id="create-img"></canvas>
             </div>
@@ -366,6 +367,7 @@
                 this.initColor();
                 this.bindEvent();
                 this.renderBG();
+                this.renderBGImg();
             },
             bindEvent    : function () {
                 var _this = this;
@@ -508,7 +510,7 @@
                                     _this.renderOption = null;
                                 };
                             } else {
-                                console.log(ret.msg);
+                                alert(ret.msg)
                             }
                         }, 'json');
 
@@ -530,17 +532,14 @@
                     var img    = new Image();
                     img.src    = bg.attr('src');
                     img.onload = function () {
-                        console.log(bg.length);
-                        _this.bg_ctx.drawImage(this, 0, 0, _this.w, _this.h);
-                        // img.width = _this.w;
-                        // img.height =_this.h;
-                        // var img1  = new fabric.Image(img, {
-                        //     left : 0,
-                        //     top  : 0,
-                        //     width:_this.w,
-                        //     height:_this.h
-                        // });
-                        // _this.grids.add(img1);
+                        var img        = new fabric.Image(this, {
+                            left : 0,
+                            top  : 0,
+                        });
+                        img.width      = _this.w;
+                        img.height     = _this.h;
+                        img.selectable = false;
+                        _this.ctx.add(img);
                     }
                 }
             }
@@ -557,6 +556,10 @@
                     this.ctx.clear();
                     return false;
                 }
+                if ($('#bg-img').length > 0 && this.bg_cache.length == 1) {
+                    $('.btn-pre').hide();
+                    return false;
+                }
                 this.bg_cache.pop();
                 this.renderBgArr();
                 if (this.bg_cache.length <= 0) {
@@ -569,14 +572,14 @@
                 if (this.ctx.getObjects().length <= 0) {return false;}
                 ;
                 $('.btn-pre').show();
-                var _this      = this;
-                var currentObj = obj.ctx.getActiveObject();
-                if (currentObj) {
-                    currentObj.set({
-                        borderColor : 'transparent',
-                        cornerColor : 'transparent'
-                    })
-                }
+                var _this = this;
+                //  var currentObj =obj.ctx.getActiveObject();
+                // if(currentObj){
+                //      currentObj.set({
+                //          borderColor:'transparent',
+                //          cornerColor:'transparent'
+                //      })
+                // }
                 for (var i = 0; i < this.controllerCircleArr.length; i++) {
                     this.controllerCircleArr[i].set({opacity : 0});
                 }
@@ -597,8 +600,8 @@
                         var img    = new Image();
                         img.src    = _this.bg_cache[i];
                         img.onload = function () {
-                            _this.bg_ctx.drawImage(img, 0, 0, _this.w, _this.h);
-                            _this.create_ctx.drawImage(img, 0, 0, _this.w * _this.mul, _this.h * _this.mul);
+                            _this.bg_ctx.drawImage(this, 0, 0, _this.w, _this.h);
+                            _this.create_ctx.drawImage(this, 0, 0, _this.w * _this.mul, _this.h * _this.mul);
                             ++isEnd;
                             console.log('mul');
                             if (isEnd == _this.bg_cache.length && fn) {

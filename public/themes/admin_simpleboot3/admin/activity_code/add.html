@@ -1,0 +1,68 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('Element/index')}">组件管理</a></li>
+        <li class="active"><a href="{:url('Element/add')}">添加组件</a></li>
+    </ul>
+    <form class="form-horizontal js-ajax-form margin-top-20" action="{:url('Element/addPost')}" method="post">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-name"><span class="form-required">*</span>组件名称:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-name" name="name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>组件图片:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="hidden" name="image" class="form-control" id="js-thumbnail-input">
+                <div>
+                    <a href="javascript:uploadOneImage('图片上传','#js-thumbnail-input');">
+                        <img src="__TMPL__/public/assets/images/default-thumbnail.png" id="js-thumbnail-input-preview" width="135" style="cursor: pointer"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-target-type"><span class="form-required">*</span>组件类型:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="type" id="input-target-type">
+                    <foreach name="Think.config.property.element_type" item="vo">
+                        <option value="{$key}">{$vo}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-target-type"><span class="form-required">*</span>是否免费:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="is_free" id="input-target-free">
+                    <option value="1">免费</option>
+                    <option value="0">不免费</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-name">组件价格:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-price" name="price"><span>若组件选择免费则该选项无效</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-name">排序:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-order" name="list_order" value="10000"><span>从小到大排序</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+                <a class="btn btn-default" href="{:url('AdminCategory/index')}">{:lang('BACK')}</a>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__STATIC__/js/admin.js"></script>
+</body>
+</html>
