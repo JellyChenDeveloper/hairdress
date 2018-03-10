@@ -10,34 +10,40 @@
  */
 
 return [
-    'pay_status'        => [
+    'pay_status'          => [
         0 => '未支付',
         1 => '已支付',
     ],
-    'pay_status_select' => [
+    'pay_status_select'   => [
         999 => '全部',
         0   => '未支付',
         1   => '已支付',
     ],
-    'user_type'         => [
+    'user_type'           => [
         1 => '普通会员',
         2 => '代理',
     ],
-    'order_type'        => [
+    'order_type'          => [
         0 => '工具订单',
         1 => '组件订单',
     ],
-    'sex'               => [
+    'sex'                 => [
         0 => '未知',
         1 => '男',
         2 => '女',
     ],
-    'element_type'      => [
+    'element_type'        => [
         0 => '头像',
         1 => '工具',
         2 => '功能',
     ],
-    'is_free'           => [
+    'element_type_select' => [
+        999 => '全部',
+        0   => '头像',
+        1   => '工具',
+        2   => '功能',
+    ],
+    'is_free'             => [
         0 => '收费',
         1 => '免费',
     ],

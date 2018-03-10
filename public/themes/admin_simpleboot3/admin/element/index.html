@@ -6,6 +6,19 @@
         <li class="active"><a href="{:url('Element/index')}">组件管理</a></li>
         <li><a href="{:url('Element/add')}">添加组件</a></li>
     </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('Element/index')}">
+        组件名称:
+        <input type="text" class="form-control" name="name" style="width: 150px;" value="{:input('request.name/s','')}" placeholder="请输入组件名称">
+        组件类型：
+        <select class="form-control" name="type" style="width: 140px;">
+            <foreach name="Think.config.property.element_type_select" item="vo">
+                <php>$target_selected=input('request.type',999)==$key?"selected='selected'":"";</php>
+                <option value="{$key}" {$target_selected}>{$vo}</option>
+            </foreach>
+        </select>
+        <input type="submit" class="btn btn-primary" value="搜索"/>
+        <a class="btn btn-danger" href="{:url('Element/index')}">清空</a>
+    </form>
     <form method="post" class="js-ajax-form" action="{:url('Element/listOrder')}">
         <div class="table-actions">
             <button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>

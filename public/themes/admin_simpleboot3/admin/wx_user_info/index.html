@@ -12,9 +12,9 @@
         <input type="text" class="form-control" name="mobile" style="width: 120px;" value="{:input('request.mobile/s','')}" placeholder="请输入手机号">
         支付状态：
         <select class="form-control" name="pay_status" style="width: 140px;">
-            <option>全部</option>
-            <foreach name="Think.config.property.pay_status" item="vo">
-                <option value="{$key}">{$vo}</option>
+            <foreach name="Think.config.property.pay_status_select" item="vo">
+                <php>$target_selected=input('request.has_payed',999)==$key?"selected='selected'":"";</php>
+                <option value="{$key}" {$target_selected}>{$vo}</option>
             </foreach>
         </select>
         <input type="submit" class="btn btn-primary" value="搜索"/>

@@ -43,9 +43,20 @@ class ElementController extends AdminBaseController {
      * )
      */
     public function index() {
+        $where = [];
+        $name  = $this->request->param('name');
+        $type  = $this->request->param('type');
+        if ($name) {
+            $where['name'] = ['like', "%$name%"];
+        }
+        if ($type && $type != '999') {
+            $where['type'] = $type;
+        }
         $elements = model('Element')
             ->order(["list_order" => "asc"])
+            ->where($where)
             ->paginate(10);
+        $elements->appends(['name' => $name, 'type' => $type]);
         // 获取分页显示
         $page = $elements->render();
 
