@@ -47,12 +47,12 @@ class PageController extends HairBaseController {
             $this->error(lang('页面错误，请关闭页面后重试!'));
         }
 
-        $path = cmf_save_base64_image($image, $name);
+        $path = cmf_save_base64_image($image, $name, 'page');
 
         $data = [
             'id'         => $id,
             'user_id'    => $this->user_id,
-            'project_id' => $project_id
+            'project_id' => $project_id,
         ];
         $page = model('Pages')->get($data);
         if (!$page) {
