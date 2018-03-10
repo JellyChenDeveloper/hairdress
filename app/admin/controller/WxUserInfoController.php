@@ -51,7 +51,7 @@ class WxUserInfoController extends AdminBaseController {
         }
 
         if ($mobile) {
-            $where['mobile'] = ['like', "%$mobile%"];;
+            $where['mobile'] = ['like', "%$mobile%"];
         }
         $users = model('WechatUser')
             ->useGlobalScope(false)
