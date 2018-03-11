@@ -2,6 +2,28 @@
 <script src="__PAGE_TOOLS__/js/flexible.js"></script>
 <link rel="stylesheet" href="__PAGE_TOOLS__/css/minicolor.css">
 <link rel="stylesheet" href="__PAGE_TOOLS__/css/main.css">
+<style>
+    #m-alert {
+        display: none;
+        position: absolute;
+        z-index: 99;
+        width: 80%;
+        left: 10%;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        margin-top: -0.3733rem;
+        font-size: 0.3733rem;
+        background: #fff;
+        text-align: center;
+        border: 1px solid #ccc;
+    }
+
+    #m-alert.on {
+        background: rgba(200, 92, 87, 1);
+        border-color: rgba(200, 92, 87, 1);
+    }
+</style>
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <style>
     body {
@@ -29,8 +51,8 @@
         <ul>
             <li class="fl"><a href="{:url('hair/project/detail',['id'=>$page.project_id])}" style="color:#000;">返回</a></li>
             <li class="fl tri-head">头像</li>
-            <li class="fl tri-fun">工具</li>
             <li class="fl tri-tool">功能</li>
+            <li class="fl tri-fun">工具</li>
             <li class="fl tri-word">文字</li>
             <li class="fl">分享</li>
         </ul>
@@ -127,12 +149,12 @@
                             <p class="h-text">圆形</p>
                         </div>
                     </li>
-                    <li class="h-icon fl" renderType='renderEllipse'>
+                    <li class="h-icon fl" renderType='renderRect'>
                         <div class="h-one">
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_10.jpg" alt="">
                             </div>
-                            <p class="h-text">椭圆</p>
+                            <p class="h-text">正方形</p>
                         </div>
                     </li>
                     <li class="h-icon fl" renderType='isDrawingMode'>
@@ -205,11 +227,11 @@
                             <img src="__PAGE_TOOLS__/images/tool_1.png" alt="">
                         </div>
                     </li>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/tool_2.png" alt="">
-                        </div>
-                    </li>
+                    <!--  <li class="h-icon fl">
+                         <div class="h-one add-ele">
+                             <img src="__PAGE_TOOLS__/images/tool_2.png" alt="">
+                         </div>
+                     </li> -->
                     <li class="h-icon fl">
                         <div class="h-one add-ele">
                             <img src="__PAGE_TOOLS__/images/tool_4.png" alt="">
@@ -274,7 +296,7 @@
                     <p>颜色：<input class="s-select color" type="hidden" key='fill' value="#000"></p>
                 </li>
                 <li>
-                    <p class="text-c">椭圆</p>
+                    <p class="text-c">正方形</p>
                     <p>颜色：<input class="s-select color" type="hidden" key='fill' value="#000"></p>
                 </li>
                 <li>
@@ -336,6 +358,9 @@
 </div>
 <div class="mask" id="createImg">
     <div class="m-box text-c">图片生成中...</div>
+</div>
+<div id="m-alert">
+    图片生成成功！
 </div>
 <!-- <include file="hair@public/foot"/> -->
 
@@ -424,7 +449,10 @@
                     var obj       = {};
                     var hasOption = false;
                     var option    = $('#select-cx ul li.on').find('.s-select');
-                    option        = _this.createOption(option);
+                    if (!option.val()) {
+                        option.val = '#000';
+                    }
+                    option = _this.createOption(option);
                     console.log(JSON.stringify(option));
                     console.log(_this.renderOBJ);
                     _this.renderFN[_this.renderOBJ].call(_this, option);
@@ -509,8 +537,10 @@
                                     _this.renderOBJ    = null;
                                     _this.renderOption = null;
                                 };
+                                _this.toast('图片上传成功！', true)
                             } else {
-                                alert(ret.msg)
+                                _this.toast(ret.msg, false)
+                                // alert(ret.msg)
                             }
                         }, 'json');
 
@@ -525,6 +555,17 @@
                     _this.pre();
                 });
             },
+            toast        : function (text, isTrue) {
+                if (isTrue) {
+                    $('#m-alert').removeClass('on').show().text(text);
+                } else {
+                    $('#m-alert').addClass('on').show().text(text);
+                }
+                setTimeout(function () {
+                    $('#m-alert').hide();
+                }, 2000)
+            }
+            ,
             renderBGImg  : function () {
                 var bg    = $('#bg-img');
                 var _this = this;
@@ -785,17 +826,17 @@
                     var tri       = new fabric.Circle(option);
                     this.ctx.add(tri);
                 },
-                renderEllipse   : function (option) {
-                    var w       = this.w / 3;
-                    var h       = w * 0.5;
-                    var top     = (this.h - h * 2) / 2;
-                    var left    = (this.w - w * 2) / 2;
-                    option.rx   = w;
-                    option.ry   = h;
-                    option.top  = top;
-                    option.left = left;
+                renderRect      : function (option) {
+                    var w         = this.w / 3;
+                    var h         = w;
+                    var top       = (this.h - h) / 2;
+                    var left      = (this.w - w) / 2;
+                    option.width  = w;
+                    option.height = h;
+                    option.top    = top;
+                    option.left   = left;
                     console.log(JSON.stringify(option));
-                    var ell = new fabric.Ellipse(option);
+                    var ell = new fabric.Rect(option);
                     this.ctx.add(ell);
                 }
                 ,
