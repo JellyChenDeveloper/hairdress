@@ -1095,3 +1095,20 @@
         obj.init();
     });
 </script>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+    wx.config( {$share.js_config} );
+    wx.ready(function () {
+        var shareData = {
+            title  : '{$share.share_title}',
+            desc   : '{$share.share_desc}',
+            link   : '{$share.share_link}',
+            imgUrl : '{$share.share_img}'
+        };
+        wx.onMenuShareAppMessage(shareData);
+        wx.onMenuShareTimeline(shareData);
+        wx.onMenuShareQQ(shareData);
+        wx.onMenuShareWeibo(shareData);
+    });
+</script>

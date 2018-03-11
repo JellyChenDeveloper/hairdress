@@ -12,6 +12,20 @@ class PageController extends HairBaseController {
     public function index($id) {
         $page = model('Pages')->get(['id' => $id, 'user_id' => $this->user_id]);
         $this->assign('page', $page);
+        $js_config = $this->wecharService->jssdk()->buildConfig([
+            "onMenuShareTimeline",
+            "onMenuShareAppMessage",
+            "onMenuShareQQ",
+            "onMenuShareWeibo",
+        ]);
+        $share     = [
+            'js_config'   => $js_config,
+            'share_title' => '美发工具',
+            'share_desc'  => '分享描述',
+            'share_link'  => url('hair/index/index', '', true, true),
+            'share_img'   => $page->avatar_url,
+        ];
+        $this->assign('share', $share);
 
         return $this->fetch();
     }

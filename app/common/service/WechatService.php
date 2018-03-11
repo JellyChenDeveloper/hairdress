@@ -77,4 +77,18 @@ class WechatService {
 
         return $app;
     }
+
+    /**
+     * 获取jssdk接口句柄
+     *
+     * @return \EasyWeChat\BasicService\Jssdk\Client
+     */
+    public function jssdk() {
+        $app   = Factory::officialAccount($this->config);
+        $jssdk = $app->jssdk;
+
+        return $jssdk;
+    }
+
+
 }
