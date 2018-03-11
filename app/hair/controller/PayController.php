@@ -100,26 +100,24 @@ class PayController extends HairBaseController {
             $m_order                   = model('Order')->get(['out_trade_no' => $message['out_trade_no']]);
             $m_order['transaction_id'] = $message['transaction_id'];
 
-            if (!$m_order || $m_order->pay_status == 1) {
+            if (!$m_order || $m_order->pay_time > 0) {
                 return true;
             }
 
             if ($message['return_code'] === 'SUCCESS') {
                 // 用户是否支付成功
                 if ($message['result_code'] === 'SUCCESS') {
-                    $m_order['pay_time']   = time();
-                    $m_order['pay_status'] = 1;
-
+                    $m_order['pay_time'] = time();
                     // 用户支付失败
                 } elseif ($message['result_code'] === 'FAIL') {
-                    $m_order['pay_status'] = 2;
+                    $m_order['pay_time'] = 0;
                 }
             } else {
                 return $fail('通信失败，请稍后再通知我');
             }
 
             $m_order->save(); // 保存订单
-            if ($m_order['pay_status'] == 1) {
+            if ($m_order['pay_time'] > 0) {
                 $user = model('WechatUser')->get($m_order['user_id']);
                 $user->save(['has_payed' => 1]);
                 cmf_update_current_user($user->toArray());
