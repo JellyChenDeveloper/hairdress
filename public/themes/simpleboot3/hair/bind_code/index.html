@@ -1,0 +1,57 @@
+<include file="hair@public/head"/>
+
+<header class='demos-header'>
+    <h1 class="demos-title">绑定代理</h1>
+</header>
+<br>
+<br>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">激活码</label></div>
+        <div class="weui-cell__bd">
+            <input id="code" class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入激活码">
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+        <div class="weui-cell__bd">
+            <input id="verify" class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入验证码">
+        </div>
+    </div>
+    <input type="hidden" id="user_id" value="{$user.id}">
+</div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
+</div>
+<include file="hair@public/foot"/>
+<script>
+    $(function () {
+        $("#showTooltips").click(function () {
+            var code   = $('#code').val();
+            var verify = $('#verify').val();
+            if (!code) {
+                $.toptip('请输入激活码');
+                return false;
+            }
+            if (!verify) {
+                $.toptip('请输入验证码');
+                return false;
+            }
+            $.post("{:url('hair/bind_code/doBindCode')}", {
+                code    : code,
+                verify  : verify,
+                user_id : $('#user_id').val()
+            }, function (ret) {
+                if (ret.code) {
+                    $.toast(ret.msg, 'success', function () {
+                        // window.location.href = ret.url;
+                    });
+                } else {
+                    $.toast(ret.msg, "forbidden");
+                }
+            }, 'json').error(function (err) {
+                console.log(err);
+            });
+        });
+    });
+</script>

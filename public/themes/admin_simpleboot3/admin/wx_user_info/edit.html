@@ -34,7 +34,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">用户头像:</label>
             <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" value="{$user.wx_avatar}" disabled="disabled">
+                <img src="{$user.wx_avatar}" style="width: 100px;height: 100px;">
             </div>
         </div>
         <div class="form-group">
@@ -58,18 +58,18 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">是否支付:</label>
             <div class="col-md-6 col-sm-10">
-                <div class="checkbox">
-                    <label>
-                        <php>$has_payed=$user['has_payed']?"checked":"";</php>
-                        <input type="checkbox" name="has_payed" {$has_payed} value="1">
-                    </label>
-                </div>
+                <select class="form-control" name="has_payed">
+                    <php>$select_1_str=$user['has_payed']?"":"selected";</php>
+                    <php>$select_2_str=$user['has_payed']?"selected":"";</php>
+                    <option value="0" {$select_1_str}>未支付</option>
+                    <option value="1" {$select_2_str}>已支付</option>
+                </select>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">用户类型:</label>
             <div class="col-md-6 col-sm-10">
-                <select class="form-control" name="user_type" id="input-target">
+                <select class="form-control" disabled>
                     <foreach name="Think.config.property.user_type" item="vo">
                         <php>$link_target_selected=$user['user_type']==$key?"selected='selected'":"";</php>
                         <option value="{$key}" {$link_target_selected}>{$vo}</option>
@@ -80,19 +80,19 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">代理推广码:</label>
             <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" name="agent_activation_key" value="{$user.agent_activation_key}">
+                <input type="text" class="form-control" value="{$user.code_str}" disabled>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">推广人数:</label>
             <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" value="{$user.agent_work_count}" disabled="disabled">
+                <input type="text" class="form-control" value="{$user.code_count}" disabled="disabled">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">创建时间:</label>
             <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" name="create_time" value="{$user.create_time_str}" disabled="disabled">
+                <input type="text" class="form-control" value="{$user.create_time_str}" disabled="disabled">
             </div>
         </div>
         <div class="form-group">

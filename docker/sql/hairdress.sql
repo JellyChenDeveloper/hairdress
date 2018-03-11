@@ -1327,12 +1327,11 @@ CREATE TABLE `hair_wechat_user` (
   `country` varchar(255) NOT NULL DEFAULT '' COMMENT '国',
   `province` varchar(255) NOT NULL DEFAULT '' COMMENT '省',
   `city` varchar(255) NOT NULL DEFAULT '' COMMENT '市',
-  `user_type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户类型;1:普通会员;2:代理',
   `mobile` varchar(255) NOT NULL DEFAULT '' COMMENT '用户手机号',
   `activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '激活码,user_type=1时有效',
   `has_payed` float unsigned NOT NULL DEFAULT '0' COMMENT '支付状态;0:未支付,1:已支付',
-  `agent_activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '代理激活码,user_type=2时有效',
-  `agent_work_count` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '代理推广人数,user_type=2时有效',
+  `user_type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户类型;1:普通会员;2:代理',
+  `code_id` bigint(20) unsigned NOT NULL COMMENT '绑定的激活码id',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户状态;0:已删除,1:正常',
   `last_login_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '最后登录时间',
   `last_login_ip` varchar(15) NOT NULL DEFAULT '' COMMENT '最后登录ip',
@@ -1353,7 +1352,7 @@ CREATE TABLE `hair_wechat_user` (
 
 LOCK TABLES `hair_wechat_user` WRITE;
 /*!40000 ALTER TABLE `hair_wechat_user` DISABLE KEYS */;
-INSERT INTO `hair_wechat_user` VALUES (1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','Jelly_国栋',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/6SoGhxRa80KlwicJGGR6KZDnllWwIbsrbkdVTRZxYXwQ4MGPqYBN5eicNdyO5KjjZlscOpFf4CwmI69vsRjqhnBQ/132','中国','北京','朝阳',1,'13111111111','',1,'',0,1,0,'',NULL,1520075519,1520075526,0);
+INSERT INTO `hair_wechat_user` VALUES (1,'odJLRt4ITX2siPTPbiN3LNUJAxUI','Jelly_国栋',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/6SoGhxRa80KlwicJGGR6KZDnllWwIbsrbkdVTRZxYXwQ4MGPqYBN5eicNdyO5KjjZlscOpFf4CwmI69vsRjqhnBQ/132','中国','北京','朝阳','13111111111','',1,2,1,1,0,'',NULL,1520075519,1520763152,0);
 /*!40000 ALTER TABLE `hair_wechat_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1366,4 +1365,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-10 14:54:50
+-- Dump completed on 2018-03-11 10:14:48

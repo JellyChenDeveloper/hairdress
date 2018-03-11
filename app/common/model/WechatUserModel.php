@@ -32,4 +32,16 @@ class WechatUserModel extends BaseModel {
     public function getSexStrAttr($value, $data) {
         return config('property.sex')[$data['sex']];
     }
+
+    public function getCodeStrAttr($value, $data) {
+        $code = model('ActivityCode')->get($data['code_id']);
+
+        return $code['code'];
+    }
+
+    public function getCodeCountAttr($value, $data) {
+        $code = model('ActivityCode')->get($data['code_id']);
+
+        return $code['count'];
+    }
 }

@@ -8,9 +8,6 @@
 
 namespace app\hair\controller;
 
-
-use cmf\lib\Storage;
-
 class PageController extends HairBaseController {
     public function index($id) {
         $page = model('Pages')->get(['id' => $id, 'user_id' => $this->user_id]);
@@ -60,7 +57,7 @@ class PageController extends HairBaseController {
         }
         $page->save(['avatar' => $path]);
 
-        $this->success(lang('SAVE_IMG_OK'), url('hair/project/detail', ['id' => $project_id]), ['img_url' => Storage::instance()->getImageUrl($path)]);
+        $this->success(lang('SAVE_IMG_OK'), url('hair/project/detail', ['id' => $project_id]), ['img_url' => cmf_get_image_url($path)]);
     }
 
     public function doDeletePage() {
