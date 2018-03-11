@@ -15,6 +15,9 @@ namespace app\hair\controller;
 class BindCodeController extends HairBaseController {
 
     public function index() {
+        if ($this->user['code_id'] != 0) {
+            $this->redirect(url('hair/UserInfo/index'));
+        }
         $this->assign('user', $this->user);
 
         return $this->fetch();
