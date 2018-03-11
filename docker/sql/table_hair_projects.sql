@@ -15,5 +15,5 @@ CREATE TABLE `hair_projects` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='项目列表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='项目列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
