@@ -1331,7 +1331,7 @@ CREATE TABLE `hair_wechat_user` (
   `activation_key` varchar(255) NOT NULL DEFAULT '' COMMENT '激活码,user_type=1时有效',
   `has_payed` float unsigned NOT NULL DEFAULT '0' COMMENT '支付状态;0:未支付,1:已支付',
   `user_type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户类型;1:普通会员;2:代理',
-  `code_id` bigint(20) unsigned NOT NULL COMMENT '绑定的激活码id',
+  `code_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '绑定的激活码id',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '用户状态;0:已删除,1:正常',
   `last_login_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '最后登录时间',
   `last_login_ip` varchar(15) NOT NULL DEFAULT '' COMMENT '最后登录ip',
