@@ -217,7 +217,7 @@ $configs = [
     'paginate'                => [
         'type'      => '\cmf\paginator\Bootstrap',
         'var_page'  => 'page',
-        'list_rows' => 15,
+        'list_rows' => 30,
     ],
     'queue'                   => [
         'connector' => '\cmf\queue\connector\Database'

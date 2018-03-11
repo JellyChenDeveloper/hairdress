@@ -31,6 +31,7 @@ function cmf_user_has_register() {
  */
 function cmf_user_has_payed() {
     $user = cmf_get_current_user();
+
     return $user['has_payed'];
 }
 
@@ -40,6 +41,7 @@ function cmf_user_has_payed() {
  * @param        $image_str
  * @param        $filename
  * @param string $path
+ *
  * @return mixed|string
  */
 function cmf_save_base64_image($image_str, $filename, $path = 'default') {
@@ -57,4 +59,13 @@ function cmf_save_base64_image($image_str, $filename, $path = 'default') {
     $abs_path = str_replace($upload_path, '', $abs_path);
 
     return $abs_path;
+}
+
+function cmf_generate_code($length = 8, $characters = '0123456789') {
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+    }
+
+    return $randomString;
 }

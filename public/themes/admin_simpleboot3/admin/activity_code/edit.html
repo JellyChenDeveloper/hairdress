@@ -3,65 +3,70 @@
 <body>
 <div class="wrap js-check-wrap">
     <ul class="nav nav-tabs">
-        <li><a href="{:url('Element/index')}">组件管理</a></li>
-        <li><a href="{:url('Element/add')}">添加组件</a></li>
-        <li class="active"><a href="{:url('Element/edit',['id'=>$element['id']])}">编辑组件</a></li>
+        <li><a href="{:url('ActivityCode/index')}">激活码管理</a></li>
+        <li><a href="{:url('ActivityCode/add')}">添加激活码</a></li>
+        <li class="active"><a href="{:url('ActivityCode/edit',['id'=>$code['id']])}">编辑激活码</a></li>
     </ul>
-    <form class="form-horizontal js-ajax-form margin-top-20" action="{:url('Element/editPost')}" method="post">
+    <form class="form-horizontal js-ajax-form margin-top-20" action="{:url('ActivityCode/editPost')}" method="post">
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-name"><span class="form-required">*</span>组件名称:</label>
+            <label class="col-sm-2 control-label">激活码:</label>
             <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" id="input-name" name="name" value="{$element.name}">
+                <input type="text" class="form-control" value="{$code.code}" disabled>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label"><span class="form-required">*</span>组件图片:</label>
+            <label class="col-sm-2 control-label">验证码:</label>
+            <div class="col-md-2 col-sm-5">
+                <input type="text" class="form-control" value="{$code.verify}" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">绑定用户:</label>
+            <div class="col-md-2 col-sm-5">
+                <input type="text" class="form-control" value="{$code.user_name_str}" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>级别:</label>
             <div class="col-md-6 col-sm-10">
-                <input type="hidden" name="image" class="form-control" id="js-thumbnail-input" value="{$element.image}">
-                <div>
-                    <a href="javascript:uploadOneImage('图片上传','#js-thumbnail-input');">
-                        <img src="{$element.image|default='__TMPL__/public/assets/images/default-thumbnail.png'}" id="js-thumbnail-input-preview" width="135" style="cursor: pointer"/>
-                    </a>
+                <select class="form-control" disabled>
+                    <foreach name="Think.config.property.code_level" item="vo">
+                        <php>$selected=($code['level']==$key)?"selected='selected'":"";</php>
+                        <option value="{$key}" {$selected}>{$vo}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <eq name="code.level" value="1">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">下级激活码数目:</label>
+                <div class="col-md-2 col-sm-5">
+                    <input type="text" class="form-control" value="{$code.child_count}" disabled>
                 </div>
             </div>
-        </div>
+            <else/>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">上级激活码:</label>
+                <div class="col-md-2 col-sm-5">
+                    <input type="text" class="form-control" value="{$code.parent_code}" disabled>
+                </div>
+            </div>
+        </eq>
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-target-type"><span class="form-required">*</span>组件类型:</label>
-            <div class="col-md-6 col-sm-10">
-                <select class="form-control" name="type" id="input-target-type">
-                    <foreach name="Think.config.property.element_type" item="vo">
-                        <php>$selected=($element['type']==$key)?"selected='selected'":"";</php>
-                        <option value="{$key}" {$selected}>{$vo}</option>
-                    </foreach>
-                </select>
+            <label class="col-sm-2 control-label">引用次数:</label>
+            <div class="col-md-2 col-sm-5">
+                <input type="text" class="form-control" value="{$code.count}" disabled>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-target-type"><span class="form-required">*</span>是否免费:</label>
-            <div class="col-md-6 col-sm-10">
-                <select class="form-control" name="is_free" id="input-target-free">
-                    <foreach name="Think.config.property.is_free" item="vo">
-                        <php>$selected=($element['is_free']==$key)?"selected='selected'":"";</php>
-                        <option value="{$key}" {$selected}>{$vo}</option>
-                    </foreach>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-name">组件价格:</label>
-            <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" id="input-price" name="price" value="{$element.price}"><span>若组件选择免费则该选项无效</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-name">排序:</label>
-            <div class="col-md-6 col-sm-10">
-                <input type="text" class="form-control" id="input-order" name="list_order" value="{$element.list_order|default=10000}"><span>从小到大排序</span>
+            <label class="col-sm-2 control-label" for="input-rate">分配比率:</label>
+            <div class="col-md-2 col-sm-5">
+                <input type="text" class="form-control" id="input-rate" name="rate" value="{$code.rate}">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input type="hidden" name="id" value="{$element.id}">
+                <input type="hidden" name="id" value="{$code.id}">
                 <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
                 <a class="btn btn-default" href="{:url('AdminCategory/index')}">{:lang('BACK')}</a>
             </div>

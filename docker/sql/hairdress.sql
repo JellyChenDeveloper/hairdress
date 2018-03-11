@@ -1138,10 +1138,11 @@ CREATE TABLE `hair_activity_code` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '父id',
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '绑定的用户id',
-  `count` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '使用次数',
-  `code` int(10) unsigned NOT NULL COMMENT '激活码：8位数',
+  `code` varchar(10) NOT NULL DEFAULT '' COMMENT '激活码：8位数',
+  `verify` varchar(10) NOT NULL DEFAULT '' COMMENT '验证码，4位',
   `level` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '级别:0-无意义,1-一级激活码,2-二级激活码',
   `rate` int(2) unsigned NOT NULL DEFAULT '0' COMMENT '分配比率，百分之几',
+  `count` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '使用次数',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态:0:已隐藏,1:正常',
   `list_order` float NOT NULL DEFAULT '10000' COMMENT '排序',
   `more` text COMMENT '扩展属性',
@@ -1159,7 +1160,7 @@ CREATE TABLE `hair_activity_code` (
 
 LOCK TABLES `hair_activity_code` WRITE;
 /*!40000 ALTER TABLE `hair_activity_code` DISABLE KEYS */;
-INSERT INTO `hair_activity_code` VALUES (1,0,1,20,88888888,1,25,1,10000,NULL,0,0,0);
+INSERT INTO `hair_activity_code` VALUES (1,0,1,20,88888888,1,25,1,10000,NULL,1520758682,1520758682,0);
 /*!40000 ALTER TABLE `hair_activity_code` ENABLE KEYS */;
 UNLOCK TABLES;
 
