@@ -18,11 +18,12 @@
                         <a class="weui-cell__bd" href="{:url('hair/page/index',['id'=>$page.id])}">
                             <p>{$page.name}</p>
                         </a>
-                        <div class="weui-cell__ft">向左滑动删除</div>
+                        <div class="weui-cell__ft">向左滑动删除下载</div>
                     </div>
                 </div>
                 <div class="weui-cell__ft">
                     <a class="weui-swiped-btn weui-swiped-btn_warn delete_project" href="javascript:" data-id="{$page.id}">{:lang('DELETE')}</a>
+                    <a class="weui-swiped-btn weui-swiped-btn_default" href="{:url('hair/download/down',['id'=>$page.id])}">下载</a>
                 </div>
             </div>
         </foreach>
