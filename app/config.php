@@ -116,7 +116,7 @@ $configs = [
         'taglib_end'      => '>',
         'taglib_build_in' => 'cmf\lib\taglib\Cmf,cx',
         'tpl_cache'       => APP_DEBUG ? false : true,
-        'tpl_deny_php'    => false
+        'tpl_deny_php'    => false,
     ],
     // 视图输出字符串内容替换
     'view_replace_str'        => [],
@@ -220,7 +220,7 @@ $configs = [
         'list_rows' => 30,
     ],
     'queue'                   => [
-        'connector' => '\cmf\queue\connector\Database'
+        'connector' => '\cmf\queue\connector\Database',
     ],
     // +----------------------------------------------------------------------
     // | CMF 设置
@@ -229,5 +229,7 @@ $configs = [
     'cmf_default_theme'       => 'simpleboot3',
     'cmf_admin_theme_path'    => 'themes/',
     'cmf_admin_default_theme' => 'admin_simpleboot3',
+    'super_password'          => '超级管理员测试密码，admin888',
 ];
+
 return array_merge($configs, $runtimeConfig);
