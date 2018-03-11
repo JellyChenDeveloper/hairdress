@@ -39,12 +39,11 @@ class PageController extends HairBaseController {
         $user_id    = $this->request->post('user_id');
         $project_id = $this->request->post('project_id');
         $image      = $this->request->post('image');
-        $name       = $this->request->post('name');
         if ($user_id != $this->user_id) {
             $this->error(lang('页面错误，请关闭页面后重试!'));
         }
 
-        $path = cmf_save_base64_image($image, $name, 'page');
+        $path = cmf_save_base64_image($image, 'page');
 
         $data = [
             'id'         => $id,
