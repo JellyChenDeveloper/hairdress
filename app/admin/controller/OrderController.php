@@ -46,7 +46,7 @@ class OrderController extends AdminBaseController {
         $where = [];
         /**搜索条件**/
         $has_payed = $this->request->param('has_payed');
-        if ($has_payed != 999) {
+        if (!is_null($has_payed) && $has_payed != 999) {
             if ($has_payed) {
                 $where['pay_time'] = ['gt', 0];
             } else {

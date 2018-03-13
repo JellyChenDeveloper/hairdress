@@ -52,7 +52,7 @@ class ActivityCodeController extends AdminBaseController {
         if ($code) {
             $where['code'] = ['like', "%$code%"];
         }
-        if (!is_null($level) && $level != '0') {
+        if (!is_null($level) && $level != 999) {
             $where['level'] = $level;
         }
         if ($parent_id) {

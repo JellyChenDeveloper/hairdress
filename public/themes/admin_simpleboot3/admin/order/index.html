@@ -8,7 +8,7 @@
     <form class="well form-inline margin-top-20" method="post" action="{:url('order/index')}">
         支付状态：
         <select class="form-control" name="has_payed" style="width: 140px;">
-            <foreach name="Think.config.property.pay_status_select" item="vo">
+            <foreach name="Think.config.property.has_payed_select" item="vo">
                 <php>$target_selected=input('request.has_payed',999)==$key?"selected='selected'":"";</php>
                 <option value="{$key}" {$target_selected}>{$vo}</option>
             </foreach>

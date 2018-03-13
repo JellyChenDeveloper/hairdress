@@ -44,7 +44,9 @@ class WxUserInfoController extends AdminBaseController {
         $where = [];
         /**搜索条件**/
         $wx_nickname = $this->request->param('wx_nickname');
-        $mobile      = trim($this->request->param('mobile'));
+        $mobile      = $this->request->param('mobile');
+        $has_payed   = $this->request->param('has_payed');
+        $user_type   = $this->request->param('user_type');
 
         if ($wx_nickname) {
             $where['wx_nickname'] = ['like', "%$wx_nickname%"];
@@ -53,12 +55,18 @@ class WxUserInfoController extends AdminBaseController {
         if ($mobile) {
             $where['mobile'] = ['like', "%$mobile%"];
         }
+        if (!is_null($has_payed) && $has_payed != 999) {
+            $where['has_payed'] = $has_payed;
+        }
+        if (!is_null($user_type) && $user_type != 999) {
+            $where['user_type'] = $user_type;
+        }
         $users = model('WechatUser')
             ->useGlobalScope(false)
             ->where($where)
             ->order("id DESC")
             ->paginate(10);
-        $users->appends(['wx_nickname' => $wx_nickname, 'mobile' => $mobile]);
+        $users->appends(['wx_nickname' => $wx_nickname, 'mobile' => $mobile, 'has_payed' => $has_payed, 'user_type' => $user_type]);
         // 获取分页显示
         $page = $users->render();
 

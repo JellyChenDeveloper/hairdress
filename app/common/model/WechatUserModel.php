@@ -18,7 +18,7 @@ class WechatUserModel extends BaseModel {
 
 
     public function getHasPayedStrAttr($value, $data) {
-        return config('property.pay_status')[$data['has_payed']];
+        return config('property.has_payed')[$data['has_payed']];
     }
 
     public function getLocationAttr($value, $data) {

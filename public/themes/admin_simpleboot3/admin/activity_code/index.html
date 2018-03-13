@@ -12,14 +12,14 @@
         级别：
         <select class="form-control" name="level" style="width: 140px;">
             <foreach name="Think.config.property.code_level" item="vo">
-                <php>$target_selected=input('request.level',0)==$key?"selected='selected'":"";</php>
+                <php>$target_selected=input('request.level',999)==$key?"selected='selected'":"";</php>
                 <option value="{$key}" {$target_selected}>{$vo}</option>
             </foreach>
         </select>
         是否绑定：
         <select class="form-control" name="is_bind" style="width: 140px;">
             <foreach name="Think.config.property.bind_select" item="vo">
-                <php>$target_selected=input('request.is_bind',0)==$key?"selected='selected'":"";</php>
+                <php>$target_selected=input('request.is_bind',999)==$key?"selected='selected'":"";</php>
                 <option value="{$key}" {$target_selected}>{$vo}</option>
             </foreach>
         </select>

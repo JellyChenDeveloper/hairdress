@@ -11,9 +11,16 @@
         手机号:
         <input type="text" class="form-control" name="mobile" style="width: 120px;" value="{:input('request.mobile/s','')}" placeholder="请输入手机号">
         支付状态：
-        <select class="form-control" name="pay_status" style="width: 140px;">
-            <foreach name="Think.config.property.pay_status_select" item="vo">
+        <select class="form-control" name="has_payed" style="width: 140px;">
+            <foreach name="Think.config.property.has_payed_select" item="vo">
                 <php>$target_selected=input('request.has_payed',999)==$key?"selected='selected'":"";</php>
+                <option value="{$key}" {$target_selected}>{$vo}</option>
+            </foreach>
+        </select>
+        用户类型：
+        <select class="form-control" name="user_type" style="width: 140px;">
+            <foreach name="Think.config.property.user_type_select" item="vo">
+                <php>$target_selected=input('request.user_type',999)==$key?"selected='selected'":"";</php>
                 <option value="{$key}" {$target_selected}>{$vo}</option>
             </foreach>
         </select>
