@@ -39,7 +39,7 @@ return [
          */
         'log'           => [
             'level' => 'debug',
-            'file'  => ROOT_PATH . 'runtime/wechat/easywechat.log',
+            'file'  => ROOT_PATH . 'data/runtime/wechat/easywechat.log',
         ],
         /**
          * OAuth 配置
