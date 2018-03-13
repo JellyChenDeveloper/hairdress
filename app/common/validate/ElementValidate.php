@@ -9,7 +9,7 @@
  * @version        1.0
  */
 
-namespace app\admin\validate;
+namespace app\common\validate;
 
 use think\Validate;
 
