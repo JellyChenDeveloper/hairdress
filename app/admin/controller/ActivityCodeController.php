@@ -121,24 +121,9 @@ class ActivityCodeController extends AdminBaseController {
     public function generatePost() {
         $data = $this->request->param();
 
-        $result = $this->validate($data, [
-            'level' => 'require',
-            'num'   => 'require|number|between:1,20',
-            'rate'  => 'require|number|between:1,50',
-        ], [
-            'level.require' => '参数错误，请刷新重试',
-            'num.require'   => '数量不能为空',
-            'num.number'    => '数量必须是数字',
-            'num.between'   => '一次生成的数量必须为1-20个之间',
-            'rate.require'  => '比率不能为空',
-            'rate.number'   => '比率必须是数字',
-            'rate.between'  => '比率必须为1-50之间',
-        ]);
+        $result = $this->validate($data, 'ActivityCode.generate');
         if ($result !== true) {
             $this->error($result);
-        }
-        if ($data['level'] == 2 && empty($data['parent_id'])) {
-            $this->error('参数错误，请刷新重试');
         }
 
         $parent_id = isset($data['parent_id']) ? $data['parent_id'] : 0;
@@ -193,15 +178,7 @@ class ActivityCodeController extends AdminBaseController {
     public function editPost() {
         $data = $this->request->param();
 
-        $result = $this->validate($data, [
-            'id'   => 'require',
-            'rate' => 'require|number|between:1,50',
-        ], [
-            'id.require'   => '参数错误，请刷新重试',
-            'rate.require' => '比率不能为空',
-            'rate.number'  => '比率必须是数字',
-            'rate.between' => '比率必须为1-50之间',
-        ]);
+        $result = $this->validate($data, 'ActivityCode.edit');
         if ($result !== true) {
             $this->error($result);
         }

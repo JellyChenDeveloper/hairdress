@@ -25,19 +25,7 @@ class BindCodeController extends HairBaseController {
 
     public function doBindCode() {
         $data   = $this->request->param();
-        $result = $this->validate($data, [
-            'user_id' => 'require',
-            'code'    => 'require|number|length:8',
-            'verify'  => 'require|number|length:4',
-        ], [
-            'user_id.require' => '参数错误，请刷新重试',
-            'code.require'    => '激活码不能为空',
-            'code.number'     => '激活码必须是数字',
-            'code.length'     => '激活码为8位数字',
-            'verify.require'  => '验证码不能为空',
-            'verify.number'   => '验证码必须是数字',
-            'verify.length'   => '验证码为4位数字',
-        ]);
+        $result = $this->validate($data, 'ActivityCode.bind');
         if ($result !== true) {
             $this->error($result);
         }
@@ -50,7 +38,7 @@ class BindCodeController extends HairBaseController {
             $result = model('WechatUser')->get($this->user_id)->save($data);
             if ($result) {
                 model('ActivityCode')->get($code->id)->save(['user_id' => $this->user_id]);
-                $this->success('绑定成功', '');
+                $this->success('绑定成功', url('hair/UserInfo/index'));
             } else {
                 $this->error('绑定失败');
             }

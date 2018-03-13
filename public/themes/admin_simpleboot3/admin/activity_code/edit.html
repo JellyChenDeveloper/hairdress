@@ -4,7 +4,7 @@
 <div class="wrap js-check-wrap">
     <ul class="nav nav-tabs">
         <li><a href="{:url('ActivityCode/index')}">激活码管理</a></li>
-        <li><a href="{:url('ActivityCode/add')}">添加激活码</a></li>
+        <li><a href="{:url('ActivityCode/generate')}">生成一级激活码</a></li>
         <li class="active"><a href="{:url('ActivityCode/edit',['id'=>$code['id']])}">编辑激活码</a></li>
     </ul>
     <form class="form-horizontal js-ajax-form margin-top-20" action="{:url('ActivityCode/editPost')}" method="post">

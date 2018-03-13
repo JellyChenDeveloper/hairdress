@@ -165,10 +165,6 @@ class ElementController extends AdminBaseController {
             $this->error($result);
         }
 
-        if ($data['is_free'] == 0 && empty($data['price'])) {
-            $this->error('价格不能为空');
-        }
-
         if ($data['is_free']) {
             unset($data['price']);
         }

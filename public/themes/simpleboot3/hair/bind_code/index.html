@@ -27,24 +27,14 @@
 <script>
     $(function () {
         $("#showTooltips").click(function () {
-            var code   = $('#code').val();
-            var verify = $('#verify').val();
-            if (!code) {
-                $.toptip('请输入激活码');
-                return false;
-            }
-            if (!verify) {
-                $.toptip('请输入验证码');
-                return false;
-            }
             $.post("{:url('hair/bind_code/doBindCode')}", {
-                code    : code,
-                verify  : verify,
+                code    : $('#code').val(),
+                verify  : $('#verify').val(),
                 user_id : $('#user_id').val()
             }, function (ret) {
                 if (ret.code) {
                     $.toast(ret.msg, 'success', function () {
-                        // window.location.href = ret.url;
+                        window.location.href = ret.url;
                     });
                 } else {
                     $.toast(ret.msg, "forbidden");
