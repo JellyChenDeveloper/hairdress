@@ -64,8 +64,22 @@
                                 <div class="weui-cell__bd">
                                     <p>推广人数</p>
                                 </div>
-                                <div class="weui-cell__ft">{$user.code_count|default='0'}</div>
+                                <div class="weui-cell__ft">{$user.code_count}</div>
                             </div>
+                            <eq name="$user.code_level" value="1">
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <p>二级邀请码数量</p>
+                                    </div>
+                                    <div class="weui-cell__ft">{$user.child_code_num}</div>
+                                </div>
+                                <div class="weui-cell">
+                                    <div class="weui-cell__bd">
+                                        <p>二级邀请码推广人数</p>
+                                    </div>
+                                    <div class="weui-cell__ft">{$user.child_code_count}</div>
+                                </div>
+                            </eq>
                         </div>
                     </div>
                 </div>

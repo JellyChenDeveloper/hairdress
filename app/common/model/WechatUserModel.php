@@ -34,14 +34,22 @@ class WechatUserModel extends BaseModel {
     }
 
     public function getCodeStrAttr($value, $data) {
-        $code = model('ActivityCode')->get($data['code_id']);
-
-        return $code['code'];
+        return model('ActivityCode')->get($data['code_id'])->code;
     }
 
     public function getCodeCountAttr($value, $data) {
-        $code = model('ActivityCode')->get($data['code_id']);
+        return model('ActivityCode')->get($data['code_id'])->count;
+    }
 
-        return $code['count'];
+    public function getCodeLevelAttr($value, $data) {
+        return model('ActivityCode')->get($data['code_id'])->level;
+    }
+
+    public function getChildCodeNumAttr($value, $data) {
+        return model('ActivityCode')->get($data['code_id'])->child_num;
+    }
+
+    public function getChildCodeCountAttr($value, $data) {
+        return model('ActivityCode')->get($data['code_id'])->child_count;
     }
 }

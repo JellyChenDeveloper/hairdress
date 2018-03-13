@@ -27,10 +27,18 @@ class ActivityCodeModel extends BaseModel {
         return $data['user_id'] ? model('WechatUser')->get($data['user_id'])->wx_nickname : '未绑定';
     }
 
-    public function getChildCountAttr($value, $data) {
-        $child_count = $this->where(['parent_id' => $data['id']])->count();
+    public function getChildNumAttr($value, $data) {
+        return $this->where(['parent_id' => $data['id']])->count();
+    }
 
-        return $child_count ? : '';
+    public function getChildCountAttr($value, $data) {
+        return $this->where(['parent_id' => $data['id']])->sum('count');
+    }
+
+    public function getChildNumStrAttr($value, $data) {
+        $child_num = $this->where(['parent_id' => $data['id']])->count();
+
+        return $child_num ? : '';
     }
 
     public function getParentCodeAttr($value, $data) {
