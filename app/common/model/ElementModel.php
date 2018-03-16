@@ -32,4 +32,8 @@ class ElementModel extends BaseModel {
     public function setImageAttr($value) {
         return Storage::instance()->getFilePath($value);
     }
+
+    public function getIsLockStrAttr($value, $data) {
+        return config('property.is_lock')[$data['is_lock']];
+    }
 }

@@ -35,7 +35,17 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-target-type"><span class="form-required">*</span>是否免费:</label>
+            <label class="col-sm-2 control-label" for="input-target-lock"><span class="form-required">*</span>是否免费:</label>
+            <div class="col-md-6 col-sm-10">
+                <select class="form-control" name="is_lock" id="input-target-lock">
+                    <foreach name="Think.config.property.is_lock" item="vo">
+                        <option value="{$key}">{$vo}</option>
+                    </foreach>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-target-free"><span class="form-required">*</span>是否免费:</label>
             <div class="col-md-6 col-sm-10">
                 <select class="form-control" name="is_free" id="input-target-free">
                     <option value="1">免费</option>
@@ -44,13 +54,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-name">组件价格:</label>
+            <label class="col-sm-2 control-label" for="input-price">组件价格:</label>
             <div class="col-md-6 col-sm-10">
                 <input type="text" class="form-control" id="input-price" name="price"><span>若组件选择免费则该选项无效</span>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-name">排序:</label>
+            <label class="col-sm-2 control-label" for="input-order">排序:</label>
             <div class="col-md-6 col-sm-10">
                 <input type="text" class="form-control" id="input-order" name="list_order" value="10000"><span>从小到大排序</span>
             </div>

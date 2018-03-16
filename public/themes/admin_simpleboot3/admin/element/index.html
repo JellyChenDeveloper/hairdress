@@ -32,6 +32,7 @@
                 <th>组件</th>
                 <th>组件类型</th>
                 <th>价格</th>
+                <th>是否锁定</th>
                 <th width="180">操作</th>
             </tr>
             </thead>
@@ -44,6 +45,7 @@
                     <td><img width="80" height="80" src="{$vo.image}"/></td>
                     <td>{$vo.type_str}</td>
                     <td>{$vo.price_str}</td>
+                    <td>{$vo.is_lock_str}</td>
                     <td>
                         <a href='{:url("Element/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
                         <a href="{:url('Element/deletePost',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="是否删除该组件">删除</a>
