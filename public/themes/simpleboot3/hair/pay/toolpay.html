@@ -1,21 +1,21 @@
 <include file="hair@public/head"/>
 
 <header class='demos-header'>
-    <h1 class="demos-title">付费开通</h1>
+    <h1 class="demos-title">{$data.title}</h1>
 </header>
 <div class="weui-form-preview">
     <div class="weui-form-preview__bd">
         <div class="weui-form-preview__item">
             <label class="weui-form-preview__label">名称</label>
-            <span class="weui-form-preview__value">美发工具</span>
+            <span class="weui-form-preview__value">{$data.name}</span>
         </div>
         <div class="weui-form-preview__item">
             <label class="weui-form-preview__label">价格</label>
-            <em class="weui-form-preview__value">200.00元</em>
+            <em class="weui-form-preview__value">{$data.price}元</em>
         </div>
         <div class="weui-form-preview__item">
             <label class="weui-form-preview__label">说明</label>
-            <span class="weui-form-preview__value">该工具为付费产品，必须支付后方能使用，一次付费终生使用。</span>
+            <span class="weui-form-preview__value">{$data.desc}</span>
         </div>
     </div>
     <div class="weui-form-preview__ft">
@@ -42,6 +42,7 @@
                                 $.toast('支付成功', 'success');
                                 window.location.href = '{$wx_pay_from_url}';
                             } else {
+                                alert(res.err_msg);
                                 $.toast('支付失败', "forbidden");
                             }
                         });

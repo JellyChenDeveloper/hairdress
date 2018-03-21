@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS `hair_order`;
 CREATE TABLE `hair_order` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `element_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '组件id',
   `openid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '微信用户openid',
   `body` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '商品描述',
   `detail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '商品详情',

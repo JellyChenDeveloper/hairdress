@@ -12,6 +12,22 @@ class PageController extends HairBaseController {
     public function index($id) {
         $page = model('Pages')->get(['id' => $id, 'user_id' => $this->user_id]);
         $this->assign('page', $page);
+
+        $heads  = model('Element')->all(['type' => ['in', [0, 1]]])->toArray();
+        $orders = model('Order')->where(['user_id' => $this->user_id, 'type' => 1, 'pay_time' => ['gt', 0]])->column('element_id');
+        foreach ($heads as $k => $v) {
+            if ($v['is_free'] == 0 && $v['price'] != 0) {
+                if (!in_array($v['id'], $orders)) {
+                    $heads[$k]['need_pay'] = 1;
+                } else {
+                    $heads[$k]['need_pay'] = 0;
+                }
+            } else {
+                $heads[$k]['need_pay'] = 0;
+            }
+        }
+        $this->assign('heads', $heads);
+
         $js_config = $this->wecharService->jssdk()->buildConfig([
             "onMenuShareTimeline",
             "onMenuShareAppMessage",
@@ -26,6 +42,7 @@ class PageController extends HairBaseController {
             'share_img'   => $page->avatar_url,
         ];
         $this->assign('share', $share);
+        session('wx_pay.from_url', $this->request->url(true));
 
         return $this->fetch();
     }
