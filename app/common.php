@@ -60,6 +60,14 @@ function cmf_save_base64_image($image_str, $path = 'default') {
     return $abs_path;
 }
 
+/**
+ * 生成随机数字
+ *
+ * @param int    $length 生成的字符串长度
+ * @param string $characters 生成限定字符集
+ *
+ * @return string 生成的字符串
+ */
 function cmf_generate_code($length = 8, $characters = '0123456789') {
     $randomString = '';
     for ($i = 0; $i < $length; $i++) {

@@ -21,7 +21,7 @@ class PayController extends HairBaseController {
             'desc'  => '该工具为付费产品，必须支付后方能使用，一次付费终生使用。',
         ];
         $this->assign('data', $data);
-        $out_trade_no = config('we_chat.wx_sdk_config')['payment']['mch_id'] . date("YmdHis");
+        $out_trade_no = config('we_chat.wx_sdk_config')['payment']['mch_id'] . date("YmdHis") . cmf_generate_code(8);
         $order_info   = [
             'body'         => '美发工具-付费开通',
             'detail'       => $data['name'],
@@ -76,7 +76,7 @@ class PayController extends HairBaseController {
         ];
         $this->assign('data', $data);
 
-        $out_trade_no = config('we_chat.wx_sdk_config')['payment']['mch_id'] . date("YmdHis");
+        $out_trade_no = config('we_chat.wx_sdk_config')['payment']['mch_id'] . date("YmdHis") . cmf_generate_code(8);
         $order_info   = [
             'body'         => '付费组件',
             'detail'       => $element['name'],

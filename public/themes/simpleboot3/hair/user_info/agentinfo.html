@@ -24,12 +24,12 @@
                         </div>
                         <div class="weui-cell__ft">1000</div>
                     </div>
-                    <!--<a class="weui-cell weui-cell_access" href="{:url('hair/userInfo/paybackRecord')}">-->
-                    <!--<div class="weui-cell__bd">-->
-                    <!--<p>提现记录</p>-->
-                    <!--</div>-->
-                    <!--<div class="weui-cell__ft"></div>-->
-                    <!--</a>-->
+                    <a class="weui-cell weui-cell_access" href="{:url('hair/userInfo/paybackRecord')}">
+                        <div class="weui-cell__bd">
+                            <p>提现记录</p>
+                        </div>
+                        <div class="weui-cell__ft"></div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -39,7 +39,39 @@
 
 <article class="weui-article">
     <br>
-    <a href="javascript:;" class="weui-btn weui-btn_primary">提现</a>
+    <a href="javascript:" class="weui-btn weui-btn_primary" id="transfer">提现</a>
 </article>
 
 <include file="hair@public/foot"/>
+<script>
+    $(function () {
+        $(document).on("click", "#transfer", function () {
+            $.prompt({
+                title    : "请输入提现金额，100的整数倍",
+                onOK     : function (amount) {
+                    if (!amount) {
+                        $.toptip("请输入提现金额");
+                        return false;
+                    }
+
+                    $.post("{:url('hair/UserInfo/postTransfer')}", {amount : amount}, function (ret) {
+                        if (ret.code) {
+                            $.toast(ret.msg, 'success', function () {
+                                // window.location.href = ret.url;
+                            });
+                        } else {
+                            $.toast(ret.msg, "forbidden");
+                        }
+                    }, 'json').error(function (err) {
+                        console.log(err);
+                    });
+                },
+                onCancel : function () {
+                    $.toast("{:lang('CANCEL')}", "cancel");
+                    console.log("{:lang('CANCEL')}");
+                },
+                input    : "1000"
+            });
+        });
+    });
+</script>

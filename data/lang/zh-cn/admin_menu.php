@@ -5,6 +5,7 @@ return array (
   'ADMIN_ORDER_INDEX' => '订单管理',
   'ADMIN_USER_INDEX' => '管理员',
   'ADMIN_WXUSERINFO_INDEX' => '微信用户',
+  'HAIR_ADMINTRANSFER_INDEX' => '返现管理',
   'PORTAL_ADMINARTICLE_INDEX' => '文章管理',
   'PORTAL_ADMINCATEGORY_INDEX' => '分类管理',
   'PORTAL_ADMININDEX_DEFAULT' => '门户管理',

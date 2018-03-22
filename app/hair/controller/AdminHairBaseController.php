@@ -12,7 +12,17 @@
 namespace app\hair\controller;
 
 use cmf\controller\AdminBaseController;
+use app\common\service\WechatService;
 
 class AdminHairBaseController extends AdminBaseController {
 
+    /**
+     * @var \app\common\service\WechatService
+     */
+    protected $wecharService;
+
+    public function _initialize() {
+        parent::_initialize();
+        $this->wecharService = WechatService::instance();
+    }
 }

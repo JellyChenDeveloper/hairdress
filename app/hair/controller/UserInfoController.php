@@ -25,7 +25,38 @@ class UserInfoController extends HairBaseController {
         return $this->fetch();
     }
 
+
     public function paybackRecord() {
+        $transfers = model('Transfer')->where(['user_id' => $this->user_id])->select();
+
+        $this->assign('transfers', $transfers);
+
         return $this->fetch();
+    }
+
+    public function postTransfer() {
+        $amount = $this->request->param('amount');
+        $data   = [
+            'user_id' => $this->user_id,
+            'openid'  => $this->user['wx_openid'],
+            'amount'  => $amount,
+        ];
+        $result = $this->validate($data, 'Transfer.apply');
+        if ($result !== true) {
+            $this->error($result);
+        }
+        $partner_trade_no         = config('we_chat.wx_sdk_config')['payment']['mch_id'] . date("YmdHis") . cmf_generate_code(8);
+        $data['partner_trade_no'] = $partner_trade_no;
+        $data['is_check']         = 0;
+        $data['re_user_name']     = '陈国栋';
+        $data['desc']             = '返现';
+        $data['trans_status']     = 1;
+
+        $result = model('Transfer')->save($data);
+        if ($result) {
+            $this->success('申请提现成功', url('hair/UserInfo/paybackRecord'));
+        } else {
+            $this->error('保存失败');
+        }
     }
 }
