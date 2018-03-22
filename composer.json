@@ -25,7 +25,8 @@
         "mindplay/annotations": "^1.3",
         "ezyang/htmlpurifier": "^4.9",
         "topthink/think-queue": "^1.1.4",
-        "overtrue/wechat":"~4.0"
+        "overtrue/wechat":"~4.0",
+        "easywechat/console": "^1.0"
     },
     "extra": {
     },
