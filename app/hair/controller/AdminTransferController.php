@@ -61,15 +61,19 @@ class AdminTransferController extends AdminHairBaseController {
             $this->error('参数错误，请刷新重试');
         }
         $app = $this->wecharService->pay();
-        $app->transfer->toBalance([
+        $rst = $app->transfer->toBankCard([
             'partner_trade_no' => $transfer['partner_trade_no'],
-            'openid'           => $transfer['openid'],
-            'check_name'       => 'NO_CHECK', // NO_CHECK：不校验真实姓名, FORCE_CHECK：强校验真实姓名
-            //            're_user_name'     => '陈国栋', // 如果 check_name 设置为FORCE_CHECK，则必填用户真实姓名
+            'enc_bank_no'      => '6217000010077774829', // 银行卡号
+            'enc_true_name'    => '陈国栋',   // 银行卡对应的用户真实姓名
+            'bank_code'        => '1003', // 银行编号
             'amount'           => $transfer['amount'],
             'desc'             => $transfer['desc'],
         ]);
-        $transfer->save(['trans_status' => 2]);
-        $this->success('申请通过，等待微信处理');
+        if ($rst['return_code'] == 'SUCCESS') {
+            $transfer->save(['trans_status' => 2]);
+            $this->success('申请通过，等待微信处理');
+        } else {
+            $this->error($rst['err_code_des']);
+        }
     }
 }

@@ -51,6 +51,7 @@ class UserInfoController extends HairBaseController {
         $data['re_user_name']     = '陈国栋';
         $data['desc']             = '返现';
         $data['trans_status']     = 1;
+        $data['amount']           = $amount * 100;
 
         $result = model('Transfer')->save($data);
         if ($result) {

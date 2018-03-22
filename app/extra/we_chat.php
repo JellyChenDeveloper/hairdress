@@ -55,12 +55,13 @@ return [
          * 微信支付
          */
         'payment'       => [
-            'app_id'     => $app_id,
-            'mch_id'     => '1499509362',
-            'key'        => 'klp4h9BxsP5LF8NsXdy2YgKMRNFoWjzk',
-            'cert_path'  => ROOT_PATH . 'data/cert/apiclient_cert.pem', // XXX: 绝对路径！！！！
-            'key_path'   => ROOT_PATH . 'data/cert/apiclient_key.pem', // XXX: 绝对路径！！！！
-            'notify_url' => think\Url::build('hair/pay/notify', '', true, true),     // 你也可以在下单时单独设置来想覆盖它
+            'app_id'              => $app_id,
+            'mch_id'              => '1499509362',
+            'key'                 => 'klp4h9BxsP5LF8NsXdy2YgKMRNFoWjzk',
+            'cert_path'           => ROOT_PATH . 'data/cert/apiclient_cert.pem', // XXX: 绝对路径！！！！
+            'key_path'            => ROOT_PATH . 'data/cert/apiclient_key.pem', // XXX: 绝对路径！！！！
+            'rsa_public_key_path' => ROOT_PATH . 'data/cert/public-1499509362.pem',
+            'notify_url'          => think\Url::build('hair/pay/notify', '', true, true),     // 你也可以在下单时单独设置来想覆盖它
         ],
     ],
 ];
