@@ -69,9 +69,10 @@ class AdminTransferController extends AdminHairBaseController {
             'amount'           => $transfer['amount'],
             'desc'             => $transfer['desc'],
         ]);
-        if ($rst['return_code'] == 'SUCCESS') {
+        trace($rst);
+        if ($rst['return_code'] == 'SUCCESS' && $rst['result_code'] == 'SUCCESS') {
             $transfer->save(['trans_status' => 2]);
-            $this->success('申请通过，等待微信处理');
+            $this->success($rst['err_code_des']);
         } else {
             $this->error($rst['err_code_des']);
         }

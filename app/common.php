@@ -63,7 +63,7 @@ function cmf_save_base64_image($image_str, $path = 'default') {
 /**
  * 生成随机数字
  *
- * @param int    $length 生成的字符串长度
+ * @param int    $length     生成的字符串长度
  * @param string $characters 生成限定字符集
  *
  * @return string 生成的字符串
@@ -75,4 +75,39 @@ function cmf_generate_code($length = 8, $characters = '0123456789') {
     }
 
     return $randomString;
+}
+
+/**
+ * 获取代理用户的总金额
+ *
+ * @param int $user_id 用户ID
+ *
+ * @return int
+ */
+function cmf_get_total_money($user_id) {
+    $user = model('WechatUser')->get($user_id);
+    if ($user['user_type'] == 1 || $user['code_id'] == 0) {
+        return 0;
+    }
+    $activity_code = model('ActivityCode')->get($user['code_id']);
+    $money         = ($user['code_count'] * $activity_code['rate'] / 100 + $user['child_code_count'] * $activity_code['rate2'] / 100) * 300;
+
+    return $money;
+}
+
+/**
+ * 获取代理用户的剩余可用金额
+ *
+ * @param int $user_id 用户ID
+ *
+ * @return int
+ */
+function cmf_get_last_money($user_id) {
+    $total_money = cmf_get_total_money($user_id);
+    if ($total_money == 0) {
+        return 0;
+    }
+    $used_money = model('Transfer')->where(['user_id' => $user_id])->sum('amount');
+
+    return $total_money - $used_money;
 }

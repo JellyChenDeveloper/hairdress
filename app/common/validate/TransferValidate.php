@@ -19,7 +19,7 @@ class TransferValidate extends Validate {
         'openid'           => 'require',
         'partner_trade_no' => 'require',
         'is_check'         => 'require',
-        're_user_name'     => 'requireIf:is_check:1',
+        're_user_name'     => 'requireIf:is_check,1',
         'amount'           => 'require|integer|gt:0|checkAmount',
         'desc'             => 'require',
     ];

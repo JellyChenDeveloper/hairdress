@@ -52,10 +52,11 @@ class ActivityCodeModel extends BaseModel {
      * @param int $level     级别：1-一级，2-二级
      * @param int $num       数量
      * @param int $rate      比率
+     * @param int $rate2     二级比率
      *
      * @return int|string 插入成功数量
      */
-    public function generateCode($parent_id = 0, $level = 1, $num = 1, $rate = 25) {
+    public function generateCode($parent_id = 0, $level = 1, $num = 1, $rate = 25, $rate2 = 0) {
         $flag  = 0;
         $codes = [];
         while ($flag == 0) {
@@ -87,6 +88,7 @@ class ActivityCodeModel extends BaseModel {
             $datas[] = [
                 'code'        => $value,
                 'rate'        => $rate,
+                'rate2'       => $rate2,
                 'verify'      => cmf_generate_code(4),
                 'level'       => $level,
                 'parent_id'   => $parent_id,

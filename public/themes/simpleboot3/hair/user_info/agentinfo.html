@@ -5,24 +5,32 @@
     <div class="weui-media-box weui-media-box_text">
         <h4 class="weui-media-box__title">提现</h4>
         <p class="weui-media-box__desc" style="-webkit-line-clamp:100">必须为100的整数倍，每月只能申请提现3次，提现一般48小时内审批通过，提交提现申请时金额就从额度中减去，若48小时内未到账，请联系管理员，133XXXXXXXX。</p>
+        <br/>
+        <p class="weui-media-box__desc" style="-webkit-line-clamp:100">提现之前必须设置银行卡信息，提现操作请注意核对信息，该操作不能撤销。</p>
     </div>
 
     <div class="weui-panel__bd">
-        <div class="weui-panel__hd"></div>
         <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_text">
+                <p class="weui-media-box__desc">银行卡号：{$enc_bank_no}</p>
+                <ul class="weui-media-box__info">
+                    <li class="weui-media-box__info__meta">{$bank}</li>
+                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">{$enc_true_name}</li>
+                </ul>
+            </div>
             <div class="weui-media-box weui-media-box_small-appmsg">
                 <div class="weui-cells">
                     <div class="weui-cell">
                         <div class="weui-cell__bd">
-                            <p>剩余额度</p>
+                            <p>总额度</p>
                         </div>
-                        <div class="weui-cell__ft">1001</div>
+                        <div class="weui-cell__ft">{$total_money}</div>
                     </div>
                     <div class="weui-cell">
                         <div class="weui-cell__bd">
                             <p>可提现额度</p>
                         </div>
-                        <div class="weui-cell__ft">1000</div>
+                        <div class="weui-cell__ft">{$last_money}</div>
                     </div>
                     <a class="weui-cell weui-cell_access" href="{:url('hair/userInfo/paybackRecord')}">
                         <div class="weui-cell__bd">
@@ -31,14 +39,15 @@
                         <div class="weui-cell__ft"></div>
                     </a>
                 </div>
+
             </div>
         </div>
     </div>
-
 </div>
 
 <article class="weui-article">
-    <br>
+    <input type="hidden" id="enc_bank_no" value="{$enc_bank_no}">
+    <a href="{:url('hair/userInfo/bankInfo')}" class="weui-btn weui-btn_default" id="set_bank_info">设置银行卡</a>
     <a href="javascript:" class="weui-btn weui-btn_primary" id="transfer">提现</a>
 </article>
 
@@ -46,6 +55,10 @@
 <script>
     $(function () {
         $(document).on("click", "#transfer", function () {
+            if (!$('#enc_bank_no').val()) {
+                $.toast('请设置银行卡', "forbidden");
+                return;
+            }
             $.prompt({
                 title    : "请输入提现金额，100的整数倍",
                 onOK     : function (amount) {
@@ -57,7 +70,7 @@
                     $.post("{:url('hair/UserInfo/postTransfer')}", {amount : amount}, function (ret) {
                         if (ret.code) {
                             $.toast(ret.msg, 'success', function () {
-                                // window.location.href = ret.url;
+                                location.reload();
                             });
                         } else {
                             $.toast(ret.msg, "forbidden");

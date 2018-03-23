@@ -7,9 +7,9 @@
         <tr>
             <th width="50">ID</th>
             <th>用户ID</th>
-            <th>微信openid</th>
-            <th>商户订单</th>
             <th>真实姓名</th>
+            <th>银行卡号</th>
+            <th>银行</th>
             <th>金额</th>
             <th>订单状态</th>
             <th>操作</th>
@@ -20,9 +20,9 @@
             <tr>
                 <td>{$vo.id}</td>
                 <td>{$vo.user_id}</td>
-                <td>{$vo.openid}</td>
-                <td>{$vo.partner_trade_no}</td>
-                <td>{$vo.re_user_name}</td>
+                <td>{$vo.enc_true_name}</td>
+                <td>{$vo.enc_bank_no}</td>
+                <td>{$vo.bank_code_str}</td>
                 <td>{$vo.amount}</td>
                 <td>{$vo.trans_status_str}</td>
                 <td>

@@ -9,6 +9,7 @@ CREATE TABLE `hair_activity_code` (
   `verify` varchar(10) NOT NULL DEFAULT '' COMMENT '验证码，4位',
   `level` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '级别:0-无意义,1-一级激活码,2-二级激活码',
   `rate` int(2) unsigned NOT NULL DEFAULT '0' COMMENT '分配比率，百分之几',
+  `rate2` int(2) unsigned NOT NULL DEFAULT '0' COMMENT '二级分配比率，百分之几',
   `count` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '使用次数',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态:0:已隐藏,1:正常',
   `list_order` float NOT NULL DEFAULT '10000' COMMENT '排序',

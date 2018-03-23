@@ -95,6 +95,19 @@
                 <input type="text" class="form-control" value="{$user.create_time_str}" disabled="disabled">
             </div>
         </div>
+        <php>$hide=$user['user_type']==1?'hide':''</php>
+        <div class="form-group {$hide}">
+            <label class="col-sm-2 control-label">总金额:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" value="{$user.total_money}￥" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group {$hide}">
+            <label class="col-sm-2 control-label">剩余金额:</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" value="{$user.last_money}￥" disabled="disabled">
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <input type="hidden" name="id" value="{$user.id}"/>

@@ -37,7 +37,7 @@
                 <th>激活码</th>
                 <th>验证码</th>
                 <th>级别</th>
-                <th>下级激活码数量</th>
+                <th>下级数量</th>
                 <th>分配比率</th>
                 <th>引用次数</th>
                 <th>生成时间</th>
@@ -54,7 +54,10 @@
                     <td>{$vo.verify}</td>
                     <td>{$vo.level_str}</td>
                     <td><a href="{:url('ActivityCode/index',['parent_id'=>$vo.id])}">{$vo.child_num_str}</a></td>
-                    <td>{$vo.rate}%</td>
+                    <td>
+                        <php>$str=$vo['level']==1?$vo['rate'].'% '.$vo['rate2'].'%':$vo['rate'].'%'</php>
+                        {$str}
+                    </td>
                     <td>{$vo.count}</td>
                     <td>{$vo.create_time_str}</td>
                     <td>

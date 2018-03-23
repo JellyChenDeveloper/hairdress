@@ -1,0 +1,64 @@
+<include file="hair@public/head"/>
+
+<header class='demos-header'>
+    <h1 class="demos-title">设置银行卡</h1>
+</header>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">真实姓名</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="请输入姓名" value="{$enc_true_name}" id="enc_true_name">
+        </div>
+    </div>
+    <div class="weui-cell weui-cells_form">
+        <div class="weui-cell__hd">
+            <label class="weui-label">银行卡号</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="number" placeholder="请输入银行卡号" value="{$enc_bank_no}" id="enc_bank_no">
+        </div>
+    </div>
+    <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+            <label class="weui-label">银行</label>
+        </div>
+        <div class="weui-cell__bd">
+            <select class="weui-select" id="bank_code">
+                <option value="">请选择银行</option>
+                <foreach name="Think.config.property.wechat_bank_code" item="vo">
+                    <php>$target_selected=$bank_code==$key?"selected='selected'":"";</php>
+                    <option value="{$key}" {$target_selected}>{$vo}</option>
+                </foreach>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:" id="save">保存</a>
+</div>
+
+<include file="hair@public/foot"/>
+<script>
+    $(function () {
+        $("#save").click(function () {
+            $.post("{:url('hair/UserInfo/postBankInfo')}", {
+                enc_true_name : $('#enc_true_name').val(),
+                enc_bank_no   : $('#enc_bank_no').val(),
+                bank_code     : $('#bank_code').val()
+            }, function (ret) {
+                if (ret.code) {
+                    $.toast(ret.msg, 'success', function () {
+                        window.location.href = ret.url;
+                    });
+                } else {
+                    $.toast(ret.msg, "forbidden");
+                }
+            }, 'json').error(function (err) {
+                console.log(err);
+            });
+        });
+    });
+</script>

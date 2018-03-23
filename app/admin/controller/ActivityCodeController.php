@@ -129,9 +129,10 @@ class ActivityCodeController extends AdminBaseController {
         $parent_id = isset($data['parent_id']) ? $data['parent_id'] : 0;
         $num       = $data['num'];
         $rate      = $data['rate'];
+        $rate2     = $data['rate2'];
         $level     = $data['level'];
 
-        $result = model('ActivityCode')->generateCode($parent_id, $level, $num, $rate);
+        $result = model('ActivityCode')->generateCode($parent_id, $level, $num, $rate, $rate2);
 
         if ($result === false) {
             $this->error('生成失败!');
