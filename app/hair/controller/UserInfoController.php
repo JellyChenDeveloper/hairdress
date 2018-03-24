@@ -65,6 +65,8 @@ class UserInfoController extends HairBaseController {
     }
 
     public function paybackRecord() {
+        cmf_check_transfer_order($this->user_id);
+
         $transfers = model('Transfer')->where(['user_id' => $this->user_id])->select();
 
         $this->assign('transfers', $transfers);

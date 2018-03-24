@@ -9,6 +9,8 @@
  * @version        1.0
  */
 
+use app\common\service\WechatService;
+
 
 /**
  * 判断是否使用手机号注册过
@@ -110,4 +112,40 @@ function cmf_get_last_money($user_id) {
     $used_money = model('Transfer')->where(['user_id' => $user_id])->sum('amount');
 
     return $total_money - $used_money;
+}
+
+/**
+ * 查询企业支付订单情况
+ *
+ * @param int $user_id 用户ID
+ *
+ * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
+ * @throws \think\db\exception\DataNotFoundException
+ * @throws \think\db\exception\ModelNotFoundException
+ * @throws \think\exception\DbException
+ */
+function cmf_check_transfer_order($user_id = 0) {
+    $app = WechatService::instance()->pay();
+    if ($user_id == 0) {
+        $orders = model('Transfer')->where(['trans_status' => 2])->limit(config('paginate.list_rows'))->select();
+    } else {
+        $orders = model('Transfer')->where(['user_id' => $user_id, 'trans_status' => 2])->select();
+    }
+    trace('企业支付订单列表');
+    trace($orders->toArray());
+    foreach ($orders as $order) {
+        $rst = $app->transfer->queryBankCardOrder($order['partner_trade_no']);
+        if ($rst['return_code'] == 'SUCCESS') {
+            if ($rst['result_code'] == 'FAIL') {
+                trace($order);
+                trace($rst);
+            } else {
+                if ($rst['status'] == 'SUCCESS') {
+                    model('Transfer')->get($order['id'])->save(['trans_status' => 3]);
+                } elseif ($rst['status'] == 'FAILED' || $rst['status'] == 'BANK_FAIL') {
+                    model('Transfer')->get($order['id'])->save(['trans_status' => 4]);
+                }
+            }
+        }
+    }
 }

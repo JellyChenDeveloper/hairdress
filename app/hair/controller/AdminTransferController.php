@@ -42,6 +42,8 @@ class AdminTransferController extends AdminHairBaseController {
      * )
      */
     public function index() {
+        cmf_check_transfer_order();
+
         $where     = [];
         $transfers = model('Transfer')
             ->where($where)
@@ -75,6 +77,21 @@ class AdminTransferController extends AdminHairBaseController {
             $this->success($rst['err_code_des']);
         } else {
             $this->error($rst['err_code_des']);
+        }
+    }
+
+    public function delete() {
+        $id       = $this->request->param('id');
+        $transfer = model('Transfer')->get($id);
+        if (empty($transfer)) {
+            $this->error('参数错误，请刷新重试');
+        }
+        $transfer->save(['trans_status' => 0]);
+        $result = $transfer->delete();
+        if ($result == 1) {
+            $this->success(lang('DELETE_SUCCESS'));
+        } else {
+            $this->error(lang('DELETE_FAILED'));
         }
     }
 }

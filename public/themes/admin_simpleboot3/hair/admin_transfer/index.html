@@ -26,7 +26,20 @@
                 <td>{$vo.amount}</td>
                 <td>{$vo.trans_status_str}</td>
                 <td>
-                    <a href="{:url('hair/AdminTransfer/pass',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="是否通过申请">通过</a>
+                    <switch name="$vo.trans_status">
+                        <case value="0"></case>
+                        <case value="1">
+                            <a href="{:url('hair/AdminTransfer/pass',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="是否通过申请">通过</a>
+                            <a href="{:url('hair/AdminTransfer/delete',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="是否删除">删除</a>
+                        </case>
+                        <case value="2">
+                        </case>
+                        <case value="3"></case>
+                        <case value="4">
+                            <a href="{:url('hair/AdminTransfer/delete',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="是否删除">删除</a>
+                        </case>
+                        <default></default>
+                    </switch>
                 </td>
             </tr>
         </foreach>
