@@ -18,4 +18,8 @@ class TransferModel extends BaseModel {
     public function getTransStatusStrAttr($value, $data) {
         return config('property.trans_status')[$data['trans_status']];
     }
+
+    public function getBankCodeStrAttr($value, $data) {
+        return config('property.wechat_bank_code')[$data['bank_code']];
+    }
 }

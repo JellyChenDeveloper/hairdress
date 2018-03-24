@@ -26,7 +26,7 @@ class IndexController extends HairBaseController {
     public function doRegister() {
         $from_url = session('register.from_url');
         $data     = $this->request->param();
-        $user_id  = $this->request->post('user_id');
+        $user_id  = $this->request->post('id');
         if ($user_id != $this->user_id) {
             $this->error(lang('参数错误，请刷新重试'));
         }

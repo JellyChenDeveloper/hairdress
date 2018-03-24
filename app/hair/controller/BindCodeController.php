@@ -29,21 +29,23 @@ class BindCodeController extends HairBaseController {
         if ($result !== true) {
             $this->error($result);
         }
-        $code = model('ActivityCode')->get(['code' => $data['code'], 'verify' => $data['verify']]);
-        if ($code) {
-            $data   = [
-                'code_id'   => $code->id,
-                'user_type' => 2,
-            ];
-            $result = model('WechatUser')->get($this->user_id)->save($data);
-            if ($result) {
-                model('ActivityCode')->get($code->id)->save(['user_id' => $this->user_id]);
-                $this->success('绑定成功', url('hair/UserInfo/index'));
-            } else {
-                $this->error('绑定失败');
-            }
-        } else {
+        $code = model('ActivityCode')->get(['code' => $data['code']]);
+        if ($code['user_id'] != 0) {
+            $this->error('该激活码已经使用');
+        }
+        if ($code['verify'] != $data['verify']) {
             $this->error('激活码和验证码不匹配');
+        }
+        $data   = [
+            'code_id'   => $code->id,
+            'user_type' => 2,
+        ];
+        $result = model('WechatUser')->get($this->user_id)->save($data);
+        if ($result) {
+            model('ActivityCode')->get($code->id)->save(['user_id' => $this->user_id]);
+            $this->success('绑定成功', url('hair/UserInfo/index'));
+        } else {
+            $this->error('绑定失败');
         }
     }
 }

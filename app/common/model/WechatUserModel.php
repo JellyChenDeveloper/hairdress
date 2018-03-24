@@ -62,4 +62,12 @@ class WechatUserModel extends BaseModel {
 
         return $code ? $code->child_count : 0;
     }
+
+    public function getTotalMoneyAttr($value, $data) {
+        return cmf_get_total_money($data['id']);
+    }
+
+    public function getLastMoneyAttr($value, $data) {
+        return cmf_get_last_money($data['id']);
+    }
 }

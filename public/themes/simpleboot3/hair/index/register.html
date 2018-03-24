@@ -40,7 +40,7 @@
             <input id="activation_key" class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入邀请码" value="{$user.activation_key}">
         </div>
     </div>
-    <input type="hidden" id="user_id" value="{$user.id}">
+    <input type="hidden" id="id" value="{$user.id}">
 </div>
 <div class="weui-btn-area">
     <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
@@ -52,7 +52,7 @@
             $.post("{:url('hair/index/doRegister')}", {
                 mobile         : $('#mobile').val(),
                 activation_key : $('#activation_key').val(),
-                user_id        : $('#user_id').val()
+                id             : $('#id').val()
             }, function (ret) {
                 if (ret.code) {
                     $.toast(ret.msg, 'success', function () {

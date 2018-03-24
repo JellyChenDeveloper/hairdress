@@ -64,6 +64,13 @@
                 <input type="text" class="form-control" id="input-rate" name="rate" value="{$code.rate}">
             </div>
         </div>
+        <php>$hide=$code['level']==2?'hide':''</php>
+        <div class="form-group {$hide}">
+            <label class="col-sm-2 control-label" for="input-rate2">二级分配比率:</label>
+            <div class="col-md-2 col-sm-5">
+                <input type="text" class="form-control" id="input-rate2" name="rate2" value="{$code.rate2}">
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <input type="hidden" name="id" value="{$code.id}">

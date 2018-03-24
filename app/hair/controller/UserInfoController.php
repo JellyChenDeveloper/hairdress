@@ -22,9 +22,47 @@ class UserInfoController extends HairBaseController {
     }
 
     public function agentInfo() {
+        $user = model('WechatUser')->get(['id' => $this->user_id]);
+        $data = [
+            'total_money'   => cmf_get_total_money($this->user_id),
+            'last_money'    => cmf_get_last_money($this->user_id),
+            'enc_true_name' => $user['enc_true_name'],
+            'enc_bank_no'   => $user['enc_bank_no'],
+            'bank'          => $user['bank_code'] ? config('property.wechat_bank_code')[$user['bank_code']] : '',
+        ];
+        $this->assign($data);
+
         return $this->fetch();
     }
 
+    public function bankInfo() {
+        $user = model('WechatUser')->get(['id' => $this->user_id]);
+        $data = [
+            'enc_true_name' => $user['enc_true_name'],
+            'enc_bank_no'   => $user['enc_bank_no'],
+            'bank_code'     => $user['bank_code'],
+        ];
+        $this->assign($data);
+
+        return $this->fetch();
+    }
+
+    public function postBankInfo() {
+        $data       = $this->request->param();
+        $data['id'] = $this->user_id;
+
+        $result = $this->validate($data, 'WechatUser.set_bank_info');
+        if ($result !== true) {
+            $this->error($result);
+        }
+
+        $result = model('WechatUser')->isUpdate()->save($data);
+        if ($result) {
+            $this->success('保存成功', url('hair/UserInfo/agentInfo'));
+        } else {
+            $this->error('保存失败');
+        }
+    }
 
     public function paybackRecord() {
         $transfers = model('Transfer')->where(['user_id' => $this->user_id])->select();
@@ -45,13 +83,18 @@ class UserInfoController extends HairBaseController {
         if ($result !== true) {
             $this->error($result);
         }
+        if (cmf_get_last_money($this->user_id) < $amount) {
+            $this->error('剩余可提现金额不足');
+        }
+        $user                     = model('WechatUser')->get($this->user_id);
         $partner_trade_no         = config('we_chat.wx_sdk_config')['payment']['mch_id'] . date("YmdHis") . cmf_generate_code(8);
         $data['partner_trade_no'] = $partner_trade_no;
-        $data['is_check']         = 0;
-        $data['re_user_name']     = '陈国栋';
+        $data['enc_true_name']    = $user['enc_true_name'];
+        $data['enc_bank_no']      = $user['enc_bank_no'];
+        $data['bank_code']        = $user['bank_code'];
         $data['desc']             = '返现';
         $data['trans_status']     = 1;
-        $data['amount']           = $amount * 100;
+        $data['amount']           = $amount;
 
         $result = model('Transfer')->save($data);
         if ($result) {
