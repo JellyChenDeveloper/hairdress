@@ -38,8 +38,7 @@ class PayController extends HairBaseController {
             $prepayId = $result['prepay_id'];
             $jssdk    = $this->wecharService->pay()->jssdk;
             $pay_json = $jssdk->bridgeConfig($prepayId);
-            // todo 更新用户的订单号
-            $data = [
+            $data     = [
                 'user_id'      => $this->user_id,
                 'body'         => $order_info['body'],
                 'detail'       => $order_info['detail'],
@@ -59,11 +58,11 @@ class PayController extends HairBaseController {
     }
 
     public function elementPay() {
-        $elementid = $this->request->param('id');
-        if (is_null($elementid) || $elementid <= 0) {
+        $element_id = $this->request->param('id');
+        if (is_null($element_id) || $element_id <= 0) {
             $this->error('参数错误');
         }
-        $element = model('Element')->get($elementid);
+        $element = model('Element')->get($element_id);
         if (is_null($element) || empty($element)) {
             $this->error('参数错误');
         }
@@ -93,8 +92,7 @@ class PayController extends HairBaseController {
             $prepayId = $result['prepay_id'];
             $jssdk    = $this->wecharService->pay()->jssdk;
             $pay_json = $jssdk->bridgeConfig($prepayId);
-            // todo 更新用户的订单号
-            $data = [
+            $data     = [
                 'user_id'      => $this->user_id,
                 'element_id'   => $element['id'],
                 'body'         => $order_info['body'],
@@ -116,9 +114,6 @@ class PayController extends HairBaseController {
 
     /**
      * 支付回调函数
-     *
-     * TODO 还未做，带参数配置好后再写该部分代码
-     *
      */
     public function notify() {
         $response = $this->wecharService->pay()->handlePaidNotify(function ($message, $fail) {
