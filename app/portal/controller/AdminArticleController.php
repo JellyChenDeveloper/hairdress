@@ -17,8 +17,7 @@ use app\portal\model\PortalCategoryModel;
 use think\Db;
 use app\admin\model\ThemeModel;
 
-class AdminArticleController extends AdminBaseController
-{
+class AdminArticleController extends AdminBaseController {
     /**
      * 文章列表
      * @adminMenu(
@@ -32,28 +31,19 @@ class AdminArticleController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-    public function index()
-    {
+    public function index() {
         $param = $this->request->param();
-
-        $categoryId = $this->request->param('category', 0, 'intval');
 
         $postService = new PostService();
         $data        = $postService->adminArticleList($param);
 
         $data->appends($param);
 
-        $portalCategoryModel = new PortalCategoryModel();
-        $categoryTree        = $portalCategoryModel->adminCategoryTree($categoryId);
-
         $this->assign('start_time', isset($param['start_time']) ? $param['start_time'] : '');
         $this->assign('end_time', isset($param['end_time']) ? $param['end_time'] : '');
         $this->assign('keyword', isset($param['keyword']) ? $param['keyword'] : '');
         $this->assign('articles', $data->items());
-        $this->assign('category_tree', $categoryTree);
-        $this->assign('category', $categoryId);
         $this->assign('page', $data->render());
-
 
         return $this->fetch();
     }
@@ -71,11 +61,7 @@ class AdminArticleController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-    public function add()
-    {
-        $themeModel        = new ThemeModel();
-        $articleThemeFiles = $themeModel->getActionThemeFiles('portal/Article/index');
-        $this->assign('article_theme_files', $articleThemeFiles);
+    public function add() {
         return $this->fetch();
     }
 
@@ -92,8 +78,7 @@ class AdminArticleController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-    public function addPost()
-    {
+    public function addPost() {
         if ($this->request->isPost()) {
             $data   = $this->request->param();
             $post   = $data['post'];
@@ -104,28 +89,12 @@ class AdminArticleController extends AdminBaseController
 
             $portalPostModel = new PortalPostModel();
 
-            if (!empty($data['photo_names']) && !empty($data['photo_urls'])) {
-                $data['post']['more']['photos'] = [];
-                foreach ($data['photo_urls'] as $key => $url) {
-                    $photoUrl = cmf_asset_relative_url($url);
-                    array_push($data['post']['more']['photos'], ["url" => $photoUrl, "name" => $data['photo_names'][$key]]);
-                }
-            }
-
-            if (!empty($data['file_names']) && !empty($data['file_urls'])) {
-                $data['post']['more']['files'] = [];
-                foreach ($data['file_urls'] as $key => $url) {
-                    $fileUrl = cmf_asset_relative_url($url);
-                    array_push($data['post']['more']['files'], ["url" => $fileUrl, "name" => $data['file_names'][$key]]);
-                }
-            }
-
-            $portalPostModel->adminAddArticle($data['post'], $data['post']['categories']);
+            $portalPostModel->adminAddArticle($data['post']);
 
             $data['post']['id'] = $portalPostModel->id;
             $hookParam          = [
                 'is_add'  => true,
-                'article' => $data['post']
+                'article' => $data['post'],
             ];
             hook('portal_admin_after_save_article', $hookParam);
 
@@ -148,21 +117,13 @@ class AdminArticleController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-    public function edit()
-    {
+    public function edit() {
         $id = $this->request->param('id', 0, 'intval');
 
         $portalPostModel = new PortalPostModel();
         $post            = $portalPostModel->where('id', $id)->find();
-        $postCategories  = $post->categories()->alias('a')->column('a.name', 'a.id');
-        $postCategoryIds = implode(',', array_keys($postCategories));
 
-        $themeModel        = new ThemeModel();
-        $articleThemeFiles = $themeModel->getActionThemeFiles('portal/Article/index');
-        $this->assign('article_theme_files', $articleThemeFiles);
         $this->assign('post', $post);
-        $this->assign('post_categories', $postCategories);
-        $this->assign('post_category_ids', $postCategoryIds);
 
         return $this->fetch();
     }
@@ -180,8 +141,7 @@ class AdminArticleController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-    public function editPost()
-    {
+    public function editPost() {
 
         if ($this->request->isPost()) {
             $data   = $this->request->param();
@@ -193,27 +153,11 @@ class AdminArticleController extends AdminBaseController
 
             $portalPostModel = new PortalPostModel();
 
-            if (!empty($data['photo_names']) && !empty($data['photo_urls'])) {
-                $data['post']['more']['photos'] = [];
-                foreach ($data['photo_urls'] as $key => $url) {
-                    $photoUrl = cmf_asset_relative_url($url);
-                    array_push($data['post']['more']['photos'], ["url" => $photoUrl, "name" => $data['photo_names'][$key]]);
-                }
-            }
-
-            if (!empty($data['file_names']) && !empty($data['file_urls'])) {
-                $data['post']['more']['files'] = [];
-                foreach ($data['file_urls'] as $key => $url) {
-                    $fileUrl = cmf_asset_relative_url($url);
-                    array_push($data['post']['more']['files'], ["url" => $fileUrl, "name" => $data['file_names'][$key]]);
-                }
-            }
-
-            $portalPostModel->adminEditArticle($data['post'], $data['post']['categories']);
+            $portalPostModel->adminEditArticle($data['post']);
 
             $hookParam = [
                 'is_add'  => false,
-                'article' => $data['post']
+                'article' => $data['post'],
             ];
             hook('portal_admin_after_save_article', $hookParam);
 
@@ -235,8 +179,7 @@ class AdminArticleController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-    public function delete()
-    {
+    public function delete() {
         $param           = $this->request->param();
         $portalPostModel = new PortalPostModel();
 
@@ -248,14 +191,14 @@ class AdminArticleController extends AdminBaseController
                 'create_time' => time(),
                 'table_name'  => 'portal_post',
                 'name'        => $result['post_title'],
-                'user_id'=>cmf_get_current_admin_id()
+                'user_id'     => cmf_get_current_admin_id(),
             ];
             $resultPortal = $portalPostModel
                 ->where(['id' => $id])
                 ->update(['delete_time' => time()]);
             if ($resultPortal) {
-                Db::name('portal_category_post')->where(['post_id'=>$id])->update(['status'=>0]);
-                Db::name('portal_tag_post')->where(['post_id'=>$id])->update(['status'=>0]);
+                Db::name('portal_category_post')->where(['post_id' => $id])->update(['status' => 0]);
+                Db::name('portal_tag_post')->where(['post_id' => $id])->update(['status' => 0]);
 
                 Db::name('recycleBin')->insert($data);
             }
@@ -268,15 +211,15 @@ class AdminArticleController extends AdminBaseController
             $recycle = $portalPostModel->where(['id' => ['in', $ids]])->select();
             $result  = $portalPostModel->where(['id' => ['in', $ids]])->update(['delete_time' => time()]);
             if ($result) {
-                Db::name('portal_category_post')->where(['post_id' => ['in', $ids]])->update(['status'=>0]);
-                Db::name('portal_tag_post')->where(['post_id' => ['in', $ids]])->update(['status'=>0]);
+                Db::name('portal_category_post')->where(['post_id' => ['in', $ids]])->update(['status' => 0]);
+                Db::name('portal_tag_post')->where(['post_id' => ['in', $ids]])->update(['status' => 0]);
                 foreach ($recycle as $value) {
                     $data = [
                         'object_id'   => $value['id'],
                         'create_time' => time(),
                         'table_name'  => 'portal_post',
                         'name'        => $value['post_title'],
-                        'user_id'=>cmf_get_current_admin_id()
+                        'user_id'     => cmf_get_current_admin_id(),
                     ];
                     Db::name('recycleBin')->insert($data);
                 }
@@ -298,8 +241,7 @@ class AdminArticleController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-    public function publish()
-    {
+    public function publish() {
         $param           = $this->request->param();
         $portalPostModel = new PortalPostModel();
 
@@ -334,8 +276,7 @@ class AdminArticleController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-    public function top()
-    {
+    public function top() {
         $param           = $this->request->param();
         $portalPostModel = new PortalPostModel();
 
@@ -370,8 +311,7 @@ class AdminArticleController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-    public function recommend()
-    {
+    public function recommend() {
         $param           = $this->request->param();
         $portalPostModel = new PortalPostModel();
 
@@ -406,19 +346,16 @@ class AdminArticleController extends AdminBaseController
      *     'param'  => ''
      * )
      */
-    public function listOrder()
-    {
+    public function listOrder() {
         parent::listOrders(Db::name('portal_category_post'));
         $this->success("排序更新成功！", '');
     }
 
-    public function move()
-    {
+    public function move() {
 
     }
 
-    public function copy()
-    {
+    public function copy() {
 
     }
 

@@ -15,11 +15,9 @@ use think\Validate;
 class AdminArticleValidate extends Validate
 {
     protected $rule = [
-        'categories' => 'require',
         'post_title' => 'require',
     ];
     protected $message = [
-        'categories.require' => '请指定文章分类！',
         'post_title.require' => '文章标题不能为空！',
     ];
 

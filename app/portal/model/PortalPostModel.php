@@ -14,8 +14,7 @@ use app\admin\model\RouteModel;
 use think\Model;
 use think\Db;
 
-class PortalPostModel extends Model
-{
+class PortalPostModel extends Model {
 
     protected $type = [
         'more' => 'array',
@@ -26,67 +25,68 @@ class PortalPostModel extends Model
 
     /**
      * 关联 user表
+     *
      * @return $this
      */
-    public function user()
-    {
+    public function user() {
         return $this->belongsTo('UserModel', 'user_id')->setEagerlyType(1);
     }
 
     /**
      * 关联分类表
      */
-    public function categories()
-    {
+    public function categories() {
         return $this->belongsToMany('PortalCategoryModel', 'portal_category_post', 'category_id', 'post_id');
     }
 
     /**
      * 关联标签表
      */
-    public function tags()
-    {
+    public function tags() {
         return $this->belongsToMany('PortalTagModel', 'portal_tag_post', 'tag_id', 'post_id');
     }
 
     /**
      * post_content 自动转化
+     *
      * @param $value
+     *
      * @return string
      */
-    public function getPostContentAttr($value)
-    {
+    public function getPostContentAttr($value) {
         return cmf_replace_content_file_url(htmlspecialchars_decode($value));
     }
 
     /**
      * post_content 自动转化
+     *
      * @param $value
+     *
      * @return string
      */
-    public function setPostContentAttr($value)
-    {
+    public function setPostContentAttr($value) {
         return htmlspecialchars(cmf_replace_content_file_url(htmlspecialchars_decode($value), true));
     }
 
     /**
      * published_time 自动完成
+     *
      * @param $value
+     *
      * @return false|int
      */
-    public function setPublishedTimeAttr($value)
-    {
+    public function setPublishedTimeAttr($value) {
         return strtotime($value);
     }
 
     /**
      * 后台管理添加文章
+     *
      * @param array $data 文章数据
-     * @param array|string $categories 文章分类 id
+     *
      * @return $this
      */
-    public function adminAddArticle($data, $categories)
-    {
+    public function adminAddArticle($data) {
         $data['user_id'] = cmf_get_current_admin_id();
 
         if (!empty($data['more']['thumbnail'])) {
@@ -95,30 +95,17 @@ class PortalPostModel extends Model
 
         $this->allowField(true)->data($data, true)->isUpdate(false)->save();
 
-        if (is_string($categories)) {
-            $categories = explode(',', $categories);
-        }
-
-        $this->categories()->save($categories);
-
-        $data['post_keywords'] = str_replace('，', ',', $data['post_keywords']);
-
-        $keywords = explode(',', $data['post_keywords']);
-
-        $this->addTags($keywords, $this->id);
-
         return $this;
-
     }
 
     /**
      * 后台管理编辑文章
+     *
      * @param array $data 文章数据
-     * @param array|string $categories 文章分类 id
+     *
      * @return $this
      */
-    public function adminEditArticle($data, $categories)
-    {
+    public function adminEditArticle($data) {
 
         unset($data['user_id']);
 
@@ -132,36 +119,11 @@ class PortalPostModel extends Model
 
         $this->allowField(true)->isUpdate(true)->data($data, true)->save();
 
-        if (is_string($categories)) {
-            $categories = explode(',', $categories);
-        }
-
-        $oldCategoryIds        = $this->categories()->column('category_id');
-        $sameCategoryIds       = array_intersect($categories, $oldCategoryIds);
-        $needDeleteCategoryIds = array_diff($oldCategoryIds, $sameCategoryIds);
-        $newCategoryIds        = array_diff($categories, $sameCategoryIds);
-
-        if (!empty($needDeleteCategoryIds)) {
-            $this->categories()->detach($needDeleteCategoryIds);
-        }
-
-        if (!empty($newCategoryIds)) {
-            $this->categories()->attach(array_values($newCategoryIds));
-        }
-
-
-        $data['post_keywords'] = str_replace('，', ',', $data['post_keywords']);
-
-        $keywords = explode(',', $data['post_keywords']);
-
-        $this->addTags($keywords, $data['id']);
-
         return $this;
 
     }
 
-    public function addTags($keywords, $articleId)
-    {
+    public function addTags($keywords, $articleId) {
         $portalTagModel = new PortalTagModel();
 
         $tagIds = [];
@@ -178,7 +140,7 @@ class PortalPostModel extends Model
                     $findTag = $portalTagModel->where('name', $keyword)->find();
                     if (empty($findTag)) {
                         $tagId = $portalTagModel->insertGetId([
-                            'name' => $keyword
+                            'name' => $keyword,
                         ]);
                     } else {
                         $tagId = $findTag['id'];
@@ -216,8 +178,7 @@ class PortalPostModel extends Model
         }
     }
 
-    public function adminDeletePage($data)
-    {
+    public function adminDeletePage($data) {
 
         if (isset($data['id'])) {
             $id = $data['id']; //获取删除id
@@ -239,7 +200,7 @@ class PortalPostModel extends Model
                 $transStatus = false;
                 try {
                     Db::name('portal_post')->where(['id' => $id])->update([
-                        'delete_time' => time()
+                        'delete_time' => time(),
                     ]);
                     Db::name('recycle_bin')->insert($recycleData);
 
@@ -251,6 +212,7 @@ class PortalPostModel extends Model
                     // 回滚事务
                     Db::rollback();
                 }
+
                 return $transStatus;
 
 
@@ -278,7 +240,7 @@ class PortalPostModel extends Model
                 try {
                     Db::name('portal_post')->where(['id' => ['in', $ids]])
                         ->update([
-                            'delete_time' => time()
+                            'delete_time' => time(),
                         ]);
 
 
@@ -295,6 +257,7 @@ class PortalPostModel extends Model
 
 
                 }
+
                 return $transStatus;
 
 
@@ -309,11 +272,12 @@ class PortalPostModel extends Model
 
     /**
      * 后台管理添加页面
+     *
      * @param array $data 页面数据
+     *
      * @return $this
      */
-    public function adminAddPage($data)
-    {
+    public function adminAddPage($data) {
         $data['user_id'] = cmf_get_current_admin_id();
 
         if (!empty($data['more']['thumbnail'])) {
@@ -330,11 +294,12 @@ class PortalPostModel extends Model
 
     /**
      * 后台管理编辑页面
+     *
      * @param array $data 页面数据
+     *
      * @return $this
      */
-    public function adminEditPage($data)
-    {
+    public function adminEditPage($data) {
         $data['user_id'] = cmf_get_current_admin_id();
 
         if (!empty($data['more']['thumbnail'])) {
@@ -349,6 +314,7 @@ class PortalPostModel extends Model
         $routeModel->setRoute($data['post_alias'], 'portal/Page/index', ['id' => $data['id']], 2, 5000);
 
         $routeModel->getRoutes(true);
+
         return $this;
     }
 
