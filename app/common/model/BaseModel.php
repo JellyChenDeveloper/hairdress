@@ -16,6 +16,10 @@ use traits\model\SoftDelete;
 
 class BaseModel extends Model {
 
+    protected $type = [
+        'more' => 'array',
+    ];
+
     use SoftDelete;
     protected $deleteTime = 'delete_time';
 

@@ -9,7 +9,7 @@ CREATE TABLE `hair_pages` (
   `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '页面url',
   `thumb` varchar(255) NOT NULL DEFAULT '' COMMENT '页面缩略图',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '页面状态;0:已删除,1:正常',
-  `order` int(10) unsigned NOT NULL DEFAULT '10000' COMMENT '图片排序，0-10000，从小到大',
+  `list_order` int(10) unsigned NOT NULL DEFAULT '10000' COMMENT '图片排序，0-10000，从小到大',
   `more` text COMMENT '扩展属性',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
