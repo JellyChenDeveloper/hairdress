@@ -128,6 +128,14 @@
         <div class="m-tool m-all-tool">
             <div class="m-inner">
                 <ul>
+                    <li class="h-icon fl" renderType='isDrawingMode'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_11.jpg" alt="">
+                            </div>
+                            <p class="h-text">画笔</p>
+                        </div>
+                    </li>
                     <li class="h-icon fl" renderType='renderLigature'>
                         <div class="h-one" data-add='0'>
                             <!--<div class="h-mask">
@@ -144,12 +152,12 @@
                             <p class="h-text">发片</p>
                         </div>
                     </li>
-                    <li class="h-icon fl" renderType='Line'>
+                    <li class="h-icon fl" renderType='renderArrDashLine'>
                         <div class="h-one">
                             <div class="h-img-wrap">
-                                <img src="__PAGE_TOOLS__/images/icon_2.jpg" alt="">
+                                <img src="__PAGE_TOOLS__/images/icon_4.jpg" alt="">
                             </div>
-                            <p class="h-text">直线</p>
+                            <p class="h-text">虚弧线</p>
                         </div>
                     </li>
                     <li class="h-icon fl" renderType='renderArrLine'>
@@ -160,12 +168,12 @@
                             <p class="h-text">弧线</p>
                         </div>
                     </li>
-                    <li class="h-icon fl" renderType='renderArrDashLine'>
+                    <li class="h-icon fl" renderType='Line'>
                         <div class="h-one">
                             <div class="h-img-wrap">
-                                <img src="__PAGE_TOOLS__/images/icon_4.jpg" alt="">
+                                <img src="__PAGE_TOOLS__/images/icon_2.jpg" alt="">
                             </div>
-                            <p class="h-text">虚弧线</p>
+                            <p class="h-text">直线</p>
                         </div>
                     </li>
                     <li class="h-icon fl" renderType='arrLine'>
@@ -197,7 +205,7 @@
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_6.jpg" alt="">
                             </div>
-                            <p class="h-text">弧线箭头</p>
+                            <p class="h-text">箭头</p>
                         </div>
                     </li>
                     <li class="h-icon fl" renderType='renderDashedArc'>
@@ -205,15 +213,7 @@
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_7.jpg" alt="">
                             </div>
-                            <p class="h-text">虚弧线箭头</p>
-                        </div>
-                    </li>
-                    <li class="h-icon fl" renderType='renderTriangle'>
-                        <div class="h-one">
-                            <div class="h-img-wrap">
-                                <img src="__PAGE_TOOLS__/images/icon_8.jpg" alt="">
-                            </div>
-                            <p class="h-text">三角形</p>
+                            <p class="h-text">虚线箭头</p>
                         </div>
                     </li>
                     <li class="h-icon fl" renderType='renderCircle'>
@@ -232,12 +232,12 @@
                             <p class="h-text">正方形</p>
                         </div>
                     </li>
-                    <li class="h-icon fl" renderType='isDrawingMode'>
+                    <li class="h-icon fl" renderType='renderTriangle'>
                         <div class="h-one">
                             <div class="h-img-wrap">
-                                <img src="__PAGE_TOOLS__/images/icon_11.jpg" alt="">
+                                <img src="__PAGE_TOOLS__/images/icon_8.jpg" alt="">
                             </div>
-                            <p class="h-text">画笔</p>
+                            <p class="h-text">三角形</p>
                         </div>
                     </li>
                 </ul>
@@ -352,10 +352,35 @@
         <div class="m-box">
             <ul>
                 <li>
+                    <p class="text-c">画笔</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='color' value="#000"></p>
+                    <p>线宽：<select class="s-select " key='width' id="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    </p>
+                </li>
+                <li>
                     <p class="text-c">发片</p>
                     <p>
                         请选择颜色:<input class="s-select color" type="hidden" key='stroke ' value="#000">
                     </p>
+                </li>
+                <li>
+                    <p class="text-c">虚弧线</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
+                </li>
+                <li>
+                    <p class="text-c">弧线</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
                 </li>
                 <li>
                     <p class="text-c">直线</p>
@@ -375,14 +400,6 @@
                     </p>
                 </li>
                 <li>
-                    <p class="text-c">弧线</p>
-                    <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
-                </li>
-                <li>
-                    <p class="text-c">虚弧线</p>
-                    <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
-                </li>
-                <li>
                     <p class="text-c">s线</p>
                     <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
                 </li>
@@ -395,16 +412,12 @@
                     <p>颜色：<input value="#000" class="s-select color" type="hidden" key='stroke fill'></p>
                 </li> -->
                 <li>
-                    <p class="text-c">弧线箭头</p>
+                    <p class="text-c">箭头</p>
                     <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
                 </li>
                 <li>
-                    <p class="text-c">虚弧线箭头</p>
+                    <p class="text-c">虚线箭头</p>
                     <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
-                </li>
-                <li>
-                    <p class="text-c">三角形</p>
-                    <p>颜色：<input class="s-select color" type="hidden" key='fill' value="#000"></p>
                 </li>
                 <li>
                     <p class="text-c">圆形</p>
@@ -415,21 +428,8 @@
                     <p>颜色：<input class="s-select color" type="hidden" key='fill' value="#000"></p>
                 </li>
                 <li>
-                    <p class="text-c">画笔</p>
-                    <p>颜色：<input class="s-select color" type="hidden" key='color' value="#000"></p>
-                    <p>线宽：<select class="s-select " key='width' id="">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
-                    </p>
+                    <p class="text-c">三角形</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='fill' value="#000"></p>
                 </li>
             </ul>
             <div class="btn-wrap">
