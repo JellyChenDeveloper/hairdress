@@ -10,6 +10,7 @@ CREATE TABLE `hair_course` (
   `thumb` varchar(255) NOT NULL DEFAULT '' COMMENT '页面缩略图',
   `content_filtered` text COMMENT '处理过的文章内容',
   `hits` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '查看数',
+  `price` FLOAT NOT NULL DEFAULT '0' COMMENT '价格',
   `published_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布时间',
   `list_order` int(10) unsigned NOT NULL DEFAULT '10000' COMMENT '排序，0-10000，从小到大',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态:0:删除,1:正常',

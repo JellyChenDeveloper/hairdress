@@ -105,12 +105,6 @@ class ElementController extends AdminBaseController {
             $this->error($result);
         }
 
-        if ($data['is_free'] == 0 && empty($data['price'])) {
-            $this->error('价格不能为空');
-        }
-        if ($data['is_free']) {
-            unset($data['price']);
-        }
         $result = model('Element')->save($data);
 
         if ($result === false) {
@@ -163,10 +157,6 @@ class ElementController extends AdminBaseController {
 
         if ($result !== true) {
             $this->error($result);
-        }
-
-        if ($data['is_free']) {
-            unset($data['price']);
         }
 
         $result = model('Element')->get($data['id'])->save($data);

@@ -26,4 +26,8 @@ class CourseModel extends BaseModel {
     public function setPublishedTimeAttr($value) {
         return strtotime($value);
     }
+
+    public function getPriceStrAttr($value, $data) {
+        return $data['price'] ? $data['price'] : '免费';
+    }
 }

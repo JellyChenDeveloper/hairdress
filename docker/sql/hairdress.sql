@@ -895,7 +895,7 @@ CREATE TABLE `cmf_user` (
 
 LOCK TABLES `cmf_user` WRITE;
 /*!40000 ALTER TABLE `cmf_user` DISABLE KEYS */;
-INSERT INTO `cmf_user` VALUES (1,1,0,0,1521824526,0,0,0.00,1517667595,1,'admin','###b0e6dcf3e0cc1923339b92d115e6bcc1','admin','1@1.com','','','','172.21.0.1','','',NULL),(2,1,0,0,1520075935,0,0,0.00,0,0,'admin2','###949505e3c19e695eefbb70fb3197dfc4','','3@3.com','','','','172.21.0.1','','',NULL);
+INSERT INTO `cmf_user` VALUES (1,1,0,0,1522084951,0,0,0.00,1517667595,1,'admin','###b0e6dcf3e0cc1923339b92d115e6bcc1','admin','1@1.com','','','','172.21.0.1','','',NULL),(2,1,0,0,1520075935,0,0,0.00,0,0,'admin2','###949505e3c19e695eefbb70fb3197dfc4','','3@3.com','','','','172.21.0.1','','',NULL);
 /*!40000 ALTER TABLE `cmf_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1181,6 +1181,7 @@ CREATE TABLE `hair_course` (
   `thumb` varchar(255) NOT NULL DEFAULT '' COMMENT '页面缩略图',
   `content_filtered` text COMMENT '处理过的文章内容',
   `hits` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '查看数',
+  `price` float NOT NULL DEFAULT '0' COMMENT '价格',
   `published_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '发布时间',
   `list_order` int(10) unsigned NOT NULL DEFAULT '10000' COMMENT '排序，0-10000，从小到大',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态:0:删除,1:正常',
@@ -1219,7 +1220,6 @@ CREATE TABLE `hair_element` (
   `thumb` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '组件缩略图',
   `type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '组件类型:0-头像,1-工具,2-功能组件',
   `is_lock` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否锁定:0-否,1-是',
-  `is_free` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否免费:0-否,1-是',
   `price` float NOT NULL DEFAULT '0' COMMENT '价格',
   `list_order` int(10) unsigned NOT NULL DEFAULT '10000' COMMENT '排序，0-10000，从小到大',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态:0:已隐藏,1:正常',
@@ -1443,4 +1443,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-26 16:38:40
+-- Dump completed on 2018-03-26 17:41:09

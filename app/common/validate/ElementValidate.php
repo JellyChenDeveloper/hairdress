@@ -20,9 +20,8 @@ class ElementValidate extends Validate {
         'name'       => 'require',
         'image'      => 'require',
         'type'       => 'require',
-        'is_free'    => 'require',
         'is_lock'    => 'require',
-        'price'      => 'checkPrice|integer',
+        'price'      => 'float',
         'list_order' => 'require|between:1,10000',
     ];
 
@@ -31,29 +30,16 @@ class ElementValidate extends Validate {
         'name'       => '组件名称',
         'image'      => '组件图片',
         'type'       => '组件类型',
-        'is_lock'    => '是否锁定',
-        'is_free'    => '是否免费',
         'price'      => '组件价格',
         'list_order' => '排序',
     ];
 
     protected $message = [
-        'id.require'       => 'id不存在，操作错误',
-        'price.checkPrice' => '价格不能为空',
+        'id.require' => 'id不存在，操作错误',
     ];
 
     protected $scene = [
         'add'  => ['name', 'image', 'type', 'is_free', 'price', 'list_order', 'is_lock'],
         'edit' => ['id', 'name', 'image', 'type', 'is_free', 'price', 'list_order', 'is_lock'],
     ];
-
-    protected function checkPrice($value, $rule, $data) {
-        if ($data['is_free'] == 0) {
-            if (empty($value) || $value <= 0) {
-                return false;
-            }
-        }
-
-        return true;
-    }
 }

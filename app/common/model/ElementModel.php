@@ -22,7 +22,7 @@ class ElementModel extends BaseModel {
     }
 
     public function getPriceStrAttr($value, $data) {
-        return $data['is_free'] ? '免费' : $data['price'];
+        return $data['price'] ? $data['price'] : '免费';
     }
 
     public function getImageAttr($value) {

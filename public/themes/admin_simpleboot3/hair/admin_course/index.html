@@ -41,6 +41,7 @@
                 <th>标题</th>
                 <th>Url</th>
                 <th width="65">点击量</th>
+                <th width="65">价格</th>
                 <th width="130">发布时间</th>
                 <th width="90">操作</th>
             </tr>
@@ -59,6 +60,7 @@
                     </td>
                     <td>{:cmf_url('portal/Article/index',array('id'=>$vo['id']), true, true)}</td>
                     <td>{$vo.hits|default=0}</td>
+                    <td>{$vo.price_str}</td>
                     <td>
                         {:date('Y-m-d H:i',$vo['published_time'])}
                     </td>

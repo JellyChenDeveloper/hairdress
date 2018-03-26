@@ -16,7 +16,7 @@ class PageController extends HairBaseController {
         $heads  = model('Element')->all(['type' => ['in', [0, 1]]])->toArray();
         $orders = model('Order')->where(['user_id' => $this->user_id, 'type' => 1, 'pay_time' => ['gt', 0]])->column('element_id');
         foreach ($heads as $k => $v) {
-            if ($v['is_free'] == 0 && $v['price'] != 0) {
+            if ($v['price'] != 0) {
                 if (!in_array($v['id'], $orders)) {
                     $heads[$k]['need_pay'] = 1;
                 } else {
