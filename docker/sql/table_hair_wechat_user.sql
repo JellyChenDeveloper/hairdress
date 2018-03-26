@@ -29,5 +29,5 @@ CREATE TABLE `hair_wechat_user` (
   KEY `wx_openid` (`wx_openid`),
   KEY `wx_nickname` (`wx_nickname`),
   KEY `mobile` (`mobile`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;

@@ -17,5 +17,5 @@ CREATE TABLE `hair_pages` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='项目详情表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='项目详情表';
 /*!40101 SET character_set_client = @saved_cs_client */;
