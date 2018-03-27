@@ -17,5 +17,5 @@ mysql -uroot -proot -B hairdress < /opt/sql/hairdress.sql
 #### 关闭容器时导出数据库
 在容器中，运行
 ```bash
-mysqldump -uroot -proot -B hairdress >/opt/sql/hairdress.sql
+mysqldump -uroot -proot -B hairdress > /opt/sql/hairdress.sql
 ``` 

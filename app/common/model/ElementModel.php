@@ -11,9 +11,6 @@
 
 namespace app\common\model;
 
-
-use cmf\lib\Storage;
-
 class ElementModel extends BaseModel {
     protected $table = 'hair_element';
 
@@ -26,11 +23,7 @@ class ElementModel extends BaseModel {
     }
 
     public function getImageAttr($value) {
-        return Storage::instance()->getImageUrl($value);
-    }
-
-    public function setImageAttr($value) {
-        return Storage::instance()->getFilePath($value);
+        return cmf_get_image_url($value);
     }
 
     public function getIsLockStrAttr($value, $data) {
