@@ -1554,7 +1554,7 @@ function cmf_url($url = '', $vars = '', $suffix = true, $domain = false)
         $url = $url . '#' . $anchor;
     }
 
-    if (!empty($domain)) {
+    if (!empty($domain) && is_string($domain)) {
         $url = $url . '@' . $domain;
     }
 
