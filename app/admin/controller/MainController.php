@@ -74,11 +74,26 @@ class MainController extends AdminBaseController
             }
         }
 
-        $smtpSetting = cmf_get_option('smtp_setting');
+        $transfer_menu = model('AdminMenu')->get(6);
+        $_todoData     = [
+            'transfer_todo_count' => model('Transfer')->where(['trans_status' => 1])->count(),
+            'transfer_url'        => cmf_url($transfer_menu['app'] . '/' . $transfer_menu['controller'] . '/' . $transfer_menu['action']),
+            'menu_name'           => $transfer_menu['name'],
+            'appid'               => $transfer_menu['id'] . $transfer_menu['app'],
+        ];
+        $_StaticData   = [
+            'total_user'       => model('WechatUser')->count(),
+            'total_payed_user' => model('WechatUser')->where(['has_payed' => 1])->count(),
+            'total_code'       => model('ActivityCode')->count(),
+            'total_bind_code'  => model('ActivityCode')->where(['user_id' => ['neq', 0]])->count(),
+        ];
+        $this->assign('StaticData', $_StaticData);
+        $this->assign('todoData', $_todoData);
+        $this->assign('code_bind_url', cmf_url('hair/BindCode/index', '', true, true));
+
 
         $this->assign('dashboard_widgets', $dashboardWidgets);
         $this->assign('dashboard_widget_plugins', $dashboardWidgetPlugins);
-        $this->assign('has_smtp_setting', empty($smtpSetting) ? false : true);
 
         return $this->fetch();
     }
