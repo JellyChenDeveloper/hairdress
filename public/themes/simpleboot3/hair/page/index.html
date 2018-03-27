@@ -291,27 +291,6 @@
                             <img src="__PAGE_TOOLS__/images/bg_8.png" alt="">
                         </div>
                     </li>
-                    <foreach name="heads" item="head">
-                        <eq name="head['type']" value="0">
-                            <li class="h-icon fl">
-                                <div class="h-one" data-add='0'>
-                                    <eq name="head['need_pay']" value="1">
-                                        <div class="h-mask">
-                                            <div class="h-wrap">
-                                                <p class="p-price">￥{$head.price}</p>
-                                                <div>
-                                                    <a class="p-btn" href="{:url('hair/pay/elementPay')}?id={$head.id}">立即购买</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </eq>
-                                    <div class="h-one add-ele">
-                                        <img src="{$head.image}" alt="">
-                                    </div>
-                                </div>
-                            </li>
-                        </eq>
-                    </foreach>
                 </ul>
             </div>
         </div>
@@ -344,6 +323,30 @@
                             <img src="__PAGE_TOOLS__/images/tool_3.png" alt="">
                         </div>
                     </li>
+                    <foreach name="heads" item="head">
+                        <eq name="head['type']" value="1">
+                            <li class="h-icon fl">
+                                <div class="h-one" data-lock="{$head['is_lock']}" data-pay="{$head['need_pay']}">
+                                    <div class="h-mask">
+                                        <div class="h-wrap">
+                                            <p class="p-price">￥{$head.price}</p>
+                                            <div>
+                                                <a class="p-btn" href="{:url('hair/pay/elementPay')}?id={$head.id}">立即购买</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="h-mask">
+                                        <div class="h-wrap">
+                                            <p class="p-price">锁定</p>
+                                        </div>
+                                    </div>
+                                    <div class="h-one add-ele">
+                                        <img src="{$head.image}" alt="">
+                                    </div>
+                                </div>
+                            </li>
+                        </eq>
+                    </foreach>
                 </ul>
             </div>
         </div>
@@ -711,7 +714,7 @@
                     var ext      = filepath.substring(extStart, filepath.length).toUpperCase();
                     if (ext != ".JPG" && ext != ".JPEG") {
                         // alert("图片限于jpeg,jpg格式");
-                        
+
                     }
                 }
             },
