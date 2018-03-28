@@ -1,0 +1,20 @@
+<include file="hair@public/head"/>
+<style>
+    #article_content img {
+        height: auto !important;
+        max-width: 100% !important;
+    }
+
+    #article_content {
+        word-wrap: break-word;
+    }
+</style>
+
+<header class='demos-header'>
+    <h1 class="demos-title">{$course.title}</h1>
+</header>
+<article class="weui-article" id="article_content">
+    {$course.content}
+</article>
+
+<include file="hair@public/foot"/>

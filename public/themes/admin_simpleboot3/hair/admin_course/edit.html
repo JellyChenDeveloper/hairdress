@@ -33,7 +33,7 @@
                                     <if condition="empty($course.thumb)">
                                         <img src="__TMPL__/public/assets/images/default-thumbnail.png" id="thumbnail-preview" width="135" style="cursor: pointer"/>
                                         <else/>
-                                        <img src="{:cmf_get_image_preview_url($course.thumb)}" id="thumbnail-preview" width="135" style="cursor: pointer"/>
+                                        <img src="{$course.thumb_url}" id="thumbnail-preview" width="135" style="cursor: pointer"/>
                                     </if>
                                 </a>
                                 <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">

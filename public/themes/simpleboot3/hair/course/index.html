@@ -1,0 +1,66 @@
+<include file="hair@public/head"/>
+<header class='demos-header'>
+    <h1 class="demos-title">教程</h1>
+</header>
+<div class="page__bd">
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd" id="course_list">
+            <foreach name="courses" item="course">
+                <a href="{:cmf_url('hair/Course/detail',array('id'=>$course['id']))}" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__hd">
+                        <img class="weui-media-box__thumb" src="{$course.thumb_url}" alt="">
+                    </div>
+                    <div class="weui-media-box__bd">
+                        <h4 class="weui-media-box__title">{$course.title}</h4>
+                        <p class="weui-media-box__desc">{$course.excerpt}</p>
+                    </div>
+                </a>
+            </foreach>
+        </div>
+    </div>
+</div>
+<div class="weui-loadmore" id="infinite_view">
+    <i class="weui-loading"></i>
+    <span class="weui-loadmore__tips">正在加载</span>
+</div>
+<include file="hair@public/foot"/>
+<script>
+    $(function () {
+        $('#infinite_view').hide();
+        var loading = false;
+        var page    = 1;
+        $(document.body).infinite().on("infinite", function () {
+            if (loading) return;
+            loading = true;
+            page++;
+            $('#infinite_view').show();
+            $.post("{:url('hair/Course/getMore')}", {page : page}, function (ret) {
+                if (ret.code) {
+                    for (let vo of ret.data) {
+                        $('#course_list').append(
+                            "<a href=\"" + vo.thumb_url + "\" class=\"weui-media-box weui-media-box_appmsg\">\n" +
+                            "    <div class=\"weui-media-box__hd\">\n" +
+                            "        <img class=\"weui-media-box__thumb\" src=\"" + vo.thumb_url + "\" alt=\"\">\n" +
+                            "    </div>\n" +
+                            "    <div class=\"weui-media-box__bd\">\n" +
+                            "        <h4 class=\"weui-media-box__title\">" + vo.title + "</h4>\n" +
+                            "        <p class=\"weui-media-box__desc\">" + vo.excerpt + "</p>\n" +
+                            "    </div>\n" +
+                            "</a>"
+                        );
+                    }
+                } else {
+                    $.toast(ret.msg, "forbidden");
+                    $('#infinite_view').hide();
+                    $(document.body).destroyInfinite();
+                }
+                loading = false;
+            }, 'json').error(function (err) {
+                console.log(err);
+                loading = false;
+                $('#infinite_view').hide();
+                $(document.body).destroyInfinite();
+            });
+        });
+    });
+</script>

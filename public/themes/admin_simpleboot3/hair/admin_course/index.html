@@ -55,10 +55,10 @@
                     <td><input name='list_orders[{$vo.id}]' type='text' size='3' value='{$vo.list_order}' class='input-order'></td>
                     <td><b>{$vo.id}</b></td>
                     <td>
-                        <a href="{:cmf_url('portal/Article/index',array('id'=>$vo['id']))}"
+                        <a href="{:cmf_url('hair/Course/detail',array('id'=>$vo['id']))}"
                            target="_blank">{$vo.title}</a>
                     </td>
-                    <td>{:cmf_url('portal/Article/index',array('id'=>$vo['id']), true, true)}</td>
+                    <td>{:cmf_url('hair/Course/detail',array('id'=>$vo['id']), true, true)}</td>
                     <td>{$vo.hits|default=0}</td>
                     <td>{$vo.price_str}</td>
                     <td>

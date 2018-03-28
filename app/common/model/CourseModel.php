@@ -27,6 +27,10 @@ class CourseModel extends BaseModel {
         return strtotime($value);
     }
 
+    public function getThumbUrlAttr($value, $data) {
+        return $data['thumb'] ? cmf_get_image_url($data['thumb']) : "";
+    }
+
     public function getPriceStrAttr($value, $data) {
         return $data['price'] ? $data['price'] : '免费';
     }

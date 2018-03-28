@@ -32,10 +32,6 @@ class HairBaseController extends HomeBaseController {
             $this->user    = $this->userLogin();
             $this->user_id = cmf_get_current_user_id();
         }
-        // todo 测试代码，待删除
-        $a1 = $this->request->module();
-        $a2 = $this->request->controller();
-        $a3 = $this->request->action();
         if ($this->user_id) {
             if (!($this->request->module() == 'hair' && $this->request->controller() == 'Index')) {
                 if (!cmf_user_has_register()) {
@@ -44,7 +40,6 @@ class HairBaseController extends HomeBaseController {
                 } elseif (!cmf_user_has_payed()) {
                     if (!($this->request->module() == 'hair' && $this->request->controller() == 'Pay')) {
                         session('wx_pay.from_url', $this->request->url(true));
-                        // TODO 先屏蔽该部分代码，支付完成后放开
                         $this->redirect(url('hair/pay/toolPay'));
                     }
                 }
