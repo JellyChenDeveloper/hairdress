@@ -20,6 +20,7 @@
     }
 
     .h-mask {
+        display: none;
         position: absolute;
         top: 0;
         left: 0;
@@ -181,15 +182,15 @@
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_12.jpg" alt="">
                             </div>
-                            <p class="h-text">s线</p>
+                            <p class="h-text">分区线</p>
                         </div>
                     </li>
                     <li class="h-icon fl" renderType='arrDashLine'>
                         <div class="h-one">
                             <div class="h-img-wrap">
-                                <img src="__PAGE_TOOLS__/images/icon_4.jpg" alt="">
+                                <img src="__PAGE_TOOLS__/images/icon_13.jpg" alt="">
                             </div>
-                            <p class="h-text">s虚线</p>
+                            <p class="h-text">分区虚线</p>
                         </div>
                     </li>
                     <!--  <li class="h-icon fl" renderType='renderArrow'>
@@ -325,7 +326,7 @@
                     </li>
                     <foreach name="heads" item="head">
                         <eq name="head['type']" value="1">
-                            <li class="h-icon fl">
+                           <!--  <li class="h-icon fl">
                                 <div class="h-one" data-lock="{$head['is_lock']}" data-pay="{$head['need_pay']}">
                                     <div class="h-mask">
                                         <div class="h-wrap">
@@ -343,6 +344,24 @@
                                     <div class="h-one add-ele">
                                         <img src="{$head.image}" alt="">
                                     </div>
+                                </div>
+                            </li> -->
+                            <li class="h-icon fl">
+                                <div class="h-one add-ele" data-lock="{$head['is_lock']}" data-pay="{$head['need_pay']}">
+                                    <div class="h-mask h-pay">
+                                        <div class="h-wrap">
+                                            <p class="p-price">￥{$head.price}</p>
+                                            <div>
+                                                <a class="p-btn" href="{:url('hair/pay/elementPay')}?id={$head.id}">立即购买</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="h-mask h-lock">
+                                        <div class="h-wrap">
+                                            <p class="p-price">锁定</p>
+                                        </div>
+                                    </div>
+                                        <img src="{$head.image}" alt="">
                                 </div>
                             </li>
                         </eq>
@@ -403,11 +422,11 @@
                     </p>
                 </li>
                 <li>
-                    <p class="text-c">s线</p>
+                    <p class="text-c">分区线</p>
                     <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
                 </li>
                 <li>
-                    <p class="text-c">s虚线</p>
+                    <p class="text-c">分区虚线</p>
                     <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
                 </li>
                 <!-- <li>
@@ -510,6 +529,7 @@
                 this.ctx.isDrawingMode = false;
                 this.baseSize          = this.w / 5;
                 this.initColor();
+                this.showPayOrLock();
                 this.bindEvent();
                 this.renderBG();
                 this.renderBGImg();
@@ -517,9 +537,13 @@
             bindEvent           : function () {
                 var _this = this;
                 $('.add-ele').on('click', function () {
-                    if ($(this).attr('data-add') == 1) {return false;}
+                    if ($(this).attr('data-lock') == 1 ||$(this).attr('data-pay') == 1 ) {return false;}
                     ;
                     _this.bg_add();
+                });
+                $('a.p-btn').on('click',function(){
+                   var url = $(this).attr('href');
+                   window.location.href=url; 
                 });
                 //工具头像切换
                 $('.tri-head').on('click', function () {
@@ -540,7 +564,7 @@
                 });
                 //头像点击
                 $('.m-head .h-one,.m-fun .h-one').on('click', function () {
-                    if ($(this).attr('data-add') == 1) {return false;}
+                    if ($(this).attr('data-lock') == 1 ||$(this).attr('data-pay') == 1 ) {return false;}
                     ;
                     var src    = $(this).find('img').attr('src');
                     var img1   = $(this).find('img')[0];
@@ -565,7 +589,7 @@
                 });
                 //工具点击
                 $('.m-tool li.h-icon').on('click', function () {
-                    if ($(this).find('.h-one').attr('data-add') == 1) {return false;}
+                    if ($(this).find('.h-one').attr('data-pay') == 1 || $(this).find('.h-one').attr('data-lock') == 1) {return false;}
                     ;
                     var index       = $(this).index();
                     _this.renderOBJ = $(this).attr('renderType');
@@ -699,6 +723,18 @@
                     _this.ctx.add(img);
                 });
             },
+            showPayOrLock:function(){
+                    $('.h-one,.add-ele').each(function(){
+                       var lock = $(this).attr('data-lock'); 
+                       var pay = $(this).attr('data-pay'); 
+                       if(lock==1){
+                        $(this).find('.h-lock').show();
+                       }else if(pay ==1){
+                        $(this).find('.h-pay').show();
+                       }
+                    });
+            }
+            ,
             input_img           : function (el) {
                 var _this = this;
                 this.selectPhoto(el, $(".h-input-img").val());
