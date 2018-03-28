@@ -292,60 +292,8 @@
                             <img src="__PAGE_TOOLS__/images/bg_8.png" alt="">
                         </div>
                     </li>
-                </ul>
-            </div>
-        </div>
-        <div class="m-fun m-all-tool">
-            <div class="m-inner">
-                <ul>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele" data-add='1'>
-                            <div class="h-mask">
-                                <div class="h-wrap">
-                                    <p class="p-price">锁定</p>
-                                </div>
-                            </div>
-                            <img src="__PAGE_TOOLS__/images/tool_1.png" alt="">
-                        </div>
-                    </li>
-                    <!--  <li class="h-icon fl">
-                         <div class="h-one add-ele">
-                             <img src="__PAGE_TOOLS__/images/tool_2.png" alt="">
-                         </div>
-                     </li> -->
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/tool_4.png" alt="">
-                        </div>
-                    </li>
-                    <li class="h-icon fl" style="position: relative;">
-                        <input type="file" accept="image/jpg,image/jpeg" class='h-input-img'>
-                        <div class="h-one add-ele" data-add='1'>
-                            <img src="__PAGE_TOOLS__/images/tool_3.png" alt="">
-                        </div>
-                    </li>
                     <foreach name="heads" item="head">
-                        <eq name="head['type']" value="1">
-                           <!--  <li class="h-icon fl">
-                                <div class="h-one" data-lock="{$head['is_lock']}" data-pay="{$head['need_pay']}">
-                                    <div class="h-mask">
-                                        <div class="h-wrap">
-                                            <p class="p-price">￥{$head.price}</p>
-                                            <div>
-                                                <a class="p-btn" href="{:url('hair/pay/elementPay')}?id={$head.id}">立即购买</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="h-mask">
-                                        <div class="h-wrap">
-                                            <p class="p-price">锁定</p>
-                                        </div>
-                                    </div>
-                                    <div class="h-one add-ele">
-                                        <img src="{$head.image}" alt="">
-                                    </div>
-                                </div>
-                            </li> -->
+                        <eq name="head['type']" value="0">
                             <li class="h-icon fl">
                                 <div class="h-one add-ele" data-lock="{$head['is_lock']}" data-pay="{$head['need_pay']}">
                                     <div class="h-mask h-pay">
@@ -361,7 +309,51 @@
                                             <p class="p-price">锁定</p>
                                         </div>
                                     </div>
-                                        <img src="{$head.image}" alt="">
+                                    <img src="{$head.image}" alt="">
+                                </div>
+                            </li>
+                        </eq>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+        <div class="m-fun m-all-tool">
+            <div class="m-inner">
+                <ul>
+                    <li class="h-icon fl" style="position: relative;">
+                        <input type="file" accept="image/jpg,image/jpeg" class='h-input-img'>
+                        <div class="h-one add-ele" data-add='1'>
+                            <img src="__PAGE_TOOLS__/images/tool_3.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/tool_1.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/tool_4.png" alt="">
+                        </div>
+                    </li>
+                    <foreach name="heads" item="head">
+                        <eq name="head['type']" value="1">
+                            <li class="h-icon fl">
+                                <div class="h-one add-ele" data-lock="{$head['is_lock']}" data-pay="{$head['need_pay']}">
+                                    <div class="h-mask h-pay">
+                                        <div class="h-wrap">
+                                            <p class="p-price">￥{$head.price}</p>
+                                            <div>
+                                                <a class="p-btn" href="{:url('hair/pay/elementPay')}?id={$head.id}">立即购买</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="h-mask h-lock">
+                                        <div class="h-wrap">
+                                            <p class="p-price">锁定</p>
+                                        </div>
+                                    </div>
+                                    <img src="{$head.image}" alt="">
                                 </div>
                             </li>
                         </eq>
@@ -537,13 +529,13 @@
             bindEvent           : function () {
                 var _this = this;
                 $('.add-ele').on('click', function () {
-                    if ($(this).attr('data-lock') == 1 ||$(this).attr('data-pay') == 1 ) {return false;}
+                    if ($(this).attr('data-lock') == 1 || $(this).attr('data-pay') == 1) {return false;}
                     ;
                     _this.bg_add();
                 });
-                $('a.p-btn').on('click',function(){
-                   var url = $(this).attr('href');
-                   window.location.href=url; 
+                $('a.p-btn').on('click', function () {
+                    var url              = $(this).attr('href');
+                    window.location.href = url;
                 });
                 //工具头像切换
                 $('.tri-head').on('click', function () {
@@ -564,7 +556,7 @@
                 });
                 //头像点击
                 $('.m-head .h-one,.m-fun .h-one').on('click', function () {
-                    if ($(this).attr('data-lock') == 1 ||$(this).attr('data-pay') == 1 ) {return false;}
+                    if ($(this).attr('data-lock') == 1 || $(this).attr('data-pay') == 1) {return false;}
                     ;
                     var src    = $(this).find('img').attr('src');
                     var img1   = $(this).find('img')[0];
@@ -723,16 +715,16 @@
                     _this.ctx.add(img);
                 });
             },
-            showPayOrLock:function(){
-                    $('.h-one,.add-ele').each(function(){
-                       var lock = $(this).attr('data-lock'); 
-                       var pay = $(this).attr('data-pay'); 
-                       if(lock==1){
+            showPayOrLock       : function () {
+                $('.h-one,.add-ele').each(function () {
+                    var lock = $(this).attr('data-lock');
+                    var pay  = $(this).attr('data-pay');
+                    if (lock == 1) {
                         $(this).find('.h-lock').show();
-                       }else if(pay ==1){
+                    } else if (pay == 1) {
                         $(this).find('.h-pay').show();
-                       }
-                    });
+                    }
+                });
             }
             ,
             input_img           : function (el) {
