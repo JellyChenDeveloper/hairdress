@@ -20,41 +20,9 @@ class PayController extends HairBaseController {
             'price' => 200,
             'desc'  => '该工具为付费产品，必须支付后方能使用，一次付费终生使用。',
         ];
-        $this->assign('data', $data);
-        $out_trade_no = config('we_chat.wx_sdk_config')['payment']['mch_id'] . date("YmdHis") . cmf_generate_code(8);
-        $order_info   = [
-            'body'         => '美发工具-付费开通',
-            'detail'       => $data['name'],
-            'out_trade_no' => $out_trade_no,
-            'total_fee'    => 1/*$data['price'] * 100*/,
-            'notify_url'   => url('hair/pay/notify', '', true, true), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
-            'trade_type'   => 'JSAPI',
-            'openid'       => $this->user['wx_openid'],
-        ];
+        $this->pub_pay($data, 0);
 
-        $order  = $this->wecharService->pay()->order;
-        $result = $order->unify($order_info);
-        if ($result['return_code'] == 'SUCCESS' && $result['return_msg'] == 'OK') {
-            $prepayId = $result['prepay_id'];
-            $jssdk    = $this->wecharService->pay()->jssdk;
-            $pay_json = $jssdk->bridgeConfig($prepayId);
-            $data     = [
-                'user_id'      => $this->user_id,
-                'body'         => $order_info['body'],
-                'detail'       => $order_info['detail'],
-                'out_trade_no' => $order_info['out_trade_no'],
-                'total_fee'    => $order_info['total_fee'],
-                'openid'       => $order_info['openid'],
-                'prepay_id'    => $prepayId,
-                'type'         => 0,
-            ];
-            model('Order')->save($data);
-
-            $this->assign('pay_json', $pay_json);
-            $this->assign('wx_pay_from_url', session('wx_pay.from_url'));
-        }
-
-        return $this->fetch();
+        return $this->fetch('toolpay');
     }
 
     public function elementPay() {
@@ -71,45 +39,75 @@ class PayController extends HairBaseController {
             'title' => '付费组件',
             'name'  => $element['name'],
             'price' => $element['price'],
-            'desc'  => '',
+            'desc'  => '付费组件，一次付费终生使用',
         ];
-        $this->assign('data', $data);
+        $this->pub_pay($data, 1, $element['id']);
 
+        return $this->fetch('toolpay');
+    }
+
+    public function coursePay() {
+        $course_id = $this->request->param('id');
+        if (is_null($course_id) || $course_id <= 0) {
+            $this->error('参数错误');
+        }
+        $course = model('Course')->get($course_id);
+        if (is_null($course) || empty($course)) {
+            $this->error('参数错误');
+        }
+
+        $data = [
+            'title' => '付费教程',
+            'name'  => $course['title'],
+            'price' => $course['price'],
+            'desc'  => $course['excerpt'],
+        ];
+        $this->pub_pay($data, 2, $course['id']);
+
+        return $this->fetch('toolpay');
+    }
+
+    /**
+     * @param $data
+     * @param $element_id
+     *
+     * @throws \EasyWeChat\Kernel\Exceptions\InvalidConfigException
+     */
+    private function pub_pay($data, $type, $element_id = 0) {
         $out_trade_no = config('we_chat.wx_sdk_config')['payment']['mch_id'] . date("YmdHis") . cmf_generate_code(8);
         $order_info   = [
-            'body'         => '付费组件',
-            'detail'       => $element['name'],
+            'body'         => $data['title'],
+            'detail'       => $data['name'],
             'out_trade_no' => $out_trade_no,
-            'total_fee'    => $element['price'] * 100,
+            'total_fee'    => $data['price'] * 100,
             'notify_url'   => url('hair/pay/notify', '', true, true), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
             'trade_type'   => 'JSAPI',
             'openid'       => $this->user['wx_openid'],
         ];
 
-        $order  = $this->wecharService->pay()->order;
-        $result = $order->unify($order_info);
+        $result = $this->wecharService->pay()->order->unify($order_info);
         if ($result['return_code'] == 'SUCCESS' && $result['return_msg'] == 'OK') {
             $prepayId = $result['prepay_id'];
             $jssdk    = $this->wecharService->pay()->jssdk;
             $pay_json = $jssdk->bridgeConfig($prepayId);
-            $data     = [
+            $order    = [
                 'user_id'      => $this->user_id,
-                'element_id'   => $element['id'],
+                'element_id'   => $element_id,
                 'body'         => $order_info['body'],
                 'detail'       => $order_info['detail'],
                 'out_trade_no' => $order_info['out_trade_no'],
                 'total_fee'    => $order_info['total_fee'],
                 'openid'       => $order_info['openid'],
                 'prepay_id'    => $prepayId,
-                'type'         => 1,
+                'type'         => $type,
             ];
-            model('Order')->save($data);
-
-            $this->assign('pay_json', $pay_json);
-            $this->assign('wx_pay_from_url', session('wx_pay.from_url'));
+            model('Order')->save($order);
+        } else {
+            $pay_json = '';
         }
-
-        return $this->fetch('toolpay');
+        $this->assign('data', $data);
+        $this->assign('pay_json', $pay_json);
+        $this->assign('wx_pay_from_url', session('wx_pay.from_url'));
     }
 
     /**

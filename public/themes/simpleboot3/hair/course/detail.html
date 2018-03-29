@@ -14,7 +14,14 @@
     <h1 class="demos-title">{$course.title}</h1>
 </header>
 <article class="weui-article" id="article_content">
-    {$course.content}
+    <eq name="course['need_pay']" value="0">
+        {$course.content}
+        <else/>
+        {$course.content|strip_tags|mb_substr=0,100,'UTF-8'}
+        <br/>
+        <br/>
+        <div class="weui-cells__title" style="text-align: center;">付费{$course.price}元查看全部内容</div>
+        <a href="{:url('hair/pay/coursePay')}?id={$course.id}" class="weui-btn weui-btn_primary">支付</a>
+    </eq>
 </article>
-
 <include file="hair@public/foot"/>

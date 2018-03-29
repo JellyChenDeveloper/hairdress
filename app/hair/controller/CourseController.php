@@ -43,6 +43,10 @@ class CourseController extends HairBaseController {
         }
 
         $course = model('Course')->get($id);
+        if ($course) {
+            $order              = model('Order')->where(['user_id' => $this->user_id, 'type' => 2, 'pay_time' => ['gt', 0], 'element_id' => $course['id']])->find();
+            $course['need_pay'] = $course['price'] > 0 && empty($order);
+        }
         $this->assign('course', $course);
 
         return $this->fetch();
