@@ -9,14 +9,12 @@
  * @version        1.0
  */
 
-namespace app\admin\controller;
-
-use cmf\controller\AdminBaseController;
+namespace app\hair\controller;
 
 /**
  * Class ElementController
  *
- * @package app\admin\controller
+ * @package app\hair\controller
  * @adminMenuRoot(
  *     'name'   => '组件管理',
  *     'action' => 'default',
@@ -27,7 +25,7 @@ use cmf\controller\AdminBaseController;
  *     'remark' => '组件管理'
  * )
  */
-class ElementController extends AdminBaseController {
+class AdminElementController extends AdminHairBaseController {
 
     /**
      * 组件列表

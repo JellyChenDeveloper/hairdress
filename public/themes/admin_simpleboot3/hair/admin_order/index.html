@@ -3,9 +3,9 @@
 <body>
 <div class="wrap js-check-wrap">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="{:url('order/index')}">订单列表</a></li>
+        <li class="active"><a href="{:url('AdminOrder/index')}">订单列表</a></li>
     </ul>
-    <form class="well form-inline margin-top-20" method="post" action="{:url('order/index')}">
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminOrder/index')}">
         支付状态：
         <select class="form-control" name="has_payed" style="width: 140px;">
             <foreach name="Think.config.property.has_payed_select" item="vo">
@@ -14,7 +14,7 @@
             </foreach>
         </select>
         <input type="submit" class="btn btn-primary" value="搜索"/>
-        <a class="btn btn-danger" href="{:url('order/index')}">清空</a>
+        <a class="btn btn-danger" href="{:url('AdminOrder/index')}">清空</a>
     </form>
     <table class="table table-hover table-bordered">
         <thead>
@@ -42,7 +42,7 @@
                 <td>{$vo.type_str}</td>
                 <td>{$vo.pay_time_str}</td>
                 <td>
-                    <a href='{:url("order/detail",array("id"=>$vo["id"]))}'>详情</a>
+                    <a href='{:url("AdminOrder/detail",array("id"=>$vo["id"]))}'>详情</a>
                 </td>
             </tr>
         </foreach>

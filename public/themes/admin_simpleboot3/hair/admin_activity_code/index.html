@@ -3,10 +3,10 @@
 <body>
 <div class="wrap">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="{:url('ActivityCode/index')}">激活码管理</a></li>
-        <li><a href="{:url('ActivityCode/generate')}">生成一级激活码</a></li>
+        <li class="active"><a href="{:url('AdminActivityCode/index')}">激活码管理</a></li>
+        <li><a href="{:url('AdminActivityCode/generate')}">生成一级激活码</a></li>
     </ul>
-    <form class="well form-inline margin-top-20" method="post" action="{:url('ActivityCode/index')}">
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminActivityCode/index')}">
         激活码:
         <input type="text" class="form-control" name="code" style="width: 150px;" value="{:input('param.code/s','')}" placeholder="请输入激活码">
         级别：
@@ -25,7 +25,7 @@
         </select>
         <input type="hidden" name="parent_id" value="{:input('param.parent_id/s','')}">
         <input type="submit" class="btn btn-primary" value="搜索"/>
-        <a class="btn btn-danger" href="{:url('ActivityCode/index')}">清空</a>
+        <a class="btn btn-danger" href="{:url('AdminActivityCode/index')}">清空</a>
     </form>
     <form method="post" class="js-ajax-form">
         <table class="table table-hover table-bordered table-list">
@@ -48,12 +48,12 @@
             <foreach name="codes" item="vo">
                 <tr>
                     <td>{$vo.id}</td>
-                    <td><a href="{:url('ActivityCode/index',['parent_id'=>$vo.parent_id])}">{$vo.parent_code}</a></td>
+                    <td><a href="{:url('AdminActivityCode/index',['parent_id'=>$vo.parent_id])}">{$vo.parent_code}</a></td>
                     <td>{$vo.user_name_str}</td>
                     <td>{$vo.code}</td>
                     <td>{$vo.verify}</td>
                     <td>{$vo.level_str}</td>
-                    <td><a href="{:url('ActivityCode/index',['parent_id'=>$vo.id])}">{$vo.child_num_str}</a></td>
+                    <td><a href="{:url('AdminActivityCode/index',['parent_id'=>$vo.id])}">{$vo.child_num_str}</a></td>
                     <td>
                         <php>$str=$vo['level']==1?$vo['rate'].'% '.$vo['rate2'].'%':$vo['rate'].'%'</php>
                         {$str}
@@ -61,9 +61,9 @@
                     <td>{$vo.count}</td>
                     <td>{$vo.create_time_str}</td>
                     <td>
-                        <a href='{:url("ActivityCode/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
+                        <a href='{:url("AdminActivityCode/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
                         <eq name="vo['level']" value="1">
-                            <a href='{:url("ActivityCode/generate",array("parent_id"=>$vo["id"]))}'>生成二级激活码</a>
+                            <a href='{:url("AdminActivityCode/generate",array("parent_id"=>$vo["id"]))}'>生成二级激活码</a>
                         </eq>
                     </td>
                 </tr>

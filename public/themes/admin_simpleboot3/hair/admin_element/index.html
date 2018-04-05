@@ -3,10 +3,10 @@
 <body>
 <div class="wrap">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="{:url('Element/index')}">组件管理</a></li>
-        <li><a href="{:url('Element/add')}">添加组件</a></li>
+        <li class="active"><a href="{:url('AdminElement/index')}">组件管理</a></li>
+        <li><a href="{:url('AdminElement/add')}">添加组件</a></li>
     </ul>
-    <form class="well form-inline margin-top-20" method="post" action="{:url('Element/index')}">
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminElement/index')}">
         组件名称:
         <input type="text" class="form-control" name="name" style="width: 150px;" value="{:input('request.name/s','')}" placeholder="请输入组件名称">
         组件类型：
@@ -17,9 +17,9 @@
             </foreach>
         </select>
         <input type="submit" class="btn btn-primary" value="搜索"/>
-        <a class="btn btn-danger" href="{:url('Element/index')}">清空</a>
+        <a class="btn btn-danger" href="{:url('AdminElement/index')}">清空</a>
     </form>
-    <form method="post" class="js-ajax-form" action="{:url('Element/listOrder')}">
+    <form method="post" class="js-ajax-form" action="{:url('AdminElement/listOrder')}">
         <div class="table-actions">
             <button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>
         </div>
@@ -47,8 +47,8 @@
                     <td>{$vo.price_str}</td>
                     <td>{$vo.is_lock_str}</td>
                     <td>
-                        <a href='{:url("Element/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
-                        <a href="{:url('Element/deletePost',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="是否删除该组件">删除</a>
+                        <a href='{:url("AdminElement/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
+                        <a href="{:url('AdminElement/deletePost',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="是否删除该组件">删除</a>
                     </td>
                 </tr>
             </foreach>

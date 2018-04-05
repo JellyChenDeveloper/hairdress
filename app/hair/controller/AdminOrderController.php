@@ -9,14 +9,12 @@
  * @version        1.0
  */
 
-namespace app\admin\controller;
-
-use cmf\controller\AdminBaseController;
+namespace app\hair\controller;
 
 /**
  * Class OrderController
  *
- * @package app\admin\controller
+ * @package app\hair\controller
  * @adminMenuRoot(
  *     'name'   => '订单管理',
  *     'action' => 'default',
@@ -27,7 +25,7 @@ use cmf\controller\AdminBaseController;
  *     'remark' => '订单管理'
  * )
  */
-class OrderController extends AdminBaseController {
+class AdminOrderController extends AdminHairBaseController {
 
     /**
      * 订单列表

@@ -6,15 +6,12 @@
  * Time: 14:30
  */
 
-namespace app\admin\controller;
-
-
-use cmf\controller\AdminBaseController;
+namespace app\hair\controller;
 
 /**
  * Class WxUserInfoController
  *
- * @package app\admin\controller
+ * @package app\hair\controller
  * @adminMenuRoot(
  *     'name'   => '微信用户管理',
  *     'action' => 'default',
@@ -25,7 +22,7 @@ use cmf\controller\AdminBaseController;
  *     'remark' => '微信用户管理'
  * )
  */
-class WxUserInfoController extends AdminBaseController {
+class AdminWxUserInfoController extends AdminHairBaseController {
 
     /**
      * 微信用户

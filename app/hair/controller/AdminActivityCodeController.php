@@ -9,15 +9,12 @@
  * @version        1.0
  */
 
-namespace app\admin\controller;
-
-use cmf\controller\AdminBaseController;
-use think\Validate;
+namespace app\hair\controller;
 
 /**
  * Class ElementController
  *
- * @package app\admin\controller
+ * @package app\hair\controller
  * @adminMenuRoot(
  *     'name'   => '激活码管理',
  *     'action' => 'default',
@@ -28,7 +25,7 @@ use think\Validate;
  *     'remark' => '激活码管理'
  * )
  */
-class ActivityCodeController extends AdminBaseController {
+class AdminActivityCodeController extends AdminHairBaseController {
 
     /**
      * 激活码列表
