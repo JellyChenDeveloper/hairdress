@@ -33,4 +33,6 @@ return array(
     'EasyWeChat\\Console\\' => array($vendorDir . '/easywechat/console/src'),
     'EasyWeChat\\' => array($vendorDir . '/overtrue/wechat/src'),
     'EasyWeChatComposer\\' => array($vendorDir . '/easywechat-composer/easywechat-composer/src'),
+    'Aliyun\\Test\\' => array($vendorDir . '/zeonwang/aliyun-dysms-php-sdk/tests'),
+    'Aliyun\\' => array($vendorDir . '/zeonwang/aliyun-dysms-php-sdk/lib'),
 );

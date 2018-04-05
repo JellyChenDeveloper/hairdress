@@ -26,7 +26,8 @@
         "ezyang/htmlpurifier": "^4.9",
         "topthink/think-queue": "^1.1.4",
         "overtrue/wechat":"~4.0",
-        "easywechat/console": "^1.0"
+        "easywechat/console": "^1.0",
+        "zeonwang/aliyun-dysms-php-sdk": "^1.0"
     },
     "extra": {
     },
