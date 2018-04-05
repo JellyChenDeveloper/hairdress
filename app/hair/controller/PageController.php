@@ -36,7 +36,7 @@ class PageController extends HairBaseController {
         ]);
         $share     = [
             'js_config'   => $js_config,
-            'share_title' => '美发工具',
+            'share_title' => $this->setting['software_name'],
             'share_desc'  => '分享描述',
             'share_link'  => url('hair/index/index', '', true, true),
             'share_img'   => $page->avatar_url,

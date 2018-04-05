@@ -1,0 +1,31 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('AdminSetting/index')}">参数设置</a></li>
+        <li><a href="{:url('AdminSetting/content')}">首页内容</a></li>
+    </ul>
+    <form class="form-horizontal js-ajax-form margin-top-20" method="post" action="{:url('AdminSetting/postIndex')}">
+        <div class="form-group">
+            <label for="input-software_name" class="col-sm-2 control-label">软件名称</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-software_name" name="software_name" value="{$software_name}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-software_price" class="col-sm-2 control-label">软件价格</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-software_price" name="software_price" value="{$software_price|default=0}">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

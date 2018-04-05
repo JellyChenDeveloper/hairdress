@@ -16,8 +16,8 @@ class PayController extends HairBaseController {
     public function toolPay() {
         $data = [
             'title' => '付费开通',
-            'name'  => '美发工具',
-            'price' => 200,
+            'name'  => $this->setting['software_name'],
+            'price' => $this->setting['software_price'],
             'desc'  => '该工具为付费产品，必须支付后方能使用，一次付费终生使用。',
         ];
         $this->pub_pay($data, 0);

@@ -25,9 +25,14 @@ class HairBaseController extends HomeBaseController {
 
     protected $user;
 
+    protected $setting;
+
     public function _initialize() {
         parent::_initialize();
         $this->wecharService = WechatService::instance();
+        $this->setting = model('Setting')->get(1);
+        $this->assign('setting', $this->setting);
+
         if ($this->request->path() != strtolower('hair/index/wxauth')) {
             $this->user    = $this->userLogin();
             $this->user_id = cmf_get_current_user_id();

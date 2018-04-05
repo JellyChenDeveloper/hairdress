@@ -1,17 +1,11 @@
 <include file="hair@public/head"/>
 
 <header class='demos-header'>
-    <h1 class="demos-title">美发工具</h1>
+    <h1 class="demos-title">{$setting.software_name}</h1>
 </header>
 <article class="weui-article">
     <section>
-        <p>
-            一些文字说明，一些文字说明，一些文字说明，一些文字说明，一些文字说明，一些文字说明，
-            一些文字说明，一些文字说明，一些文字说明，一些文字说明，一些文字说明，一些文字说明，
-        </p>
-        <p>
-            <img src="__WE_IMAGES__/pic_article.png" alt="">
-        </p>
+        {$setting.content}
     </section>
     <a href="{:url('hair/project/index')}" class="weui-btn weui-btn_primary">进入</a>
 </article>
