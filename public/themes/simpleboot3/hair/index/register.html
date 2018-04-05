@@ -6,34 +6,23 @@
 <br>
 <br>
 <div class="weui-cells weui-cells_form">
-
-    <!--
     <div class="weui-cell weui-cell_vcode">
-        <div class="weui-cell__hd">
-            <label class="weui-label">手机号</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="tel" placeholder="请输入手机号">
-        </div>
-        <div class="weui-cell__ft">
-            <button class="weui-vcode-btn">获取验证码</button>
-        </div>
-    </div>
-
-    <div class="weui-cell">
-        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入验证码">
-        </div>
-    </div>
-    -->
-
-    <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
         <div class="weui-cell__bd">
             <input id="mobile" class="weui-input" type="tel" placeholder="请输入手机号" value="{$user.mobile}">
         </div>
+        <div class="weui-cell__ft">
+            <button class="weui-vcode-btn" id="get_sms_code">获取验证码</button>
+        </div>
     </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+        <div class="weui-cell__bd">
+            <input id="sms_code" class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入验证码">
+        </div>
+    </div>
+</div>
+<div class="weui-cells weui-cells_form">
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">邀请码</label></div>
         <div class="weui-cell__bd">
@@ -52,6 +41,7 @@
             $.post("{:url('hair/index/doRegister')}", {
                 mobile         : $('#mobile').val(),
                 activation_key : $('#activation_key').val(),
+                sms_code       : $('#sms_code').val(),
                 id             : $('#id').val()
             }, function (ret) {
                 if (ret.code) {
@@ -65,5 +55,44 @@
                 console.log(err);
             });
         });
+
+
+        $("#get_sms_code").click(function () {
+            var InterValObj;
+            var curCount = 60;
+            var _this    = $(this);
+            //设置button效果，开始计时
+            _this.attr("disabled", "true");
+            _this.html(curCount + " 秒");
+            InterValObj = window.setInterval(function () {
+                if (curCount == 0) {
+                    window.clearInterval(InterValObj);//停止计时器
+                    _this.removeAttr("disabled");//启用按钮
+                    _this.html("获取验证码");
+                }
+                else {
+                    curCount--;
+                    _this.html(curCount + " 秒");
+                }
+            }, 1000); //启动计时器，1秒执行一次
+
+            $.post("{:url('hair/index/sendSmsCode')}", {
+                mobile : $('#mobile').val(),
+                id     : $('#id').val()
+            }, function (ret) {
+                if (ret.code) {
+                    $.toast(ret.msg, 'success');
+                } else {
+                    $.toast(ret.msg, "forbidden");
+                }
+            }, 'json').error(function (err) {
+                console.log(err);
+            });
+        });
+
+        //timer处理函数
+        function SetRemainTime() {
+
+        }
     });
 </script>

@@ -51,9 +51,9 @@ class ProjectController extends HairBaseController {
         }
 
         $result = $project->delete();
-        if($result == 1){
+        if ($result == 1) {
             $this->success(lang('DELETE_SUCCESS'));
-        }else{
+        } else {
             $this->error(lang('DELETE_FAILED'));
         }
     }

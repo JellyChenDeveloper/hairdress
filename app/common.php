@@ -84,7 +84,8 @@ function cmf_generate_code($length = 8, $characters = '0123456789') {
  *
  * @param int $user_id 用户ID
  *
- * @return int
+ * @return float|int
+ * @throws \think\exception\DbException
  */
 function cmf_get_total_money($user_id) {
     $user = model('WechatUser')->get($user_id);
@@ -102,7 +103,8 @@ function cmf_get_total_money($user_id) {
  *
  * @param int $user_id 用户ID
  *
- * @return int
+ * @return float|int
+ * @throws \think\exception\DbException
  */
 function cmf_get_last_money($user_id) {
     $total_money = cmf_get_total_money($user_id);
@@ -148,4 +150,42 @@ function cmf_check_transfer_order($user_id = 0) {
             }
         }
     }
+}
+
+use Aliyun\Core\Config;
+use Aliyun\Core\Profile\DefaultProfile;
+use Aliyun\Core\DefaultAcsClient;
+use Aliyun\Api\Sms\Request\V20170525\SendSmsRequest;
+
+/**
+ * 发送短信验证码
+ *
+ * @param $code
+ * @param $mobile
+ *
+ * @return mixed|SimpleXMLElement
+ */
+function cmf_send_sms_code($code, $mobile) {
+    Config::load();
+    $product         = "Dysmsapi";
+    $domain          = "dysmsapi.aliyuncs.com";
+    $accessKeyId     = config('ali_sms.AccessKeyId');
+    $accessKeySecret = config('ali_sms.AccessKeySecret');
+    $region          = config('ali_sms.region');
+    $endPointName    = config('ali_sms.endPointName');
+    static $acsClient;
+    if ($acsClient == null) {
+        $profile = DefaultProfile::getProfile($region, $accessKeyId, $accessKeySecret);
+        DefaultProfile::addEndpoint($endPointName, $region, $product, $domain);
+        $acsClient = new DefaultAcsClient($profile);
+    }
+    $request = new SendSmsRequest();
+    //$request->setProtocol("https");
+    $request->setPhoneNumbers($mobile);
+    $request->setSignName(config('ali_sms.signName'));
+    $request->setTemplateCode(config('ali_sms.templateCode'));
+    $request->setTemplateParam(json_encode(array("code" => $code,), JSON_UNESCAPED_UNICODE));
+    $acsResponse = $acsClient->getAcsResponse($request);
+
+    return $acsResponse->Code == 'OK';
 }
