@@ -29,4 +29,8 @@ class SystemController extends HairBaseController {
 
         $this->redirect(url('hair/index/index'));
     }
+
+    public function shareTest() {
+        return $this->fetch();
+    }
 }
