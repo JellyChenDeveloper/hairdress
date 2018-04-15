@@ -388,23 +388,23 @@
                         请选择颜色:<input class="s-select color" type="hidden" key='stroke ' value="#000">
                     </p>
                 </li>
-                <li  >
+                <li>
                     <p class="text-c">发片2</p>
                     <p>
-                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill' >
+                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill'>
                     </p>
                     <p>透明度：<select class="s-select" key='opacity' id="">
-                            <option value="1">100%</option>
-                            <option value="0.9">90%</option>
-                            <option value="0.8">80%</option>
-                            <option value="0.7">70%</option>
-                            <option value="0.6">60%</option>
-                            <option value="0.5">50%</option>
-                            <option value="0.4">40%</option>
-                            <option value="0.3">30%</option>
-                            <option value="0.2">20%</option>
-                            <option value="0.1">10%</option>
-                            </select>
+                        <option value="1">100%</option>
+                        <option value="0.9">90%</option>
+                        <option value="0.8">80%</option>
+                        <option value="0.7">70%</option>
+                        <option value="0.6">60%</option>
+                        <option value="0.5">50%</option>
+                        <option value="0.4">40%</option>
+                        <option value="0.3">30%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.1">10%</option>
+                    </select>
                     </p>
                 </li>
                 <li>
@@ -734,7 +734,7 @@
                     _this.ctx.add(img);
                 });
 
-                $('body').on("touchmove",function(e){
+                $('body').on("touchmove", function (e) {
                     e.preventDefault();
                 });
             },
@@ -1595,131 +1595,133 @@
                         canvas.renderAll();
                     });
                 },
-                renderLigature2:function(option){
-                    var canvas = this.ctx;
-                    var _this=this;
+                renderLigature2   : function (option) {
+                    var canvas                      = this.ctx;
+                    var _this                       = this;
                     fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
-                    var _this =this;
-                    // option.fill='transparent';
-                    function makeCircle(left, top, point_arr,line) {
-                                var c = new fabric.Circle({
-                                  left: left,
-                                  top: top,
-                                  strokeWidth: 5,
-                                  radius: 12,
-                                  fill: 'transparent',
-                                  stroke: '#666',
-                                });
-                                c.hasControls = c.hasBorders = false;
+                    var _this = this;
 
-                                c.point_arr = point_arr;
-                                c.c_line=line;
-                                _this.controllerCircleArr.push(c);
-                                return c;
-                      };
-                    function makeCurvePoint(left, top, c_arr,line) {
+                    // option.fill='transparent';
+                    function makeCircle(left, top, point_arr, line) {
+                        var c         = new fabric.Circle({
+                            left        : left,
+                            top         : top,
+                            strokeWidth : 5,
+                            radius      : 12,
+                            fill        : 'transparent',
+                            stroke      : '#666',
+                        });
+                        c.hasControls = c.hasBorders = false;
+
+                        c.point_arr = point_arr;
+                        c.c_line    = line;
+                        _this.controllerCircleArr.push(c);
+                        return c;
+                    };
+
+                    function makeCurvePoint(left, top, c_arr, line) {
                         var c = new fabric.Circle({
-                          left: left,
-                          top: top,
-                          strokeWidth: 8,
-                          radius: 14,
-                          fill: 'transparent',
-                          // fill: '#fff',
-                          stroke: '#666'
+                            left        : left,
+                            top         : top,
+                            strokeWidth : 8,
+                            radius      : 14,
+                            fill        : 'transparent',
+                            // fill: '#fff',
+                            stroke      : '#666'
                         });
 
                         c.hasBorders = c.hasControls = false;
 
-                        c.c_arr = c_arr;
-                        c.c_line=line;
+                        c.c_arr  = c_arr;
+                        c.c_line = line;
                         _this.controllerCircleArr.push(c);
                         return c;
-                      }
-                    
-                      var line_2 = new fabric.Path('M 65 0 Q 100, 100, 200, L 65 0 Q 100, 100, 200, L 65 0 Q 100, 100, 200, L 65 0 Q 100, 100, 200, Z', option);
-                      this.currentObj=line_2;
-                      line_2.selectable = false;
-                      var pointArr=[
-                        [this.w*(1/3),this.h/2+50,this.w*(1/3),this.h/2-50],
-                        [this.w*(1/3),this.h/2-50,this.w*(2/3),this.h/2-50],
-                        [this.w*(2/3),this.h/2-50,this.w*(2/3),this.h/2+50],
-                        [this.w*(2/3),this.h/2+50,this.w*(1/3),this.h/2+50]
-                      ];
-                      var controllArr=[
-                        [this.w*1/4,this.h/2],
-                        [this.w/2,this.h/2-75],
-                        [this.w*3/4,this.h/2],
-                        [this.w/2,this.h/2+75]
-                      ];
-                      console.log(pointArr);
-                      console.log(line_2.path);
-                      line_2.path[0][1] = pointArr[0][0];
-                      line_2.path[0][2] = pointArr[0][1];
+                    }
 
-                      line_2.path[1][1]=controllArr[0][0];
-                      line_2.path[1][2]=controllArr[0][1];
-                      line_2.path[1][3]=pointArr[0][2];
-                      line_2.path[1][4]=pointArr[0][3];
+                    var line_2        = new fabric.Path('M 65 0 Q 100, 100, 200, L 65 0 Q 100, 100, 200, L 65 0 Q 100, 100, 200, L 65 0 Q 100, 100, 200, Z', option);
+                    this.currentObj   = line_2;
+                    line_2.selectable = false;
+                    var pointArr      = [
+                        [this.w * (1 / 3), this.h / 2 + 50, this.w * (1 / 3), this.h / 2 - 50],
+                        [this.w * (1 / 3), this.h / 2 - 50, this.w * (2 / 3), this.h / 2 - 50],
+                        [this.w * (2 / 3), this.h / 2 - 50, this.w * (2 / 3), this.h / 2 + 50],
+                        [this.w * (2 / 3), this.h / 2 + 50, this.w * (1 / 3), this.h / 2 + 50]
+                    ];
+                    var controllArr   = [
+                        [this.w * 1 / 4, this.h / 2],
+                        [this.w / 2, this.h / 2 - 75],
+                        [this.w * 3 / 4, this.h / 2],
+                        [this.w / 2, this.h / 2 + 75]
+                    ];
+                    console.log(pointArr);
+                    console.log(line_2.path);
+                    line_2.path[0][1] = pointArr[0][0];
+                    line_2.path[0][2] = pointArr[0][1];
 
-
-                      line_2.path[2][1] = pointArr[1][0];
-                      line_2.path[2][2] = pointArr[1][1];
-
-                      line_2.path[3][1]=controllArr[1][0];
-                      line_2.path[3][2]=controllArr[1][1];
-                      line_2.path[3][3]=pointArr[1][2];
-                      line_2.path[3][4]=pointArr[1][3];
+                    line_2.path[1][1] = controllArr[0][0];
+                    line_2.path[1][2] = controllArr[0][1];
+                    line_2.path[1][3] = pointArr[0][2];
+                    line_2.path[1][4] = pointArr[0][3];
 
 
-                      line_2.path[4][1] = pointArr[2][0];
-                      line_2.path[4][2] = pointArr[2][1];
+                    line_2.path[2][1] = pointArr[1][0];
+                    line_2.path[2][2] = pointArr[1][1];
 
-                      line_2.path[5][1]=controllArr[2][0];
-                      line_2.path[5][2]=controllArr[2][1];
-                      line_2.path[5][3]=pointArr[2][2];
-                      line_2.path[5][4]=pointArr[2][3];
-
-
-                      line_2.path[6][1] = pointArr[3][0];
-                      line_2.path[6][2] = pointArr[3][1];
-
-                      line_2.path[7][1]=controllArr[3][0];
-                      line_2.path[7][2]=controllArr[3][1];
-                      line_2.path[7][3]=pointArr[3][2];
-                      line_2.path[7][4]=pointArr[3][3];
+                    line_2.path[3][1] = controllArr[1][0];
+                    line_2.path[3][2] = controllArr[1][1];
+                    line_2.path[3][3] = pointArr[1][2];
+                    line_2.path[3][4] = pointArr[1][3];
 
 
-                      var po1=makeCircle(pointArr[0][0],pointArr[0][1],[[0,1],[0,2],[7,3],[7,4]],line_2);
-                      po1.name='point_2';
-                      var po2=makeCircle(pointArr[1][0],pointArr[1][1],[[2,1],[2,2],[1,3],[1,4]],line_2);
-                      po2.name='point_2';
-                      var po3=makeCircle(pointArr[2][0],pointArr[2][1],[[4,1],[4,2],[3,3],[3,4]],line_2);
-                      po3.name='point_2';
-                      var po4=makeCircle(pointArr[3][0],pointArr[3][1],[[6,1],[6,2],[5,3],[5,4]],line_2);
-                      po4.name='point_2';
-                      var c_po1=makeCurvePoint(controllArr[0][0],controllArr[0][1],[[1,1],[1,2]],line_2);
-                      c_po1.name='c_po1';
-                      var c_po2=makeCurvePoint(controllArr[1][0],controllArr[1][1],[[3,1],[3,2]],line_2);
-                      c_po2.name='c_po1';
-                      var c_po3=makeCurvePoint(controllArr[2][0],controllArr[2][1],[[5,1],[5,2]],line_2);
-                      c_po3.name='c_po1';
-                      var c_po4=makeCurvePoint(controllArr[3][0],controllArr[3][1],[[7,1],[7,2]],line_2);
-                      c_po4.name='c_po1';
-                      canvas.add(line_2,po1,po2,po3,po4,c_po1,c_po2,c_po3,c_po4);
-                       canvas.on('object:moving', function(e) {
+                    line_2.path[4][1] = pointArr[2][0];
+                    line_2.path[4][2] = pointArr[2][1];
+
+                    line_2.path[5][1] = controllArr[2][0];
+                    line_2.path[5][2] = controllArr[2][1];
+                    line_2.path[5][3] = pointArr[2][2];
+                    line_2.path[5][4] = pointArr[2][3];
+
+
+                    line_2.path[6][1] = pointArr[3][0];
+                    line_2.path[6][2] = pointArr[3][1];
+
+                    line_2.path[7][1] = controllArr[3][0];
+                    line_2.path[7][2] = controllArr[3][1];
+                    line_2.path[7][3] = pointArr[3][2];
+                    line_2.path[7][4] = pointArr[3][3];
+
+
+                    var po1    = makeCircle(pointArr[0][0], pointArr[0][1], [[0, 1], [0, 2], [7, 3], [7, 4]], line_2);
+                    po1.name   = 'point_2';
+                    var po2    = makeCircle(pointArr[1][0], pointArr[1][1], [[2, 1], [2, 2], [1, 3], [1, 4]], line_2);
+                    po2.name   = 'point_2';
+                    var po3    = makeCircle(pointArr[2][0], pointArr[2][1], [[4, 1], [4, 2], [3, 3], [3, 4]], line_2);
+                    po3.name   = 'point_2';
+                    var po4    = makeCircle(pointArr[3][0], pointArr[3][1], [[6, 1], [6, 2], [5, 3], [5, 4]], line_2);
+                    po4.name   = 'point_2';
+                    var c_po1  = makeCurvePoint(controllArr[0][0], controllArr[0][1], [[1, 1], [1, 2]], line_2);
+                    c_po1.name = 'c_po1';
+                    var c_po2  = makeCurvePoint(controllArr[1][0], controllArr[1][1], [[3, 1], [3, 2]], line_2);
+                    c_po2.name = 'c_po1';
+                    var c_po3  = makeCurvePoint(controllArr[2][0], controllArr[2][1], [[5, 1], [5, 2]], line_2);
+                    c_po3.name = 'c_po1';
+                    var c_po4  = makeCurvePoint(controllArr[3][0], controllArr[3][1], [[7, 1], [7, 2]], line_2);
+                    c_po4.name = 'c_po1';
+                    canvas.add(line_2, po1, po2, po3, po4, c_po1, c_po2, c_po3, c_po4);
+                    canvas.on('object:moving', function (e) {
                         var p = e.target;
-                        if(p.point_arr && p.c_line && p.name=='point_2'){
-                            p.c_line.path[p.point_arr[0][0]][p.point_arr[0][1]]=p.left;
-                            p.c_line.path[p.point_arr[1][0]][p.point_arr[1][1]]=p.top;
-                            p.c_line.path[p.point_arr[2][0]][p.point_arr[2][1]]=p.left;
-                            p.c_line.path[p.point_arr[3][0]][p.point_arr[3][1]]=p.top;
+                        if (p.point_arr && p.c_line && p.name == 'point_2') {
+                            p.c_line.path[p.point_arr[0][0]][p.point_arr[0][1]] = p.left;
+                            p.c_line.path[p.point_arr[1][0]][p.point_arr[1][1]] = p.top;
+                            p.c_line.path[p.point_arr[2][0]][p.point_arr[2][1]] = p.left;
+                            p.c_line.path[p.point_arr[3][0]][p.point_arr[3][1]] = p.top;
                         }
-                        if(p.c_arr && p.c_line&& p.name=='c_po1'){
-                            p.c_line.path[p.c_arr[0][0]][p.c_arr[0][1]]=p.left;
-                            p.c_line.path[p.c_arr[1][0]][p.c_arr[1][1]]=p.top;
+                        if (p.c_arr && p.c_line && p.name == 'c_po1') {
+                            p.c_line.path[p.c_arr[0][0]][p.c_arr[0][1]] = p.left;
+                            p.c_line.path[p.c_arr[1][0]][p.c_arr[1][1]] = p.top;
                         }
                         canvas.renderAll();
-                      });
+                    });
                 }
             }
         };
