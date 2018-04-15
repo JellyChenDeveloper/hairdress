@@ -39,7 +39,8 @@ class ElementValidate extends Validate {
     ];
 
     protected $scene = [
-        'add'  => ['name', 'image', 'type', 'is_free', 'price', 'list_order', 'is_lock'],
-        'edit' => ['id', 'name', 'image', 'type', 'is_free', 'price', 'list_order', 'is_lock'],
+        'add'   => ['name', 'image', 'type', 'is_free', 'price', 'list_order', 'is_lock'],
+        'edit'  => ['id', 'name', 'image', 'type', 'is_free', 'price', 'list_order', 'is_lock'],
+        'edit2' => ['id', 'name', 'type', 'is_free', 'price', 'is_lock'],
     ];
 }

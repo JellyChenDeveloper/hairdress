@@ -42,7 +42,11 @@
                     <td><input name='list_orders[{$vo.id}]' type='text' size='3' value='{$vo.list_order}' class='input-order'></td>
                     <td>{$vo.id}</td>
                     <td>{$vo.name}</td>
-                    <td><img width="80" height="80" src="{$vo.image}"/></td>
+                    <eq name="vo.type" value="2">
+                        <td><img width="80" height="80" src="__TMPL__/public/assets/images/default-thumbnail.png"/></td>
+                        <else/>
+                        <td><img width="80" height="80" src="{$vo.image}"/></td>
+                    </eq>
                     <td>{$vo.type_str}</td>
                     <td>{$vo.price_str}</td>
                     <td>{$vo.is_lock_str}</td>

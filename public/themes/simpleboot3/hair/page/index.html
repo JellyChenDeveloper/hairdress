@@ -129,70 +129,190 @@
         <div class="m-tool m-all-tool">
             <div class="m-inner">
                 <ul>
+                    <!-- 画笔 -->
                     <li class="h-icon fl" renderType='isDrawingMode'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.drawpanel.is_lock}" data-pay="{$funcs.drawpanel.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.drawpanel.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.drawpanel.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_11.jpg" alt="">
                             </div>
-                            <p class="h-text">画笔</p>
+                            <p class="h-text">{$funcs.drawpanel.name}</p>
                         </div>
                     </li>
+
+                    <!-- 发片 -->
                     <li class="h-icon fl" renderType='renderLigature'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.hairpiece.is_lock}" data-pay="{$funcs.hairpiece.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.hairpiece.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.hairpiece.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_1.jpg" alt="">
                             </div>
-                            <p class="h-text">发片</p>
+                            <p class="h-text">{$funcs.hairpiece.name}</p>
                         </div>
                     </li>
+
+                    <!-- 发片2 -->
                     <li class="h-icon fl" renderType='renderLigature2'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.hairpiece2.is_lock}" data-pay="{$funcs.hairpiece2.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.hairpiece2.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.hairpiece2.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_1.jpg" alt="">
                             </div>
-                            <p class="h-text">发片2</p>
+                            <p class="h-text">{$funcs.hairpiece2.name}</p>
                         </div>
                     </li>
+
+                    <!-- 分区线 -->
                     <li class="h-icon fl" renderType='renderArrDashLine'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.partline.is_lock}" data-pay="{$funcs.partline.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.partline.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.partline.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_4.jpg" alt="">
                             </div>
-                            <p class="h-text">分区线</p>
+                            <p class="h-text">{$funcs.partline.name}</p>
                         </div>
                     </li>
+
+                    <!-- 弧线 -->
                     <li class="h-icon fl" renderType='renderArrLine'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.arc.is_lock}" data-pay="{$funcs.arc.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.arc.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.arc.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_3.jpg" alt="">
                             </div>
-                            <p class="h-text">弧线</p>
+                            <p class="h-text">{$funcs.arc.name}</p>
                         </div>
                     </li>
+
+                    <!-- 直线 -->
                     <li class="h-icon fl" renderType='Line'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.line.is_lock}" data-pay="{$funcs.line.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.line.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.line.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_2.jpg" alt="">
                             </div>
-                            <p class="h-text">直线</p>
+                            <p class="h-text">{$funcs.line.name}</p>
                         </div>
                     </li>
+
+                    <!-- S线 -->
                     <li class="h-icon fl" renderType='arrLine'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.Sline.is_lock}" data-pay="{$funcs.Sline.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.Sline.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.Sline.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_12.jpg" alt="">
                             </div>
-                            <p class="h-text">S线</p>
+                            <p class="h-text">{$funcs.Sline.name}</p>
                         </div>
                     </li>
+
+                    <!-- S虚线 -->
                     <li class="h-icon fl" renderType='arrDashLine'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.SIline.is_lock}" data-pay="{$funcs.SIline.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.SIline.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.SIline.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_13.jpg" alt="">
                             </div>
-                            <p class="h-text">S虚线</p>
+                            <p class="h-text">{$funcs.SIline.name}</p>
                         </div>
                     </li>
+
                     <!--  <li class="h-icon fl" renderType='renderArrow'>
                          <div class="h-one">
                              <div class="h-img-wrap">
@@ -201,44 +321,119 @@
                              <p class="h-text">箭头</p>
                          </div>
                      </li> -->
+
+                    <!-- 箭头 -->
                     <li class="h-icon fl" renderType='renderArc'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.arrow.is_lock}" data-pay="{$funcs.arrow.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.arrow.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.arrow.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_6.jpg" alt="">
                             </div>
-                            <p class="h-text">箭头</p>
+                            <p class="h-text">{$funcs.arrow.name}</p>
                         </div>
                     </li>
+
+                    <!-- 虚线箭头 -->
                     <li class="h-icon fl" renderType='renderDashedArc'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.iarrow.is_lock}" data-pay="{$funcs.iarrow.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.iarrow.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.iarrow.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_7.jpg" alt="">
                             </div>
-                            <p class="h-text">虚线箭头</p>
+                            <p class="h-text">{$funcs.iarrow.name}</p>
                         </div>
                     </li>
+
+                    <!-- 圆形 -->
                     <li class="h-icon fl" renderType='renderCircle'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.circle.is_lock}" data-pay="{$funcs.circle.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.circle.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.circle.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_9.jpg" alt="">
                             </div>
-                            <p class="h-text">圆形</p>
+                            <p class="h-text">{$funcs.circle.name}</p>
                         </div>
                     </li>
+
+                    <!-- 正方形 -->
                     <li class="h-icon fl" renderType='renderRect'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.square.is_lock}" data-pay="{$funcs.square.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.square.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.square.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_10.jpg" alt="">
                             </div>
-                            <p class="h-text">正方形</p>
+                            <p class="h-text">{$funcs.square.name}</p>
                         </div>
                     </li>
+
+                    <!-- 三角形 -->
                     <li class="h-icon fl" renderType='renderTriangle'>
-                        <div class="h-one">
+                        <div class="h-one add-ele" data-lock="{$funcs.triangle.is_lock}" data-pay="{$funcs.triangle.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.triangle.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.triangle.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/icon_8.jpg" alt="">
                             </div>
-                            <p class="h-text">三角形</p>
+                            <p class="h-text">{$funcs.triangle.name}</p>
                         </div>
                     </li>
                 </ul>
@@ -336,15 +531,15 @@
                             <img src="__PAGE_TOOLS__/images/tool_4.png" alt="">
                         </div>
                     </li>
-                    <foreach name="heads" item="head">
-                        <eq name="head['type']" value="1">
+                    <foreach name="tools" item="tool">
+                        <eq name="tool['type']" value="1">
                             <li class="h-icon fl">
-                                <div class="h-one add-ele" data-lock="{$head['is_lock']}" data-pay="{$head['need_pay']}">
+                                <div class="h-one add-ele" data-lock="{$tool['is_lock']}" data-pay="{$tool['need_pay']}">
                                     <div class="h-mask h-pay">
                                         <div class="h-wrap">
-                                            <p class="p-price">￥{$head.price}</p>
+                                            <p class="p-price">￥{$tool.price}</p>
                                             <div>
-                                                <a class="p-btn" href="{:url('hair/pay/elementPay')}?id={$head.id}">立即购买</a>
+                                                <a class="p-btn" href="{:url('hair/pay/elementPay')}?id={$tool.id}">立即购买</a>
                                             </div>
                                         </div>
                                     </div>
@@ -353,7 +548,7 @@
                                             <p class="p-price">锁定</p>
                                         </div>
                                     </div>
-                                    <img src="{$head.image}" alt="">
+                                    <img src="{$tool.image}" alt="">
                                 </div>
                             </li>
                         </eq>

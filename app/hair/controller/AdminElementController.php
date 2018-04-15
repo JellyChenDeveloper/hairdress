@@ -151,8 +151,11 @@ class AdminElementController extends AdminHairBaseController {
     public function editPost() {
         $data = $this->request->param();
 
-        $result = $this->validate($data, 'Element.edit');
-
+        if ($data['type'] == 2) {
+            $result = $this->validate($data, 'Element.edit2');
+        } else {
+            $result = $this->validate($data, 'Element.edit');
+        }
         if ($result !== true) {
             $this->error($result);
         }
