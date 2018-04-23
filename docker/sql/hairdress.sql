@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: hairdress
 -- ------------------------------------------------------
--- Server version	5.7.21
+-- Server version	5.7.21-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -922,7 +922,7 @@ CREATE TABLE `cmf_user` (
 
 LOCK TABLES `cmf_user` WRITE;
 /*!40000 ALTER TABLE `cmf_user` DISABLE KEYS */;
-INSERT INTO `cmf_user` VALUES (1,1,0,0,1522084951,0,0,0.00,1517667595,1,'admin','###b0e6dcf3e0cc1923339b92d115e6bcc1','admin','1@1.com','','','','172.21.0.1','','',NULL),(2,1,0,0,1520075935,0,0,0.00,0,0,'admin2','###949505e3c19e695eefbb70fb3197dfc4','','3@3.com','','','','172.21.0.1','','',NULL);
+INSERT INTO `cmf_user` VALUES (1,1,0,0,1524497882,0,0,0.00,1517667595,1,'admin','###b0e6dcf3e0cc1923339b92d115e6bcc1','admin','1@1.com','','','','172.105.217.173','','',NULL),(2,1,0,0,1520075935,0,0,0.00,0,0,'admin2','###949505e3c19e695eefbb70fb3197dfc4','','3@3.com','','','','172.21.0.1','','',NULL);
 /*!40000 ALTER TABLE `cmf_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1266,7 +1266,7 @@ CREATE TABLE `hair_element` (
 
 LOCK TABLES `hair_element` WRITE;
 /*!40000 ALTER TABLE `hair_element` DISABLE KEYS */;
-INSERT INTO `hair_element` VALUES (1,'画笔','drawpanel','','',2,0,0,10000,1,NULL,1523780329,1523781457,0),(2,'发片','hairpiece','','',2,0,0,10000,1,NULL,1523780329,1523782221,0),(3,'发片2','hairpiece2','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(4,'分区线','partline','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(5,'弧线','arc','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(6,'直线','line','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(7,'S线','Sline','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(8,'S虚线','SIline','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(9,'箭头','arrow','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(10,'虚箭头','iarrow','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(11,'圆形','circle','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(12,'正方形','square','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(13,'三角形','triangle','','',2,0,0,10000,1,NULL,1523780329,1523780329,0);
+INSERT INTO `hair_element` VALUES (1,'画笔','drawpanel','','',2,0,0,10000,1,NULL,1523780329,1523781457,0),(2,'发片','hairpiece','','',2,0,0,10000,1,NULL,1523780329,1523782221,0),(3,'彩色发片','hairpiece2','','',2,0,0,10000,1,NULL,1523780329,1524499079,0),(4,'次分区线','partline','','',2,0,0,10000,1,NULL,1523780329,1524498732,0),(5,'主分区线','arc','','',2,0,0,10000,1,NULL,1523780329,1524498471,0),(6,'直线','line','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(7,'S线','Sline','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(8,'S虚线','SIline','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(9,'箭头','arrow','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(10,'虚箭头','iarrow','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(11,'圆形','circle','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(12,'正方形','square','','',2,0,0,10000,1,NULL,1523780329,1523780329,0),(13,'三角形','triangle','','',2,0,0,10000,1,NULL,1523780329,1523780329,0);
 /*!40000 ALTER TABLE `hair_element` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1334,7 +1334,7 @@ CREATE TABLE `hair_pages` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='项目详情表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='项目详情表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1343,7 +1343,7 @@ CREATE TABLE `hair_pages` (
 
 LOCK TABLES `hair_pages` WRITE;
 /*!40000 ALTER TABLE `hair_pages` DISABLE KEYS */;
-INSERT INTO `hair_pages` VALUES (1,1,1,'页面','page/20180409/cabb70c9823dc25d8ac26fcc37349529.png','',1,10000,NULL,1521914794,1523274998,0),(2,2,2,'经典1','page/20180326/781b6fdf3aecd7fda9c7742534ae68b9.png','',1,10000,NULL,1521958077,1522036933,0),(3,3,3,'页面','','',1,10000,NULL,1522143674,1522143674,0),(4,2,4,'1','','',1,10000,NULL,1522976531,1522976531,0),(5,2,2,'經典2','','',1,10000,NULL,1523188047,1523188047,0),(6,2,2,'經典3','','',1,10000,NULL,1523271035,1523271035,0);
+INSERT INTO `hair_pages` VALUES (1,2,0,'页面','','',1,10000,NULL,1524499040,1524499040,0);
 /*!40000 ALTER TABLE `hair_pages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1368,7 +1368,7 @@ CREATE TABLE `hair_projects` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='项目列表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='项目列表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1377,7 +1377,6 @@ CREATE TABLE `hair_projects` (
 
 LOCK TABLES `hair_projects` WRITE;
 /*!40000 ALTER TABLE `hair_projects` DISABLE KEYS */;
-INSERT INTO `hair_projects` VALUES (1,1,'项目','',1,10000,NULL,1521914789,1521914789,0),(2,2,'经典','',1,10000,NULL,1521958025,1521958025,0),(3,3,'项目','',1,10000,NULL,1522143668,1522143668,0),(4,2,'经典2','',1,10000,NULL,1522976512,1522976512,0);
 /*!40000 ALTER TABLE `hair_projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1485,7 +1484,7 @@ CREATE TABLE `hair_wechat_user` (
   KEY `wx_openid` (`wx_openid`),
   KEY `wx_nickname` (`wx_nickname`),
   KEY `mobile` (`mobile`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1494,7 +1493,7 @@ CREATE TABLE `hair_wechat_user` (
 
 LOCK TABLES `hair_wechat_user` WRITE;
 /*!40000 ALTER TABLE `hair_wechat_user` DISABLE KEYS */;
-INSERT INTO `hair_wechat_user` VALUES (1,'oM4l11OFSG5h0yjtHJuhJoaVudmc','Jelly_国栋',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/iauibgHxdsiaHkBKib1j59avyCLp5dYRWyIDc2a7zhS1FInN96NV6NIXJIWmzjYs2Yr551GpSUoYkAWY5zrr7R0HdA/132','中国','北京','朝阳','13111111111','88888888',1,1,0,'','','',1,0,'',NULL,1521914584,1521914766,0),(2,'oM4l11Da4XmP_5F6eiuy-Z-JHRSI','北京J-design贾雨锦13141434567',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqgXEJT7g6Gda8JbcZ2j1Eiab9cS6MOaFicaibdhPibCc1ib5sus8A08GMwCicSibp8kuSWbc97nicq0YCccA/132','中国','','','13141434567','88888888',1,1,0,'','','',1,0,'',NULL,1521957936,1521957990,0),(3,'oM4l11EOzI7EKmG0E4PInGoSUtDQ','勇哥',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/ekiaNr29pZLgias5hZyWhCTmXEpZ9tBYlaZ3hYoL0UwqZVs3Z0KcuvsFvqIk1CDBvRliaFJCibUz4e1Mqic7NfmjDAA/132','中国','湖北','天门','13829707081','88888888',1,1,0,'','','',1,0,'',NULL,1522143615,1522143663,0),(4,'oM4l11Opnos6GMOPUylYeKXFAXQU','黃福生',0,'http://thirdwx.qlogo.cn/mmopen/vi_32/3w76ugCm36WaBRR4CU9s2FNCicGWibr5sDUX1GPyibLpgFNIs8nZBb5vicCtKEIzcWJiatiajtrkHLsbmc1JDYAibsmKQ/132','','','','13141434567','88888888',0,1,0,'','','',1,0,'',NULL,1523182162,1523186823,0);
+INSERT INTO `hair_wechat_user` VALUES (1,'oM4l11OFSG5h0yjtHJuhJoaVudmc','Jelly_国栋',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/iauibgHxdsiaHkBKib1j59avyCLp5dYRWyIDc2a7zhS1FInN96NV6NIXJIWmzjYs2Yr551GpSUoYkAWY5zrr7R0HdA/132','中国','北京','朝阳','13111111111','88888888',1,1,0,'','','',1,0,'',NULL,1521914584,1521914766,0),(2,'oM4l11Da4XmP_5F6eiuy-Z-JHRSI','北京J-design贾雨锦13141434567',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqgXEJT7g6Gda8JbcZ2j1Eiab9cS6MOaFicaibdhPibCc1ib5sus8A08GMwCicSibp8kuSWbc97nicq0YCccA/132','中国','','','13141434567','88888888',1,1,0,'','','',1,0,'',NULL,1521957936,1521957990,0),(3,'oM4l11EOzI7EKmG0E4PInGoSUtDQ','勇哥',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/ekiaNr29pZLgias5hZyWhCTmXEpZ9tBYlaZ3hYoL0UwqZVs3Z0KcuvsFvqIk1CDBvRliaFJCibUz4e1Mqic7NfmjDAA/132','中国','湖北','天门','13829707081','88888888',1,1,0,'','','',1,0,'',NULL,1522143615,1522143663,0),(4,'oM4l11Opnos6GMOPUylYeKXFAXQU','黃福生',0,'http://thirdwx.qlogo.cn/mmopen/vi_32/3w76ugCm36WaBRR4CU9s2FNCicGWibr5sDUX1GPyibLpgFNIs8nZBb5vicCtKEIzcWJiatiajtrkHLsbmc1JDYAibsmKQ/132','','','','13141434567','88888888',0,1,0,'','','',1,0,'',NULL,1523182162,1523186823,0),(5,'oM4l11AQ2N8hS1gJF36p8XOldsM4','oO喵小睿Oo',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/7ndO40USerMPjLAcxxmGGIBMvyenxTclTD4qZl7ooh2aAG7XataPdDcJ3IiaATeqgLpUiaEiaBCLGRMibtUw6El4icA/132','中国','北京','朝阳','','',0,1,0,'','','',1,0,'',NULL,1524231340,1524231340,0);
 /*!40000 ALTER TABLE `hair_wechat_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1507,4 +1506,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-15  9:00:50
+-- Dump completed on 2018-04-23 23:58:26
