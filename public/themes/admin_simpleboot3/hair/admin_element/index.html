@@ -52,7 +52,9 @@
                     <td>{$vo.is_lock_str}</td>
                     <td>
                         <a href='{:url("AdminElement/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
-                        <a href="{:url('AdminElement/deletePost',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="是否删除该组件">删除</a>
+                        <neq name="vo.type" value="2">
+                            <a href="{:url('AdminElement/deletePost',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="是否删除该组件">删除</a>
+                        </neq>
                     </td>
                 </tr>
             </foreach>
