@@ -75,6 +75,14 @@
         background: rgba(200, 92, 87, 1);
         border-color: rgba(200, 92, 87, 1);
     }
+    
+    .zoom{
+        display: none;
+        position: absolute;
+        z-index: 1;
+        width:30%;
+        background: #fff;
+    }
 </style>
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <style>
@@ -110,6 +118,10 @@
         </ul>
     </div>
     <div class="main-wrap">
+            <div class="zoom">
+                <canvas id="zoom"></canvas>
+                <img src="" id="test-img" alt="" style="display: none;">
+            </div>
         <div class="canvas-wrap">
             <!-- 背景图片 -->
             <img src="{$page.avatar_url|default=''}" alt="" id="bg-img" style="position: absolute;width:100%;height: 100%;opacity: 0;z-index: -2;">
@@ -129,6 +141,20 @@
         <div class="m-tool m-all-tool">
             <div class="m-inner">
                 <ul>
+
+                    <li class="h-icon fl" style="position: relative;">
+                        <input type="file" accept="image/jpg,image/jpeg" class='h-input-img'>
+                        <div class="h-one add-ele" data-lock='1'>
+                            
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/tool_3.png" alt="">
+                            </div>
+                            <p class="h-text">上传图片</p>
+                        </div>
+                        <!-- <div class="h-one add-ele" data-add='1'>
+                            <img src="__PAGE_TOOLS__/images/tool_3.png" alt="">
+                        </div> -->
+                    </li>
                     <!-- 画笔 -->
                     <li class="h-icon fl" renderType='isDrawingMode'>
                         <div class="h-one add-ele" data-lock="{$funcs.drawpanel.is_lock}" data-pay="{$funcs.drawpanel.need_pay}">
@@ -515,12 +541,6 @@
         <div class="m-fun m-all-tool">
             <div class="m-inner">
                 <ul>
-                    <li class="h-icon fl" style="position: relative;">
-                        <input type="file" accept="image/jpg,image/jpeg" class='h-input-img'>
-                        <div class="h-one add-ele" data-add='1'>
-                            <img src="__PAGE_TOOLS__/images/tool_3.png" alt="">
-                        </div>
-                    </li>
                     <li class="h-icon fl">
                         <div class="h-one add-ele">
                             <img src="__PAGE_TOOLS__/images/tool_1.png" alt="">
@@ -560,6 +580,7 @@
     <div class="mask" id="select-cx">
         <div class="m-box">
             <ul>
+                <li></li>
                 <li>
                     <p class="text-c">画笔</p>
                     <p>颜色：<input class="s-select color" type="hidden" key='color' value="#000"></p>
@@ -734,6 +755,7 @@
                 this.ctx               = new fabric.Canvas('canvas');
                 this.ctx.isDrawingMode = false;
                 this.baseSize          = this.w / 5;
+                this.setZoom();
                 this.initColor();
                 this.showPayOrLock();
                 this.bindEvent();
@@ -795,7 +817,7 @@
                 });
                 //工具点击
                 $('.m-tool li.h-icon').on('click', function () {
-                    if ($(this).find('.h-one').attr('data-pay') == 1 || $(this).find('.h-one').attr('data-lock') == 1) {return false;}
+                    if ($(this).find('.h-one').attr('data-pay') == 1 || $(this).find('.h-one').attr('data-lock') == 1) {return ;}
                     ;
                     var index       = $(this).index();
                     _this.renderOBJ = $(this).attr('renderType');
@@ -929,9 +951,7 @@
                     _this.ctx.add(img);
                 });
 
-                $('body').on("touchmove", function (e) {
-                    e.preventDefault();
-                });
+                
             },
             showPayOrLock       : function () {
                 $('.h-one,.add-ele').each(function () {
@@ -952,6 +972,53 @@
                 this.bg_add();
                 $('.tri-fun').trigger('click');
             },
+            setZoom:function(){
+                    var _this= this;
+                    var $zoom=$('.zoom');
+                    var width =$zoom.width();
+                    var zoom_c=$('#zoom')[0];
+                    var z_ctx=zoom_c.getContext('2d');
+                    var z_scale=0.3;
+                    // var can_zoom=new fabric.Canvas('zoom');
+                    $zoom.height(width);
+                    var height = width;
+                    zoom_c.width = width;
+                    zoom_c.height = width;
+                    this.ctx.on('mouse:down',function(options){
+                    });
+                    this.ctx.on("object:moving",function(option){
+                        var currentObj = _this.ctx.getObjects();
+                        var pointer =_this.ctx.getPointer(option.e);
+                        if(currentObj.length>0&&option.target){
+                            $('.zoom').show();
+                            z_ctx.clearRect(0,0,width,height);
+                            var bg_img = _this.canvas_bg[0].toDataURL();
+                            var cur_img = _this.ctx.toDataURL();
+                            var img_bg=new Image();
+                            var x = pointer.x;
+                            var y = pointer.y;
+                            var sx=(x-width/2)<=0?0:(x-width/2);
+                            var sy=(y-height/2)<=0?0:(y-height/2);
+                            img_bg.src=bg_img;
+                            img_bg.onload=function(){
+                                z_ctx.drawImage(this,sx,sy,width,height,0,0,_this.w*z_scale,_this.h*z_scale);
+                            }
+                            var img_c=new Image();
+                            img_c.src=cur_img;
+                            $('#test-img').attr('src',cur_img);
+                            img_c.onload=function(){
+                                z_ctx.drawImage(this,sx,sy,width,height,0,0,_this.w*z_scale,_this.h*z_scale);
+                            }
+                        }
+                    });
+                    this.ctx.on('mouse:up',function(options){
+                        $('.zoom').hide();
+                    });
+                    $('body').on("touchmove",function(e){
+                        e.preventDefault();
+                    })
+                }
+            ,
             selectPhoto         : function (el, path) {
                 var $el = $(el).length && $(el);
                 if ($el) {
@@ -960,7 +1027,7 @@
                     var ext      = filepath.substring(extStart, filepath.length).toUpperCase();
                     if (ext != ".JPG" && ext != ".JPEG") {
                         // alert("图片限于jpeg,jpg格式");
-
+                        return false;
                     }
                 }
             },
