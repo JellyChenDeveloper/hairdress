@@ -1,0 +1,1588 @@
+<!-- <include file="hair@public/head"/> -->
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<script src="__PAGE_TOOLS__/js/flexible.js"></script>
+<link rel="stylesheet" href="__PAGE_TOOLS__/css/minicolor.css">
+<link rel="stylesheet" href="__PAGE_TOOLS__/css/main.css">
+<style>
+    .h-input-img {
+        position: absolute;
+        top: 20%;
+        border: none;
+        left: 0;
+        width: 100%;
+        height: 60%;
+        opacity: 0;
+        z-index: 9;
+    }
+
+    .h-one {
+        position: relative;
+    }
+
+    .h-mask {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 2;
+    }
+
+    .h-mask .h-wrap {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        line-height: 1.5;
+    }
+
+    .h-mask .p-price {
+        color: #da2424;
+        font-size: 0.35rem;
+        padding: 0.2rem 0;
+    }
+
+    .h-mask .p-btn {
+        background: #da2424;
+        color: #fff;
+        font-size: .35rem;
+        padding: 0.1333rem 0.2667rem;
+    }
+
+    #m-alert {
+        display: none;
+        position: absolute;
+        z-index: 99;
+        width: 80%;
+        left: 10%;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        margin-top: -0.3733rem;
+        font-size: 0.3733rem;
+        background: #fff;
+        text-align: center;
+        border: 1px solid #ccc;
+    }
+
+    #m-alert.on {
+        background: rgba(200, 92, 87, 1);
+        border-color: rgba(200, 92, 87, 1);
+    }
+</style>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<style>
+    body {
+        line-height: 1.5rem;
+        font-size: 12px !important;
+    }
+
+    #i-text {
+        resize: none;
+        vertical-align: middle;
+        /*height: 0.4533rem;*/
+        /*line-height: 0.4533rem;*/
+        border: 1px solid #ccc;
+    }
+</style>
+<form id="page_info">
+    <input type="hidden" name="id" value="{$page.id}"/>
+    <input type="hidden" name="user_id" value="{$page.user_id}"/>
+    <input type="hidden" name="project_id" value="{$page.project_id}"/>
+    <input type="hidden" name="name" value="{$page.name}"/>
+    <input type="hidden" name="image" value="{$page.avatar_url}"/>
+</form>
+<div class="wrap">
+    <div class="tab">
+        <ul>
+            <li class="fl"><a href="{:url('hair/project/detail',['id'=>$page.project_id])}" style="color:#000;">返回</a></li>
+            <li class="fl tri-head">头像</li>
+            <li class="fl tri-tool">功能</li>
+            <li class="fl tri-fun">工具</li>
+            <li class="fl tri-word">文字</li>
+            <li class="fl">分享</li>
+        </ul>
+    </div>
+    <div class="main-wrap">
+        <div class="canvas-wrap">
+            <!-- 背景图片 -->
+            <img src="{$page.avatar_url|default=''}" alt="" id="bg-img" style="position: absolute;width:100%;height: 100%;opacity: 0;z-index: -2;">
+            <div class="c-inner" style="overflow: hidden;">
+                <canvas id="create-img"></canvas>
+            </div>
+            <div class="c-inner" style="background: #fff;">
+                <canvas id="canvas-grids"></canvas>
+            </div>
+            <div class="c-inner">
+                <canvas id="canvas-bg"></canvas>
+            </div>
+            <div class="c-inner">
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+        <div class="m-tool m-all-tool">
+            <div class="m-inner">
+                <ul>
+                    <li class="h-icon fl" renderType='isDrawingMode'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_11.jpg" alt="">
+                            </div>
+                            <p class="h-text">画笔</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='renderLigature'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_1.jpg" alt="">
+                            </div>
+                            <p class="h-text">发片</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='renderArrDashLine'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_4.jpg" alt="">
+                            </div>
+                            <p class="h-text">分区线</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='renderArrLine'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_3.jpg" alt="">
+                            </div>
+                            <p class="h-text">弧线</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='Line'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_2.jpg" alt="">
+                            </div>
+                            <p class="h-text">直线</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='arrLine'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_12.jpg" alt="">
+                            </div>
+                            <p class="h-text">S线</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='arrDashLine'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_13.jpg" alt="">
+                            </div>
+                            <p class="h-text">S虚线</p>
+                        </div>
+                    </li>
+                    <!--  <li class="h-icon fl" renderType='renderArrow'>
+                         <div class="h-one">
+                             <div class="h-img-wrap">
+                                 <img src="__PAGE_TOOLS__/images/icon_5.jpg" alt="">
+                             </div>
+                             <p class="h-text">箭头</p>
+                         </div>
+                     </li> -->
+                    <li class="h-icon fl" renderType='renderArc'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_6.jpg" alt="">
+                            </div>
+                            <p class="h-text">箭头</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='renderDashedArc'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_7.jpg" alt="">
+                            </div>
+                            <p class="h-text">虚线箭头</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='renderCircle'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_9.jpg" alt="">
+                            </div>
+                            <p class="h-text">圆形</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='renderRect'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_10.jpg" alt="">
+                            </div>
+                            <p class="h-text">正方形</p>
+                        </div>
+                    </li>
+                    <li class="h-icon fl" renderType='renderTriangle'>
+                        <div class="h-one">
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/icon_8.jpg" alt="">
+                            </div>
+                            <p class="h-text">三角形</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="m-head m-all-tool">
+            <div class="m-inner">
+                <ul>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/bg_0.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/bg_1.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/bg_2.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/bg_3.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/bg_4.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/bg_5.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/bg_6.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/bg_7.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/bg_8.png" alt="">
+                        </div>
+                    </li>
+                    <foreach name="heads" item="head">
+                        <eq name="head['type']" value="0">
+                            <li class="h-icon fl">
+                                <div class="h-one add-ele" data-lock="{$head['is_lock']}" data-pay="{$head['need_pay']}">
+                                    <div class="h-mask h-pay">
+                                        <div class="h-wrap">
+                                            <p class="p-price">￥{$head.price}</p>
+                                            <div>
+                                                <a class="p-btn" href="{:url('hair/pay/elementPay')}?id={$head.id}">立即购买</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="h-mask h-lock">
+                                        <div class="h-wrap">
+                                            <p class="p-price">锁定</p>
+                                        </div>
+                                    </div>
+                                    <img src="{$head.image}" alt="">
+                                </div>
+                            </li>
+                        </eq>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+        <div class="m-fun m-all-tool">
+            <div class="m-inner">
+                <ul>
+                    <li class="h-icon fl" style="position: relative;">
+                        <input type="file" accept="image/jpg,image/jpeg" class='h-input-img'>
+                        <div class="h-one add-ele" data-add='1'>
+                            <img src="__PAGE_TOOLS__/images/tool_3.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/tool_1.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/tool_4.png" alt="">
+                        </div>
+                    </li>
+                    <foreach name="heads" item="head">
+                        <eq name="head['type']" value="1">
+                            <li class="h-icon fl">
+                                <div class="h-one add-ele" data-lock="{$head['is_lock']}" data-pay="{$head['need_pay']}">
+                                    <div class="h-mask h-pay">
+                                        <div class="h-wrap">
+                                            <p class="p-price">￥{$head.price}</p>
+                                            <div>
+                                                <a class="p-btn" href="{:url('hair/pay/elementPay')}?id={$head.id}">立即购买</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="h-mask h-lock">
+                                        <div class="h-wrap">
+                                            <p class="p-price">锁定</p>
+                                        </div>
+                                    </div>
+                                    <img src="{$head.image}" alt="">
+                                </div>
+                            </li>
+                        </eq>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="mask" id="select-cx">
+        <div class="m-box">
+            <ul>
+                <li>
+                    <p class="text-c">画笔</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='color' value="#000"></p>
+                    <p>线宽：<select class="s-select " key='width' id="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    </p>
+                </li>
+                <li>
+                    <p class="text-c">发片</p>
+                    <p>
+                        请选择颜色:<input class="s-select color" type="hidden" key='stroke ' value="#000">
+                    </p>
+                </li>
+                <li>
+                    <p class="text-c">虚弧线</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
+                </li>
+                <li>
+                    <p class="text-c">弧线</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
+                </li>
+                <li>
+                    <p class="text-c">直线</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='stroke fill' value="#000"></p>
+                    <p>线宽：<select class="s-select" key='strokeWidth' id="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    </p>
+                </li>
+                <li>
+                    <p class="text-c">分区线</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
+                </li>
+                <li>
+                    <p class="text-c">分区虚线</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
+                </li>
+                <!-- <li>
+                    <p class="text-c">箭头</p>
+                    <p>颜色：<input value="#000" class="s-select color" type="hidden" key='stroke fill'></p>
+                </li> -->
+                <li>
+                    <p class="text-c">箭头</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
+                </li>
+                <li>
+                    <p class="text-c">虚线箭头</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='stroke ' value="#000"></p>
+                </li>
+                <li>
+                    <p class="text-c">圆形</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='fill' value="#000"></p>
+                </li>
+                <li>
+                    <p class="text-c">正方形</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='fill' value="#000"></p>
+                </li>
+                <li>
+                    <p class="text-c">三角形</p>
+                    <p>颜色：<input class="s-select color" type="hidden" key='fill' value="#000"></p>
+                </li>
+            </ul>
+            <div class="btn-wrap">
+                <div class="btn-no">取消</div>
+                <div class="btn-ok add-ele">确定</div>
+            </div>
+        </div>
+    </div>
+    <div class="mask" id="text">
+        <div class="m-box">
+            <div class="text-wrap">
+                <!-- <p>文案：<input type="text" id="i-text"></p> -->
+                <p>文案：<textarea id="i-text"></textarea></p>
+                <p>颜色：<input class="text-option color" type="hidden" key='stroke fill' name='color' value="#000"></p>
+                <p>粗细：<select class="text-option" key='fontWeight' id="text-width">
+                    <option value="normal">正常</option>
+                    <option value="bold">加粗</option>
+                </select>
+                </p>
+                <p>字体：<select class="text-option" key='fontSize' name="" id="font-size">
+                    <option value="12">12</option>
+                    <option value="14">14</option>
+                    <option value="16">16</option>
+                    <option value="18">18</option>
+                    <option value="20">20</option>
+                </select>
+                </p>
+            </div>
+            <div class="btn-wrap">
+                <div class="btn-no">取消</div>
+                <div class="btn-ok add-ele">确定</div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-btn">
+        <div class="btn-pre btn fl" style="display: none;">上一步</div>
+        <div class="btn-delete btn fl">删除</div>
+        <div class="btn-save fr btn">生成图片</div>
+        <div class="btn-hb btn fr">移除画笔</div>
+    </div>
+</div>
+<div class="mask" id="createImg">
+    <div class="m-box text-c">图片生成中...</div>
+</div>
+<div id="m-alert">
+    图片生成成功！
+</div>
+<!-- <include file="hair@public/foot"/> -->
+<img src="" id="change-img" alt="">
+<script src="__PAGE_TOOLS__/js/jquery.min.js"></script>
+<script src="__PAGE_TOOLS__/js/jquery.minicolor.js"></script>
+<!-- <script src="__PAGE_TOOLS__/js/fabric_gestures.js"></script> -->
+<script src="__PAGE_TOOLS__/js/fabric_g.min.js"></script>
+<script src="__PAGE_TOOLS__/js/exif.js"></script>
+<script>
+    $(function () {
+        window.obj = {
+            init                : function () {
+                var _this                = this;
+                this.mul                 = 1;
+                this.controllerCircleArr = [];
+                this.bg_cache            = [];
+                this.offsetX             = $('.main-wrap').offset().left;
+                this.offsetY             = $('.main-wrap').offset().top;
+                this.renderOBJ           = null;
+                this.renderOption        = null;
+                this.canvas              = $('#canvas');
+                this.canvas_bg           = $('#canvas-bg');
+                this.canvas_create       = $('#create-img');
+                this.bg_ctx              = this.canvas_bg[0].getContext("2d");
+                this.create_ctx          = this.canvas_create[0].getContext("2d");
+                this.setHeight();
+                this.grids             = new fabric.Canvas('canvas-grids');
+                this.ctx               = new fabric.Canvas('canvas');
+                this.ctx.isDrawingMode = false;
+                this.baseSize          = this.w / 5;
+                this.initColor();
+                this.showPayOrLock();
+                this.bindEvent();
+                this.renderBG();
+                this.renderBGImg();
+            },
+            bindEvent           : function () {
+                var _this = this;
+                $('.add-ele').on('click', function () {
+                    if ($(this).attr('data-lock') == 1 || $(this).attr('data-pay') == 1) {return false;}
+                    ;
+                    _this.bg_add();
+                });
+                $('a.p-btn').on('click', function () {
+                    var url              = $(this).attr('href');
+                    window.location.href = url;
+                });
+                //工具头像切换
+                $('.tri-head').on('click', function () {
+                    $('.m-head').slideToggle();
+                    $('.m-tool').hide();
+                    $('.m-fun').hide();
+
+                });
+                $('.tri-tool').on('click', function () {
+                    $('.m-tool').slideToggle();
+                    $('.m-head').hide();
+                    $('.m-fun').hide();
+                });
+                $('.tri-fun').on('click', function () {
+                    $('.m-fun').slideToggle();
+                    $('.m-head').hide();
+                    $('.m-tool').hide();
+                });
+                //头像点击
+                $('.m-head .h-one,.m-fun .h-one').on('click', function () {
+                    if ($(this).attr('data-lock') == 1 || $(this).attr('data-pay') == 1) {return false;}
+                    ;
+                    var src    = $(this).find('img').attr('src');
+                    var img1   = $(this).find('img')[0];
+                    var img    = new Image();
+                    img.src    = src;
+                    var width  = parseFloat($(img1).css('width'));
+                    var height = parseFloat($(img1).css('height'));
+                    var i_w    = _this.w * (2 / 5);
+                    var i_h    = height / width * i_w;
+                    var top    = (_this.h - i_h) * 0.6;
+                    var left   = (_this.w - i_w) / 2;
+                    img.onload = function () {
+                        var img    = new fabric.Image(this, {
+                            left : left,
+                            top  : top,
+                        });
+                        img.width  = i_w;
+                        img.height = i_h;
+                        _this.ctx.add(img);
+                    }
+                    $(this).parents('.m-all-tool').slideUp();
+                });
+                //工具点击
+                $('.m-tool li.h-icon').on('click', function () {
+                    if ($(this).find('.h-one').attr('data-pay') == 1 || $(this).find('.h-one').attr('data-lock') == 1) {return false;}
+                    ;
+                    var index       = $(this).index();
+                    _this.renderOBJ = $(this).attr('renderType');
+                    $('#select-cx').show().find('li').eq(index).addClass('on').siblings().removeClass('on');
+                });
+                $('#select-cx .btn-wrap .btn-ok').on("click", function () {
+                    var obj       = {};
+                    var hasOption = false;
+                    var option    = $('#select-cx ul li.on').find('.s-select');
+                    if (!option.val()) {
+                        option.val = '#000';
+                    }
+                    option = _this.createOption(option);
+                    console.log(JSON.stringify(option));
+                    console.log(_this.renderOBJ);
+                    _this.renderFN[_this.renderOBJ].call(_this, option);
+                    $('#select-cx').hide();
+                    $('.m-tool').hide();
+                });
+                $('.btn-wrap .btn-no').on("click", function () {
+                    $('#select-cx input').val('');
+                    $(this).parents('.mask').hide();
+                    _this.renderOBJ    = null;
+                    _this.renderOption = null;
+                });
+                //文案点击
+                //
+                $('.tri-word').on('click', function () {
+                    $('.m-all-tool').hide();
+                    $('#text').show();
+                });
+                $('#text .btn-ok').on('click', function () {
+                    var text = $('#i-text').val();
+                    if (text == '') {
+                        alert('文案不能为空~');
+                        return false;
+                    }
+                    var input_option = $('#text').find('.text-option');
+                    var option       = _this.createOption(input_option);
+                    console.log(JSON.stringify(option));
+                    option.left      = _this.w / 2;
+                    option.top       = _this.h / 2;
+                    option.textAlign = 'center';
+                    option.width     = _this.w / 2;
+                    // option.originY='top';
+                    _this.renderOBJ  = 'Text';
+                    var width        = $('#i-text').width();
+                    option.width     = width;
+                    var text_obj     = new fabric[_this.renderOBJ](text, option);
+                    _this.ctx.add(text_obj);
+                    $(this).parents('.mask').hide();
+                    $('#i-text').val('');
+                    $('.m-all-tool').hide();
+                    _this.renderOBJ    = null;
+                    _this.renderOption = null;
+
+                });
+                //
+                //
+                //画笔
+                $('.btn-hb').on('click', function () {
+                    $(this).hide();
+                    _this.ctx.isDrawingMode = false;
+                });
+
+                ///生成图片
+                $('.btn-save').on('click', function () {
+                    _this.bg_add(function () {
+                        var png = _this.canvas_create[0].toDataURL();
+                        $('#createImg').show();
+                        $("#page_info input[name='image']").val(png);
+                        var form = $('#page_info');
+                        $.post("{:url('hair/page/doSavePage')}", form.serializeArray(), function (ret) {
+                            $('#createImg').hide();
+                            if (ret.code) {
+                                // window.location.href = ret.data.from_url;
+                                // var imgObj = new Image();
+                                // imgObj.src = ret.data.img_url;
+                                // //待图片加载完后，将其显示在canvas上
+
+                                var img    = new Image();
+                                img.src    = ret.data.img_url;
+                                img.onload = function () {
+                                    this.width  = _this.w;
+                                    this.height = _this.h;
+                                    var top     = 0;
+                                    var left    = 0;
+                                    var img     = new fabric.Image(this, {
+                                        left : left,
+                                        top  : top,
+                                    });
+                                    // todo 目前生成的图片还是已以控件的形式添加在画布上的，能否直接将该图片设置为背景。
+                                    _this.ctx.clear();
+                                    // _this.ctx.add(img);
+                                    _this.renderOBJ    = null;
+                                    _this.renderOption = null;
+                                };
+                                _this.toast('图片上传成功！', true)
+                            } else {
+                                _this.toast(ret.msg, false)
+                                // alert(ret.msg)
+                            }
+                        }, 'json');
+
+                    });
+                });
+                //canvas点击
+
+                this.ctx.on('before:selection:cleared', function () {
+                    for (var i = 0; i < _this.controllerCircleArr.length; i++) {
+                        _this.ctx.remove(_this.controllerCircleArr[i]);
+                    }
+                });
+                $('.btn-pre').on('click', function () {
+                    _this.pre();
+                });
+                $('.h-input-img').on('change', function () {
+                    _this.input_img(this);
+                });
+                $('#change-img').on('load', function () {
+                    var width  = this.width;
+                    var height = this.height;
+                    var i_w    = _this.w * 0.4;
+                    var i_h    = height / width * i_w;
+                    var img    = new fabric.Image(this, {
+                        left : (_this.w - i_w) / 2,
+                        top  : (_this.h - i_h) / 2
+                    });
+                    img.height = i_h;
+                    img.width  = i_w;
+                    _this.ctx.add(img);
+                });
+            },
+            showPayOrLock       : function () {
+                $('.h-one,.add-ele').each(function () {
+                    var lock = $(this).attr('data-lock');
+                    var pay  = $(this).attr('data-pay');
+                    if (lock == 1) {
+                        $(this).find('.h-lock').show();
+                    } else if (pay == 1) {
+                        $(this).find('.h-pay').show();
+                    }
+                });
+            }
+            ,
+            input_img           : function (el) {
+                var _this = this;
+                this.selectPhoto(el, $(".h-input-img").val());
+                this.html5Reader(el, $('#change-img')[0]);
+                this.bg_add();
+                $('.tri-fun').trigger('click');
+            },
+            selectPhoto         : function (el, path) {
+                var $el = $(el).length && $(el);
+                if ($el) {
+                    var filepath = path;
+                    var extStart = filepath.lastIndexOf(".");
+                    var ext      = filepath.substring(extStart, filepath.length).toUpperCase();
+                    if (ext != ".JPG" && ext != ".JPEG") {
+                        // alert("图片限于jpeg,jpg格式");
+
+                    }
+                }
+            },
+            html5Reader         : function (file, el) {
+                var _this  = this;
+                var file   = file.files[0];
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    var _this  = this;
+                    var img    = new Image();
+                    img.src    = this.result;
+                    img.onload = function () {
+                        var orient = obj.getPhotoOrientation(img);
+                        if (orient == 6) {
+                            var canvas    = document.getElementById("canvas-rotate");
+                            var ctx       = canvas.getContext("2d");
+                            var ratio     = obj.scaleImg(ctx);
+                            var canvas_w  = Number($('.tplScreenshot').width()) * ratio;
+                            var canvas_h  = Number($('.tplScreenshot').height()) * ratio;
+                            canvas.width  = canvas_w;
+                            canvas.height = canvas_h;
+                            ctx.save();
+                            ctx.translate(canvas_w / 2, canvas_h / 2);
+                            ctx.rotate(90 * Math.PI / 180);
+                            ctx.drawImage(img, 0 - canvas_h / 2, 0 - canvas_w / 2, canvas_h, canvas_w);
+                            el.src = canvas.toDataURL();
+                        } else {
+                            el.src = _this.result;
+                        }
+                    }
+                }
+            },
+            getPhotoOrientation : function (img) {
+                var orient;
+                EXIF.getData(img, function () {
+                    orient = EXIF.getTag(this, 'Orientation');
+                });
+                return orient;
+            },
+            scaleImg            : function (context) {
+                var getPixelRatio = function (context) {
+                    var backingStore = context.backingStorePixelRatio ||
+                        context.webkitBackingStorePixelRatio ||
+                        context.mozBackingStorePixelRatio ||
+                        context.msBackingStorePixelRatio ||
+                        context.oBackingStorePixelRatio ||
+                        context.backingStorePixelRatio || 1;
+
+                    return (window.devicePixelRatio || 1) / backingStore;
+                };
+                var ratio         = getPixelRatio(context);
+                return ratio;
+            }
+            ,
+            toast               : function (text, isTrue) {
+                if (isTrue) {
+                    $('#m-alert').removeClass('on').show().text(text);
+                } else {
+                    $('#m-alert').addClass('on').show().text(text);
+                }
+                setTimeout(function () {
+                    $('#m-alert').hide();
+                }, 2000)
+            }
+            ,
+            renderBGImg         : function () {
+                var bg    = $('#bg-img');
+                var _this = this;
+                if (bg.length > 0) {
+                    var img    = new Image();
+                    img.src    = bg.attr('src');
+                    img.onload = function () {
+                        var img        = new fabric.Image(this, {
+                            left : 0,
+                            top  : 0,
+                        });
+                        img.width      = _this.w;
+                        img.height     = _this.h;
+                        img.selectable = false;
+                        _this.ctx.add(img);
+                    }
+                }
+
+            }
+            ,
+            initColor           : function () {
+                setTimeout(function () {
+                    $('input.color').minicolors({
+                        defaultValue : '#000'
+                    });
+                }, 300)
+            },
+            pre                 : function () {
+                if (this.ctx.getObjects().length > 0) {
+                    this.ctx.clear();
+                    return false;
+                }
+                if ($('#bg-img').length > 0 && this.bg_cache.length == 1) {
+                    $('.btn-pre').hide();
+                    return false;
+                }
+                this.bg_cache.pop();
+                this.renderBgArr();
+                if (this.bg_cache.length <= 0) {
+                    this.renderBG();
+                    $('.btn-pre').hide();
+                }
+            }
+            ,
+            bg_add              : function (fn) {
+                $('.btn-hb').trigger('click');
+                if (this.ctx.getObjects().length <= 0) {return false;}
+                ;
+                $('.btn-pre').show();
+                var _this      = this;
+                var currentObj = obj.ctx.getActiveObject();
+                if (currentObj) {
+                    currentObj.set({
+                        borderColor : 'transparent',
+                        cornerColor : 'transparent'
+                    })
+                }
+                for (var i = 0; i < this.controllerCircleArr.length; i++) {
+                    this.controllerCircleArr[i].set({opacity : 0});
+                }
+                var bg = this.ctx.toDataURL();
+                this.bg_cache.push(bg);
+                this.renderBgArr(fn);
+                this.ctx.clear();
+                fabric.Object.prototype.originX = 'left';
+                fabric.Object.prototype.originY = 'top';
+            },
+            renderBgArr         : function (fn) {
+                this.bg_ctx.clearRect(0, 0, this.w, this.h);
+                this.create_ctx.clearRect(0, 0, this.w * this.mul, this.h * this.mul);
+                var _this = this;
+                var isEnd = 0;
+                _this.create_ctx.save();
+                _this.create_ctx.fillStyle = '#fff';
+                _this.create_ctx.fillRect(0, 0, _this.w * _this.mul, _this.h * _this.mul);
+                _this.create_ctx.restore();
+                for (var i = 0; i < this.bg_cache.length; i++) {
+                    (function (i) {
+                        var img    = new Image();
+                        img.src    = _this.bg_cache[i];
+                        img.onload = function () {
+                            _this.bg_ctx.drawImage(this, 0, 0, _this.w, _this.h);
+                            _this.create_ctx.drawImage(this, 0, 0, _this.w * _this.mul, _this.h * _this.mul);
+                            ++isEnd;
+                            console.log('mul');
+                            if (isEnd == _this.bg_cache.length && fn) {
+                                fn();
+                            }
+                        }
+                    })(i);
+                }
+            }
+            ,
+            createOBJ           : function () {
+                var obj = new fabric[this.renderOBJ, this.renderOption];
+                this.ctx.add(obj);
+            }
+            ,
+            renderBG            : function () {
+                var num    = 10;
+                var w      = this.w;
+                var space  = w / num;
+                var h      = this.h;
+                var l_num  = Math.ceil(h / space);
+                var option = {
+                    fill               : '#ccc',
+                    stroke             : '#ccc',
+                    opacity            : 0.2,
+                    strokeWidth        : 1,
+                    hasControls        : false,
+                    hasRotatingPoint   : false,
+                    hasBorders         : false,
+                    transparentCorners : true,
+                    perPixelTargetFind : true,
+                    selectable         : false,
+                    lockMovementX      : true,
+                    lockMovementY      : true,
+                };
+                for (var i = 1; i < l_num; i++) {
+                    var line = new fabric.Line([w, i * space, 0, i * space], option);
+                    this.ctx.add(line);
+                }
+                for (var i = 1; i < num; i++) {
+                    var line = new fabric.Line([i * space, 0, i * space, h], option);
+                    this.ctx.add(line);
+                }
+            }
+            ,
+            setHeight           : function () {
+                var h  = $('.canvas-wrap').height();
+                var w  = $('.canvas-wrap').width();
+                this.w = w;
+                this.h = h;
+                $('canvas').each(function () {
+                    $(this)[0].height = h;
+                    $(this)[0].width  = w;
+                });
+                $('#create-img')[0].height = h * this.mul;
+                $('#create-img')[0].width  = w * this.mul;
+            },
+            angle               : function (start, end) {
+                var px     = start.x;
+                var py     = start.y;
+                var mx     = end.x;
+                var my     = end.y;
+                var x      = Math.abs(px - mx);
+                var y      = Math.abs(py - my);
+                var z      = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+                var cos    = y / z;
+                var radina = Math.acos(cos);
+                var angle  = Math.floor(180 / (Math.PI / radina));
+                if (mx > px && my > py) {
+                    angle = 180 - angle;
+                }
+                if (mx == px && my > py) {
+                    angle = 180;
+                }
+                if (mx > px && my == py) {
+                    angle = 90;
+                }
+                if (mx < px && my > py) {
+                    angle = 180 + angle;
+                }
+                if (mx < px && my == py) {
+                    angle = 270;
+                }
+                if (mx < px && my < py) {
+                    angle = 360 - angle;
+                }
+                return angle;
+            },
+            createOption        : function (el) {
+                var option = {};
+                $(el).each(function (i, e) {
+                    var keys = $(e).attr('key').trim().split(' ');
+                    var val  = $(this).val();
+                    if ($(e).hasClass('color') && val == '') {
+                        val = '#000';
+                    }
+                    $.each(keys, function (i, e) {
+                        option[e] = val;
+                    });
+                });
+                return option;
+            },
+            renderFN            : {
+                Line              : function (option) {
+                    var canvas                      = this.ctx;
+                    var _this                       = this;
+                    fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
+                    var lineArr = [
+                        [this.w / 3, this.h / 2, this.w * (2 / 3), this.h / 2],
+                    ];
+
+                    function makeCircle(left, top, line1, line2) {
+                        var c         = new fabric.Circle({
+                            left        : left,
+                            top         : top,
+                            strokeWidth : 5,
+                            radius      : 12,
+                            fill        : 'transparent',
+                            stroke      : '#666',
+                        });
+                        c.hasControls = c.hasBorders = false;
+
+                        c.line1 = line1;
+                        c.line2 = line2;
+                        _this.controllerCircleArr.push(c);
+                        return c;
+                    };
+
+                    function makeLine(coords) {
+                        return new fabric.Line(coords, {
+                            fill        : option.stroke,
+                            stroke      : option.stroke,
+                            strokeWidth : option.strokeWidth,
+                            selectable  : false
+                        });
+                    }
+
+                    var line = makeLine(lineArr[0], lineArr[1]);
+
+                    canvas.add(line);
+
+                    canvas.add(
+                        makeCircle(line.get('x1'), line.get('y1'), line),
+                        makeCircle(line.get('x2'), line.get('y2'), null, line)
+                    );
+
+                    canvas.on('object:moving', function (e) {
+                        var p = e.target;
+                        p.line1 && p.line1.set({'x1' : p.left, 'y1' : p.top});
+                        p.line2 && p.line2.set({'x2' : p.left, 'y2' : p.top});
+                        canvas.renderAll();
+                    });
+                },
+                renderArrLine     : function (option) {
+                    this.renderFN.renderArc.call(obj, option, false, true);
+                },
+                renderArrDashLine : function (option) {
+                    this.renderFN.renderArc.call(obj, option, true, true);
+                },
+                arrLine           : function (option, isTrue) {
+                    var _this                       = this;
+                    var canvas                      = this.ctx;
+                    fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
+                    option.objectCaching = false;
+                    option.fill          = '';
+                    option.strokeWidth   = 2;
+                    if (isTrue) {
+                        option.strokeDashArray = [6, 6];
+                    }
+                    canvas.on({
+                        'object:moving' : onObjectMoving
+                    });
+
+                    var pointArr = [
+                        [_this.w * (1 / 5), _this.h / 2 - 50],
+                        [_this.w * (1 / 4), _this.h / 2 + 50],
+                        [_this.w * (3 / 4), _this.h / 2 + 50],
+                        [_this.w * (4 / 5), _this.h / 2 - 50]
+                    ];
+                    var line     = new fabric.Path('M 65 0 C 0, 0, 0, 0,0,0', option);
+                    console.log(line.path);
+                    line.path[0][1] = pointArr[0][0];
+                    line.path[0][2] = pointArr[0][1];
+
+                    line.path[1][1] = pointArr[1][0];
+                    line.path[1][2] = pointArr[1][1];
+
+                    line.path[1][3] = pointArr[2][0];
+                    line.path[1][4] = pointArr[2][1];
+
+                    line.path[1][5] = pointArr[3][0];
+                    line.path[1][6] = pointArr[3][1];
+                    line.name       = 'arcLine';
+                    line.selectable = false;
+                    canvas.add(line);
+                    var p1      = makeCurvePoint(pointArr[1][0], pointArr[1][1], null, line, null)
+                    p1.name     = "p1";
+                    p1.pointArr = pointArr;
+                    canvas.add(p1);
+
+                    var p0  = makeCurveCircle(pointArr[0][0], pointArr[0][1], line, p1, null);
+                    p0.name = "p0";
+                    canvas.add(p0);
+
+                    var p4  = makeCurveCircle(pointArr[3][0], pointArr[3][1], line, null, null);
+                    p4.name = "p4";
+                    canvas.add(p4);
+
+                    var p2      = makeCurvePoint(pointArr[2][0], pointArr[2][1], null, p1, line);
+                    p2.name     = "p2";
+                    p2.pointArr = pointArr;
+                    canvas.add(p2);
+
+
+                    function makeCurveCircle(left, top, line1, line2, line3, arr) {
+                        var c = new fabric.Circle({
+                            left        : left,
+                            top         : top,
+                            strokeWidth : 5,
+                            radius      : 12,
+                            fill        : 'transparent',
+                            // fill: '#fff',
+                            stroke      : '#666',
+                        });
+
+                        c.hasBorders = c.hasControls = false;
+
+                        c.line1 = line1;
+                        c.line2 = line2;
+                        c.line3 = line3;
+                        _this.controllerCircleArr.push(c);
+                        return c;
+                    }
+
+                    function makeCurvePoint(left, top, line1, line2, line3) {
+                        var c = new fabric.Circle({
+                            left        : left,
+                            top         : top,
+                            strokeWidth : 8,
+                            radius      : 14,
+                            fill        : 'transparent',
+                            // fill: '#fff',
+                            stroke      : '#666'
+                        });
+
+                        c.hasBorders = c.hasControls = false;
+
+                        c.line1 = line1;
+                        c.line2 = line2;
+                        c.line3 = line3;
+                        _this.controllerCircleArr.push(c);
+                        return c;
+                    }
+
+                    function onObjectMoving(e) {
+                        var p = e.target;
+                        if (e.target.name == "p0" || e.target.name == "p2") {
+
+                            if (p.line1) {
+                                p.line1.path[0][1] = p.left;
+                                p.line1.path[0][2] = p.top;
+                                p.line1.path
+                            }
+                            else if (p.line3) {
+                                p.line3.path[1][3] = p.left;
+                                p.line3.path[1][4] = p.top;
+                            }
+                        }
+                        else if (e.target.name == "p1") {
+                            if (p.line2) {
+                                p.line2.path[1][1] = p.left;
+                                p.line2.path[1][2] = p.top;
+                            }
+                        }
+                        else if (e.target.name == "p0" || e.target.name == "p2") {
+                            p.line1 && p.line1.set({'x2' : p.left, 'y2' : p.top});
+                            p.line2 && p.line2.set({'x1' : p.left, 'y1' : p.top});
+                            p.line3 && p.line3.set({'x1' : p.left, 'y1' : p.top});
+                            p.line4 && p.line4.set({'x1' : p.left, 'y1' : p.top});
+                        }
+                        if (e.target.name == 'p4' && p.line1) {
+                            p.line1.path[1][5] = p.left;
+                            p.line1.path[1][6] = p.top;
+                        }
+                        if (e.target.name == 'p1' && e.target.pointArr) {
+                            pointArr[1][0] = p.left;
+                            pointArr[1][1] = p.top;
+                        }
+                        if (e.target.name == 'p2' && e.target.pointArr) {
+                            pointArr[2][0] = p.left;
+                            pointArr[2][1] = p.top;
+                        }
+                    };
+                },
+                arrDashLine       : function (option) {
+                    this.renderFN.arrLine.call(obj, option, true);
+                },
+                isDrawingMode     : function (option) {
+                    this.ctx.freeDrawingBrush.color = option.color;
+                    this.ctx.freeDrawingBrush.width = option.width;
+                    this.ctx.isDrawingMode          = true;
+                    $('.btn-hb').show();
+                },
+                renderTriangle    : function (option) {
+                    var w         = this.w / 4;
+                    var top       = (this.h - w) / 2;
+                    var left      = (this.w - w) / 2;
+                    option.width  = w;
+                    option.height = w;
+                    option.top    = top;
+                    option.left   = left;
+                    var tri       = new fabric.Triangle(option);
+                    this.ctx.add(tri);
+                },
+                renderCircle      : function (option) {
+                    var w         = this.w / 5;
+                    var top       = (this.h - w * 2) / 2;
+                    var left      = (this.w - w * 2) / 2;
+                    option.radius = w;
+                    option.top    = top;
+                    option.left   = left;
+                    var tri       = new fabric.Circle(option);
+                    this.ctx.add(tri);
+                },
+                renderRect        : function (option) {
+                    var w         = this.w / 3;
+                    var h         = w;
+                    var top       = (this.h - h) / 2;
+                    var left      = (this.w - w) / 2;
+                    option.width  = w;
+                    option.height = h;
+                    option.top    = top;
+                    option.left   = left;
+                    console.log(JSON.stringify(option));
+                    var ell = new fabric.Rect(option);
+                    this.ctx.add(ell);
+                }
+                ,
+                renderArrow       : function (option) {
+                    option.strokeWidth              = 1;
+                    var canvas                      = this.ctx;
+                    var _this                       = this;
+                    var arr_angle                   = 90;
+                    fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
+                    var lineArr = [
+                        [this.w / 3, this.h / 2, this.w * (2 / 3), this.h / 2],
+                    ];
+
+                    function makeCircle(left, top, line1, line2) {
+                        var c         = new fabric.Circle({
+                            left        : left,
+                            top         : top,
+                            strokeWidth : 5,
+                            radius      : 12,
+                            fill        : 'transparent',
+                            stroke      : '#666',
+                        });
+                        c.hasControls = c.hasBorders = false;
+
+                        c.line1 = line1;
+                        c.line2 = line2;
+                        _this.controllerCircleArr.push(c);
+                        return c;
+                    };
+                    var a_w        = 10;
+                    var a_h        = a_w * 2;
+                    var arr        = new fabric.Triangle({
+                        width  : a_w,
+                        height : a_h,
+                        left   : lineArr[0][2],
+                        top    : lineArr[0][3],
+                        fill   : option.stroke,
+                        angle  : arr_angle
+                    });
+                    arr.selectable = false;
+                    canvas.add(arr);
+
+                    function makeLine(coords) {
+                        return new fabric.Line(coords, {
+                            fill        : option.stroke,
+                            stroke      : option.stroke,
+                            strokeWidth : option.strokeWidth,
+                            selectable  : false
+                        });
+                    }
+
+                    var line  = makeLine(lineArr[0], lineArr[1]);
+                    var pot0  = makeCircle(line.get('x1'), line.get('y1'), line);
+                    var pot1  =
+                            makeCircle(line.get('x2'), line.get('y2'), null, line);
+                    pot1.name = 'arrPoint';
+                    canvas.add(line);
+                    canvas.add(pot0, pot1);
+
+                    canvas.on('object:moving', function (e) {
+                        var p = e.target;
+                        p.line1 && p.line1.set({'x1' : p.left, 'y1' : p.top});
+                        if (p.line2) {
+                            p.line2.set({'x2' : p.left, 'y2' : p.top});
+                            arr.set({left : p.left, top : p.top});
+                        }
+                        arr_angle = _this.angle({x : pot0.left, y : pot0.top}, {x : pot1.left, y : pot1.top});
+                        arr.set({angle : arr_angle});
+                        canvas.renderAll();
+                    });
+                },
+                renderArc         : function (option, isTrue, hasArr) {
+                    var _this                       = this;
+                    var canvas                      = this.ctx;
+                    fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
+                    option.objectCaching = false;
+                    option.fill          = '';
+                    option.strokeWidth   = 2;
+                    if (isTrue) {
+                        option.strokeDashArray = [6, 6];
+                    }
+                    canvas.on({
+                        'object:moving' : onObjectMoving
+                    });
+
+                    var pointArr = [
+                        [_this.w * (1 / 3), _this.h / 2 - 50],
+                        [_this.w * (1 / 2), _this.h / 2 + 50],
+                        [_this.w * (2 / 3), _this.h / 2 - 50]
+                    ];
+                    // var line = new fabric.Path('M 65 0 Q 100, 100, 200, 0', option);
+                    var line     = new fabric.Path('M 65 0 Q 100, 100, 200, 0', option);
+
+                    line.path[0][1] = pointArr[0][0];
+                    line.path[0][2] = pointArr[0][1];
+
+                    line.path[1][1] = pointArr[1][0];
+                    line.path[1][2] = pointArr[1][1];
+
+                    line.path[1][3] = pointArr[2][0];
+                    line.path[1][4] = pointArr[2][1];
+                    line.name       = 'arcLine';
+                    line.selectable = false;
+                    canvas.add(line);
+
+                    var a_w       = 10;
+                    var a_h       = a_w * 2;
+                    var arr_angle = _this.angle({x : pointArr[1][0], y : pointArr[1][1]}, {x : pointArr[2][0], y : pointArr[2][1]});
+                    if (!hasArr) {
+                        var arr        = new fabric.Triangle({
+                            width  : a_w,
+                            height : a_h,
+                            left   : pointArr[2][0],
+                            top    : pointArr[2][1],
+                            fill   : option.stroke,
+                            angle  : arr_angle
+                        });
+                        arr.selectable = false;
+                        canvas.add(arr);
+                    }
+
+                    var p1      = makeCurvePoint(pointArr[1][0], pointArr[1][1], null, line, null, arr)
+                    p1.name     = "p1";
+                    p1.pointArr = pointArr;
+                    p1.arr      = arr;
+                    canvas.add(p1);
+
+                    var p0  = makeCurveCircle(pointArr[0][0], pointArr[0][1], line, p1, null, null);
+                    p0.name = "p0";
+                    canvas.add(p0);
+
+                    var p2      = makeCurveCircle(pointArr[2][0], pointArr[2][1], null, p1, line, arr);
+                    p2.name     = "p2";
+                    p2.pointArr = pointArr;
+                    p2.arr      = arr;
+                    canvas.add(p2);
+
+
+                    function makeCurveCircle(left, top, line1, line2, line3, arr) {
+                        var c = new fabric.Circle({
+                            left        : left,
+                            top         : top,
+                            strokeWidth : 5,
+                            radius      : 12,
+                            fill        : 'transparent',
+                            // fill: '#fff',
+                            stroke      : '#666',
+                        });
+
+                        c.hasBorders = c.hasControls = false;
+
+                        c.line1 = line1;
+                        c.line2 = line2;
+                        c.line3 = line3;
+                        c.arr   = arr;
+                        _this.controllerCircleArr.push(c);
+                        return c;
+                    }
+
+                    function makeCurvePoint(left, top, line1, line2, line3) {
+                        var c = new fabric.Circle({
+                            left        : left,
+                            top         : top,
+                            strokeWidth : 8,
+                            radius      : 14,
+                            fill        : 'transparent',
+                            // fill: '#fff',
+                            stroke      : '#666'
+                        });
+
+                        c.hasBorders = c.hasControls = false;
+
+                        c.line1 = line1;
+                        c.line2 = line2;
+                        c.line3 = line3;
+                        _this.controllerCircleArr.push(c);
+                        return c;
+                    }
+
+                    function onObjectMoving(e) {
+                        if (e.target.name == "p0" || e.target.name == "p2") {
+                            var p = e.target;
+
+                            if (p.line1) {
+                                p.line1.path[0][1] = p.left;
+                                p.line1.path[0][2] = p.top;
+                                p.line1.path
+                            }
+                            else if (p.line3) {
+                                p.line3.path[1][3] = p.left;
+                                p.line3.path[1][4] = p.top;
+                            }
+                        }
+                        else if (e.target.name == "p1") {
+                            var p = e.target;
+
+                            if (p.line2) {
+                                p.line2.path[1][1] = p.left;
+                                p.line2.path[1][2] = p.top;
+                            }
+                        }
+                        else if (e.target.name == "p0" || e.target.name == "p2") {
+                            var p = e.target;
+
+                            p.line1 && p.line1.set({'x2' : p.left, 'y2' : p.top});
+                            p.line2 && p.line2.set({'x1' : p.left, 'y1' : p.top});
+                            p.line3 && p.line3.set({'x1' : p.left, 'y1' : p.top});
+                            p.line4 && p.line4.set({'x1' : p.left, 'y1' : p.top});
+                        }
+
+                        if (e.target.name == 'p1' && e.target.pointArr) {
+                            pointArr[1][0] = p.left;
+                            pointArr[1][1] = p.top;
+                        }
+                        if (e.target.name == 'p2' && e.target.pointArr) {
+                            pointArr[2][0] = p.left;
+                            pointArr[2][1] = p.top;
+                        }
+                        var arr_angle = _this.angle({x : pointArr[1][0], y : pointArr[1][1]}, {x : pointArr[2][0], y : pointArr[2][1]});
+                        if (arr) {
+
+                            arr.set({
+                                left  : pointArr[2][0],
+                                top   : pointArr[2][1],
+                                angle : arr_angle
+                            })
+                        }
+                    };
+
+                },
+                renderDashedArc   : function (option) {
+                    this.renderFN.renderArc.call(obj, option, true);
+                }
+                ,
+                renderLigature    : function (option) {
+                    var canvas                      = this.ctx;
+                    fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
+                    var _this            = this;
+                    option.strokeLineCap = 'square';
+
+                    function makeCircle(left, top, line1, line2) {
+                        var c         = new fabric.Circle({
+                            left        : left,
+                            top         : top,
+                            strokeWidth : 5,
+                            radius      : 12,
+                            fill        : 'transparent',
+                            stroke      : '#666',
+                        });
+                        c.hasControls = c.hasBorders = false;
+
+                        c.line1 = line1;
+                        c.line2 = line2;
+                        _this.controllerCircleArr.push(c);
+                        return c;
+                    };
+
+                    function makeCurvePoint(left, top, line1, line2, line3) {
+                        var c = new fabric.Circle({
+                            left        : left,
+                            top         : top,
+                            strokeWidth : 8,
+                            radius      : 14,
+                            fill        : 'transparent',
+                            // fill: '#fff',
+                            stroke      : '#666'
+                        });
+
+                        c.hasBorders = c.hasControls = false;
+
+                        c.line1 = line1;
+                        c.line2 = line2;
+                        c.line3 = line3;
+                        _this.controllerCircleArr.push(c);
+                        return c;
+                    }
+
+                    var lineArr = [
+                        [this.w * (1 / 3), this.h / 2 + 50, this.w * (1 / 3), this.h / 2 - 50],
+                        [this.w * (1 / 3), this.h / 2 - 50, this.w * (2 / 3), this.h / 2 - 50],
+                        [this.w * (2 / 3), this.h / 2 - 50, this.w * (2 / 3), this.h / 2 + 50]
+                    ];
+
+                    function makeLine(coords) {
+                        return new fabric.Line(coords, {
+                            fill        : option.stroke,
+                            stroke      : option.stroke,
+                            strokeWidth : 2,
+                            selectable  : false
+                        });
+                    }
+
+                    var line           = makeLine(lineArr[0]);
+                    // var line2 = makeLine(lineArr[1]);
+                    option.fill        = 'transparent';
+                    option.strokeWidth = 2;
+                    var line2          = new fabric.Path('M 65 0 Q 100, 100, 200, 0', option);
+                    line2.path[0][1]   = lineArr[1][0];
+                    line2.path[0][2]   = lineArr[1][1];
+
+                    line2.path[1][1] = _this.w / 2;
+                    line2.path[1][2] = _this.h / 2 - 75;
+
+                    line2.path[1][3] = lineArr[1][2];
+                    line2.path[1][4] = lineArr[1][3];
+                    line2.name       = 'arcLine';
+                    line2.selectable = false;
+                    var line3        = makeLine(lineArr[2]);
+                    var point        = makeCurvePoint(_this.w / 2, _this.h / 2 - 75, line2, null, null);
+                    point.name       = 'controller';
+
+                    canvas.add(line, line2, line3, point);
+
+                    var point0  = makeCircle(lineArr[1][0], lineArr[1][1], line2, line);
+                    point0.name = 'point0';
+
+                    var point1  = makeCircle(lineArr[1][2], lineArr[1][3], line3, line2);
+                    point1.name = 'point1';
+                    canvas.add(
+                        makeCircle(line.get('x1'), line.get('y1'), line),
+                        makeCircle(line3.get('x2'), line3.get('y2'), null, line3),
+                        point0, point1
+                    );
+
+                    canvas.on('object:moving', function (e) {
+                        var p = e.target;
+                        p.line1 && p.line1.set({'x1' : p.left, 'y1' : p.top});
+                        p.line2 && p.line2.set({'x2' : p.left, 'y2' : p.top});
+                        if (p.name == 'controller' && p.line1) {
+                            p.line1.path[1][1] = p.left;
+                            p.line1.path[1][2] = p.top;
+                        }
+                        if (p.name == 'point0' && p.line2 && p.line1) {
+                            p.line1.path[0][1] = p.left;
+                            p.line1.path[0][2] = p.top;
+                            p.line2.set({'x2' : p.left, 'y2' : p.top});
+                        }
+                        if (p.name == 'point1' && p.line1 && p.line2) {
+                            p.line2.path[1][3] = p.left;
+                            p.line2.path[1][4] = p.top;
+                            p.line1.set({'x1' : p.left, 'y1' : p.top});
+                        }
+                        canvas.renderAll();
+                    });
+                }
+            }
+        };
+        obj.init();
+    });
+</script>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+    wx.config({$share.js_config})
+    wx.ready(function () {
+        var shareData = {
+            title  : '{$share.share_title}',
+            desc   : '{$share.share_desc}',
+            link   : '{$share.share_link}',
+            imgUrl : '{$share.share_img}'
+        };
+        wx.onMenuShareAppMessage(shareData);
+        wx.onMenuShareTimeline(shareData);
+        wx.onMenuShareQQ(shareData);
+        wx.onMenuShareWeibo(shareData);
+    });
+</script>
