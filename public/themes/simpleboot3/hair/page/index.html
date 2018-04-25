@@ -1025,13 +1025,28 @@
             selectPhoto         : function (el, path) {
                 var $el = $(el).length && $(el);
                 if ($el) {
-                    var filepath = path;
-                    var extStart = filepath.lastIndexOf(".");
-                    var ext      = filepath.substring(extStart, filepath.length).toUpperCase();
-                    if (ext != ".JPG" && ext != ".JPEG") {
+                    if(typeof FileReader != 'undefined'){    
+                       var file = $el[0].files[0];    
+                        console.log(file.type);
+                         if((file.type).indexOf("image/jpg")==-1 ||(file.type).indexOf("image/jpeg")==-1 ){  
+                         return false; 
+                        }  
+                    }else{  
+                       var fileName= $el[0].value;  
+                       var suffixIndex=fileName.lastIndexOf(".");  
+                       var suffix=fileName.substring(suffixIndex+1).toUpperCase();  
+                       if(suffix!="JPG"&&suffix!="JPEG"){  
                         // alert("图片限于jpeg,jpg格式");
                         return false;
-                    }
+                       }  
+                    } 
+                    // var filepath = path;
+                    // var extStart = filepath.lastIndexOf(".");
+                    // var ext      = filepath.substring(extStart, filepath.length).toUpperCase();
+                    // if (ext != ".JPG" && ext != ".JPEG") {
+                    //     // alert("图片限于jpeg,jpg格式");
+                    //     return false;
+                    // }
                 }
             },
             html5Reader         : function (file, el) {
