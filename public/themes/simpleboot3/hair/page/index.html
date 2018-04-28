@@ -1,5 +1,5 @@
 <!-- <include file="hair@public/head"/> -->
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta name="viewport" content="width=device-width, user-scalable=no">
 <script src="__PAGE_TOOLS__/js/flexible.js"></script>
 <link rel="stylesheet" href="__PAGE_TOOLS__/css/minicolor.css">
 <link rel="stylesheet" href="__PAGE_TOOLS__/css/main.css">
@@ -75,16 +75,15 @@
         background: rgba(200, 92, 87, 1);
         border-color: rgba(200, 92, 87, 1);
     }
-    
-    .zoom{
+
+    .zoom {
         display: none;
         position: absolute;
         z-index: 1;
-        width:30%;
+        width: 30%;
         background: #fff;
     }
 </style>
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <style>
     body {
         line-height: 1.5rem;
@@ -118,10 +117,10 @@
         </ul>
     </div>
     <div class="main-wrap">
-            <div class="zoom">
-                <canvas id="zoom"></canvas>
-                <img src="" id="test-img" alt="" style="display: none;">
-            </div>
+        <div class="zoom">
+            <canvas id="zoom"></canvas>
+            <img src="" id="test-img" alt="" style="display: none;">
+        </div>
         <div id="back_canvas" class="canvas-wrap">
             <!-- 背景图片 -->
             <img src="{$page.avatar_url|default=''}" alt="" id="bg-img" style="position: absolute;width:100%;height: 100%;opacity: 0;z-index: -2;">
@@ -141,11 +140,10 @@
         <div class="m-tool m-all-tool">
             <div class="m-inner">
                 <ul>
-
                     <li class="h-icon fl" style="position: relative;">
                         <input type="file" accept="image/jpg,image/jpeg" class='h-input-img'>
                         <div class="h-one add-ele" data-lock='1'>
-                            
+
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/tool_3.png" alt="">
                             </div>
@@ -737,7 +735,7 @@
     $(function () {
         document.getElementById("back_canvas").addEventListener('touchmove', function (e) {
             e.preventDefault();
-        }, {passive: false});
+        }, {passive : false});
         window.obj = {
             init                : function () {
                 var _this                = this;
@@ -767,15 +765,19 @@
             },
             bindEvent           : function () {
                 var _this = this;
+
                 $('.add-ele').on('click', function () {
-                    if ($(this).attr('data-lock') == 1 || $(this).attr('data-pay') == 1) {return false;}
-                    ;
+                    if ($(this).attr('data-lock') == 1 || $(this).attr('data-pay') == 1) {
+                        return false;
+                    }
                     _this.bg_add();
                 });
+
                 $('a.p-btn').on('click', function () {
                     var url              = $(this).attr('href');
                     window.location.href = url;
                 });
+
                 //工具头像切换
                 $('.tri-head').on('click', function () {
                     $('.m-head').slideToggle();
@@ -783,20 +785,24 @@
                     $('.m-fun').hide();
 
                 });
+
                 $('.tri-tool').on('click', function () {
                     $('.m-tool').slideToggle();
                     $('.m-head').hide();
                     $('.m-fun').hide();
                 });
+
                 $('.tri-fun').on('click', function () {
                     $('.m-fun').slideToggle();
                     $('.m-head').hide();
                     $('.m-tool').hide();
                 });
+
                 //头像点击
                 $('.m-head .h-one,.m-fun .h-one').on('click', function () {
-                    if ($(this).attr('data-lock') == 1 || $(this).attr('data-pay') == 1) {return false;}
-                    ;
+                    if ($(this).attr('data-lock') == 1 || $(this).attr('data-pay') == 1) {
+                        return false;
+                    }
                     var src    = $(this).find('img').attr('src');
                     var img1   = $(this).find('img')[0];
                     var img    = new Image();
@@ -815,17 +821,20 @@
                         img.width  = i_w;
                         img.height = i_h;
                         _this.ctx.add(img);
-                    }
+                    };
                     $(this).parents('.m-all-tool').slideUp();
                 });
+
                 //工具点击
                 $('.m-tool li.h-icon').on('click', function () {
-                    if ($(this).find('.h-one').attr('data-pay') == 1 || $(this).find('.h-one').attr('data-lock') == 1) {return ;}
-                    ;
+                    if ($(this).find('.h-one').attr('data-pay') == 1 || $(this).find('.h-one').attr('data-lock') == 1) {
+                        return;
+                    }
                     var index       = $(this).index();
                     _this.renderOBJ = $(this).attr('renderType');
                     $('#select-cx').show().find('li').eq(index).addClass('on').siblings().removeClass('on');
                 });
+
                 $('#select-cx .btn-wrap .btn-ok').on("click", function () {
                     var obj       = {};
                     var hasOption = false;
@@ -840,18 +849,20 @@
                     $('#select-cx').hide();
                     $('.m-tool').hide();
                 });
+
                 $('.btn-wrap .btn-no').on("click", function () {
                     $('#select-cx input').val('');
                     $(this).parents('.mask').hide();
                     _this.renderOBJ    = null;
                     _this.renderOption = null;
                 });
+
                 //文案点击
-                //
                 $('.tri-word').on('click', function () {
                     $('.m-all-tool').hide();
                     $('#text').show();
                 });
+
                 $('#text .btn-ok').on('click', function () {
                     var text = $('#i-text').val();
                     if (text == '') {
@@ -878,8 +889,7 @@
                     _this.renderOption = null;
 
                 });
-                //
-                //
+
                 //画笔
                 $('.btn-hb').on('click', function () {
                     $(this).hide();
@@ -912,7 +922,6 @@
                                         left : left,
                                         top  : top,
                                     });
-                                    // todo 目前生成的图片还是已以控件的形式添加在画布上的，能否直接将该图片设置为背景。
                                     _this.ctx.clear();
                                     // _this.ctx.add(img);
                                     _this.renderOBJ    = null;
@@ -924,22 +933,24 @@
                                 // alert(ret.msg)
                             }
                         }, 'json');
-
                     });
                 });
-                //canvas点击
 
+                //canvas点击
                 this.ctx.on('before:selection:cleared', function () {
                     for (var i = 0; i < _this.controllerCircleArr.length; i++) {
                         _this.ctx.remove(_this.controllerCircleArr[i]);
                     }
                 });
+
                 $('.btn-pre').on('click', function () {
                     _this.pre();
                 });
+
                 $('.h-input-img').on('change', function () {
                     _this.input_img(this);
                 });
+
                 $('#change-img').on('load', function () {
                     var width  = this.width;
                     var height = this.height;
@@ -953,8 +964,6 @@
                     img.width  = i_w;
                     _this.ctx.add(img);
                 });
-
-                
             },
             showPayOrLock       : function () {
                 $('.h-one,.add-ele').each(function () {
@@ -966,8 +975,7 @@
                         $(this).find('.h-pay').show();
                     }
                 });
-            }
-            ,
+            },
             input_img           : function (el) {
                 var _this = this;
                 this.selectPhoto(el, $(".h-input-img").val());
@@ -975,74 +983,69 @@
                 this.bg_add();
                 $('.tri-fun').trigger('click');
             },
-            setZoom:function(){
-                    var _this= this;
-                    var $zoom=$('.zoom');
-                    var width =$zoom.width();
-                    var zoom_c=$('#zoom')[0];
-                    var z_ctx=zoom_c.getContext('2d');
-                    var z_scale=0.3;
-                    // var can_zoom=new fabric.Canvas('zoom');
-                    $zoom.height(width);
-                    var height = width;
-                    zoom_c.width = width;
-                    zoom_c.height = width;
-                    this.ctx.on('mouse:down',function(options){
-                    });
-                    this.ctx.on("object:moving",function(option){
-                        var currentObj = _this.ctx.getObjects();
-                        var pointer =_this.ctx.getPointer(option.e);
-                        if(currentObj.length>0&&option.target){
-                            $('.zoom').show();
-                            z_ctx.clearRect(0,0,width,height);
-                            var bg_img = _this.canvas_bg[0].toDataURL();
-                            var cur_img = _this.ctx.toDataURL();
-                            var img_bg=new Image();
-                            var x = pointer.x;
-                            var y = pointer.y;
-                            var sx=(x-width/2)<=0?0:(x-width/2);
-                            var sy=(y-height/2)<=0?0:(y-height/2);
-                            img_bg.src=bg_img;
-                            img_bg.onload=function(){
-                                z_ctx.drawImage(this,sx,sy,width,height,0,0,_this.w*z_scale,_this.h*z_scale);
-                            }
-                            var img_c=new Image();
-                            img_c.src=cur_img;
-                            $('#test-img').attr('src',cur_img);
-                            img_c.onload=function(){
-                                z_ctx.drawImage(this,sx,sy,width,height,0,0,_this.w*z_scale,_this.h*z_scale);
-                            }
+            setZoom             : function () {
+                var _this   = this;
+                var $zoom   = $('.zoom');
+                var width   = $zoom.width();
+                var zoom_c  = $('#zoom')[0];
+                var z_ctx   = zoom_c.getContext('2d');
+                var z_scale = 0.3;
+                $zoom.height(width);
+                var height    = width;
+                zoom_c.width  = width;
+                zoom_c.height = width;
+                this.ctx.on('mouse:down', function (options) {
+                });
+                this.ctx.on("object:moving", function (option) {
+                    var currentObj = _this.ctx.getObjects();
+                    var pointer    = _this.ctx.getPointer(option.e);
+                    if (currentObj.length > 0 && option.target) {
+                        $('.zoom').show();
+                        z_ctx.clearRect(0, 0, width, height);
+                        var bg_img    = _this.canvas_bg[0].toDataURL();
+                        var cur_img   = _this.ctx.toDataURL();
+                        var img_bg    = new Image();
+                        var x         = pointer.x;
+                        var y         = pointer.y;
+                        var sx        = (x - width / 2) <= 0 ? 0 : (x - width / 2);
+                        var sy        = (y - height / 2) <= 0 ? 0 : (y - height / 2);
+                        img_bg.src    = bg_img;
+                        img_bg.onload = function () {
+                            z_ctx.drawImage(this, sx, sy, width, height, 0, 0, _this.w * z_scale, _this.h * z_scale);
+                        };
+                        var img_c     = new Image();
+                        img_c.src     = cur_img;
+                        $('#test-img').attr('src', cur_img);
+                        img_c.onload = function () {
+                            z_ctx.drawImage(this, sx, sy, width, height, 0, 0, _this.w * z_scale, _this.h * z_scale);
                         }
-                    });
-                    this.ctx.on('mouse:up',function(options){
-                        $('.zoom').hide();
-                    });
-                    /*$('body').on("touchmove",function(e){
-                        e.preventDefault();
-                    })*/
-                }
-            ,
+                    }
+                });
+                this.ctx.on('mouse:up', function (options) {
+                    $('.zoom').hide();
+                });
+                /*$('body').on("touchmove",function(e){
+                    e.preventDefault();
+                })*/
+            },
             selectPhoto         : function (el, path) {
                 var $el = $(el).length && $(el);
                 if ($el) {
-                    if(typeof FileReader != 'undefined'){    
-                       var file = $el[0].files[0];    
-                        console.log((file.type.toLowerCase()).indexOf("image/jpg"));
-                        console.log((file.type.toLowerCase()).indexOf("image/jpeg"));
-                         if((file.type.toLowerCase()).indexOf("image/jpeg")==-1 ){  
-                            $(el).val('');
-                         return false; 
-                        } 
-                    }else{  
-                       var fileName= $el[0].value;  
-                       var suffixIndex=fileName.lastIndexOf(".");  
-                       var suffix=fileName.substring(suffixIndex+1).toUpperCase();  
-                       if(suffix!="JPG"&&suffix!="JPEG"){  
-                        // alert("图片限于jpeg,jpg格式");
-                            $(el).val('');
-                        return false;
-                       }  
-                    } 
+                    if (typeof FileReader != 'undefined') {
+                        var file = $el[0].files[0];
+                        console.log(file.type);
+                        if ((file.type).indexOf("image/jpg") == -1 || (file.type).indexOf("image/jpeg") == -1) {
+                            return false;
+                        }
+                    } else {
+                        var fileName    = $el[0].value;
+                        var suffixIndex = fileName.lastIndexOf(".");
+                        var suffix      = fileName.substring(suffixIndex + 1).toUpperCase();
+                        if (suffix != "JPG" && suffix != "JPEG") {
+                            // alert("图片限于jpeg,jpg格式");
+                            return false;
+                        }
+                    }
                     // var filepath = path;
                     // var extStart = filepath.lastIndexOf(".");
                     // var ext      = filepath.substring(extStart, filepath.length).toUpperCase();
@@ -1102,8 +1105,7 @@
                 };
                 var ratio         = getPixelRatio(context);
                 return ratio;
-            }
-            ,
+            },
             toast               : function (text, isTrue) {
                 if (isTrue) {
                     $('#m-alert').removeClass('on').show().text(text);
@@ -1113,8 +1115,7 @@
                 setTimeout(function () {
                     $('#m-alert').hide();
                 }, 2000)
-            }
-            ,
+            },
             renderBGImg         : function () {
                 var bg    = $('#bg-img');
                 var _this = this;
@@ -1133,8 +1134,7 @@
                     }
                 }
 
-            }
-            ,
+            },
             initColor           : function () {
                 setTimeout(function () {
                     $('input.color').minicolors({
@@ -1157,12 +1157,12 @@
                     this.renderBG();
                     $('.btn-pre').hide();
                 }
-            }
-            ,
+            },
             bg_add              : function (fn) {
                 $('.btn-hb').trigger('click');
-                if (this.ctx.getObjects().length <= 0) {return false;}
-                ;
+                if (this.ctx.getObjects().length <= 0) {
+                    return false;
+                }
                 $('.btn-pre').show();
                 var _this      = this;
                 var currentObj = obj.ctx.getActiveObject();
@@ -1206,13 +1206,11 @@
                         }
                     })(i);
                 }
-            }
-            ,
+            },
             createOBJ           : function () {
                 var obj = new fabric[this.renderOBJ, this.renderOption];
                 this.ctx.add(obj);
-            }
-            ,
+            },
             renderBG            : function () {
                 var num    = 10;
                 var w      = this.w;
@@ -1241,8 +1239,7 @@
                     var line = new fabric.Line([i * space, 0, i * space, h], option);
                     this.ctx.add(line);
                 }
-            }
-            ,
+            },
             setHeight           : function () {
                 var h  = $('.canvas-wrap').height();
                 var w  = $('.canvas-wrap').width();
@@ -1892,7 +1889,7 @@
                             strokeWidth : 5,
                             radius      : 12,
                             fill        : 'transparent',
-                            stroke      : '#666',
+                            stroke      : '#666'
                         });
                         c.hasControls = c.hasBorders = false;
 
@@ -1900,7 +1897,7 @@
                         c.c_line    = line;
                         _this.controllerCircleArr.push(c);
                         return c;
-                    };
+                    }
 
                     function makeCurvePoint(left, top, c_arr, line) {
                         var c = new fabric.Circle({
