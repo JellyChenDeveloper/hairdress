@@ -1027,16 +1027,19 @@
                 if ($el) {
                     if(typeof FileReader != 'undefined'){    
                        var file = $el[0].files[0];    
-                        console.log(file.type);
-                         if((file.type).indexOf("image/jpg")==-1 ||(file.type).indexOf("image/jpeg")==-1 ){  
+                        console.log((file.type.toLowerCase()).indexOf("image/jpg"));
+                        console.log((file.type.toLowerCase()).indexOf("image/jpeg"));
+                         if((file.type.toLowerCase()).indexOf("image/jpeg")==-1 ){  
+                            $(el).val('');
                          return false; 
-                        }  
+                        } 
                     }else{  
                        var fileName= $el[0].value;  
                        var suffixIndex=fileName.lastIndexOf(".");  
                        var suffix=fileName.substring(suffixIndex+1).toUpperCase();  
                        if(suffix!="JPG"&&suffix!="JPEG"){  
                         // alert("图片限于jpeg,jpg格式");
+                            $(el).val('');
                         return false;
                        }  
                     } 
