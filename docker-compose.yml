@@ -7,12 +7,12 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hairdress
     networks:
       - code-network
     volumes:
-      - ./docker/mysql:/var/lib/mysql
-      - ./docker/sql:/opt/sql
-#    command: mysql -uroot -proot < /opt/sql/thinkcmf5_2018-02-10.sql
+      - ./docker/sql:/docker-entrypoint-initdb.d
+      - ./docker/sql_table:/opt/sql
 
   php:
     image: webdevops/php-apache-dev:7.0
@@ -27,7 +27,6 @@ services:
     volumes:
       - ./:/app
       - ./docker/php.ini:/opt/docker/etc/php/php.ini
-#      - ./docker1:/opt/docker
     networks:
       - code-network
 networks:
