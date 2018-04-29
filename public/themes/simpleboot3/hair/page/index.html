@@ -143,7 +143,6 @@
                     <li class="h-icon fl" style="position: relative;">
                         <input type="file" accept="image/jpg,image/jpeg" class='h-input-img'>
                         <div class="h-one add-ele" data-lock='1'>
-
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/tool_3.png" alt="">
                             </div>
@@ -739,7 +738,7 @@
         window.obj = {
             init                : function () {
                 var _this                = this;
-                this.mul                 = 1;
+                this.mul                 = 2;
                 this.controllerCircleArr = [];
                 this.bg_cache            = [];
                 this.offsetX             = $('.main-wrap').offset().left;
@@ -981,7 +980,7 @@
                 this.selectPhoto(el, $(".h-input-img").val());
                 this.html5Reader(el, $('#change-img')[0]);
                 this.bg_add();
-                $('.tri-fun').trigger('click');
+                $('.tri-tool').trigger('click');
             },
             setZoom             : function () {
                 var _this   = this;
@@ -1191,17 +1190,25 @@
                 _this.create_ctx.fillStyle = '#fff';
                 _this.create_ctx.fillRect(0, 0, _this.w * _this.mul, _this.h * _this.mul);
                 _this.create_ctx.restore();
+                var end =0;
+                var imgArr=[];
                 for (var i = 0; i < this.bg_cache.length; i++) {
                     (function (i) {
                         var img    = new Image();
                         img.src    = _this.bg_cache[i];
+                        imgArr.push(img);
                         img.onload = function () {
-                            _this.bg_ctx.drawImage(this, 0, 0, _this.w, _this.h);
-                            _this.create_ctx.drawImage(this, 0, 0, _this.w * _this.mul, _this.h * _this.mul);
-                            ++isEnd;
-                            console.log('mul');
-                            if (isEnd == _this.bg_cache.length && fn) {
-                                fn();
+                            end++;
+                            if(end >= _this.bg_cache.length){
+                                for(var j =0;j<imgArr.length;j++){
+                                    _this.bg_ctx.drawImage(imgArr[j], 0, 0, _this.w, _this.h);
+                                    _this.create_ctx.drawImage(imgArr[j], 0, 0, _this.w * _this.mul, _this.h * _this.mul);
+                                    ++isEnd;
+                                    if (isEnd == _this.bg_cache.length && fn) {
+                                        fn();
+                                    }
+
+                                }
                             }
                         }
                     })(i);
