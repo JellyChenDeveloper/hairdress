@@ -15,7 +15,7 @@ if ($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost'
 } elseif ($_SERVER['HTTP_HOST'] == 'wechat.jellychen.cn' || $_SERVER['HTTP_HOST'] == 'wechat.yikaoshuju.com') {
     define("ENV_DEV", true);
 } else {
-    define("ENV_PRO", true);
+    define("ENV_PRD", true);
 }
 
 // 调试模式开关
