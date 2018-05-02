@@ -43,7 +43,7 @@ class HairBaseController extends HomeBaseController {
                     session('register.from_url', $this->request->url(true));
                     $this->redirect(url('hair/index/register'));
                 } elseif (!cmf_user_has_payed()) {
-                    if (!($this->request->module() == 'hair' && $this->request->controller() == 'Pay')) {
+                    if (!($this->request->module() == 'hair' && ($this->request->controller() == 'Pay' || $this->request->controller() == 'Course'))) {
                         session('wx_pay.from_url', $this->request->url(true));
                         $this->redirect(url('hair/pay/toolPay'));
                     }
