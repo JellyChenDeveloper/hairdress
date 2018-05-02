@@ -12,8 +12,8 @@
 return [
     'region'          => 'cn-hangzhou',
     'endPointName'    => 'cn-hangzhou',
-    'AccessKeyId'     => 'LTAILvn1j9ZfL98W',
-    'AccessKeySecret' => 'obWAvCUiVDOpvbITlltHQIShuVAcMj',
-    'signName'        => 'Jelly国栋',
-    'templateCode'    => 'SMS_130745100',
+    'AccessKeyId'     => 'LTAINTilRiAd5np0',
+    'AccessKeySecret' => 'nRsmlLISBRpSFsoklwYmxLbKc9a6w7',
+    'signName'        => '智能美绘',
+    'templateCode'    => 'SMS_130870029',
 ];

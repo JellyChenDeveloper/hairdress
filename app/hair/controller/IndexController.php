@@ -62,8 +62,7 @@ class IndexController extends HairBaseController {
         $sms_code = cmf_generate_code(4);
         cache('sms_code' . $data['mobile'], $sms_code, 60 * 5);
         // todo: 暂时关闭短信功能，待后期放开
-//        $result = cmf_send_sms_code($sms_code, $data['mobile']);
-        $result = 1;
+        $result = cmf_send_sms_code($sms_code, $data['mobile']);
         if ($result) {
             $this->success('短信发送成功');
         } else {
