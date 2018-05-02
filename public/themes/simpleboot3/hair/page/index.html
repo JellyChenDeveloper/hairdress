@@ -81,6 +81,8 @@
         position: absolute;
         z-index: 1;
         width: 30%;
+        right: 0;
+        top:0;
         background: #fff;
     }
 </style>
@@ -133,7 +135,7 @@
             <div class="c-inner">
                 <canvas id="canvas-bg"></canvas>
             </div>
-            <div class="c-inner">
+            <div class="c-inner f-canvas" >
                 <canvas id="canvas"></canvas>
             </div>
         </div>
@@ -668,14 +670,53 @@
                 <li>
                     <p class="text-c">圆形</p>
                     <p>颜色：<input class="s-select color" type="hidden" key='fill' value="#000"></p>
+                    <p>透明度：<select class="s-select" key='opacity' id="">
+                        <option value="1">100%</option>
+                        <option value="0.9">90%</option>
+                        <option value="0.8">80%</option>
+                        <option value="0.7">70%</option>
+                        <option value="0.6">60%</option>
+                        <option value="0.5">50%</option>
+                        <option value="0.4">40%</option>
+                        <option value="0.3">30%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.1">10%</option>
+                    </select>
+                    </p>
                 </li>
                 <li>
                     <p class="text-c">正方形</p>
                     <p>颜色：<input class="s-select color" type="hidden" key='fill' value="#000"></p>
+                    <p>透明度：<select class="s-select" key='opacity' id="">
+                        <option value="1">100%</option>
+                        <option value="0.9">90%</option>
+                        <option value="0.8">80%</option>
+                        <option value="0.7">70%</option>
+                        <option value="0.6">60%</option>
+                        <option value="0.5">50%</option>
+                        <option value="0.4">40%</option>
+                        <option value="0.3">30%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.1">10%</option>
+                    </select>
+                    </p>
                 </li>
                 <li>
                     <p class="text-c">三角形</p>
                     <p>颜色：<input class="s-select color" type="hidden" key='fill' value="#000"></p>
+                    <p>透明度：<select class="s-select" key='opacity' id="">
+                        <option value="1">100%</option>
+                        <option value="0.9">90%</option>
+                        <option value="0.8">80%</option>
+                        <option value="0.7">70%</option>
+                        <option value="0.6">60%</option>
+                        <option value="0.5">50%</option>
+                        <option value="0.4">40%</option>
+                        <option value="0.3">30%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.1">10%</option>
+                    </select>
+                    </p>
                 </li>
             </ul>
             <div class="btn-wrap">
@@ -732,9 +773,6 @@
 <script src="__PAGE_TOOLS__/js/exif.js"></script>
 <script>
     $(function () {
-        document.getElementById("back_canvas").addEventListener('touchmove', function (e) {
-            e.preventDefault();
-        }, {passive : false});
         window.obj = {
             init                : function () {
                 var _this                = this;
@@ -963,6 +1001,33 @@
                     img.width  = i_w;
                     _this.ctx.add(img);
                 });
+                // 
+                var passiveArr=['#back_canvas','.tab','.footer-btn'];
+                    
+                $.each(passiveArr,function(i,e){
+                    console.log($(e));
+                    $(e)[0].addEventListener('touchmove', function (e) {
+                        e.preventDefault();
+                    }, {passive : false});
+                });
+                console.log($('.minicolors-panel').length);
+                    $('.minicolors-panel').each(function(){
+                        this.addEventListener('touchmove', function (e) {
+                            e.preventDefault();
+                        }, {passive : false});
+                    });
+                // document.getElementById("back_canvas").addEventListener('touchmove', function (e) {
+                //     e.preventDefault();
+                // }, {passive : false});
+                // 
+                // 
+                $('.f-canvas').on('touchend',function(){
+                    var isDraw = _this.ctx.isDrawingMode ;
+                   if(isDraw){
+                    _this.bg_add();
+                    _this.ctx.isDrawingMode =true;
+                   } 
+                });
             },
             showPayOrLock       : function () {
                 $('.h-one,.add-ele').each(function () {
@@ -1135,11 +1200,14 @@
 
             },
             initColor           : function () {
-                setTimeout(function () {
-                    $('input.color').minicolors({
+                // setTimeout(function () {
+                //     $('input.color').minicolors({
+                //         defaultValue : '#000'
+                //     });
+                // }, 300)
+                $('input.color').minicolors({
                         defaultValue : '#000'
                     });
-                }, 300)
             },
             pre                 : function () {
                 if (this.ctx.getObjects().length > 0) {
