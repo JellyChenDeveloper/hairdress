@@ -18,7 +18,7 @@
                         <a class="weui-cell__bd" href="{:url('hair/page/index',['id'=>$page.id])}">
                             <p>{$page.name}</p>
                         </a>
-                        <div class="weui-cell__ft">向左滑动删除下载</div>
+                        <div class="weui-cell__ft left_word">向左滑动删除下载</div>
                     </div>
                 </div>
                 <div class="weui-cell__ft">
@@ -38,7 +38,6 @@
         $(document).on("click", "#add_page", function () {
             var _this = $(this);
             $.prompt({
-                text     : "{:lang('INPUT_NAME_TIPS')}",
                 title    : "{:lang('INPUT_PAGE_NAME')}",
                 onOK     : function (page_name) {
                     if (!page_name) {

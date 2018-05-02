@@ -51,3 +51,7 @@ a.weui-cell__bd {
 .weui-tabbar__label {
     font-size: 20px;
 }
+
+.left_word {
+    width: 200px;
+}

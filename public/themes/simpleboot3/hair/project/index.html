@@ -1,7 +1,4 @@
 <include file="hair@public/head"/>
-<header class='demos-header'>
-    <h1 class="demos-title">{:lang('MY_PROJECT')}</h1>
-</header>
 <div class="bd">
     <div class='demos-content-padded'>
         <div class="button_sp_area" style="text-align: right;">
@@ -17,7 +14,7 @@
                         <a class="weui-cell__bd" href="{:url('hair/project/detail','id='.$project.id)}">
                             <p>{$project.name}</p>
                         </a>
-                        <div class="weui-cell__ft">向左滑动删除</div>
+                        <div class="weui-cell__ft left_word">向左滑动删除</div>
                     </div>
                 </div>
                 <div class="weui-cell__ft">
@@ -32,7 +29,6 @@
     $(function () {
         $(document).on("click", "#add_project", function () {
             $.prompt({
-                text     : "{:lang('INPUT_NAME_TIPS')}",
                 title    : "{:lang('INPUT_PROJECT_NAME')}",
                 onOK     : function (project_name) {
                     if (!project_name) {
