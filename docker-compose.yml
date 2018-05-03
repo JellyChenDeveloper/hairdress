@@ -11,6 +11,7 @@ services:
     networks:
       - code-network
     volumes:
+      - ./docker/mysql:/var/lib/mysql
       - ./docker/sql:/docker-entrypoint-initdb.d
       - ./docker/sql_table:/opt/sql
 
