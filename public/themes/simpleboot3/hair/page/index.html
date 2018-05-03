@@ -113,6 +113,17 @@
         /*line-height: 0.4533rem;*/
         border: 1px solid #ccc;
     }
+    .m-exp{
+            display: none;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        height: 100%;
+        padding: 0.6667rem 0.4rem;
+        background-color: #fff;
+        z-index: 1;
+    }
 </style>
 <form id="page_info">
     <input type="hidden" name="id" value="{$page.id}"/>
@@ -124,10 +135,11 @@
 <div class="wrap">
     <div class="tab">
         <ul>
-            <li class="fl"><a href="javascript:void(0)" onclick="javascript:history.go(-1);return false;" >返回</a></li>
+            <!-- <li class="fl"><a href="javascript:void(0)" onclick="javascript:history.go(-1);return false;" >返回</a></li> -->
             <li class="fl tri-head">人像</li>
             <li class="fl tri-tool">功能</li>
             <li class="fl tri-fun">工具</li>
+            <li class="fl tri-exp" data-lock=1>表情</li>
             <li class="fl tri-word">文字</li>
             <li class="fl"><a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzU2NDQ3MjYyNw==&scene=124#wechat_redirect" >教程</a></li>
         </ul>
@@ -677,6 +689,44 @@
                 </ul>
             </div>
         </div>
+        <div class="m-exp m-all-tool">
+            <div class="m-inner">
+                <ul>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/tool_1.png" alt="">
+                        </div>
+                    </li>
+                    <li class="h-icon fl">
+                        <div class="h-one add-ele">
+                            <img src="__PAGE_TOOLS__/images/tool_4.png" alt="">
+                        </div>
+                    </li>
+                    <foreach name="tools" item="tool">
+                        <eq name="tool['type']" value="1">
+                            <li class="h-icon fl">
+                                <div class="h-one add-ele" data-lock="{$tool['is_lock']}" data-pay="{$tool['need_pay']}">
+                                    <div class="h-mask h-pay">
+                                        <div class="h-wrap">
+                                            <p class="p-price">￥{$tool.price}</p>
+                                            <div>
+                                                <a class="p-btn" href="{:url('hair/pay/elementPay')}?id={$tool.id}">立即购买</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="h-mask h-lock">
+                                        <div class="h-wrap">
+                                            <p class="p-price">锁定</p>
+                                        </div>
+                                    </div>
+                                    <img src="{$tool.image}" alt="">
+                                </div>
+                            </li>
+                        </eq>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="mask" id="select-cx">
         <div class="m-box">
@@ -998,6 +1048,7 @@
                     $('.m-head').slideToggle();
                     $('.m-tool').hide();
                     $('.m-fun').hide();
+                    $('.m-exp').hide();
 
                 });
 
@@ -1005,16 +1056,26 @@
                     $('.m-tool').slideToggle();
                     $('.m-head').hide();
                     $('.m-fun').hide();
+                    $('.m-exp').hide();
                 });
 
                 $('.tri-fun').on('click', function () {
                     $('.m-fun').slideToggle();
                     $('.m-head').hide();
                     $('.m-tool').hide();
+                    $('.m-exp').hide();
                 });
 
+                $('.tri-exp').on('click',function(){
+                   var lock = $(this).attr('data-lock');
+                   if(lock ==1){return false;} 
+                    $('.m-exp').toggle();
+                    $('.m-fun').hide();
+                    $('.m-head').hide();
+                    $('.m-tool').hide();
+                });
                 //头像点击
-                $('.m-head .h-one,.m-fun .h-one').on('click', function () {
+                $('.m-head .h-one,.m-fun .h-one,.m-exp .h-one').on('click', function () {
                     if ($(this).attr('data-lock') == 1 || $(this).attr('data-pay') == 1) {
                         return false;
                     }
