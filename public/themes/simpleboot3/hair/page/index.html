@@ -86,8 +86,21 @@
         top:0;
         background: #fff;
     }
-</style>
-<style>
+    .wrap .tab{
+        background: #626262;
+        box-sizing: border-box;
+    }
+    .wrap .tab li{
+        background: #626262;
+        border-width: 2px;
+        border-right-color: #000;
+        color:#fff;
+        box-sizing: border-box;
+        border-bottom:2px solid #000;
+    }
+    .wrap .tab li a{
+        color:#fff;
+    }
     body {
         line-height: 1.5rem;
         font-size: 12px !important;
@@ -111,12 +124,12 @@
 <div class="wrap">
     <div class="tab">
         <ul>
-            <li class="fl"><a href="javascript:void(0)" onclick="javascript:history.go(-1);return false;" style="color:#000;">返回</a></li>
+            <li class="fl"><a href="javascript:void(0)" onclick="javascript:history.go(-1);return false;" >返回</a></li>
             <li class="fl tri-head">头像</li>
             <li class="fl tri-tool">功能</li>
             <li class="fl tri-fun">工具</li>
             <li class="fl tri-word">文字</li>
-            <li class="fl"><a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzU2NDQ3MjYyNw==&scene=124#wechat_redirect" style="color:#000;">教程</a></li>
+            <li class="fl"><a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzU2NDQ3MjYyNw==&scene=124#wechat_redirect" >教程</a></li>
         </ul>
     </div>
     <div class="main-wrap">
@@ -462,6 +475,94 @@
                             <p class="h-text">{$funcs.triangle.name}</p>
                         </div>
                     </li>
+                    <!-- 四角星 -->
+                    <li class="h-icon fl" renderType='renderStar_4'>
+                        <div class="h-one add-ele" data-lock="{$funcs.triangle.is_lock}" data-pay="{$funcs.triangle.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.triangle.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.triangle.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/star_4.jpg" alt="">
+                            </div>
+                            <p class="h-text">{$funcs.triangle.name}</p>
+                        </div>
+                    </li>
+                    <!-- 五角星 -->
+                    <li class="h-icon fl" renderType='renderStar_5'>
+                        <div class="h-one add-ele" data-lock="{$funcs.triangle.is_lock}" data-pay="{$funcs.triangle.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.triangle.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.triangle.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/star_5.jpg" alt="">
+                            </div>
+                            <p class="h-text">{$funcs.triangle.name}</p>
+                        </div>
+                    </li>
+                    <!-- 六角星 -->
+                    <li class="h-icon fl" renderType='renderStar_6'>
+                        <div class="h-one add-ele" data-lock="{$funcs.triangle.is_lock}" data-pay="{$funcs.triangle.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.triangle.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.triangle.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/star_6.jpg" alt="">
+                            </div>
+                            <p class="h-text">{$funcs.triangle.name}</p>
+                        </div>
+                    </li>
+                    <!-- 月牙形 -->
+                    <li class="h-icon fl" renderType='renderMoon'>
+                        <div class="h-one add-ele" data-lock="{$funcs.triangle.is_lock}" data-pay="{$funcs.triangle.need_pay}">
+                            <div class="h-mask h-pay">
+                                <div class="h-wrap">
+                                    <p class="p-price">￥{$funcs.triangle.price}</p>
+                                    <div>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.triangle.id">立即购买</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="h-mask h-lock">
+                                <div class="h-wrap">
+                                    <p class="p-price">锁定</p>
+                                </div>
+                            </div>
+                            <div class="h-img-wrap">
+                                <img src="__PAGE_TOOLS__/images/star_2.jpg" alt="">
+                            </div>
+                            <p class="h-text">{$funcs.triangle.name}</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -717,6 +818,82 @@
                         <option value="0.2">20%</option>
                         <option value="0.1">10%</option>
                     </select>
+                    </p>
+                </li>
+                <li  >
+                    <p class="text-c">四角星</p>
+                    <p>
+                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill' >
+                    </p>
+                    <p>透明度：<select class="s-select" key='opacity' >
+                                <option value="1">100%</option>
+                                <option value="0.9">90%</option>
+                                <option value="0.8">80%</option>
+                                <option value="0.7">70%</option>
+                                <option value="0.6">60%</option>
+                                <option value="0.5">50%</option>
+                                <option value="0.4">40%</option>
+                                <option value="0.3">30%</option>
+                                <option value="0.2">20%</option>
+                                <option value="0.1">10%</option>
+                            </select>
+                    </p>
+                </li>
+                <li  >
+                    <p class="text-c">五角星</p>
+                    <p>
+                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill' >
+                    </p>
+                    <p>透明度：<select class="s-select" key='opacity' >
+                                <option value="1">100%</option>
+                                <option value="0.9">90%</option>
+                                <option value="0.8">80%</option>
+                                <option value="0.7">70%</option>
+                                <option value="0.6">60%</option>
+                                <option value="0.5">50%</option>
+                                <option value="0.4">40%</option>
+                                <option value="0.3">30%</option>
+                                <option value="0.2">20%</option>
+                                <option value="0.1">10%</option>
+                            </select>
+                    </p>
+                </li>
+                <li  >
+                    <p class="text-c">六角星</p>
+                    <p>
+                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill' >
+                    </p>
+                    <p>透明度：<select class="s-select" key='opacity' >
+                                <option value="1">100%</option>
+                                <option value="0.9">90%</option>
+                                <option value="0.8">80%</option>
+                                <option value="0.7">70%</option>
+                                <option value="0.6">60%</option>
+                                <option value="0.5">50%</option>
+                                <option value="0.4">40%</option>
+                                <option value="0.3">30%</option>
+                                <option value="0.2">20%</option>
+                                <option value="0.1">10%</option>
+                            </select>
+                    </p>
+                </li>
+                <li  >
+                    <p class="text-c">月牙形</p>
+                    <p>
+                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill' >
+                    </p>
+                    <p>透明度：<select class="s-select" key='opacity' >
+                                <option value="1">100%</option>
+                                <option value="0.9">90%</option>
+                                <option value="0.8">80%</option>
+                                <option value="0.7">70%</option>
+                                <option value="0.6">60%</option>
+                                <option value="0.5">50%</option>
+                                <option value="0.4">40%</option>
+                                <option value="0.3">30%</option>
+                                <option value="0.2">20%</option>
+                                <option value="0.1">10%</option>
+                            </select>
                     </p>
                 </li>
             </ul>
@@ -1951,6 +2128,159 @@
                         canvas.renderAll();
                     });
                 },
+                renderStar_4:function(option){
+                      var canvas = this.ctx;
+                      var w =this.w;
+                      var h =this.h;
+                      var mul =0.8;
+                      var b_num=w*0.1;
+                      var y_p=[h/2 - h*0.06,h/2+h*0.06];
+                      var x_p=[w/2-w*0.08,w/2+w*0.08];
+                      var inner_arr=[
+                            [x_p[0],y_p[0]],
+                            [x_p[1],y_p[0]],
+                            [x_p[1],y_p[1]],
+                            [x_p[0],y_p[1]],
+                          ];
+                      var outer_arr=[
+                            [w/2,h/2-h*0.3],
+                            [w/2+w*0.29,h/2],
+                            [w/2,h/2+h*0.3],
+                            [w/2-w*0.29,h/2],
+                          ];
+                          console.log(w);
+                          console.log(h);
+                          console.log(inner_arr);
+                          console.log(outer_arr);
+                     var str ='M '+inner_arr[0].join(' ')+',';
+                     // str +='L '+ outer_arr[0].join(' ')+',';
+                     // str +='L '+ inner_arr[1].join(' ')+',';
+                     console.log(str);
+                     for(var i =0;i<inner_arr.length;i++){
+                        if(i==0){
+                            str +='L '+ outer_arr[0].join(' ')+',';
+                        }else{
+                            str +='L '+ inner_arr[i].join(' ')+',';
+                            str +='L '+ outer_arr[i].join(' ')+',';
+                        }
+                        if(i == inner_arr.length -1){
+                            str +='L '+ inner_arr[0].join(' ');
+                        }
+                        console.log(str);
+                     }
+                      var line = new fabric.Path(str, option);
+                      canvas.add(line);
+                },
+                renderStar_5:function(option){
+                      var canvas = this.ctx;
+                      var w =this.w;
+                      var h =this.h;
+                      var mul =0.08;
+                      var b_num=w*0.1;
+                      // var y_p=[h/2 - h*0.06,h/2+h*0.06];
+                      // var x_p=[w/2-w*0.08,w/2+w*0.08];
+                      var inner_arr=[
+                            [w/2-w*0.08,h/2- h/2*0.11],
+                            [w/2+w*0.08,h/2- h/2*0.11],
+                            [w/2+w*0.08*1.66,h/2+ h/2*0.11*0.7],
+                            [w/2,h/2+ h/2*0.2*1.2],
+                            [w/2-w*0.08*1.66,h/2+ h/2*0.11*0.7],
+                          ];
+                      var outer_arr=[
+                            [w/2,h/2-h*0.30],
+                            [w/2+w*0.35,h/2- h/2*0.11],
+                            [w/2+w*0.21,h/2+h*0.28],
+                            [w/2-w*0.21,h/2+h*0.28],
+                            [w/2-w*0.35,h/2- h/2*0.11],
+                          ];
+                     var str ='M '+inner_arr[0].join(' ')+',';
+                     for(var i =0;i<inner_arr.length;i++){
+                        if(i==0){
+                            str +='L '+ outer_arr[0].join(' ')+',';
+                        }else{
+                            str +='L '+ inner_arr[i].join(' ')+',';
+                            str +='L '+ outer_arr[i].join(' ')+',';
+                        }
+                        if(i == inner_arr.length -1){
+                            str +='L '+ inner_arr[0].join(' ');
+                        }
+                     }
+                      var line = new fabric.Path(str, option);
+                      canvas.add(line);
+                },
+                renderStar_6:function(option){
+                      var canvas = this.ctx;
+                      var w =this.w;
+                      var h =this.h;
+                      var m =w*0.08;
+                      var b_num=w*0.1;
+                      // var y_p=[h/2 - h*0.06,h/2+h*0.06];
+                      // var x_p=[w/2-w*0.08,w/2+w*0.08];
+                      var inner_arr=[
+                            [w/2-m,h/2-m*2],
+                            [w/2+m,h/2-m*2],
+                            [w/2+m*2,h/2],
+                            [w/2+m,h/2+m*2],
+                            [w/2-m,h/2+m*2],
+                            [w/2-m*2,h/2],
+                          ];
+                      var outer_arr=[
+                            [w/2,h/2-m*4.5],
+                            [w/2+m*3.5,h/2-m*2.5],
+                            [w/2+m*3.5,h/2+m*2.5],
+                            [w/2,h/2+m*4.5],
+                            [w/2-m*3.5,h/2+m*2.5],
+                            [w/2-m*3.5,h/2-m*2.5],
+                          ];
+                     var str ='M '+inner_arr[0].join(' ')+',';
+                     for(var i =0;i<inner_arr.length;i++){
+                        if(i==0){
+                            str +='L '+ outer_arr[0].join(' ')+',';
+                        }else{
+                            str +='L '+ inner_arr[i].join(' ')+',';
+                            str +='L '+ outer_arr[i].join(' ')+',';
+                        }
+                        if(i == inner_arr.length -1){
+                            str +='L '+ inner_arr[0].join(' ');
+                        }
+                     }
+                      var line = new fabric.Path(str, option);
+                      canvas.add(line);
+                },
+                renderMoon:function(option){
+                      var canvas = this.ctx;
+                      var w =this.w;
+                      var h =this.h;
+                      var p_arr=[[w/2+w*0.23,h/2-h*0.27],[w/2-h*0.27,h/2+w*0.23],[w/2+w*0.35,h/2+w*0.35],[w/2+w*0.2,h/2+w*0.2]];
+                      var str ='M '+p_arr[0].join(' ')+' ';
+                      str+='Q '+p_arr[2].join(' ,')+',';
+                      str+=p_arr[1].join(' ,');
+                      str+='L '+ p_arr[1].join(' ')+'  '; 
+                      str+='Q '+p_arr[3].join(', ')+' ,';
+                      str+=p_arr[0].join(', ')+'  Z';
+                      // str ='M '+p_arr[0].join(' ')+' ';
+                      // str+='Q '+p_arr[2].join(' ,')+' ,';
+                      // str+=p_arr[1].join(' ,')+' ,'; 
+                      // str+=[]
+                      console.log(str);
+                      // str ='M 306 197 L 32.8699 223.8699 A 38 38 0 0 1 277.8424 222.5178'
+                      // var line2 = new fabric.Path('M 65 0 Q 100, 100, 200, 0 L 65 0 Q 100,100,200,0 Z', option); 
+                      var line2 = new fabric.Path(str, option);
+                      // line2.path[0][1]=p_arr[0][0];
+                      // line2.path[0][2]=p_arr[0][1];
+                      // line2.path[1][1]=p_arr[2][0];
+                      // line2.path[1][2]=p_arr[2][1];
+                      // line2.path[1][3]=p_arr[1][0];
+                      // line2.path[1][4]=p_arr[1][1];
+                      // line2.path[2][1]=p_arr[1][0];
+                      // line2.path[2][2]=p_arr[1][1];
+                      // line2.path[3][1]=p_arr[3][0];
+                      // line2.path[3][2]=p_arr[3][1];
+                      // line2.path[3][3]=p_arr[0][0];
+                      // line2.path[3][4]=p_arr[0][1];
+                      canvas.add(line2);
+                }
+                ,
                 renderLigature2   : function (option) {
                     var canvas                      = this.ctx;
                     var _this                       = this;
