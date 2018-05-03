@@ -1,11 +1,24 @@
 <include file="hair@public/head"/>
-
+<style>
+    .bg-c1{
+        background-color: #fc0033;
+        color:#fff;
+    }
+    .t-x{text-align: center;color:#fff;padding-top:15px;}
+    .img-b{
+        display: block;
+        margin:0 auto;
+        width: 54%;
+    }
+    .weui-btn_primary:not(.weui-btn_disabled):active{background-color: #767676;}
+    body{background: #3e3e3e;}
+</style>
 <article class="weui-article">
     <section>
-        <img src="__PAGE_TOOLS__/images/main1.png" alt="">
+        <img src="__PAGE_TOOLS__/images/main1.png" alt="" >
     </section>
-    <a href="{:url('hair/project/index')}" class="weui-btn weui-btn_primary">ENTER</a>
-    <p>Welcome to ZHI NENG MEI HUI</p>
+    <a href="{:url('hair/project/index')}" class="weui-btn weui-btn_primary bg-c1">ENTER</a>
+    <p class="t-x">Welcome to ZHI NENG MEI HUI</p>
 </article>
 
 <include file="hair@public/foot"/>

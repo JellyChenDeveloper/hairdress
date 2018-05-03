@@ -1,18 +1,42 @@
 <include file="hair@public/head"/>
+<style>
+    body{background: #3e3e3e;}
+    #add_project{
+        background: #737373;
+        color:#fff;
+        border:2px solid #000;
+
+    }
+    .weui-cell_swiped>.weui-cell__bd{background: transparent;}
+    .p-inner{
+        background-color: #fff;
+        border:2px solid #000;
+        border-radius: 5px;
+    }
+    .p-name{
+        text-align: center;
+        border:1px solid #000;
+        border-radius: 2px;
+    }
+    .weui-cell{margin-bottom: 5px;}
+    .weui-cell:before{display: none;}
+    .weui-cells:after, .weui-cells:before{display: none;}
+    .weui-swiped-btn_warn{background: #737373;border:1px solid #000;}
+</style>
 <div class="bd">
     <div class='demos-content-padded'>
-        <div class="button_sp_area" style="text-align: right;">
+        <div class="button_sp_area" style="text-align: left;">
             <a href="javascript:" id='add_project' class="weui-btn weui-btn_mini weui-btn_primary">{:lang('NEW_PROJECT')}</a>
         </div>
     </div>
-    <div class="weui-cells">
+    <div class="weui-cells" style="padding:0 15px;background: transparent;">
         <foreach name="project_list" item="project">
             <div class="weui-cell weui-cell_swiped">
                 <!--<div class="weui-cell__bd" style="transform: translateX(-136px)">-->
-                <div class="weui-cell__bd">
-                    <div class="weui-cell">
+                <div class="weui-cell__bd ">
+                    <div class="weui-cell p-inner">
                         <a class="weui-cell__bd" href="{:url('hair/project/detail','id='.$project.id)}">
-                            <p>{$project.name}</p>
+                            <p class="p-name">{$project.name}</p>
                         </a>
                         <div class="weui-cell__ft left_word">向左滑动删除</div>
                     </div>
