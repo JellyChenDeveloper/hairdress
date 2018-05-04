@@ -10,13 +10,13 @@
  */
 
 return [
-    'SUBMIT' => '提交',
-    'CANCEL' => '取消',
-    'DELETE' => '删除',
-    'LOOK'   => '查看',
-    'DELETE_CONFIRM'      => '确定删除?',
-    'DELETE_SUCCESS'      => '删除成功',
-    'DELETE_FAILED'       => '删除失败',
+    'SUBMIT'         => '提交',
+    'CANCEL'         => '取消',
+    'DELETE'         => '删除',
+    'LOOK'           => '查看',
+    'DELETE_CONFIRM' => '确定删除?',
+    'DELETE_SUCCESS' => '删除成功',
+    'DELETE_FAILED'  => '删除失败',
 
     'PROJECT'             => '作品',
     'MY_PROJECT'          => '我的作品',

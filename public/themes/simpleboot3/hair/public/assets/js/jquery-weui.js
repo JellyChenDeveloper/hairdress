@@ -3460,12 +3460,12 @@ if (typeof define === 'function' && define.amd) {
   };
 
   defaults = $.modal.prototype.defaults = {
-    title: "提示",
+    title: "Tips",
     text: undefined,
-    buttonOK: "确定",
-    buttonCancel: "取消",
+    buttonOK: "OK",
+    buttonCancel: "Cancel",
     buttons: [{
-      text: "确定",
+      text: "OK",
       className: "primary"
     }],
     autoClose: true //点击按钮自动关闭对话框，如果你不希望点击按钮就关闭对话框，可以把这个设置为false

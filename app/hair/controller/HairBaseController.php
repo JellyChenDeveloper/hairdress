@@ -32,6 +32,8 @@ class HairBaseController extends HomeBaseController {
         $this->wecharService = WechatService::instance();
         $this->setting       = model('Setting')->get(1);
         $this->assign('setting', $this->setting);
+        $lang = $this->request->param('lang');
+        $lang ? setcookie('think_var', $lang, 0, '/') : 0;
 
         if ($this->request->path() != strtolower('hair/index/wxauth')) {
             $this->user    = $this->userLogin();
