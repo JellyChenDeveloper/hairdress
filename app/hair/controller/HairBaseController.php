@@ -30,7 +30,7 @@ class HairBaseController extends HomeBaseController {
     public function _initialize() {
         parent::_initialize();
         $this->wecharService = WechatService::instance();
-        $this->setting = model('Setting')->get(1);
+        $this->setting       = model('Setting')->get(1);
         $this->assign('setting', $this->setting);
 
         if ($this->request->path() != strtolower('hair/index/wxauth')) {
@@ -38,7 +38,7 @@ class HairBaseController extends HomeBaseController {
             $this->user_id = cmf_get_current_user_id();
         }
         if ($this->user_id) {
-            if (!($this->request->module() == 'hair' && $this->request->controller() == 'Index')) {
+            if (!($this->request->module() == 'hair' && ($this->request->controller() == 'Index' || $this->request->controller() == 'Promote'))) {
                 if (!cmf_user_has_register()) {
                     session('register.from_url', $this->request->url(true));
                     $this->redirect(url('hair/index/register'));
@@ -71,16 +71,11 @@ class HairBaseController extends HomeBaseController {
      * 检测当前用户是否存在数据库中，如未存在则注册，如存在则获取信息保存在session中
      */
     public function userLogin() {
-        if (defined('ENV_LOC')) {
-            $test_user = model('WechatUser')->get(['wx_openid' => TEST_OPENID]);
-            if (!is_null($test_user)) {
-                cmf_update_current_user($test_user->toArray());
-
-                return cmf_get_current_user();
-            }
-        }
-
         if (!$this->wecharService->checkWxAuth()) {
+            $tool_code = $this->request->param('tool_code');
+            if (!empty($tool_code)) {
+                session('wx_auth_callback_tool_code', $tool_code);
+            }
             session('wx_auth_callback_url', $this->request->url());
             $this->wecharService->auth();
 
@@ -100,13 +95,17 @@ class HairBaseController extends HomeBaseController {
                     $wx_user->country     = $original['country'];
                     $wx_user->province    = $original['province'];
                     $wx_user->city        = $original['city'];
-
-                    $wx_user->save();
+                    $tool_code            = session('wx_auth_callback_tool_code');
+                    if (!empty($tool_code)) {
+                        $wx_user->activation_key = $tool_code;
+                        model('ActivityCode')->get(['code' => $tool_code])->setInc('count');
+                    }
                 } else {
                     $wx_user->last_login_time = time();
                     $wx_user->last_login_ip   = get_client_ip(0, true);
                 }
-                cmf_update_current_user(model('WechatUser')->get(['wx_openid' => $user->getId()])->toArray());
+                $wx_user->save();
+                cmf_update_current_user($wx_user->toArray());
             } else {
                 $wx_user = model('WechatUser')->get(['wx_openid' => session('wx_openid')]);
                 cmf_update_current_user($wx_user->toArray());

@@ -5,7 +5,7 @@ CREATE TABLE `hair_setting` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `software_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '软件名称',
   `software_price` float NOT NULL DEFAULT '0' COMMENT '软件价格',
-  `content` text COMMENT '首页内容',
+  `software_qr_code` varchar(255) NOT NULL DEFAULT '' COMMENT '公众号二维码',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态:0:已删除,1:正常',
   `more` text COMMENT '扩展属性',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',

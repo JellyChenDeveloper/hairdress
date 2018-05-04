@@ -39,7 +39,6 @@ class IndexController extends HairBaseController {
         $user   = model('WechatUser')->get($user_id);
         $result = $user->data($data)->save();
         if ($result == 1) {
-            model('ActivityCode')->get(['code' => $this->request->post('activation_key')])->setInc('count');
             cmf_update_current_user($user->toArray());
             $this->success('注册成功', null, ['from_url' => $from_url]);
         } else {

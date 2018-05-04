@@ -15,11 +15,7 @@ namespace app\common\model;
 class SettingModel extends BaseModel {
     protected $table = 'hair_setting';
 
-    public function getContentAttr($value) {
-        return cmf_replace_content_file_url(htmlspecialchars_decode($value));
-    }
-
-    public function setContentAttr($value) {
-        return htmlspecialchars(cmf_replace_content_file_url(htmlspecialchars_decode($value), true));
+    public function getSoftwareQrCodeAttr($value) {
+        return $value ? cmf_get_image_url($value) : '';
     }
 }

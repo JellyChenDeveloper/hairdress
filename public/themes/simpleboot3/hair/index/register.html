@@ -62,19 +62,8 @@
         </div>
     </div>
 </div>
-<div class="weui-cells weui-cells_form">
-    <div class="weui-cell">
-        <div class="weui-cell__hd p-name"><label class="weui-label">邀请码</label></div>
-        <div class="weui-cell__bd p10">
-            <input id="activation_key" class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入邀请码" value="{$user.activation_key}">
-        </div>
-        <div class="weui-cell__ft">
-            <button class="weui-vcode-btn c-0 p-name" >填充的按钮</button>
-        </div>
-    </div>
-    <input type="hidden" id="id" value="{$user.id}">
-</div>
 <div class="weui-btn-area">
+    <input type="hidden" id="id" value="{$user.id}">
     <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
 </div>
 <include file="hair@public/foot"/>

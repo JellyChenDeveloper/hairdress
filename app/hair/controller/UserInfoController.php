@@ -105,4 +105,15 @@ class UserInfoController extends HairBaseController {
             $this->error('保存失败');
         }
     }
+
+    public function qrCode() {
+        $user = model('WechatUser')->get(['id' => $this->user_id]);
+        $data = [
+            'personal_href' => url("hair/promote/index", ['tool_code' => $user['code_str']], true, true),
+            'qr_code'       => '/themes/simpleboot3/hair/public/assets/page_tools/images/main1.png',
+        ];
+        $this->assign($data);
+
+        return $this->fetch();
+    }
 }

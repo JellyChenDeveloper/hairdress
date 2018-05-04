@@ -1389,6 +1389,7 @@ CREATE TABLE `hair_setting` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `software_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '软件名称',
   `software_price` float NOT NULL DEFAULT '0' COMMENT '软件价格',
+  `software_qr_code` varchar(255) NOT NULL DEFAULT '' COMMENT '公众号二维码',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态:0:已删除,1:正常',
   `more` text COMMENT '扩展属性',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
@@ -1404,7 +1405,7 @@ CREATE TABLE `hair_setting` (
 
 LOCK TABLES `hair_setting` WRITE;
 /*!40000 ALTER TABLE `hair_setting` DISABLE KEYS */;
-INSERT INTO `hair_setting` VALUES (1,'智能美绘',365,1,NULL,1522921699,1525230174,0);
+INSERT INTO `hair_setting` VALUES (1,'智能美绘',365,'',1,NULL,1522921699,1525445058,0);
 /*!40000 ALTER TABLE `hair_setting` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1502,4 +1503,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-04 14:04:58
+-- Dump completed on 2018-05-04 15:26:19

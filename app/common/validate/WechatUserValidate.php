@@ -18,7 +18,6 @@ class WechatUserValidate extends Validate {
     protected $rule = [
         'id'             => 'require|checkUser',
         'mobile'         => ['require', 'regex' => '/^1[3|4|5|7|8][0-9]\d{4,8}$/'],
-        'activation_key' => 'require|length:8|checkCode',
         'enc_true_name'  => 'require',
         'enc_bank_no'    => ['require', 'regex' => '/^\d{16}|\d{19}$/'],
         'bank_code'      => 'require',
@@ -28,7 +27,6 @@ class WechatUserValidate extends Validate {
     protected $field = [
         'id'             => '用户ID',
         'mobile'         => '手机号',
-        'activation_key' => '邀请码',
         'enc_true_name'  => '真实姓名',
         'enc_bank_no'    => '银行卡号',
         'bank_code'      => '银行',
@@ -45,14 +43,10 @@ class WechatUserValidate extends Validate {
     ];
 
     protected $scene = [
-        'register'      => ['id', 'mobile', 'activation_key', 'sms_code'],
+        'register'      => ['id', 'mobile', 'sms_code'],
         'mobile'        => ['id', 'mobile'],
         'set_bank_info' => ['id', 'enc_true_name', 'enc_bank_no', 'bank_code'],
     ];
-
-    protected function checkCode($value) {
-        return (bool)(model('ActivityCode')->get(['code' => $value]));
-    }
 
     protected function checkUser($value) {
         return (bool)(model('WechatUser')->get($value));
