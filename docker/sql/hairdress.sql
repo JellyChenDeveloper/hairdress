@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.21, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
 -- Host: localhost    Database: hairdress
 -- ------------------------------------------------------
--- Server version	5.7.21-0ubuntu0.16.04.1
+-- Server version	5.7.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -1189,7 +1189,7 @@ CREATE TABLE `hair_activity_code` (
 
 LOCK TABLES `hair_activity_code` WRITE;
 /*!40000 ALTER TABLE `hair_activity_code` DISABLE KEYS */;
-INSERT INTO `hair_activity_code` VALUES (1,0,0,'88888888','8888',1,25,5,5,1,10000,NULL,1521914654,1521914654,0);
+INSERT INTO `hair_activity_code` VALUES (1,0,0,'88888888','8888',1,25,5,0,1,10000,NULL,1521914654,1525440473,0);
 /*!40000 ALTER TABLE `hair_activity_code` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1298,7 +1298,7 @@ CREATE TABLE `hair_order` (
   `delete_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '删除时间',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='订单表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='订单表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1307,7 +1307,6 @@ CREATE TABLE `hair_order` (
 
 LOCK TABLES `hair_order` WRITE;
 /*!40000 ALTER TABLE `hair_order` DISABLE KEYS */;
-INSERT INTO `hair_order` VALUES (1,1,0,'oM4l11OFSG5h0yjtHJuhJoaVudmc','美发工具-付费开通','美发工具','14995093622018032502053889883235','','1','','wx20180325020539695131b8aa0753920170',0,0,1,NULL,1521914739,1521914739,0),(2,1,0,'oM4l11OFSG5h0yjtHJuhJoaVudmc','美发工具-付费开通','美发工具','14995093622018032502055431398560','4200000071201803255027413795','1','','wx20180325020555501e529d5a0858766885',0,1521914766,1,NULL,1521914755,1521914766,0),(3,2,0,'oM4l11Da4XmP_5F6eiuy-Z-JHRSI','美发工具-付费开通','美发工具','14995093622018032514061051943963','4200000077201803255336323189','1','','wx20180325140611192c4ad8620245690515',0,1521957990,1,NULL,1521957971,1521957990,0),(4,3,0,'oM4l11EOzI7EKmG0E4PInGoSUtDQ','美发工具-付费开通','美发工具','14995093622018032717404476538143','4200000079201803276683708385','1','','wx20180327174048581b70d0290114271165',0,1522143663,1,NULL,1522143648,1522143663,0),(5,4,0,'oM4l11Opnos6GMOPUylYeKXFAXQU','付费开通','制图软件','14995093622018040819270655879040','','1','','wx0819270759789267e58b4a434152610273',0,0,1,NULL,1523186827,1523186827,0),(6,4,0,'oM4l11Opnos6GMOPUylYeKXFAXQU','付费开通','制图软件','14995093622018040819443045586407','','1','','wx08194430694499a35dcd64892501925074',0,0,1,NULL,1523187870,1523187870,0),(7,4,0,'oM4l11Opnos6GMOPUylYeKXFAXQU','付费开通','制图软件','14995093622018040919583805948895','','1','','wx091958390327040ff51ba6830357506991',0,0,1,NULL,1523275119,1523275119,0);
 /*!40000 ALTER TABLE `hair_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1334,7 +1333,7 @@ CREATE TABLE `hair_pages` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='项目详情表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='项目详情表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1343,7 +1342,6 @@ CREATE TABLE `hair_pages` (
 
 LOCK TABLES `hair_pages` WRITE;
 /*!40000 ALTER TABLE `hair_pages` DISABLE KEYS */;
-INSERT INTO `hair_pages` VALUES (1,2,0,'页面','','',1,10000,NULL,1524499040,1524499040,0);
 /*!40000 ALTER TABLE `hair_pages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1391,7 +1389,6 @@ CREATE TABLE `hair_setting` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `software_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '软件名称',
   `software_price` float NOT NULL DEFAULT '0' COMMENT '软件价格',
-  `content` text COMMENT '首页内容',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态:0:已删除,1:正常',
   `more` text COMMENT '扩展属性',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
@@ -1407,7 +1404,7 @@ CREATE TABLE `hair_setting` (
 
 LOCK TABLES `hair_setting` WRITE;
 /*!40000 ALTER TABLE `hair_setting` DISABLE KEYS */;
-INSERT INTO `hair_setting` VALUES (1,'制图软件',365,'\n&lt;p style=&quot;margin-top: 0px; margin-bottom: 0px; padding: 0px; line-height: 24px; color: rgb(51, 51, 51); text-align: justify; font-family: arial; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;　　3月16日凌晨，中国交建二航局仅耗时1小时，就成功整体移除上海S26公路入城段北翟高架桥落地段，该段桥梁长67.5米、宽18米，重达3050吨——这是世界上单体最大重量桥梁快速移除工程！&lt;br&gt;&lt;/p&gt;\n&lt;p&gt;&lt;img class=&quot;normal&quot; width=&quot;400px&quot; data-loadfunc=&quot;0&quot; src=&quot;https://t10.baidu.com/it/u=2923301925,2907163600&amp;amp;fm=173&amp;amp;app=12&amp;amp;f=GIF?w=400&amp;amp;h=225&amp;amp;s=6C64C94E8B60BF664045981B03005081&quot; data-loaded=&quot;0&quot; style=&quot;border: 0px; display: block; margin: 0px auto;&quot;&gt;&lt;/p&gt;\n&lt;p style=&quot;margin-top: 26px; margin-bottom: 0px; padding: 0px; line-height: 24px; color: rgb(51, 51, 51); text-align: justify; font-family: arial; white-space: normal; background-color: rgb(255, 255, 255);&quot;&gt;　　由于该拆除区域位于上海城市副中心，离虹桥机场、虹桥火车站及上海国家会展中心近，面临拆除难度要求高、拆除工期短、组织管理难度大等诸多困难。&lt;/p&gt;\n',1,NULL,1522921699,1522923176,0);
+INSERT INTO `hair_setting` VALUES (1,'智能美绘',365,1,NULL,1522921699,1525230174,0);
 /*!40000 ALTER TABLE `hair_setting` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1484,7 +1481,7 @@ CREATE TABLE `hair_wechat_user` (
   KEY `wx_openid` (`wx_openid`),
   KEY `wx_nickname` (`wx_nickname`),
   KEY `mobile` (`mobile`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1493,7 +1490,6 @@ CREATE TABLE `hair_wechat_user` (
 
 LOCK TABLES `hair_wechat_user` WRITE;
 /*!40000 ALTER TABLE `hair_wechat_user` DISABLE KEYS */;
-INSERT INTO `hair_wechat_user` VALUES (1,'oM4l11OFSG5h0yjtHJuhJoaVudmc','Jelly_国栋',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/iauibgHxdsiaHkBKib1j59avyCLp5dYRWyIDc2a7zhS1FInN96NV6NIXJIWmzjYs2Yr551GpSUoYkAWY5zrr7R0HdA/132','中国','北京','朝阳','13111111111','88888888',1,1,0,'','','',1,0,'',NULL,1521914584,1521914766,0),(2,'oM4l11Da4XmP_5F6eiuy-Z-JHRSI','北京J-design贾雨锦13141434567',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqgXEJT7g6Gda8JbcZ2j1Eiab9cS6MOaFicaibdhPibCc1ib5sus8A08GMwCicSibp8kuSWbc97nicq0YCccA/132','中国','','','13141434567','88888888',1,1,0,'','','',1,0,'',NULL,1521957936,1521957990,0),(3,'oM4l11EOzI7EKmG0E4PInGoSUtDQ','勇哥',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/ekiaNr29pZLgias5hZyWhCTmXEpZ9tBYlaZ3hYoL0UwqZVs3Z0KcuvsFvqIk1CDBvRliaFJCibUz4e1Mqic7NfmjDAA/132','中国','湖北','天门','13829707081','88888888',1,1,0,'','','',1,0,'',NULL,1522143615,1522143663,0),(4,'oM4l11Opnos6GMOPUylYeKXFAXQU','黃福生',0,'http://thirdwx.qlogo.cn/mmopen/vi_32/3w76ugCm36WaBRR4CU9s2FNCicGWibr5sDUX1GPyibLpgFNIs8nZBb5vicCtKEIzcWJiatiajtrkHLsbmc1JDYAibsmKQ/132','','','','13141434567','88888888',0,1,0,'','','',1,0,'',NULL,1523182162,1523186823,0),(5,'oM4l11AQ2N8hS1gJF36p8XOldsM4','oO喵小睿Oo',1,'http://thirdwx.qlogo.cn/mmopen/vi_32/7ndO40USerMPjLAcxxmGGIBMvyenxTclTD4qZl7ooh2aAG7XataPdDcJ3IiaATeqgLpUiaEiaBCLGRMibtUw6El4icA/132','中国','北京','朝阳','','',0,1,0,'','','',1,0,'',NULL,1524231340,1524231340,0);
 /*!40000 ALTER TABLE `hair_wechat_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1506,4 +1502,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-23 23:58:26
+-- Dump completed on 2018-05-04 14:04:58
