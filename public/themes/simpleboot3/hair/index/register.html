@@ -7,50 +7,69 @@
         border:2px solid #000;
 
     }
+    .p10{padding:0 10px;}
+    .weui-label{width: 90px;}
     .weui-cell_swiped>.weui-cell__bd{background: transparent;}
     .p-inner{
         background-color: #fff;
         border:2px solid #000;
         border-radius: 5px;
     }
-    .p-name{
+    .p-name,button.p-name{
         text-align: center;
         border:1px solid #000;
         border-radius: 2px;
+        color:#fff;
+        background: #737373;
+        line-height: inherit;
     }
-    .weui-cell{margin-bottom: 5px;}
+    .weui-cell{margin-bottom: 5px;padding:10px;line-height: 35px;}
+    .weui-cells{background-color: transparent;}
     .weui-cell:before{display: none;}
     .weui-cells:after, .weui-cells:before{display: none;}
     .weui-swiped-btn_warn,.weui-swiped-btn_default{background: #737373;border:1px solid #000;}
     .demos-title{background-color: #737373;border:2px solid #000;color:#fff;border-radius: 3px;}
+    #showTooltips{background: #fc0034;}
+    .weui-btn_primary:not(.weui-btn_disabled):active{background-color: #767676;}
+    .weui-input{background-color: #fff;border:1px solid #000;text-indent: 10px;height: 35px;}
+    button.c-0{color:transparent;background-color: transparent;border-color: transparent;}
+    .weui-vcode-btn, .weui-vcode-img{height: 100%;}
+    .weui-vcode-btn{border:none;}
+    .weui-vcode-btn:active{background: transparent;color:transparent;}
 </style>
 <header class='demos-header'>
     <h1 class="demos-title">注册</h1>
 </header>
 <br>
 <br>
-<div class="weui-cells weui-cells_form">
+<div class="weui-cells weui-cells_form" style="">
     <div class="weui-cell weui-cell_vcode">
-        <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
-        <div class="weui-cell__bd">
+        <div class="weui-cell__hd p-name"><label class="weui-label">手机号</label></div>
+        <div class="weui-cell__bd p10">
             <input id="mobile" class="weui-input" type="tel" placeholder="请输入手机号" value="{$user.mobile}">
         </div>
         <div class="weui-cell__ft">
-            <button class="weui-vcode-btn" id="get_sms_code">获取验证码</button>
+            <button class="weui-vcode-btn p-name" id="get_sms_code">获取验证码</button>
         </div>
     </div>
     <div class="weui-cell">
-        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
-        <div class="weui-cell__bd">
+        <div class="weui-cell__hd p-name"><label class="weui-label">验证码</label></div>
+        <div class="weui-cell__bd p10">
             <input id="sms_code" class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入验证码">
+        </div>
+        <div class="weui-cell__ft">
+            <button class="weui-vcode-btn c-0 p-name" >填充的按钮</button>
         </div>
     </div>
 </div>
 <div class="weui-cells weui-cells_form">
     <div class="weui-cell">
-        <div class="weui-cell__hd"><label class="weui-label">邀请码</label></div>
-        <div class="weui-cell__bd">
+        <div class="weui-cell__hd p-name"><label class="weui-label">邀请码</label></div>
+        <div class="weui-cell__bd p10">
             <input id="activation_key" class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入邀请码" value="{$user.activation_key}">
+        </div>
+        <div class="weui-cell__ft">
+            <button class="weui-vcode-btn c-0 p-name" >填充的按钮</button>
         </div>
     </div>
     <input type="hidden" id="id" value="{$user.id}">

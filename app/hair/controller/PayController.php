@@ -18,7 +18,7 @@ class PayController extends HairBaseController {
             'title' => '付费开通',
             'name'  => $this->setting['software_name'],
             'price' => $this->setting['software_price'],
-            'desc'  => '该工具为付费产品，必须支付后方能使用，一次付费终生使用。',
+            'desc'  => '付费后方可使用(部分组建内购)',
         ];
         $this->pub_pay($data, 0);
 
@@ -39,7 +39,7 @@ class PayController extends HairBaseController {
             'title' => '付费组件',
             'name'  => $element['name'],
             'price' => $element['price'],
-            'desc'  => '付费组件，一次付费终生使用',
+            'desc'  => '付费后方可使用',
         ];
         $this->pub_pay($data, 1, $element['id']);
 
