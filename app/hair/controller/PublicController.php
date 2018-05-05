@@ -21,7 +21,7 @@ class PublicController extends BaseController {
 
     public function index() {
         $href   = $this->request->param('href');
-        $href   = urldecode($href);
+        $href   = base64_decode($href);
         $object = new \QRcode();
         $object->png($href, false, QR_ECLEVEL_L, 100, 1);
     }

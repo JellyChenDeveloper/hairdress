@@ -112,7 +112,7 @@ class UserInfoController extends HairBaseController {
         $href = url("hair/promote/index", ['tool_code' => $user['code_str']], true, true);
 
         $data = [
-            'qr_code'       => url("hair/public/index", ['href' => urlencode($href)], true, true),
+            'qr_code'       => url("hair/public/index", ['href' => base64_encode($href)], true, true),
         ];
         $this->assign($data);
 
