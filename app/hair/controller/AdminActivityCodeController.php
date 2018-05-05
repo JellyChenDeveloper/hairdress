@@ -135,7 +135,7 @@ class AdminActivityCodeController extends AdminHairBaseController {
             $this->error('生成失败!');
         }
 
-        $this->success('生成成功!', url('ActivityCode/index'));
+        $this->success('生成成功!', url('AdminActivityCode/index'));
     }
 
     /**
