@@ -13,6 +13,11 @@ if (defined('ENV_LOC')) {
     $app_id = 'wx0a27e7e0e626f8ea';
     $secret = '222a7a2e27a670e6ab6cada48cdd7b14';
     define('TEST_OPENID', 'odJLRt4ITX2siPTPbiN3LNUJAxUI');
+    $mch_id              = '1499509362';
+    $key                 = 'klp4h9BxsP5LF8NsXdy2YgKMRNFoWjzk';
+    $cert_path           = ROOT_PATH . 'data/cert/apiclient_cert.pem';
+    $key_path            = ROOT_PATH . 'data/cert/apiclient_key.pem';
+    $rsa_public_key_path = ROOT_PATH . 'data/cert/public-1499509362.pem';
 } elseif (defined('ENV_DEV')) {
     $app_id              = 'wxe6a9662f8eea0ee4';
     $secret              = 'cfd4f10fd1b254fbe0ab2840676af682';
