@@ -31,9 +31,9 @@ if (defined('ENV_LOC')) {
     $secret              = '6edcf086ccb2953ace564633ef908ca4';
     $mch_id              = '1499509362';
     $key                 = 'klp4h9BxsP5LF8NsXdy2YgKMRNFoWjzk';
-    $cert_path           = ROOT_PATH . 'data/cert/apiclient_cert.pem';
-    $key_path            = ROOT_PATH . 'data/cert/apiclient_key.pem';
-    $rsa_public_key_path = ROOT_PATH . 'data/cert/public-1499509362.pem';
+    $cert_path           = ROOT_PATH . 'data/cert_online/apiclient_cert.pem';
+    $key_path            = ROOT_PATH . 'data/cert_online/apiclient_key.pem';
+    $rsa_public_key_path = ROOT_PATH . 'data/cert_online/public-1499509362.pem';
 }
 
 return [
