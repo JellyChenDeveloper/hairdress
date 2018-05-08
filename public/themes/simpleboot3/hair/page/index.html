@@ -83,24 +83,28 @@
         z-index: 1;
         width: 30%;
         right: 0;
-        top:0;
+        top: 0;
         background: #fff;
     }
-    .wrap .tab{
+
+    .wrap .tab {
         background: #626262;
         box-sizing: border-box;
     }
-    .wrap .tab li{
+
+    .wrap .tab li {
         background: #626262;
         border-width: 2px;
         border-right-color: #000;
-        color:#fff;
+        color: #fff;
         box-sizing: border-box;
-        border-bottom:2px solid #000;
+        border-bottom: 2px solid #000;
     }
-    .wrap .tab li a{
-        color:#fff;
+
+    .wrap .tab li a {
+        color: #fff;
     }
+
     body {
         line-height: 1.5rem;
         font-size: 12px !important;
@@ -113,8 +117,9 @@
         /*line-height: 0.4533rem;*/
         border: 1px solid #ccc;
     }
-    .m-exp{
-            display: none;
+
+    .m-exp {
+        display: none;
         position: absolute;
         width: 100%;
         left: 0;
@@ -135,13 +140,12 @@
 <div class="wrap">
     <div class="tab">
         <ul>
-            <!-- <li class="fl"><a href="javascript:void(0)" onclick="javascript:history.go(-1);return false;" >返回</a></li> -->
             <li class="fl tri-head">人像</li>
             <li class="fl tri-tool">功能</li>
             <li class="fl tri-fun">工具</li>
             <li class="fl tri-exp" data-lock=1>表情</li>
             <li class="fl tri-word">文字</li>
-            <li class="fl"><a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzU2NDQ3MjYyNw==&scene=124#wechat_redirect" >教程</a></li>
+            <li class="fl"><a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzU2NDQ3MjYyNw==&scene=124#wechat_redirect">教程</a></li>
         </ul>
     </div>
     <div class="main-wrap">
@@ -161,7 +165,7 @@
             <div class="c-inner">
                 <canvas id="canvas-bg"></canvas>
             </div>
-            <div class="c-inner f-canvas" >
+            <div class="c-inner f-canvas">
                 <canvas id="canvas"></canvas>
             </div>
         </div>
@@ -581,51 +585,6 @@
         <div class="m-head m-all-tool">
             <div class="m-inner">
                 <ul>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/bg_0.png" alt="">
-                        </div>
-                    </li>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/bg_1.png" alt="">
-                        </div>
-                    </li>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/bg_2.png" alt="">
-                        </div>
-                    </li>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/bg_3.png" alt="">
-                        </div>
-                    </li>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/bg_4.png" alt="">
-                        </div>
-                    </li>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/bg_5.png" alt="">
-                        </div>
-                    </li>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/bg_6.png" alt="">
-                        </div>
-                    </li>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/bg_7.png" alt="">
-                        </div>
-                    </li>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/bg_8.png" alt="">
-                        </div>
-                    </li>
                     <foreach name="heads" item="head">
                         <eq name="head['type']" value="0">
                             <li class="h-icon fl">
@@ -654,16 +613,6 @@
         <div class="m-fun m-all-tool">
             <div class="m-inner">
                 <ul>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/tool_1.png" alt="">
-                        </div>
-                    </li>
-                    <li class="h-icon fl">
-                        <div class="h-one add-ele">
-                            <img src="__PAGE_TOOLS__/images/tool_4.png" alt="">
-                        </div>
-                    </li>
                     <foreach name="tools" item="tool">
                         <eq name="tool['type']" value="1">
                             <li class="h-icon fl">
@@ -870,80 +819,80 @@
                     </select>
                     </p>
                 </li>
-                <li  >
+                <li>
                     <p class="text-c">四角星</p>
                     <p>
-                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill' >
+                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill'>
                     </p>
-                    <p>透明度：<select class="s-select" key='opacity' >
-                                <option value="1">100%</option>
-                                <option value="0.9">90%</option>
-                                <option value="0.8">80%</option>
-                                <option value="0.7">70%</option>
-                                <option value="0.6">60%</option>
-                                <option value="0.5">50%</option>
-                                <option value="0.4">40%</option>
-                                <option value="0.3">30%</option>
-                                <option value="0.2">20%</option>
-                                <option value="0.1">10%</option>
-                            </select>
+                    <p>透明度：<select class="s-select" key='opacity'>
+                        <option value="1">100%</option>
+                        <option value="0.9">90%</option>
+                        <option value="0.8">80%</option>
+                        <option value="0.7">70%</option>
+                        <option value="0.6">60%</option>
+                        <option value="0.5">50%</option>
+                        <option value="0.4">40%</option>
+                        <option value="0.3">30%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.1">10%</option>
+                    </select>
                     </p>
                 </li>
-                <li  >
+                <li>
                     <p class="text-c">五角星</p>
                     <p>
-                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill' >
+                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill'>
                     </p>
-                    <p>透明度：<select class="s-select" key='opacity' >
-                                <option value="1">100%</option>
-                                <option value="0.9">90%</option>
-                                <option value="0.8">80%</option>
-                                <option value="0.7">70%</option>
-                                <option value="0.6">60%</option>
-                                <option value="0.5">50%</option>
-                                <option value="0.4">40%</option>
-                                <option value="0.3">30%</option>
-                                <option value="0.2">20%</option>
-                                <option value="0.1">10%</option>
-                            </select>
+                    <p>透明度：<select class="s-select" key='opacity'>
+                        <option value="1">100%</option>
+                        <option value="0.9">90%</option>
+                        <option value="0.8">80%</option>
+                        <option value="0.7">70%</option>
+                        <option value="0.6">60%</option>
+                        <option value="0.5">50%</option>
+                        <option value="0.4">40%</option>
+                        <option value="0.3">30%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.1">10%</option>
+                    </select>
                     </p>
                 </li>
-                <li  >
+                <li>
                     <p class="text-c">六角星</p>
                     <p>
-                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill' >
+                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill'>
                     </p>
-                    <p>透明度：<select class="s-select" key='opacity' >
-                                <option value="1">100%</option>
-                                <option value="0.9">90%</option>
-                                <option value="0.8">80%</option>
-                                <option value="0.7">70%</option>
-                                <option value="0.6">60%</option>
-                                <option value="0.5">50%</option>
-                                <option value="0.4">40%</option>
-                                <option value="0.3">30%</option>
-                                <option value="0.2">20%</option>
-                                <option value="0.1">10%</option>
-                            </select>
+                    <p>透明度：<select class="s-select" key='opacity'>
+                        <option value="1">100%</option>
+                        <option value="0.9">90%</option>
+                        <option value="0.8">80%</option>
+                        <option value="0.7">70%</option>
+                        <option value="0.6">60%</option>
+                        <option value="0.5">50%</option>
+                        <option value="0.4">40%</option>
+                        <option value="0.3">30%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.1">10%</option>
+                    </select>
                     </p>
                 </li>
-                <li  >
+                <li>
                     <p class="text-c">月牙形</p>
                     <p>
-                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill' >
+                        请选择颜色:<input class="s-select color" type="hidden" key='stroke fill'>
                     </p>
-                    <p>透明度：<select class="s-select" key='opacity' >
-                                <option value="1">100%</option>
-                                <option value="0.9">90%</option>
-                                <option value="0.8">80%</option>
-                                <option value="0.7">70%</option>
-                                <option value="0.6">60%</option>
-                                <option value="0.5">50%</option>
-                                <option value="0.4">40%</option>
-                                <option value="0.3">30%</option>
-                                <option value="0.2">20%</option>
-                                <option value="0.1">10%</option>
-                            </select>
+                    <p>透明度：<select class="s-select" key='opacity'>
+                        <option value="1">100%</option>
+                        <option value="0.9">90%</option>
+                        <option value="0.8">80%</option>
+                        <option value="0.7">70%</option>
+                        <option value="0.6">60%</option>
+                        <option value="0.5">50%</option>
+                        <option value="0.4">40%</option>
+                        <option value="0.3">30%</option>
+                        <option value="0.2">20%</option>
+                        <option value="0.1">10%</option>
+                    </select>
                     </p>
                 </li>
             </ul>
@@ -956,7 +905,6 @@
     <div class="mask" id="text">
         <div class="m-box">
             <div class="text-wrap">
-                <!-- <p>文案：<input type="text" id="i-text"></p> -->
                 <p>文案：<textarea id="i-text"></textarea></p>
                 <p>颜色：<input class="text-option color" type="hidden" key='stroke fill' name='color' value="#000"></p>
                 <p>粗细：<select class="text-option" key='fontWeight' id="text-width">
@@ -1066,9 +1014,11 @@
                     $('.m-exp').hide();
                 });
 
-                $('.tri-exp').on('click',function(){
-                   var lock = $(this).attr('data-lock');
-                   if(lock ==1){return false;} 
+                $('.tri-exp').on('click', function () {
+                    var lock = $(this).attr('data-lock');
+                    if (lock == 1) {
+                        return false;
+                    }
                     $('.m-exp').toggle();
                     $('.m-fun').hide();
                     $('.m-head').hide();
@@ -1092,7 +1042,7 @@
                     img.onload = function () {
                         var img    = new fabric.Image(this, {
                             left : left,
-                            top  : top,
+                            top  : top
                         });
                         img.width  = i_w;
                         img.height = i_h;
@@ -1196,7 +1146,7 @@
                                     var left    = 0;
                                     var img     = new fabric.Image(this, {
                                         left : left,
-                                        top  : top,
+                                        top  : top
                                     });
                                     _this.ctx.clear();
                                     // _this.ctx.add(img);
@@ -1241,31 +1191,31 @@
                     _this.ctx.add(img);
                 });
                 // 
-                var passiveArr=['#back_canvas','.tab','.footer-btn'];
-                    
-                $.each(passiveArr,function(i,e){
+                var passiveArr = ['#back_canvas', '.tab', '.footer-btn'];
+
+                $.each(passiveArr, function (i, e) {
                     console.log($(e));
                     $(e)[0].addEventListener('touchmove', function (e) {
                         e.preventDefault();
                     }, {passive : false});
                 });
                 console.log($('.minicolors-panel').length);
-                    $('.minicolors-panel').each(function(){
-                        this.addEventListener('touchmove', function (e) {
-                            e.preventDefault();
-                        }, {passive : false});
-                    });
+                $('.minicolors-panel').each(function () {
+                    this.addEventListener('touchmove', function (e) {
+                        e.preventDefault();
+                    }, {passive : false});
+                });
                 // document.getElementById("back_canvas").addEventListener('touchmove', function (e) {
                 //     e.preventDefault();
                 // }, {passive : false});
                 // 
                 // 
-                $('.f-canvas').on('touchend',function(){
-                    var isDraw = _this.ctx.isDrawingMode ;
-                   if(isDraw){
-                    _this.bg_add();
-                    _this.ctx.isDrawingMode =true;
-                   } 
+                $('.f-canvas').on('touchend', function () {
+                    var isDraw = _this.ctx.isDrawingMode;
+                    if (isDraw) {
+                        _this.bg_add();
+                        _this.ctx.isDrawingMode = true;
+                    }
                 });
             },
             showPayOrLock       : function () {
@@ -1428,7 +1378,7 @@
                     img.onload = function () {
                         var img        = new fabric.Image(this, {
                             left : 0,
-                            top  : 0,
+                            top  : 0
                         });
                         img.width      = _this.w;
                         img.height     = _this.h;
@@ -1445,8 +1395,8 @@
                 //     });
                 // }, 300)
                 $('input.color').minicolors({
-                        defaultValue : '#000'
-                    });
+                    defaultValue : '#000'
+                });
             },
             pre                 : function () {
                 if (this.ctx.getObjects().length > 0) {
@@ -1497,17 +1447,17 @@
                 _this.create_ctx.fillStyle = '#fff';
                 _this.create_ctx.fillRect(0, 0, _this.w * _this.mul, _this.h * _this.mul);
                 _this.create_ctx.restore();
-                var end =0;
-                var imgArr=[];
+                var end    = 0;
+                var imgArr = [];
                 for (var i = 0; i < this.bg_cache.length; i++) {
                     (function (i) {
-                        var img    = new Image();
-                        img.src    = _this.bg_cache[i];
+                        var img = new Image();
+                        img.src = _this.bg_cache[i];
                         imgArr.push(img);
                         img.onload = function () {
                             end++;
-                            if(end >= _this.bg_cache.length){
-                                for(var j =0;j<imgArr.length;j++){
+                            if (end >= _this.bg_cache.length) {
+                                for (var j = 0; j < imgArr.length; j++) {
                                     _this.bg_ctx.drawImage(imgArr[j], 0, 0, _this.w, _this.h);
                                     _this.create_ctx.drawImage(imgArr[j], 0, 0, _this.w * _this.mul, _this.h * _this.mul);
                                     ++isEnd;
@@ -1543,7 +1493,7 @@
                     perPixelTargetFind : true,
                     selectable         : false,
                     lockMovementX      : true,
-                    lockMovementY      : true,
+                    lockMovementY      : true
                 };
                 for (var i = 1; i < l_num; i++) {
                     var line = new fabric.Line([w, i * space, 0, i * space], option);
@@ -1617,7 +1567,7 @@
                     var _this                       = this;
                     fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
                     var lineArr = [
-                        [this.w / 3, this.h / 2, this.w * (2 / 3), this.h / 2],
+                        [this.w / 3, this.h / 2, this.w * (2 / 3), this.h / 2]
                     ];
 
                     function makeCircle(left, top, line1, line2) {
@@ -1627,7 +1577,7 @@
                             strokeWidth : 5,
                             radius      : 12,
                             fill        : 'transparent',
-                            stroke      : '#666',
+                            stroke      : '#666'
                         });
                         c.hasControls = c.hasBorders = false;
 
@@ -1635,7 +1585,7 @@
                         c.line2 = line2;
                         _this.controllerCircleArr.push(c);
                         return c;
-                    };
+                    }
 
                     function makeLine(coords) {
                         return new fabric.Line(coords, {
@@ -1730,8 +1680,7 @@
                             strokeWidth : 5,
                             radius      : 12,
                             fill        : 'transparent',
-                            // fill: '#fff',
-                            stroke      : '#666',
+                            stroke      : '#666'
                         });
 
                         c.hasBorders = c.hasControls = false;
@@ -1801,7 +1750,7 @@
                             pointArr[2][0] = p.left;
                             pointArr[2][1] = p.top;
                         }
-                    };
+                    }
                 },
                 arrDashLine       : function (option) {
                     this.renderFN.arrLine.call(obj, option, true);
@@ -1854,7 +1803,7 @@
                     var arr_angle                   = 90;
                     fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
                     var lineArr = [
-                        [this.w / 3, this.h / 2, this.w * (2 / 3), this.h / 2],
+                        [this.w / 3, this.h / 2, this.w * (2 / 3), this.h / 2]
                     ];
 
                     function makeCircle(left, top, line1, line2) {
@@ -1864,7 +1813,7 @@
                             strokeWidth : 5,
                             radius      : 12,
                             fill        : 'transparent',
-                            stroke      : '#666',
+                            stroke      : '#666'
                         });
                         c.hasControls = c.hasBorders = false;
 
@@ -1872,7 +1821,7 @@
                         c.line2 = line2;
                         _this.controllerCircleArr.push(c);
                         return c;
-                    };
+                    }
                     var a_w        = 10;
                     var a_h        = a_w * 2;
                     var arr        = new fabric.Triangle({
@@ -1989,8 +1938,7 @@
                             strokeWidth : 5,
                             radius      : 12,
                             fill        : 'transparent',
-                            // fill: '#fff',
-                            stroke      : '#666',
+                            stroke      : '#666'
                         });
 
                         c.hasBorders = c.hasControls = false;
@@ -2071,7 +2019,7 @@
                                 angle : arr_angle
                             })
                         }
-                    };
+                    }
 
                 },
                 renderDashedArc   : function (option) {
@@ -2091,7 +2039,7 @@
                             strokeWidth : 5,
                             radius      : 12,
                             fill        : 'transparent',
-                            stroke      : '#666',
+                            stroke      : '#666'
                         });
                         c.hasControls = c.hasBorders = false;
 
@@ -2099,7 +2047,7 @@
                         c.line2 = line2;
                         _this.controllerCircleArr.push(c);
                         return c;
-                    };
+                    }
 
                     function makeCurvePoint(left, top, line1, line2, line3) {
                         var c = new fabric.Circle({
@@ -2189,157 +2137,139 @@
                         canvas.renderAll();
                     });
                 },
-                renderStar_4:function(option){
-                      var canvas = this.ctx;
-                      var w =this.w;
-                      var h =this.h;
-                      var mul =0.8;
-                      var b_num=w*0.1;
-                      var y_p=[h/2 - h*0.06,h/2+h*0.06];
-                      var x_p=[w/2-w*0.08,w/2+w*0.08];
-                      var inner_arr=[
-                            [x_p[0],y_p[0]],
-                            [x_p[1],y_p[0]],
-                            [x_p[1],y_p[1]],
-                            [x_p[0],y_p[1]],
-                          ];
-                      var outer_arr=[
-                            [w/2,h/2-h*0.3],
-                            [w/2+w*0.29,h/2],
-                            [w/2,h/2+h*0.3],
-                            [w/2-w*0.29,h/2],
-                          ];
-                          console.log(w);
-                          console.log(h);
-                          console.log(inner_arr);
-                          console.log(outer_arr);
-                     var str ='M '+inner_arr[0].join(' ')+',';
-                     // str +='L '+ outer_arr[0].join(' ')+',';
-                     // str +='L '+ inner_arr[1].join(' ')+',';
-                     console.log(str);
-                     for(var i =0;i<inner_arr.length;i++){
-                        if(i==0){
-                            str +='L '+ outer_arr[0].join(' ')+',';
-                        }else{
-                            str +='L '+ inner_arr[i].join(' ')+',';
-                            str +='L '+ outer_arr[i].join(' ')+',';
+                renderStar_4      : function (option) {
+                    var canvas    = this.ctx;
+                    var w         = this.w;
+                    var h         = this.h;
+                    var mul       = 0.8;
+                    var b_num     = w * 0.1;
+                    var y_p       = [h / 2 - h * 0.06, h / 2 + h * 0.06];
+                    var x_p       = [w / 2 - w * 0.08, w / 2 + w * 0.08];
+                    var inner_arr = [
+                        [x_p[0], y_p[0]],
+                        [x_p[1], y_p[0]],
+                        [x_p[1], y_p[1]],
+                        [x_p[0], y_p[1]]
+                    ];
+                    var outer_arr = [
+                        [w / 2, h / 2 - h * 0.3],
+                        [w / 2 + w * 0.29, h / 2],
+                        [w / 2, h / 2 + h * 0.3],
+                        [w / 2 - w * 0.29, h / 2]
+                    ];
+                    console.log(w);
+                    console.log(h);
+                    console.log(inner_arr);
+                    console.log(outer_arr);
+                    var str = 'M ' + inner_arr[0].join(' ') + ',';
+                    // str +='L '+ outer_arr[0].join(' ')+',';
+                    // str +='L '+ inner_arr[1].join(' ')+',';
+                    console.log(str);
+                    for (var i = 0; i < inner_arr.length; i++) {
+                        if (i == 0) {
+                            str += 'L ' + outer_arr[0].join(' ') + ',';
+                        } else {
+                            str += 'L ' + inner_arr[i].join(' ') + ',';
+                            str += 'L ' + outer_arr[i].join(' ') + ',';
                         }
-                        if(i == inner_arr.length -1){
-                            str +='L '+ inner_arr[0].join(' ');
+                        if (i == inner_arr.length - 1) {
+                            str += 'L ' + inner_arr[0].join(' ');
                         }
                         console.log(str);
-                     }
-                      var line = new fabric.Path(str, option);
-                      canvas.add(line);
+                    }
+                    var line = new fabric.Path(str, option);
+                    canvas.add(line);
                 },
-                renderStar_5:function(option){
-                      var canvas = this.ctx;
-                      var w =this.w;
-                      var h =this.h;
-                      var mul =0.08;
-                      var b_num=w*0.1;
-                      // var y_p=[h/2 - h*0.06,h/2+h*0.06];
-                      // var x_p=[w/2-w*0.08,w/2+w*0.08];
-                      var inner_arr=[
-                            [w/2-w*0.08,h/2- h/2*0.11],
-                            [w/2+w*0.08,h/2- h/2*0.11],
-                            [w/2+w*0.08*1.66,h/2+ h/2*0.11*0.7],
-                            [w/2,h/2+ h/2*0.2*1.2],
-                            [w/2-w*0.08*1.66,h/2+ h/2*0.11*0.7],
-                          ];
-                      var outer_arr=[
-                            [w/2,h/2-h*0.30],
-                            [w/2+w*0.35,h/2- h/2*0.11],
-                            [w/2+w*0.21,h/2+h*0.28],
-                            [w/2-w*0.21,h/2+h*0.28],
-                            [w/2-w*0.35,h/2- h/2*0.11],
-                          ];
-                     var str ='M '+inner_arr[0].join(' ')+',';
-                     for(var i =0;i<inner_arr.length;i++){
-                        if(i==0){
-                            str +='L '+ outer_arr[0].join(' ')+',';
-                        }else{
-                            str +='L '+ inner_arr[i].join(' ')+',';
-                            str +='L '+ outer_arr[i].join(' ')+',';
+                renderStar_5      : function (option) {
+                    var canvas = this.ctx;
+                    var w      = this.w;
+                    var h      = this.h;
+                    var mul    = 0.08;
+                    var b_num  = w * 0.1;
+                    // var y_p=[h/2 - h*0.06,h/2+h*0.06];
+                    // var x_p=[w/2-w*0.08,w/2+w*0.08];
+                    var inner_arr = [
+                        [w / 2 - w * 0.08, h / 2 - h / 2 * 0.11],
+                        [w / 2 + w * 0.08, h / 2 - h / 2 * 0.11],
+                        [w / 2 + w * 0.08 * 1.66, h / 2 + h / 2 * 0.11 * 0.7],
+                        [w / 2, h / 2 + h / 2 * 0.2 * 1.2],
+                        [w / 2 - w * 0.08 * 1.66, h / 2 + h / 2 * 0.11 * 0.7]
+                    ];
+                    var outer_arr = [
+                        [w / 2, h / 2 - h * 0.30],
+                        [w / 2 + w * 0.35, h / 2 - h / 2 * 0.11],
+                        [w / 2 + w * 0.21, h / 2 + h * 0.28],
+                        [w / 2 - w * 0.21, h / 2 + h * 0.28],
+                        [w / 2 - w * 0.35, h / 2 - h / 2 * 0.11]
+                    ];
+                    var str       = 'M ' + inner_arr[0].join(' ') + ',';
+                    for (var i = 0; i < inner_arr.length; i++) {
+                        if (i == 0) {
+                            str += 'L ' + outer_arr[0].join(' ') + ',';
+                        } else {
+                            str += 'L ' + inner_arr[i].join(' ') + ',';
+                            str += 'L ' + outer_arr[i].join(' ') + ',';
                         }
-                        if(i == inner_arr.length -1){
-                            str +='L '+ inner_arr[0].join(' ');
+                        if (i == inner_arr.length - 1) {
+                            str += 'L ' + inner_arr[0].join(' ');
                         }
-                     }
-                      var line = new fabric.Path(str, option);
-                      canvas.add(line);
+                    }
+                    var line = new fabric.Path(str, option);
+                    canvas.add(line);
                 },
-                renderStar_6:function(option){
-                      var canvas = this.ctx;
-                      var w =this.w;
-                      var h =this.h;
-                      var m =w*0.08;
-                      var b_num=w*0.1;
-                      // var y_p=[h/2 - h*0.06,h/2+h*0.06];
-                      // var x_p=[w/2-w*0.08,w/2+w*0.08];
-                      var inner_arr=[
-                            [w/2-m,h/2-m*2],
-                            [w/2+m,h/2-m*2],
-                            [w/2+m*2,h/2],
-                            [w/2+m,h/2+m*2],
-                            [w/2-m,h/2+m*2],
-                            [w/2-m*2,h/2],
-                          ];
-                      var outer_arr=[
-                            [w/2,h/2-m*4.5],
-                            [w/2+m*3.5,h/2-m*2.5],
-                            [w/2+m*3.5,h/2+m*2.5],
-                            [w/2,h/2+m*4.5],
-                            [w/2-m*3.5,h/2+m*2.5],
-                            [w/2-m*3.5,h/2-m*2.5],
-                          ];
-                     var str ='M '+inner_arr[0].join(' ')+',';
-                     for(var i =0;i<inner_arr.length;i++){
-                        if(i==0){
-                            str +='L '+ outer_arr[0].join(' ')+',';
-                        }else{
-                            str +='L '+ inner_arr[i].join(' ')+',';
-                            str +='L '+ outer_arr[i].join(' ')+',';
+                renderStar_6      : function (option) {
+                    var canvas = this.ctx;
+                    var w      = this.w;
+                    var h      = this.h;
+                    var m      = w * 0.08;
+                    var b_num  = w * 0.1;
+                    // var y_p=[h/2 - h*0.06,h/2+h*0.06];
+                    // var x_p=[w/2-w*0.08,w/2+w*0.08];
+                    var inner_arr = [
+                        [w / 2 - m, h / 2 - m * 2],
+                        [w / 2 + m, h / 2 - m * 2],
+                        [w / 2 + m * 2, h / 2],
+                        [w / 2 + m, h / 2 + m * 2],
+                        [w / 2 - m, h / 2 + m * 2],
+                        [w / 2 - m * 2, h / 2]
+                    ];
+                    var outer_arr = [
+                        [w / 2, h / 2 - m * 4.5],
+                        [w / 2 + m * 3.5, h / 2 - m * 2.5],
+                        [w / 2 + m * 3.5, h / 2 + m * 2.5],
+                        [w / 2, h / 2 + m * 4.5],
+                        [w / 2 - m * 3.5, h / 2 + m * 2.5],
+                        [w / 2 - m * 3.5, h / 2 - m * 2.5]
+                    ];
+                    var str       = 'M ' + inner_arr[0].join(' ') + ',';
+                    for (var i = 0; i < inner_arr.length; i++) {
+                        if (i == 0) {
+                            str += 'L ' + outer_arr[0].join(' ') + ',';
+                        } else {
+                            str += 'L ' + inner_arr[i].join(' ') + ',';
+                            str += 'L ' + outer_arr[i].join(' ') + ',';
                         }
-                        if(i == inner_arr.length -1){
-                            str +='L '+ inner_arr[0].join(' ');
+                        if (i == inner_arr.length - 1) {
+                            str += 'L ' + inner_arr[0].join(' ');
                         }
-                     }
-                      var line = new fabric.Path(str, option);
-                      canvas.add(line);
+                    }
+                    var line = new fabric.Path(str, option);
+                    canvas.add(line);
                 },
-                renderMoon:function(option){
-                      var canvas = this.ctx;
-                      var w =this.w;
-                      var h =this.h;
-                      var p_arr=[[w/2+w*0.23,h/2-h*0.27],[w/2-h*0.27,h/2+w*0.23],[w/2+w*0.35,h/2+w*0.35],[w/2+w*0.2,h/2+w*0.2]];
-                      var str ='M '+p_arr[0].join(' ')+' ';
-                      str+='Q '+p_arr[2].join(' ,')+',';
-                      str+=p_arr[1].join(' ,');
-                      str+='L '+ p_arr[1].join(' ')+'  '; 
-                      str+='Q '+p_arr[3].join(', ')+' ,';
-                      str+=p_arr[0].join(', ')+'  Z';
-                      // str ='M '+p_arr[0].join(' ')+' ';
-                      // str+='Q '+p_arr[2].join(' ,')+' ,';
-                      // str+=p_arr[1].join(' ,')+' ,'; 
-                      // str+=[]
-                      console.log(str);
-                      // str ='M 306 197 L 32.8699 223.8699 A 38 38 0 0 1 277.8424 222.5178'
-                      // var line2 = new fabric.Path('M 65 0 Q 100, 100, 200, 0 L 65 0 Q 100,100,200,0 Z', option); 
-                      var line2 = new fabric.Path(str, option);
-                      // line2.path[0][1]=p_arr[0][0];
-                      // line2.path[0][2]=p_arr[0][1];
-                      // line2.path[1][1]=p_arr[2][0];
-                      // line2.path[1][2]=p_arr[2][1];
-                      // line2.path[1][3]=p_arr[1][0];
-                      // line2.path[1][4]=p_arr[1][1];
-                      // line2.path[2][1]=p_arr[1][0];
-                      // line2.path[2][2]=p_arr[1][1];
-                      // line2.path[3][1]=p_arr[3][0];
-                      // line2.path[3][2]=p_arr[3][1];
-                      // line2.path[3][3]=p_arr[0][0];
-                      // line2.path[3][4]=p_arr[0][1];
-                      canvas.add(line2);
+                renderMoon        : function (option) {
+                    var canvas = this.ctx;
+                    var w      = this.w;
+                    var h      = this.h;
+                    var p_arr  = [[w / 2 + w * 0.23, h / 2 - h * 0.27], [w / 2 - h * 0.27, h / 2 + w * 0.23], [w / 2 + w * 0.35, h / 2 + w * 0.35], [w / 2 + w * 0.2, h / 2 + w * 0.2]];
+                    var str    = 'M ' + p_arr[0].join(' ') + ' ';
+                    str += 'Q ' + p_arr[2].join(' ,') + ',';
+                    str += p_arr[1].join(' ,');
+                    str += 'L ' + p_arr[1].join(' ') + '  ';
+                    str += 'Q ' + p_arr[3].join(', ') + ' ,';
+                    str += p_arr[0].join(', ') + '  Z';
+                    console.log(str);
+                    var line2 = new fabric.Path(str, option);
+                    canvas.add(line2);
                 }
                 ,
                 renderLigature2   : function (option) {
@@ -2373,7 +2303,6 @@
                             strokeWidth : 8,
                             radius      : 14,
                             fill        : 'transparent',
-                            // fill: '#fff',
                             stroke      : '#666'
                         });
 

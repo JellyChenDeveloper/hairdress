@@ -14,11 +14,21 @@ if (defined('ENV_LOC')) {
     $secret = '222a7a2e27a670e6ab6cada48cdd7b14';
     define('TEST_OPENID', 'odJLRt4ITX2siPTPbiN3LNUJAxUI');
 } elseif (defined('ENV_DEV')) {
-    $app_id = 'wxe6a9662f8eea0ee4';
-    $secret = 'cfd4f10fd1b254fbe0ab2840676af682';
+    $app_id              = 'wxe6a9662f8eea0ee4';
+    $secret              = 'cfd4f10fd1b254fbe0ab2840676af682';
+    $mch_id              = '1499509362';
+    $key                 = 'klp4h9BxsP5LF8NsXdy2YgKMRNFoWjzk';
+    $cert_path           = ROOT_PATH . 'data/cert/apiclient_cert.pem';
+    $key_path            = ROOT_PATH . 'data/cert/apiclient_key.pem';
+    $rsa_public_key_path = ROOT_PATH . 'data/cert/public-1499509362.pem';
 } else {
-    $app_id = 'wxe6a9662f8eea0ee4';
-    $secret = 'cfd4f10fd1b254fbe0ab2840676af682';
+    $app_id              = 'wx10123deab0cdb210';
+    $secret              = '6edcf086ccb2953ace564633ef908ca4';
+    $mch_id              = '1499509362';
+    $key                 = 'klp4h9BxsP5LF8NsXdy2YgKMRNFoWjzk';
+    $cert_path           = ROOT_PATH . 'data/cert/apiclient_cert.pem';
+    $key_path            = ROOT_PATH . 'data/cert/apiclient_key.pem';
+    $rsa_public_key_path = ROOT_PATH . 'data/cert/public-1499509362.pem';
 }
 
 return [
@@ -56,11 +66,11 @@ return [
          */
         'payment'       => [
             'app_id'              => $app_id,
-            'mch_id'              => '1499509362',
-            'key'                 => 'klp4h9BxsP5LF8NsXdy2YgKMRNFoWjzk',
-            'cert_path'           => ROOT_PATH . 'data/cert/apiclient_cert.pem', // XXX: 绝对路径！！！！
-            'key_path'            => ROOT_PATH . 'data/cert/apiclient_key.pem', // XXX: 绝对路径！！！！
-            'rsa_public_key_path' => ROOT_PATH . 'data/cert/public-1499509362.pem',
+            'mch_id'              => $mch_id,
+            'key'                 => $key,
+            'cert_path'           => $cert_path, // XXX: 绝对路径！！！！
+            'key_path'            => $key_path, // XXX: 绝对路径！！！！
+            'rsa_public_key_path' => $rsa_public_key_path,
             'notify_url'          => think\Url::build('hair/pay/notify', '', true, true),     // 你也可以在下单时单独设置来想覆盖它
         ],
     ],
