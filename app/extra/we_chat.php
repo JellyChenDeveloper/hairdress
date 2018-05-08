@@ -29,11 +29,11 @@ if (defined('ENV_LOC')) {
 } else {
     $app_id              = 'wx10123deab0cdb210';
     $secret              = '6edcf086ccb2953ace564633ef908ca4';
-    $mch_id              = '1499509362';
-    $key                 = 'klp4h9BxsP5LF8NsXdy2YgKMRNFoWjzk';
+    $mch_id              = '1503422031';
+    $key                 = 'jzWEhSrmwuBmK9gNP9tJ5MOgODUJTc2Z';
     $cert_path           = ROOT_PATH . 'data/cert_online/apiclient_cert.pem';
     $key_path            = ROOT_PATH . 'data/cert_online/apiclient_key.pem';
-    $rsa_public_key_path = ROOT_PATH . 'data/cert_online/public-1499509362.pem';
+    $rsa_public_key_path = ROOT_PATH . 'data/cert_online/public-1503422031.pem';
 }
 
 return [
