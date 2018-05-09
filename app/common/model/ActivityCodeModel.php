@@ -45,6 +45,10 @@ class ActivityCodeModel extends BaseModel {
         return $this->where(['id' => $data['parent_id']])->value('code');
     }
 
+    public function getUsefulCountAttr($value, $data) {
+        return model('WechatUser')->where(['activation_key'=>$data['code']])->count();
+    }
+
     /**
      * 批量插入激活码
      *

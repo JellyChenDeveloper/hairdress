@@ -92,8 +92,11 @@ function cmf_get_total_money($user_id) {
     if ($user['user_type'] == 1 || $user['code_id'] == 0) {
         return 0;
     }
+
+    $setting       = model('Setting')->get(1);
+    $price         = $setting['software_price'] ? $setting['software_price'] : 300;
     $activity_code = model('ActivityCode')->get($user['code_id']);
-    $money         = ($user['code_count'] * $activity_code['rate'] / 100 + $user['child_code_count'] * $activity_code['rate2'] / 100) * 300;
+    $money         = ($user['useful_code_count'] * $activity_code['rate'] / 100 + $user['useful_child_code_count'] * $activity_code['rate2'] / 100) * $price;
 
     return $money;
 }
