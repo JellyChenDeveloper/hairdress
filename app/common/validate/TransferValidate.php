@@ -20,7 +20,7 @@ class TransferValidate extends Validate {
         'partner_trade_no' => 'require',
         'is_check'         => 'require',
         're_user_name'     => 'requireIf:is_check,1',
-        'amount'           => 'require|integer|gt:0|checkAmount',
+        'amount'           => 'require|integer|gt:0|checkAmount|frequencyCheck',
         'desc'             => 'require',
     ];
 
@@ -35,7 +35,7 @@ class TransferValidate extends Validate {
     ];
 
     protected $message = [
-        'amount.checkAmount' => '金额必须为100的整数倍',
+        'amount.checkAmount' => '金额必须为1000的整数倍',
     ];
 
     protected $scene = [
@@ -43,7 +43,16 @@ class TransferValidate extends Validate {
     ];
 
     protected function checkAmount($value) {
-        if ($value % 100 == 0) {
+        if ($value % 1000 == 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function frequencyCheck($value, $rule, $data) {
+        $count = model('Transfer')->where(['user_id' => $data['user_id'], 'trans_status' => ['gt', 0], 'create_time' => ['gt', strtotime("-1 month")]])->count();
+        if ($count >= 3) {
             return true;
         }
 

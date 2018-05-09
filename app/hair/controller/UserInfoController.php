@@ -94,7 +94,7 @@ class UserInfoController extends HairBaseController {
         $data['enc_true_name']    = $user['enc_true_name'];
         $data['enc_bank_no']      = $user['enc_bank_no'];
         $data['bank_code']        = $user['bank_code'];
-        $data['desc']             = '返现';
+        $data['desc']             = '提现';
         $data['trans_status']     = 1;
         $data['amount']           = $amount;
 
