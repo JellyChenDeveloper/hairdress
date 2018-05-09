@@ -79,7 +79,7 @@ class PayController extends HairBaseController {
             'body'         => $data['title'],
             'detail'       => $data['name'],
             'out_trade_no' => $out_trade_no,
-            'total_fee'    => 1 /*$data['price'] * 100*/,
+            'total_fee'    => $data['price'] * 100,
             'notify_url'   => url('hair/pay/notify', '', true, true), // 支付结果通知网址，如果不设置则会使用配置里的默认地址
             'trade_type'   => 'JSAPI',
             'openid'       => $this->user['wx_openid'],
