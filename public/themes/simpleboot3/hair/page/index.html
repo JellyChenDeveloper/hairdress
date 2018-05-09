@@ -1231,7 +1231,7 @@
             },
             input_img           : function (el) {
                 var _this = this;
-                this.selectPhoto(el, $(".h-input-img").val());
+                var flag =this.selectPhoto(el, $(".h-input-img").val());
                 this.html5Reader(el, $('#change-img')[0]);
                 this.bg_add();
                 $('.tri-tool').trigger('click');
@@ -1286,8 +1286,11 @@
                 if ($el) {
                     if (typeof FileReader != 'undefined') {
                         var file = $el[0].files[0];
-                        console.log(file.type);
-                        if ((file.type).indexOf("image/jpg") == -1 || (file.type).indexOf("image/jpeg") == -1) {
+                        console.log((file.type).indexOf("image/jpg"));
+                        console.log((file.type).indexOf("image/jpeg"));
+                        if (file.type !=  "image/jpg" && file.type !="image/jpeg") {
+                            console.log(2222);
+                            $el.val('');
                             return false;
                         }
                     } else {
@@ -1296,6 +1299,7 @@
                         var suffix      = fileName.substring(suffixIndex + 1).toUpperCase();
                         if (suffix != "JPG" && suffix != "JPEG") {
                             // alert("图片限于jpeg,jpg格式");
+                            $el.val('');
                             return false;
                         }
                     }
@@ -1306,6 +1310,7 @@
                     //     // alert("图片限于jpeg,jpg格式");
                     //     return false;
                     // }
+                    return true;
                 }
             },
             html5Reader         : function (file, el) {
