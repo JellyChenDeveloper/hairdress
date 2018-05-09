@@ -14,9 +14,12 @@ namespace app\hair\controller;
 class UserInfoController extends HairBaseController {
 
     public function index() {
-        $user = model('WechatUser')->get(['id' => $this->user_id]);
+        $user   = model('WechatUser')->get(['id' => $this->user_id]);
+        $href   = url("hair/promote/index", ['tool_code' => $user['code_str']], true, true);
+        $qrcode = generateQrCode($href);
 
         $this->assign('user', $user);
+        $this->assign('qrcode', $qrcode);
 
         return $this->fetch();
     }
@@ -101,18 +104,5 @@ class UserInfoController extends HairBaseController {
         } else {
             $this->error('保存失败');
         }
-    }
-
-    public function qrCode() {
-        $user = model('WechatUser')->get(['id' => $this->user_id]);
-
-        $href = url("hair/promote/index", ['tool_code' => $user['code_str']], true, true);
-
-        $data = [
-            'qr_code'       => url("hair/public/index", ['href' => base64_encode($href)], true, true),
-        ];
-        $this->assign($data);
-
-        return $this->fetch();
     }
 }

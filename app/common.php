@@ -192,3 +192,33 @@ function cmf_send_sms_code($code, $mobile) {
 
     return $acsResponse->Code == 'OK';
 }
+
+
+/**
+ * 生成二维码
+ *
+ * @param string $qr_string 二维码内容
+ * @param bool   $isLink    是否生成链接
+ * @return mixed|string  返回链接或文件地址
+ */
+function generateQrCode($qr_string, $isLink = true) {
+    Vendor('phpqrcode.phpqrcode');
+    $filename    = md5($qr_string) . '.png';
+    $upload_path = $_SERVER['DOCUMENT_ROOT'] . 'upload/';
+    $path        = $upload_path . 'qrcode/';
+    $dir         = iconv("UTF-8", "GBK", $path);
+    if (!file_exists($dir)) {
+        mkdir($dir, 0777, true);
+    }
+    $abs_path = $path . $filename;
+    if (!file_exists($abs_path)) {
+        $object = new \QRcode();
+        $object->png($qr_string, $abs_path, QR_ECLEVEL_H, 10, 1);
+    }
+    $rel_path = str_replace($upload_path, '', $abs_path);
+    if ($isLink) {
+        return cmf_get_image_url($rel_path);
+    } else {
+        return $rel_path;
+    }
+}

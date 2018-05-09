@@ -33,8 +33,9 @@ class HairBaseController extends HomeBaseController {
         $this->setting       = model('Setting')->get(1);
         $this->assign('setting', $this->setting);
         $lang = $this->request->param('lang');
-        $lang ? setcookie('think_var', $lang, 0, '/') : 0;
-
+        if(!empty($lang)){
+            setcookie('think_var', $lang, 0, '/');
+        }
         if ($this->request->path() != strtolower('hair/index/wxauth')) {
             $this->user    = $this->userLogin();
             $this->user_id = cmf_get_current_user_id();
