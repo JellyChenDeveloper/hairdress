@@ -65,10 +65,10 @@ class AdminTransferController extends AdminHairBaseController {
         $app = $this->wecharService->pay();
         $rst = $app->transfer->toBankCard([
             'partner_trade_no' => $transfer['partner_trade_no'],
-            'enc_bank_no'      => '6217000010077774829', // 银行卡号
-            'enc_true_name'    => '陈国栋',   // 银行卡对应的用户真实姓名
-            'bank_code'        => '1003', // 银行编号
-            'amount'           => $transfer['amount'],
+            'enc_bank_no'      => $transfer['enc_bank_no'],
+            'enc_true_name'    => $transfer['enc_true_name'],
+            'bank_code'        => $transfer['bank_code'],
+            'amount'           => $transfer['amount'] * 100,
             'desc'             => $transfer['desc'],
         ]);
         trace($rst);
@@ -78,6 +78,16 @@ class AdminTransferController extends AdminHairBaseController {
         } else {
             $this->error($rst['err_code_des']);
         }
+    }
+
+    public function passFake() {
+        $id       = $this->request->param('id');
+        $transfer = model('Transfer')->get($id);
+        if (empty($transfer)) {
+            $this->error('参数错误，请刷新重试');
+        }
+        $transfer->save(['trans_status' => 3, 'more' => json_encode(['fake_pass' => 1])]);
+        $this->success('提现成功');
     }
 
     public function delete() {

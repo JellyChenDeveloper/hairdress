@@ -31,6 +31,7 @@
                         <case value="1">
                             <a href="{:url('hair/AdminTransfer/pass',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="是否通过申请">通过</a>
                             <a href="{:url('hair/AdminTransfer/delete',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="是否删除">删除</a>
+                            <a href="{:url('hair/AdminTransfer/passFake',array('id'=>$vo['id']))}" class="js-ajax-dialog-btn" data-msg="重要：在微信自动转账不成功的情况下才使用该功能，确认手工转账完成后再点击此按钮，谨慎使用此按钮。">手工转账完成</a>
                         </case>
                         <case value="2">
                         </case>

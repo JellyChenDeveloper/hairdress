@@ -85,9 +85,6 @@ class UserInfoController extends HairBaseController {
         if ($result !== true) {
             $this->error($result);
         }
-        if (cmf_get_last_money($this->user_id) < $amount) {
-            $this->error('剩余可提现金额不足');
-        }
         $user                     = model('WechatUser')->get($this->user_id);
         $partner_trade_no         = config('we_chat.wx_sdk_config')['payment']['mch_id'] . date("YmdHis") . cmf_generate_code(8);
         $data['partner_trade_no'] = $partner_trade_no;

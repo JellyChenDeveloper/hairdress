@@ -20,7 +20,7 @@ class TransferValidate extends Validate {
         'partner_trade_no' => 'require',
         'is_check'         => 'require',
         're_user_name'     => 'requireIf:is_check,1',
-        'amount'           => 'require|integer|gt:0|checkAmount|frequencyCheck',
+        'amount'           => 'require|integer|gt:0|checkAmount|lastMoneyCheck|frequencyCheck',
         'desc'             => 'require',
     ];
 
@@ -36,6 +36,8 @@ class TransferValidate extends Validate {
 
     protected $message = [
         'amount.checkAmount' => '金额必须为1000的整数倍',
+        'amount.lastMoneyCheck' => '剩余可提现金额不足',
+        'amount.frequencyCheck' => '每月提取次数不超过3次',
     ];
 
     protected $scene = [
@@ -52,10 +54,10 @@ class TransferValidate extends Validate {
 
     protected function frequencyCheck($value, $rule, $data) {
         $count = model('Transfer')->where(['user_id' => $data['user_id'], 'trans_status' => ['gt', 0], 'create_time' => ['gt', strtotime("-1 month")]])->count();
-        if ($count >= 3) {
-            return true;
-        }
+        return $count < 3;
+    }
 
-        return false;
+    protected function lastMoneyCheck($value, $rule, $data) {
+        return cmf_get_last_money($data['user_id']) > $value;
     }
 }
