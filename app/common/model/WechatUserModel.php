@@ -72,7 +72,7 @@ class WechatUserModel extends BaseModel {
     public function getUsefulChildCodeCountAttr($value, $data) {
         $code = model('ActivityCode')->get($data['code_id']);
 
-        return $code ? $code->useful_count : 0;
+        return $code ? $code->useful_child_count : 0;
     }
 
     public function getTotalMoneyAttr($value, $data) {

@@ -38,7 +38,7 @@ class ActivityCodeModel extends BaseModel {
     public function getChildNumStrAttr($value, $data) {
         $child_num = $this->where(['parent_id' => $data['id']])->count();
 
-        return $child_num ? : '';
+        return $child_num ?: '';
     }
 
     public function getParentCodeAttr($value, $data) {
@@ -46,7 +46,13 @@ class ActivityCodeModel extends BaseModel {
     }
 
     public function getUsefulCountAttr($value, $data) {
-        return model('WechatUser')->where(['activation_key'=>$data['code']])->count();
+        return model('WechatUser')->where(['activation_key' => $data['code'], 'has_payed' => 1])->count();
+    }
+
+    public function getUsefulChildCountAttr($value, $data) {
+        $child_codes = $this->where(['parent_id' => $data['id']])->column('code');
+        array_push($child_codes, '0');
+        return model('WechatUser')->where(['activation_key' => ['in', implode(',', $child_codes)], 'has_payed' => 1])->count();
     }
 
     /**
