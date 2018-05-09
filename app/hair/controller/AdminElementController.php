@@ -47,8 +47,8 @@ class AdminElementController extends AdminHairBaseController {
         if ($name) {
             $where['name'] = ['like', "%$name%"];
         }
-        if ($type && $type != '999') {
-            $where['type'] = $type;
+        if ($type) {
+            $where['type'] = ($type == '999') ? 0 : $type;
         }
         $elements = model('Element')
             ->order(["list_order" => "asc"])
@@ -109,7 +109,7 @@ class AdminElementController extends AdminHairBaseController {
             $this->error('添加失败!');
         }
 
-        $this->success('添加成功!', url('Element/index'));
+        $this->success('添加成功!', url('AdminElement/index'));
     }
 
     /**

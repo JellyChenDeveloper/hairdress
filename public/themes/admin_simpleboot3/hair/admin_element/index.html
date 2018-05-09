@@ -12,7 +12,7 @@
         组件类型：
         <select class="form-control" name="type" style="width: 140px;">
             <foreach name="Think.config.property.element_type_select" item="vo">
-                <php>$target_selected=input('request.type',999)==$key?"selected='selected'":"";</php>
+                <php>$target_selected=input('request.type',0)==$key?"selected='selected'":"";</php>
                 <option value="{$key}" {$target_selected}>{$vo}</option>
             </foreach>
         </select>

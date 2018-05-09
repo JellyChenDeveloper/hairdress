@@ -17,14 +17,14 @@ class CourseController extends HairBaseController {
     private $pagesize = 10;
 
     public function index() {
-        $courses = model('Course')->page(1, $this->pagesize)->select();
+        $courses = model('Course')->order('list_order')->page(1, $this->pagesize)->select();
         $this->assign('courses', $courses);
 
         return $this->fetch();
     }
 
     public function getMore() {
-        $courses = model('Course')->page($this->request->param('page'), $this->pagesize)->select()->toArray();
+        $courses = model('Course')->order('list_order')->page($this->request->param('page'), $this->pagesize)->select()->toArray();
         foreach ($courses as $k => $v) {
             $courses[$k]['thumb_url'] = $v['thumb'] ? cmf_get_image_url($v['thumb']) : "";
             $courses[$k]['url']       = cmf_url('hair/Course/detail', array('id' => $v['id']));

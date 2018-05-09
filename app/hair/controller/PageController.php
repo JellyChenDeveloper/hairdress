@@ -13,7 +13,7 @@ class PageController extends HairBaseController {
         $page = model('Pages')->get(['id' => $id, 'user_id' => $this->user_id]);
         $this->assign('page', $page);
 
-        $elements = model('Element')->all(['type' => ['in', [0, 1, 2]]])->toArray();
+        $elements = model('Element')->where(['type' => ['in', [0, 1, 2]]])->order('list_order')->select()->toArray();
         $orders   = model('Order')->where(['user_id' => $this->user_id, 'type' => 1, 'pay_time' => ['gt', 0]])->column('element_id');
         $heads    = [];
         $tools    = [];
