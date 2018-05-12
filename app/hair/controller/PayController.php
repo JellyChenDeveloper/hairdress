@@ -15,10 +15,11 @@ class PayController extends HairBaseController {
 
     public function toolPay() {
         $data = [
-            'title' => '付费开通',
-            'name'  => $this->setting['software_name'],
-            'price' => $this->setting['software_price'],
-            'desc'  => '付费后方可使用(部分组建内购)',
+            'title'     => '付费开通',
+            'name'      => $this->setting['software_name'],
+            'price'     => $this->setting['software_price'],
+            'price_str' => "(年费)" . $this->setting['software_price'],
+            'desc'      => '付费后方可使用(部分组建内购)',
         ];
         $this->pub_pay($data, 0);
 
@@ -105,7 +106,9 @@ class PayController extends HairBaseController {
         } else {
             $pay_json = '';
         }
-        $data['price'] = "(年费)" . $data['price'];
+        if(isset($data['price_str'])){
+            $data['price'] = $data['price_str'];
+        }
         $this->assign('data', $data);
         $this->assign('pay_json', $pay_json);
         $this->assign('wx_pay_from_url', session('wx_pay.from_url'));
