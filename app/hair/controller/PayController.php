@@ -105,6 +105,7 @@ class PayController extends HairBaseController {
         } else {
             $pay_json = '';
         }
+        $data['price'] = "(年费)" . $data['price'];
         $this->assign('data', $data);
         $this->assign('pay_json', $pay_json);
         $this->assign('wx_pay_from_url', session('wx_pay.from_url'));
