@@ -1019,7 +1019,7 @@
                     if (lock == 1) {
                         return false;
                     }
-                    $('.m-exp').toggle();
+                    $('.m-exp').slideToggle();
                     $('.m-fun').hide();
                     $('.m-head').hide();
                     $('.m-tool').hide();
@@ -1042,7 +1042,8 @@
                     img.onload = function () {
                         var img    = new fabric.Image(this, {
                             left : left,
-                            top  : top
+                            top  : top,
+                            lockScalingFlip:true
                         });
                         img.width  = i_w;
                         img.height = i_h;
