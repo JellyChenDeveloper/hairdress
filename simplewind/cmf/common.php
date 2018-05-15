@@ -521,11 +521,11 @@ function cmf_get_upload_setting()
                     'extensions'          => 'jpg,jpeg,png,gif,bmp4'
                 ],
                 'video' => [
-                    'upload_max_filesize' => '10240',
+                    'upload_max_filesize' => '102400',
                     'extensions'          => 'mp4,avi,wmv,rm,rmvb,mkv'
                 ],
                 'audio' => [
-                    'upload_max_filesize' => '10240',
+                    'upload_max_filesize' => '102400',
                     'extensions'          => 'mp3,wma,wav'
                 ],
                 'file'  => [
