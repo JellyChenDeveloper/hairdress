@@ -579,28 +579,6 @@
                             <p class="h-text">{$funcs.halfmoon.name}</p>
                         </div>
                     </li>
-                    <foreach name="funcs1" item="func">
-                        <eq name="func['type']" value="2">
-                            <li class="h-icon fl">
-                                <div class="h-one add-ele" data-lock="{$func['is_lock']}" data-pay="{$func['need_pay']}">
-                                    <div class="h-mask h-pay">
-                                        <div class="h-wrap">
-                                            <p class="p-price">￥{$func.price}</p>
-                                            <div>
-                                                <a class="p-btn" href="{:url('hair/pay/elementPay')}?id={$func.id}">立即购买</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="h-mask h-lock">
-                                        <div class="h-wrap">
-                                            <p class="p-price">锁定</p>
-                                        </div>
-                                    </div>
-                                    <img src="{$func.image}" alt="">
-                                </div>
-                            </li>
-                        </eq>
-                    </foreach>
                 </ul>
             </div>
         </div>
