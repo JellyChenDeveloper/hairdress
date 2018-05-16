@@ -493,12 +493,12 @@
                     </li>
                     <!-- 四角星 -->
                     <li class="h-icon fl" renderType='renderStar_4'>
-                        <div class="h-one add-ele" data-lock="{$funcs.triangle.is_lock}" data-pay="{$funcs.triangle.need_pay}">
+                        <div class="h-one add-ele" data-lock="{$funcs.fourstar.is_lock}" data-pay="{$funcs.fourstar.need_pay}">
                             <div class="h-mask h-pay">
                                 <div class="h-wrap">
-                                    <p class="p-price">￥{$funcs.triangle.price}</p>
+                                    <p class="p-price">￥{$funcs.fourstar.price}</p>
                                     <div>
-                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.triangle.id">立即购买</a>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.fourstar.id">立即购买</a>
                                     </div>
                                 </div>
                             </div>
@@ -510,17 +510,17 @@
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/star_4.jpg" alt="">
                             </div>
-                            <p class="h-text">{$funcs.triangle.name}</p>
+                            <p class="h-text">{$funcs.fourstar.name}</p>
                         </div>
                     </li>
                     <!-- 五角星 -->
                     <li class="h-icon fl" renderType='renderStar_5'>
-                        <div class="h-one add-ele" data-lock="{$funcs.triangle.is_lock}" data-pay="{$funcs.triangle.need_pay}">
+                        <div class="h-one add-ele" data-lock="{$funcs.fivestar.is_lock}" data-pay="{$funcs.fivestar.need_pay}">
                             <div class="h-mask h-pay">
                                 <div class="h-wrap">
-                                    <p class="p-price">￥{$funcs.triangle.price}</p>
+                                    <p class="p-price">￥{$funcs.fivestar.price}</p>
                                     <div>
-                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.triangle.id">立即购买</a>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.fivestar.id">立即购买</a>
                                     </div>
                                 </div>
                             </div>
@@ -532,17 +532,17 @@
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/star_5.jpg" alt="">
                             </div>
-                            <p class="h-text">{$funcs.triangle.name}</p>
+                            <p class="h-text">{$funcs.fivestar.name}</p>
                         </div>
                     </li>
                     <!-- 六角星 -->
                     <li class="h-icon fl" renderType='renderStar_6'>
-                        <div class="h-one add-ele" data-lock="{$funcs.triangle.is_lock}" data-pay="{$funcs.triangle.need_pay}">
+                        <div class="h-one add-ele" data-lock="{$funcs.sixstar.is_lock}" data-pay="{$funcs.sixstar.need_pay}">
                             <div class="h-mask h-pay">
                                 <div class="h-wrap">
-                                    <p class="p-price">￥{$funcs.triangle.price}</p>
+                                    <p class="p-price">￥{$funcs.sixstar.price}</p>
                                     <div>
-                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.triangle.id">立即购买</a>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.sixstar.id">立即购买</a>
                                     </div>
                                 </div>
                             </div>
@@ -554,17 +554,17 @@
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/star_6.jpg" alt="">
                             </div>
-                            <p class="h-text">{$funcs.triangle.name}</p>
+                            <p class="h-text">{$funcs.sixstar.name}</p>
                         </div>
                     </li>
                     <!-- 月牙形 -->
                     <li class="h-icon fl" renderType='renderMoon'>
-                        <div class="h-one add-ele" data-lock="{$funcs.triangle.is_lock}" data-pay="{$funcs.triangle.need_pay}">
+                        <div class="h-one add-ele" data-lock="{$funcs.halfmoon.is_lock}" data-pay="{$funcs.halfmoon.need_pay}">
                             <div class="h-mask h-pay">
                                 <div class="h-wrap">
-                                    <p class="p-price">￥{$funcs.triangle.price}</p>
+                                    <p class="p-price">￥{$funcs.halfmoon.price}</p>
                                     <div>
-                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.triangle.id">立即购买</a>
+                                        <a class="p-btn" href="{:url('hair/pay/elementPay')}?id=$funcs.halfmoon.id">立即购买</a>
                                     </div>
                                 </div>
                             </div>
@@ -576,9 +576,31 @@
                             <div class="h-img-wrap">
                                 <img src="__PAGE_TOOLS__/images/star_2.jpg" alt="">
                             </div>
-                            <p class="h-text">{$funcs.triangle.name}</p>
+                            <p class="h-text">{$funcs.halfmoon.name}</p>
                         </div>
                     </li>
+                    <foreach name="funcs1" item="func">
+                        <eq name="func['type']" value="2">
+                            <li class="h-icon fl">
+                                <div class="h-one add-ele" data-lock="{$func['is_lock']}" data-pay="{$func['need_pay']}">
+                                    <div class="h-mask h-pay">
+                                        <div class="h-wrap">
+                                            <p class="p-price">￥{$func.price}</p>
+                                            <div>
+                                                <a class="p-btn" href="{:url('hair/pay/elementPay')}?id={$func.id}">立即购买</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="h-mask h-lock">
+                                        <div class="h-wrap">
+                                            <p class="p-price">锁定</p>
+                                        </div>
+                                    </div>
+                                    <img src="{$func.image}" alt="">
+                                </div>
+                            </li>
+                        </eq>
+                    </foreach>
                 </ul>
             </div>
         </div>
@@ -1191,7 +1213,7 @@
                     img.width  = i_w;
                     _this.ctx.add(img);
                 });
-                // 
+                //
                 var passiveArr = ['#back_canvas', '.tab', '.footer-btn'];
 
                 $.each(passiveArr, function (i, e) {
@@ -1209,8 +1231,8 @@
                 // document.getElementById("back_canvas").addEventListener('touchmove', function (e) {
                 //     e.preventDefault();
                 // }, {passive : false});
-                // 
-                // 
+                //
+                //
                 $('.f-canvas').on('touchend', function () {
                     var isDraw = _this.ctx.isDrawingMode;
                     if (isDraw) {

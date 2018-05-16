@@ -18,6 +18,7 @@ class PageController extends HairBaseController {
         $heads    = [];
         $tools    = [];
         $funcs    = [];
+        $funcs1   = [];
 
         foreach ($elements as $k => $v) {
             $v['need_pay'] = 0;
@@ -29,7 +30,11 @@ class PageController extends HairBaseController {
                     $tools[$v['id']] = $v;
                     break;
                 case 2:
-                    $funcs[$v['alias']] = $v;
+                    if ($v['id'] < 32) {
+                        $funcs[$v['alias']] = $v;
+                    } else {
+                        $funcs1[$v['id']] = $v;
+                    }
                     break;
                 case 0:
                 default:
@@ -40,6 +45,7 @@ class PageController extends HairBaseController {
         $this->assign('heads', $heads);
         $this->assign('tools', $tools);
         $this->assign('funcs', $funcs);
+        $this->assign('funcs1', $funcs1);
 
         $js_config = $this->wecharService->jssdk()->buildConfig([
             "onMenuShareTimeline",
