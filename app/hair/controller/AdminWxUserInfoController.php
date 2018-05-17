@@ -40,10 +40,11 @@ class AdminWxUserInfoController extends AdminHairBaseController {
     public function index() {
         $where = [];
         /**搜索条件**/
-        $wx_nickname = $this->request->param('wx_nickname');
-        $mobile      = $this->request->param('mobile');
-        $has_payed   = $this->request->param('has_payed');
-        $user_type   = $this->request->param('user_type');
+        $wx_nickname    = $this->request->param('wx_nickname');
+        $mobile         = $this->request->param('mobile');
+        $has_payed      = $this->request->param('has_payed');
+        $user_type      = $this->request->param('user_type');
+        $activation_key = $this->request->param('activation_key');
 
         if ($wx_nickname) {
             $where['wx_nickname'] = ['like', "%$wx_nickname%"];
@@ -58,12 +59,16 @@ class AdminWxUserInfoController extends AdminHairBaseController {
         if (!is_null($user_type) && $user_type != 999) {
             $where['user_type'] = $user_type;
         }
+        if ($activation_key) {
+            $where['activation_key'] = $activation_key;
+        }
+
         $users = model('WechatUser')
             ->useGlobalScope(false)
             ->where($where)
             ->order("id DESC")
             ->paginate(10);
-        $users->appends(['wx_nickname' => $wx_nickname, 'mobile' => $mobile, 'has_payed' => $has_payed, 'user_type' => $user_type]);
+        $users->appends(['wx_nickname' => $wx_nickname, 'mobile' => $mobile, 'has_payed' => $has_payed, 'user_type' => $user_type, 'activation_key' => $activation_key]);
         // 获取分页显示
         $page = $users->render();
 

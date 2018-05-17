@@ -10,6 +10,8 @@
         <input type="text" class="form-control" name="wx_nickname" style="width: 120px;" value="{:input('request.wx_nickname/s','')}" placeholder="请输入{:lang('USERNAME')}">
         手机号:
         <input type="text" class="form-control" name="mobile" style="width: 120px;" value="{:input('request.mobile/s','')}" placeholder="请输入手机号">
+        邀请码:
+        <input type="text" class="form-control" name="activation_key" style="width: 120px;" value="{:input('request.activation_key/s','')}" placeholder="请输入邀请码">
         支付状态：
         <select class="form-control" name="has_payed" style="width: 140px;">
             <foreach name="Think.config.property.has_payed_select" item="vo">
