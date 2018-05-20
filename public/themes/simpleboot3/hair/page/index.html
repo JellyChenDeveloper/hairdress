@@ -1165,9 +1165,28 @@
 
                 //canvas点击
                 this.ctx.on('before:selection:cleared', function () {
-                    for (var i = 0; i < _this.controllerCircleArr.length; i++) {
-                        _this.ctx.remove(_this.controllerCircleArr[i]);
-                    }
+                    // for (var i = 0; i < _this.controllerCircleArr.length; i++) {
+                    //     _this.ctx.remove(_this.controllerCircleArr[i]);
+                    // }
+                     for(var i=0;i<_this.controllerCircleArr.length;i++){
+                        // _this.ctx.remove(_this.controllerCircleArr[i]);
+                        _this.controllerCircleArr[i].set({
+                            opacity:0,
+                            lockMovementX:true,
+                            lockMovementY:true
+                        });
+                       }
+                   setTimeout(function(){
+                        for(var i=0;i<_this.controllerCircleArr.length;i++){
+                            console.log(i);
+                    // _this.ctx.remove(_this.controllerCircleArr[i]);
+                        _this.controllerCircleArr[i].set({
+                            opacity:1,
+                            lockMovementX:false,
+                            lockMovementY:false
+                        });
+                   }
+                   },100);
                 });
 
                 $('.btn-pre').on('click', function () {
