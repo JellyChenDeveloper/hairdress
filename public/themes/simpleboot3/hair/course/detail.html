@@ -8,6 +8,56 @@
     #article_content {
         word-wrap: break-word;
     }
+     .zoomableContainer {
+                position: fixed;
+                width: 100%;
+                top:0;
+                left:0;
+                height: 100%;
+                background: #000;
+                display: none;
+            }
+        #imageFullScreen{
+            position: absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            /*margin: auto;*/
+            max-height: 100%;
+            max-width: 100%;
+        }
+        .zoomable-close{
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top:20px;
+            right:20px;
+            z-index: 99;
+        }
+        .zoomable-close::before,.zoomable-close::after{
+            content:'';
+            position: absolute;
+            width:3px;
+            height: 80%;
+            top:10%;
+            background: #fff;
+            border-radius: 3px;
+        }
+        .zoomable-close::after{
+            right:47%;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        .zoomable-close::before{
+            left:46%;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+        .zoomableContainer-innner{
+            height: 100%;
+            width:100%;
+        }
 </style>
 
 <header class='demos-header'>
@@ -24,4 +74,26 @@
         <a href="{:url('hair/pay/coursePay')}?id={$course.id}" class="weui-btn weui-btn_primary">支付</a>
     </eq>
 </article>
+
+<div class="zoomableContainer" >
+    <span class="zoomable-close"></span>
+    <div class="zoomableContainer-innner"></div>
+</div>
 <include file="hair@public/foot"/>
+<script src="__PAGE_TOOLS__/js/zoom.js"></script>
+<script>
+    $(function(){
+   
+         $('#article_content img').on('click',function(){
+             var img = $(this).clone();
+             $('.zoomableContainer-innner').empty();
+             $('.zoomableContainer').show();
+             $(img).attr('id','imageFullScreen').appendTo('.zoomableContainer-innner');
+             $('#imageFullScreen').smartZoom({'containerClass':'zoomableContainer-innner'});
+         });
+         $('.zoomable-close').on('click',function(){
+             $('.zoomableContainer-innner').empty();
+             $('.zoomableContainer').hide();
+         }); 
+    });
+</script>

@@ -10,3 +10,4 @@ composer.lock
 /node_modules
 docker1/
 docker/mysql/*
+upload/

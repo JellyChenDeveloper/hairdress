@@ -983,6 +983,7 @@
                     if ($(this).attr('data-lock') == 1 || $(this).attr('data-pay') == 1) {
                         return false;
                     }
+                    _this.controllerCircleArr=[];
                     _this.bg_add();
                 });
 
@@ -1119,6 +1120,7 @@
 
                 //画笔
                 $('.btn-hb').on('click', function () {
+                    console.log(222);
                     $(this).hide();
                     _this.ctx.isDrawingMode = false;
                 });
@@ -1168,6 +1170,10 @@
                     // for (var i = 0; i < _this.controllerCircleArr.length; i++) {
                     //     _this.ctx.remove(_this.controllerCircleArr[i]);
                     // }
+                    if(_this.controllerCircleArr.length <= 0){
+                        return false;
+                    }
+                    console.log(_this.controllerCircleArr);
                      for(var i=0;i<_this.controllerCircleArr.length;i++){
                         // _this.ctx.remove(_this.controllerCircleArr[i]);
                         _this.controllerCircleArr[i].set({
@@ -1235,6 +1241,7 @@
                     if (isDraw) {
                         _this.bg_add();
                         _this.ctx.isDrawingMode = true;
+                        $('.btn-hb').show();
                     }
                 });
             },
