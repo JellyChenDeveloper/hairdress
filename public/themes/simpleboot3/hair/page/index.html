@@ -983,8 +983,8 @@
                     if ($(this).attr('data-lock') == 1 || $(this).attr('data-pay') == 1) {
                         return false;
                     }
-                    _this.controllerCircleArr=[];
                     _this.bg_add();
+                    _this.controllerCircleArr=[];
                 });
 
                 $('a.p-btn').on('click', function () {
@@ -1071,8 +1071,6 @@
                         option.val = '#000';
                     }
                     option = _this.createOption(option);
-                    console.log(JSON.stringify(option));
-                    console.log(_this.renderOBJ);
                     _this.renderFN[_this.renderOBJ].call(_this, option);
                     $('#select-cx').hide();
                     $('.m-tool').hide();
@@ -1099,7 +1097,6 @@
                     }
                     var input_option = $('#text').find('.text-option');
                     var option       = _this.createOption(input_option);
-                    console.log(JSON.stringify(option));
                     option.left      = _this.w / 2;
                     option.top       = _this.h / 2;
                     option.textAlign = 'center';
@@ -1120,7 +1117,6 @@
 
                 //画笔
                 $('.btn-hb').on('click', function () {
-                    console.log(222);
                     $(this).hide();
                     _this.ctx.isDrawingMode = false;
                 });
@@ -1671,7 +1667,6 @@
                         [_this.w * (4 / 5), _this.h / 2 - 50]
                     ];
                     var line     = new fabric.Path('M 65 0 C 0, 0, 0, 0,0,0', option);
-                    console.log(line.path);
                     line.path[0][1] = pointArr[0][0];
                     line.path[0][2] = pointArr[0][1];
 
@@ -2189,14 +2184,9 @@
                         [w / 2, h / 2 + h * 0.3],
                         [w / 2 - w * 0.29, h / 2]
                     ];
-                    console.log(w);
-                    console.log(h);
-                    console.log(inner_arr);
-                    console.log(outer_arr);
                     var str = 'M ' + inner_arr[0].join(' ') + ',';
                     // str +='L '+ outer_arr[0].join(' ')+',';
                     // str +='L '+ inner_arr[1].join(' ')+',';
-                    console.log(str);
                     for (var i = 0; i < inner_arr.length; i++) {
                         if (i == 0) {
                             str += 'L ' + outer_arr[0].join(' ') + ',';
@@ -2207,7 +2197,6 @@
                         if (i == inner_arr.length - 1) {
                             str += 'L ' + inner_arr[0].join(' ');
                         }
-                        console.log(str);
                     }
                     var line = new fabric.Path(str, option);
                     canvas.add(line);
@@ -2299,7 +2288,6 @@
                     str += 'L ' + p_arr[1].join(' ') + '  ';
                     str += 'Q ' + p_arr[3].join(', ') + ' ,';
                     str += p_arr[0].join(', ') + '  Z';
-                    console.log(str);
                     var line2 = new fabric.Path(str, option);
                     canvas.add(line2);
                 }
@@ -2361,8 +2349,6 @@
                         [this.w * 3 / 4, this.h / 2],
                         [this.w / 2, this.h / 2 + 75]
                     ];
-                    console.log(pointArr);
-                    console.log(line_2.path);
                     line_2.path[0][1] = pointArr[0][0];
                     line_2.path[0][2] = pointArr[0][1];
 
